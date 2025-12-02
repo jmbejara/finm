@@ -17,6 +17,7 @@ from finm.fixedincome import (
     duration,
     modified_duration,
     convexity,
+    get_coupon_dates,
 )
 
 __version__ = "0.1.0"
@@ -30,5 +31,6 @@ __all__ = [
     "duration",
     "modified_duration",
     "convexity",
+    "get_coupon_dates",
 ]
 

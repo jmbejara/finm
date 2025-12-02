@@ -6,10 +6,14 @@ This module provides basic functions for:
 - Bond pricing
 - Yield to maturity calculations
 - Duration and convexity measures
+- Calculate semiannual coupon payment dates for a bond
 """
 
+from datetime import datetime
 from typing import Union
+
 import numpy as np
+import pandas as pd
 
 
 def present_value(
@@ -372,4 +376,38 @@ def convexity(
     convexity_value = convexity_sum / (price * (1 + periodic_ytm) ** 2 * frequency ** 2)
     
     return convexity_value
+
+
+def get_coupon_dates(quote_date, maturity_date):
+    """
+    Calculate semiannual coupon payment dates for a bond.
+
+    Parameters:
+    - quote_date (str or datetime): The quote date of the bond.
+    - maturity_date (str or datetime): The maturity date of the bond.
+
+    Returns:
+    - list of datetime: Semiannual coupon payment dates after the quote date.
+    """
+    # Convert input to datetime if needed
+    if isinstance(quote_date, str):
+        quote_date = datetime.strptime(quote_date, '%Y-%m-%d')
+    if isinstance(maturity_date, str):
+        maturity_date = datetime.strptime(maturity_date, '%Y-%m-%d')
+    
+    # Ensure dates are valid
+    if quote_date >= maturity_date:
+        raise ValueError("Quote date must be earlier than maturity date.")
+
+    # Generate coupon dates
+    semiannual_offset = pd.DateOffset(months=6)
+    dates = []
+    current_date = maturity_date
+
+    while current_date > quote_date:
+        dates.append(current_date)
+        current_date -= semiannual_offset
+
+    # Return sorted dates in ascending order
+    return sorted(dates)
 

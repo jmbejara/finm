@@ -13,6 +13,7 @@ from finm.fixedincome.bonds import (
     duration,
     modified_duration,
     convexity,
+    get_coupon_dates,
 )
 
 __all__ = [
@@ -23,5 +24,6 @@ __all__ = [
     "duration",
     "modified_duration",
     "convexity",
+    "get_coupon_dates",
 ]
 
