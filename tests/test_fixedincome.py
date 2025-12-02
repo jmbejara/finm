@@ -12,6 +12,7 @@ from finm.fixedincome import (
     duration,
     modified_duration,
     convexity,
+    get_coupon_dates,
 )
 
 
@@ -129,3 +130,23 @@ class TestConvexity:
         conv_long = convexity(1000, 0.05, 0.05, 20, frequency=2)
         assert conv_long > conv_short
 
+class TestCouponDates:
+    """Tests for get_coupon_dates function."""
+
+    def test_coupon_dates_count(self):
+        """Test that the number of coupon dates is correct."""
+        quote_date = "2020-01-01"
+        maturity_date = "2025-01-01"
+        coupon_dates = get_coupon_dates(quote_date, maturity_date)
+        assert len(coupon_dates) == 10  # 5 years semiannual -> 10 payments
+
+    def test_coupon_date_gap(self):
+        """Test that coupon dates are every six months."""
+        quote_date = "2020-01-01"
+        maturity_date = "2025-01-01"
+        coupon_dates = get_coupon_dates(quote_date, maturity_date)
+
+        # Check that each date is approximately 6 months apart
+        for i in range(1, len(coupon_dates)):
+            delta = (coupon_dates[i] - coupon_dates[i-1]).days
+            assert 170 <= delta <= 190  # Allow some leeway for month length variations
