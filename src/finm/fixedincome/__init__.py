@@ -13,7 +13,20 @@ from finm.fixedincome.bonds import (
     duration,
     modified_duration,
     convexity,
+    # get_coupon_dates,
+)
+
+from finm.fixedincome.gsw2006_yield_curve import (
     get_coupon_dates,
+    filter_treasury_cashflows,
+    calc_cashflows,
+    plot_spot_curve,
+    spot,
+    discount,
+    predict_prices,
+    fit,
+    gurkaynak_sack_wright_filters,
+    compare_fit,
 )
 
 __all__ = [
@@ -25,5 +38,14 @@ __all__ = [
     "modified_duration",
     "convexity",
     "get_coupon_dates",
+    "filter_treasury_cashflows",
+    "calc_cashflows",
+    "plot_spot_curve",
+    "spot",
+    "discount",
+    "predict_prices",
+    "fit",
+    "gurkaynak_sack_wright_filters",
+    "compare_fit",
 ]
 
