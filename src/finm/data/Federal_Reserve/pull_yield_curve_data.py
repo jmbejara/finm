@@ -1,5 +1,6 @@
 import pandas as pd
 import requests
+
 from io import BytesIO
 from pathlib import Path
 
@@ -7,11 +8,22 @@ from pathlib import Path
 # DATA_DIR = config('DATA_DIR')
 
 
-def pull_fed_yield_curve():
+def pull_fed_yield_curve() -> tuple[pd.DataFrame, pd.DataFrame]:
     """
-    Download the latest yield curve from the Federal Reserve
+    Download the latest yield curve from the Federal Reserve.
     
-    This is the published data using Gurkaynak, Sack, and Wright (2007) model
+    This is the published data using Gurkaynak, Sack, and Wright (2007) model.
+
+    Parameters
+    ----------
+    None
+
+    Returns
+    -------
+    pd.DataFrame
+        The full yield curve data from the Federal Reserve.
+    pd.DataFrame
+        The yield curve data from the Federal Reserve, with only the relevant columns.
     """
     
     url = "https://www.federalreserve.gov/data/yield-curve-tables/feds200628.csv"
@@ -26,6 +38,19 @@ def pull_fed_yield_curve():
 def load_fed_yield_curve_all(
     data_dir: str | Path, # DATA_DIR
 ) -> pd.DataFrame:
+    """
+    Load parquet file of the full yield curve data from the Federal Reserve.
+
+    Parameters
+    ----------
+    data_dir : str | Path
+        The directory where the parquet file is stored.
+
+    Returns
+    -------
+    pd.DataFrame
+        The full yield curve data from the Federal Reserve.
+    """
     
     data_dir = Path(data_dir)
     path = data_dir / "fed_yield_curve_all.parquet"
@@ -35,6 +60,19 @@ def load_fed_yield_curve_all(
 def load_fed_yield_curve(
     data_dir: str | Path, # DATA_DIR
 ) -> pd.DataFrame:
+    """
+    Load parquet file of the yield curve data from the Federal Reserve.
+
+    Parameters
+    ----------
+    data_dir : str | Path
+        The directory where the parquet file is stored.
+
+    Returns
+    -------
+    pd.DataFrame
+        The yield curve data from the Federal Reserve.
+    """
     
     data_dir = Path(data_dir)
     path = data_dir / "fed_yield_curve.parquet"
@@ -45,9 +83,17 @@ def load_fed_yield_curve(
 #     _df = load_fed_yield_curve(data_dir=DATA_DIR)
     
 
-# if __name__ == "__main__":
-#     df_all, df = pull_fed_yield_curve()
-#     path = Path(DATA_DIR) / "fed_yield_curve_all.parquet"
-#     df_all.to_parquet(path)
-#     path = Path(DATA_DIR) / "fed_yield_curve.parquet"
-#     df.to_parquet(path)
+if __name__ == "__main__":
+
+    # Get location of current file and parent folder
+    current_file_path = Path(__file__).resolve()    
+    current_dir = current_file_path.parent
+
+    # Download and save the yield curve data
+    df_all, df = pull_fed_yield_curve()
+
+    path = Path(current_dir) / "fed_yield_curve_all.parquet"
+    df_all.to_parquet(path)
+    
+    path = Path(current_dir) / "fed_yield_curve.parquet"
+    df.to_parquet(path)
