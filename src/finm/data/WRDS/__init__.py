@@ -1,7 +1,7 @@
 """
-Data module - CRSP
+Data module - WRDS
 
-This module provides functions for pulling, loading, and cleaning data from CRSP.
+This module provides functions for pulling, loading, and cleaning data.
 """
 
 from finm.data.WRDS.pull_CRSP_treasury import (

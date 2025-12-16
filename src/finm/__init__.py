@@ -9,6 +9,29 @@ Financial Mathematics program.
 errors and this should NOT be used for any purposes beyond education and research.
 """
 
+from finm.data import (
+    pull_fed_yield_curve,
+    load_fed_yield_curve_all,
+    load_fed_yield_curve,
+    pull_he_kelly_manela,
+    load_he_kelly_manela_factors_monthly,
+    load_he_kelly_manela_factors_daily,
+    load_he_kelly_manela_all,
+    download_file,
+    download_data,
+    load_data_into_dataframe,
+    load_treasury_returns,
+    load_corporate_bond_returns,
+    pull_CRSP_treasury_daily,
+    pull_CRSP_treasury_info,
+    calc_runness,
+    pull_CRSP_treasury_consolidated,
+    load_CRSP_treasury_daily,
+    load_CRSP_treasury_info,
+    load_CRSP_treasury_consolidated,
+    
+)
+
 from finm.fixedincome import (
     present_value,
     future_value,
@@ -29,23 +52,29 @@ from finm.fixedincome import (
     compare_fit,
 )
 
-from finm.data import (
-    pull_CRSP_treasury_daily,
-    pull_CRSP_treasury_info,
-    calc_runness,
-    pull_CRSP_treasury_consolidated,
-    load_CRSP_treasury_daily,
-    load_CRSP_treasury_info,
-    load_CRSP_treasury_consolidated,
-    pull_fed_yield_curve,
-    load_fed_yield_curve_all,
-    load_fed_yield_curve,
-)
-
 __version__ = "0.1.0"
 __author__ = "University of Chicago Financial Mathematics Program"
 
 __all__ = [
+    "pull_fed_yield_curve",
+    "load_fed_yield_curve_all",
+    "load_fed_yield_curve",
+    "pull_he_kelly_manela",
+    "load_he_kelly_manela_factors_monthly",
+    "load_he_kelly_manela_factors_daily",
+    "load_he_kelly_manela_all",
+    "download_file",
+    "download_data",
+    "load_data_into_dataframe",
+    "load_treasury_returns",
+    "load_corporate_bond_returns",
+    "pull_CRSP_treasury_daily",
+    "pull_CRSP_treasury_info",
+    "calc_runness",
+    "pull_CRSP_treasury_consolidated",
+    "load_CRSP_treasury_daily",
+    "load_CRSP_treasury_info",
+    "load_CRSP_treasury_consolidated",
     "present_value",
     "future_value",
     "yield_to_maturity",
@@ -63,15 +92,5 @@ __all__ = [
     "fit",
     "gurkaynak_sack_wright_filters",
     "compare_fit",
-    "pull_CRSP_treasury_daily",
-    "pull_CRSP_treasury_info",
-    "calc_runness",
-    "pull_CRSP_treasury_consolidated",
-    "load_CRSP_treasury_daily",
-    "load_CRSP_treasury_info",
-    "load_CRSP_treasury_consolidated",
-    "pull_fed_yield_curve",
-    "load_fed_yield_curve_all",
-    "load_fed_yield_curve",
 ]
 
