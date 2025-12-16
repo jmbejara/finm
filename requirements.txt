@@ -1,0 +1,63 @@
+# Specific package versions are specified here to allow more consistent caching in GitHub Actions. 
+#
+# Dependencies from this file can be installed with the following command:
+#
+# $ pip install -r requirements.txt
+
+# ABlog==0.11.11
+# black==24.8.0
+# colorama
+# doit==0.36.0
+# fabric==3.2.2
+# holidays
+ipykernel
+# ipython
+# jaydebeapi
+# jupyter
+# jupyter-book
+# jupyterlab
+# linearmodels==6.1
+# linkify-it-py
+matplotlib
+# markitdown
+# myst-nb
+# myst-parser==2.0.0
+# notebook
+# nougat-ocr
+# albumentations==1.0.0 # Needed for nougat to work correctly https://github.com/facebookresearch/nougat/issues/251
+numpy
+# numpydoc==1.8.0
+# openpyxl==3.1.5
+# pandas-datareader==0.10.0
+# pandas-market-calendars==4.4.1
+pandas
+# paramiko==3.5.0
+# plotly==5.24.1
+# polars==1.9.0
+pyarrow
+# pydata-sphinx-theme==0.15.4
+# pytest==8.3.3
+# python-decouple==3.8
+python-dotenv
+# pyxlsb==1.0.10
+# chartbook @ git+https://github.com/jmbejara/chartbook@main
+requests
+# ruff
+# scikit-learn==1.5.2
+scipy
+# seaborn==0.13.2
+# sphinx-autodoc2
+# sphinx-book-theme==1.1.3
+# sphinx-design
+# sphinx==7.3.7
+# sphinxext-opengraph
+# sphinxcontrib-applehelp==2.0.0
+# sphinxcontrib-htmlhelp==2.1.0
+# sphinxext-rediraffe
+# statsmodels==0.14.4
+# weightedstats
+wrds
+# xbbg==0.7.7
+# xlrd
+# xlsxwriter
+# zstandard==0.23.0
