@@ -4,7 +4,7 @@ Data module - CRSP
 This module provides functions for pulling, loading, and cleaning data from CRSP.
 """
 
-from finm.data.CRSP.pull_CRSP_treasury import (
+from finm.data.WRDS.pull_CRSP_treasury import (
     pull_CRSP_treasury_daily,
     pull_CRSP_treasury_info,
     calc_runness,

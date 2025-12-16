@@ -445,23 +445,42 @@ def load_CRSP_treasury_consolidated(
 #     return df
 
 
-# if __name__ == "__main__":
-#     df = pull_CRSP_treasury_daily(
-    #     start_date="1970-01-01",
-    #     end_date="2023-12-31",
-    #     wrds_username=WRDS_USERNAME,
-    # )
-    # path = DATA_DIR / "TFZ_DAILY.parquet"
-    # df.to_parquet(path)
+if __name__ == "__main__":
 
-    # df = pull_CRSP_treasury_info(wrds_username=WRDS_USERNAME)
-    # path = DATA_DIR / "CRSP_TFZ_INFO.parquet"
-    # df.to_parquet(path)
+    # Get location of current file and parent folder
+    current_file_path = Path(__file__).resolve()    
+    current_dir = current_file_path.parent
 
-    # df = pull_CRSP_treasury_consolidated(wrds_username=WRDS_USERNAME)
-    # path = DATA_DIR / "CRSP_TFZ_consolidated.parquet"
-    # df.to_parquet(path)
+    WRDS_USERNAME = "jszajkowski"  # Replace with your WRDS username
 
-    # df = calc_runness(df)
-    # path = DATA_DIR / "CRSP_TFZ_with_runness.parquet"
-    # df.to_parquet(path)
+    # Download and save the treasury data
+    df = pull_CRSP_treasury_daily(
+        start_date="2020-01-01",
+        end_date="2020-12-31",
+        wrds_username=WRDS_USERNAME,
+    )
+
+    path = Path(current_dir) / "CRSP_TFZ_DAILY.parquet"
+    df.to_parquet(path)
+
+    df = pull_CRSP_treasury_info(
+        wrds_username=WRDS_USERNAME
+    
+    )
+
+    path = Path(current_dir) / "CRSP_TFZ_INFO.parquet"
+    df.to_parquet(path)
+
+    df = pull_CRSP_treasury_consolidated(
+        start_date="2020-01-01",
+        end_date="2020-12-31",
+        wrds_username=WRDS_USERNAME,
+    )
+
+    path = Path(current_dir) / "CRSP_TFZ_consolidated.parquet"
+    df.to_parquet(path)
+
+    df = calc_runness(df)
+
+    path = Path(current_dir) / "CRSP_TFZ_with_runness.parquet"
+    df.to_parquet(path)
