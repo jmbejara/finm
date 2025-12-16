@@ -141,3 +141,8 @@ Thumbs.db
 
 # Hatch
 .hatch/
+
+# Data
+.pkl
+.parquet
+.csv
