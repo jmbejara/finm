@@ -146,4 +146,10 @@ Thumbs.db
 *.pkl
 *.parquet
 *.csv
+
+# README files
 *.pdf
+*.txt
+
+# Julia compiled files
+*.jl 
