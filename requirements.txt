@@ -36,7 +36,7 @@ pandas
 # polars==1.9.0
 pyarrow
 # pydata-sphinx-theme==0.15.4
-# pytest==8.3.3
+pytest
 # python-decouple==3.8
 python-dotenv
 # pyxlsb==1.0.10
