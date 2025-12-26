@@ -1,23 +1,27 @@
+import finm
+import pandas as pd
 import sys
-from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
 import warnings
 
-import pandas as pd
-import pull_open_source_bond
+from pathlib import Path
 
-from settings import config
+# warnings.filterwarnings("ignore", category=DeprecationWarning)
 
-warnings.filterwarnings("ignore", category=DeprecationWarning)
-
-DATA_DIR = config("DATA_DIR")
-
-
-def assign_cs_deciles(df):
+def assign_cs_deciles(
+    df: pd.DataFrame,
+) -> pd.Series:
     """
     Assign deciles based on the CS column within each date.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        DataFrame containing at least 'date' and 'CS' columns.
+
+    Returns
+    -------
+    pd.Series
+        DataFrame with an additional 'cs_decile' column.
     """
 
     def assign_deciles(group):
@@ -42,8 +46,10 @@ def calc_value_weighted_decile_returns(df, value_col="BOND_VALUE"):
     return pivoted
 
 
-def calc_corp_bond_returns(data_dir=DATA_DIR):
-    bond_returns = pull_open_source_bond.load_corporate_bond_returns(data_dir=data_dir)
+def calc_corp_bond_returns(
+    data_dir: Path,
+) -> pd.DataFrame:
+    bond_returns = finm.load_corporate_bond_returns(data_dir=data_dir)
     deciled_bond_returns = assign_cs_deciles(bond_returns)
     # Value-weighted returns
     value_weighted = calc_value_weighted_decile_returns(
@@ -52,11 +58,11 @@ def calc_corp_bond_returns(data_dir=DATA_DIR):
     return value_weighted
 
 
-if __name__ == "__main__":
-    bond_returns = pull_open_source_bond.load_corporate_bond_returns(data_dir=DATA_DIR)
-    deciled_bond_returns = assign_cs_deciles(bond_returns)
-    # Value-weighted returns
-    value_weighted = calc_value_weighted_decile_returns(
-        deciled_bond_returns, value_col="BOND_VALUE"
-    )
-    value_weighted.to_parquet(DATA_DIR / "corp_bond_portfolio_returns.parquet")
+# if __name__ == "__main__":
+#     bond_returns = finm.load_corporate_bond_returns(data_dir=DATA_DIR)
+#     deciled_bond_returns = assign_cs_deciles(bond_returns)
+#     # Value-weighted returns
+#     value_weighted = calc_value_weighted_decile_returns(
+#         deciled_bond_returns, value_col="BOND_VALUE"
+#     )
+#     value_weighted.to_parquet(DATA_DIR / "corp_bond_portfolio_returns.parquet")
