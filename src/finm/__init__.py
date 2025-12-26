@@ -29,7 +29,8 @@ from finm.data import (
     load_CRSP_treasury_daily,
     load_CRSP_treasury_info,
     load_CRSP_treasury_consolidated,
-    
+    pull_WRDS_corp_bond_monthly,
+    load_WRDS_corp_bond_monthly,
 )
 
 from finm.fixedincome import (
@@ -40,6 +41,9 @@ from finm.fixedincome import (
     duration,
     modified_duration,
     convexity,
+    assign_cs_deciles,
+    calc_value_weighted_decile_returns,
+    calc_corp_bond_returns,
     get_coupon_dates,
     filter_treasury_cashflows,
     calc_cashflows,
@@ -75,6 +79,8 @@ __all__ = [
     "load_CRSP_treasury_daily",
     "load_CRSP_treasury_info",
     "load_CRSP_treasury_consolidated",
+    "pull_WRDS_corp_bond_monthly",
+    "load_WRDS_corp_bond_monthly",
     "present_value",
     "future_value",
     "yield_to_maturity",
@@ -82,6 +88,9 @@ __all__ = [
     "duration",
     "modified_duration",
     "convexity",
+    "assign_cs_deciles",
+    "calc_value_weighted_decile_returns",
+    "calc_corp_bond_returns",
     "get_coupon_dates",
     "filter_treasury_cashflows",
     "calc_cashflows",

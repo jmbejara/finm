@@ -10,7 +10,7 @@ from finm.data.Federal_Reserve import (
     load_fed_yield_curve,
 )
 
-from finm.data.he_kelly_manela import (
+from finm.data.He_Kelly_Manela import (
     pull_he_kelly_manela,
     load_he_kelly_manela_factors_monthly,
     load_he_kelly_manela_factors_daily,
@@ -33,6 +33,8 @@ from finm.data.WRDS import (
     load_CRSP_treasury_daily,
     load_CRSP_treasury_info,
     load_CRSP_treasury_consolidated,
+    pull_WRDS_corp_bond_monthly,
+    load_WRDS_corp_bond_monthly,
 )
 
 __all__ = [
@@ -55,4 +57,6 @@ __all__ = [
     "load_CRSP_treasury_daily",
     "load_CRSP_treasury_info",
     "load_CRSP_treasury_consolidated",
+    "pull_WRDS_corp_bond_monthly",
+    "load_WRDS_corp_bond_monthly",
 ]

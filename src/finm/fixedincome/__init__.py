@@ -16,6 +16,12 @@ from finm.fixedincome.bonds import (
     # get_coupon_dates,
 )
 
+from finm.fixedincome.calc_corp_bond_returns import (
+    assign_cs_deciles,
+    calc_value_weighted_decile_returns,
+    calc_corp_bond_returns,
+)
+
 from finm.fixedincome.gsw2006_yield_curve import (
     get_coupon_dates,
     filter_treasury_cashflows,
@@ -37,6 +43,9 @@ __all__ = [
     "duration",
     "modified_duration",
     "convexity",
+    "assign_cs_deciles",
+    "calc_value_weighted_decile_returns",
+    "calc_corp_bond_returns",
     "get_coupon_dates",
     "filter_treasury_cashflows",
     "calc_cashflows",
