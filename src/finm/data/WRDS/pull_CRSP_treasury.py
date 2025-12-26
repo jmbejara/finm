@@ -24,21 +24,11 @@ Data Description:
 Thank you to Younghun Lee for preparing this script for use in class.
 """
 
-import sys
-from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
-from datetime import datetime
-from pathlib import Path
-
 import pandas as pd
 import wrds
 
-# from settings import config
-
-# DATA_DIR = Path(config("DATA_DIR"))
-# WRDS_USERNAME = config("WRDS_USERNAME")
+from datetime import datetime
+from pathlib import Path
 
 def pull_CRSP_treasury_daily(
     start_date: str, # "1970-01-01"
@@ -465,7 +455,6 @@ if __name__ == "__main__":
 
     df = pull_CRSP_treasury_info(
         wrds_username=WRDS_USERNAME
-    
     )
 
     path = Path(current_dir) / "CRSP_TFZ_INFO.parquet"
