@@ -146,6 +146,7 @@ Thumbs.db
 *.pkl
 *.parquet
 *.csv
+*.zip
 
 # README files
 *.pdf
