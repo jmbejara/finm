@@ -41,6 +41,7 @@ pytest
 python-dotenv
 # pyxlsb==1.0.10
 # chartbook @ git+https://github.com/jmbejara/chartbook@main
+quantlib
 requests
 # ruff
 # scikit-learn==1.5.2
