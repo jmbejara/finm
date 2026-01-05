@@ -5,11 +5,16 @@ import pandas as pd
 from pathlib import Path
 
 # Get location of current file and parent folder
-current_file_path = Path(__file__).resolve()    
+# for .py file
+current_file_path = Path(__file__).resolve()
 TESTS_DIR = current_file_path.parent
-DATA_DIR = TESTS_DIR.parent / "src" / "finm" / "data"
-FED_RES_DIR = DATA_DIR / "Federal_Reserve"
-WRDS_DIR = DATA_DIR / "WRDS"
+BASE_FINM_DIR = TESTS_DIR.parent
+DATA_CACHE_DIR = Path(BASE_FINM_DIR) / "data_cache"
+
+# for Jupyter notebook
+# EXAMPLES_DIR = Path.cwd().resolve()
+# BASE_FINM_DIR = EXAMPLES_DIR.parent
+# DATA_CACHE_DIR = Path(BASE_FINM_DIR) / "data_cache"
 
 def test_fit_on_several_days():
     """
@@ -19,7 +24,7 @@ def test_fit_on_several_days():
     ## Load Gurkaynak Sack Wright data from Federal Reserve's website
     # See here: https://www.federalreserve.gov/data/nominal-yield-curve.htm
     # and here: https://www.federalreserve.gov/data/yield-curve-tables/feds200628_1.html
-    actual_all = finm.load_fed_yield_curve_all(data_dir=FED_RES_DIR)
+    actual_all = finm.load_fed_yield_curve_all(data_dir=DATA_CACHE_DIR)
     # Create copy of parameter DataFrame to avoid view vs copy issues
     actual_params_all = actual_all.loc[
         :, ["TAU1", "TAU2", "BETA0", "BETA1", "BETA2", "BETA3"]
@@ -32,7 +37,7 @@ def test_fit_on_several_days():
     ## Load CRSP Treasury data from Wharton Research Data Services
     # We will fit a Nelson-Siegel-Svensson model to this data to see
     # if we can replicate the Gurkaynak Sack Wright results above.
-    df_all = finm.load_CRSP_treasury_consolidated(data_dir=WRDS_DIR)
+    df_all = finm.load_CRSP_treasury_consolidated(data_dir=DATA_CACHE_DIR)
     df_all = finm.gurkaynak_sack_wright_filters(df_all)
 
     quote_dates = pd.date_range("2000-01-02", "2024-06-30", freq="BMS")

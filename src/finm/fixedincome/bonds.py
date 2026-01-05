@@ -9,11 +9,12 @@ This module provides basic functions for:
 - Calculate semiannual coupon payment dates for a bond
 """
 
-from datetime import datetime
-from typing import Union
-
+import finm
 import numpy as np
 import pandas as pd
+
+from datetime import datetime
+from typing import Union
 
 
 def present_value(
@@ -92,52 +93,7 @@ def future_value(
         return present_value * ((1 + rate) ** periods)
 
 
-def bond_price(
-    face_value: float,
-    coupon_rate: float,
-    ytm: float,
-    periods: int,
-    frequency: int = 2
-) -> float:
-    """
-    Calculate the price of a bond.
 
-    Parameters
-    ----------
-    face_value : float
-        The face (par) value of the bond.
-    coupon_rate : float
-        The annual coupon rate (as a decimal, e.g., 0.05 for 5%).
-    ytm : float
-        The yield to maturity (as a decimal, e.g., 0.05 for 5%).
-    periods : int
-        The number of coupon periods remaining until maturity.
-    frequency : int, optional
-        The number of coupon payments per year (default: 2 for semi-annual).
-
-    Returns
-    -------
-    float
-        The price of the bond.
-
-    Examples
-    --------
-    >>> bond_price(1000, 0.06, 0.05, 10, frequency=2)
-    1038.8972918207702
-    """
-    coupon_payment = face_value * coupon_rate / frequency
-    periodic_ytm = ytm / frequency
-
-    # Present value of coupon payments (annuity)
-    if periodic_ytm == 0:
-        pv_coupons = coupon_payment * periods
-    else:
-        pv_coupons = coupon_payment * (1 - (1 + periodic_ytm) ** (-periods)) / periodic_ytm
-
-    # Present value of face value
-    pv_face = face_value / ((1 + periodic_ytm) ** periods)
-
-    return pv_coupons + pv_face
 
 
 def yield_to_maturity(
@@ -258,7 +214,7 @@ def duration(
     coupon_payment = face_value * coupon_rate / frequency
     periodic_ytm = ytm / frequency
     
-    price = bond_price(face_value, coupon_rate, ytm, periods, frequency)
+    price = finm.bond_price(face_value, coupon_rate, ytm, periods, frequency)
     
     # Calculate weighted average time
     weighted_sum = 0
@@ -358,7 +314,7 @@ def convexity(
     coupon_payment = face_value * coupon_rate / frequency
     periodic_ytm = ytm / frequency
     
-    price = bond_price(face_value, coupon_rate, ytm, periods, frequency)
+    price = finm.bond_price(face_value, coupon_rate, ytm, periods, frequency)
     
     # Calculate convexity
     convexity_sum = 0

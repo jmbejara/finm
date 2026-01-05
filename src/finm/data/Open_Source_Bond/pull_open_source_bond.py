@@ -168,12 +168,23 @@ def load_corporate_bond_returns(
 if __name__ == "__main__":
 
     # Get location of current file and parent folder
-    current_file_path = Path(__file__).resolve()    
-    current_dir = current_file_path.parent
+    # for .py file
+    current_file_path = Path(__file__).resolve()
+    OSB_DIR = current_file_path.parent
+    DATA_DIR = OSB_DIR.parent
+    FINM_DIR = DATA_DIR.parent
+    SRC_DIR = FINM_DIR.parent
+    BASE_FINM_DIR = SRC_DIR.parent
+    DATA_CACHE_DIR = Path(BASE_FINM_DIR) / "data_cache"
+
+    # for Jupyter notebook
+    # EXAMPLES_DIR = Path.cwd().resolve()
+    # BASE_FINM_DIR = EXAMPLES_DIR.parent
+    # DATA_CACHE_DIR = Path(BASE_FINM_DIR) / "data_cache"
 
     # Download and save the bond data
     for dataset, info in DATA_INFO.items():
-        data_dir = current_dir
+        data_dir = DATA_CACHE_DIR
         # data_dir.mkdir(parents=True, exist_ok=True)
 
         # Download and process data file

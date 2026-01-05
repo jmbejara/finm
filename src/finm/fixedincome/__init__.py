@@ -9,11 +9,9 @@ from finm.fixedincome.bonds import (
     present_value,
     future_value,
     yield_to_maturity,
-    bond_price,
     duration,
     modified_duration,
     convexity,
-    # get_coupon_dates,
 )
 
 from finm.fixedincome.calc_corp_bond_returns import (
@@ -35,17 +33,28 @@ from finm.fixedincome.gsw2006_yield_curve import (
     compare_fit,
 )
 
+from finm.fixedincome.pricing import (
+    get_coupon_dates,
+    get_coupon_dates_ql,
+    bond_price,
+    bond_price_ql,
+)
+
 __all__ = [
+    # from finm.fixedincome.bonds
     "present_value",
     "future_value",
     "yield_to_maturity",
-    "bond_price",
     "duration",
     "modified_duration",
     "convexity",
+
+    # from finm.fixedincome.calc_corp_bond_returns
     "assign_cs_deciles",
     "calc_value_weighted_decile_returns",
     "calc_corp_bond_returns",
+
+    # from finm.fixedincome.gsw2006_yield_curve
     "get_coupon_dates",
     "filter_treasury_cashflows",
     "calc_cashflows",
@@ -56,5 +65,10 @@ __all__ = [
     "fit",
     "gurkaynak_sack_wright_filters",
     "compare_fit",
-]
 
+    # from finm.fixedincome.pricing import
+    "get_coupon_dates",
+    "get_coupon_dates_ql",
+    "bond_price",
+    "bond_price_ql",
+]

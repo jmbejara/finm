@@ -438,10 +438,22 @@ def load_CRSP_treasury_consolidated(
 if __name__ == "__main__":
 
     # Get location of current file and parent folder
-    current_file_path = Path(__file__).resolve()    
-    current_dir = current_file_path.parent
+    # for .py file
+    current_file_path = Path(__file__).resolve()
+    WRDS_DIR = current_file_path.parent
+    DATA_DIR = WRDS_DIR.parent
+    FINM_DIR = DATA_DIR.parent
+    SRC_DIR = FINM_DIR.parent
+    BASE_FINM_DIR = SRC_DIR.parent
+    DATA_CACHE_DIR = Path(BASE_FINM_DIR) / "data_cache"
 
-    WRDS_USERNAME = "jszajkowski"  # Replace with your WRDS username
+    # for Jupyter notebook
+    # EXAMPLES_DIR = Path.cwd().resolve()
+    # BASE_FINM_DIR = EXAMPLES_DIR.parent
+    # DATA_CACHE_DIR = Path(BASE_FINM_DIR) / "data_cache"
+
+    # Replace with your WRDS username
+    WRDS_USERNAME = "jszajkowski"  
 
     # Download and save the treasury data
     df = pull_CRSP_treasury_daily(
@@ -450,14 +462,14 @@ if __name__ == "__main__":
         wrds_username=WRDS_USERNAME,
     )
 
-    path = Path(current_dir) / "CRSP_TFZ_DAILY.parquet"
+    path = Path(DATA_CACHE_DIR) / "CRSP_TFZ_DAILY.parquet"
     df.to_parquet(path)
 
     df = pull_CRSP_treasury_info(
         wrds_username=WRDS_USERNAME
     )
 
-    path = Path(current_dir) / "CRSP_TFZ_INFO.parquet"
+    path = Path(DATA_CACHE_DIR) / "CRSP_TFZ_INFO.parquet"
     df.to_parquet(path)
 
     df = pull_CRSP_treasury_consolidated(
@@ -466,10 +478,10 @@ if __name__ == "__main__":
         wrds_username=WRDS_USERNAME,
     )
 
-    path = Path(current_dir) / "CRSP_TFZ_consolidated.parquet"
+    path = Path(DATA_CACHE_DIR) / "CRSP_TFZ_consolidated.parquet"
     df.to_parquet(path)
 
     df = calc_runness(df)
 
-    path = Path(current_dir) / "CRSP_TFZ_with_runness.parquet"
+    path = Path(DATA_CACHE_DIR) / "CRSP_TFZ_with_runness.parquet"
     df.to_parquet(path)

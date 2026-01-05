@@ -8,12 +8,16 @@ from finm.fixedincome import (
     present_value,
     future_value,
     bond_price,
+    bond_price_ql,
     yield_to_maturity,
     duration,
     modified_duration,
     convexity,
     get_coupon_dates,
+    get_coupon_dates_ql,
 )
+
+
 
 
 class TestPresentValue:
@@ -61,6 +65,14 @@ class TestBondPrice:
         # When coupon rate equals YTM, bond should trade at par
         price = bond_price(1000, 0.05, 0.05, 10, frequency=2)
         assert np.isclose(price, 1000, rtol=1e-6)
+
+    def test_bond_price_ql(self):
+        """Test that a bond priced with the python function matches that of the QuantLib function within 0.1%."""
+        # When coupon rate equals YTM, bond should trade at par
+        price = bond_price(1000, 0.05, 0.05, 10, frequency=2)
+        price_ql = bond_price_ql(1000, 0.05, 0.05, 10, frequency=2)
+        price_percent_delta = abs(price / price_ql)
+        assert np.isclose(price_percent_delta, 1, rtol=1e-3)
 
     def test_premium_bond(self):
         """Test that coupon > YTM results in premium bond."""
@@ -140,6 +152,15 @@ class TestCouponDates:
         coupon_dates = get_coupon_dates(quote_date, maturity_date)
         assert len(coupon_dates) == 10  # 5 years semiannual -> 10 payments
 
+    def test_coupon_dates_count_ql(self):
+        """Test that the number of coupon dates is correct based on the python function 
+        and the QuantLib function."""
+        quote_date = "2020-01-02"
+        maturity_date = "2025-01-01"
+        coupon_dates = get_coupon_dates(quote_date, maturity_date)
+        coupon_dates_ql = get_coupon_dates_ql(quote_date, maturity_date)
+        assert len(coupon_dates) == len(coupon_dates_ql)  # 5 years semiannual -> 10 payments
+
     def test_coupon_date_gap(self):
         """Test that coupon dates are every six months."""
         quote_date = "2020-01-01"
@@ -150,3 +171,23 @@ class TestCouponDates:
         for i in range(1, len(coupon_dates)):
             delta = (coupon_dates[i] - coupon_dates[i-1]).days
             assert 170 <= delta <= 190  # Allow some leeway for month length variations
+
+    def test_coupon_date_gap_ql(self):
+        """Test that coupon dates are every six months and that the difference in date between 
+        python function and QuantLib function is less than 3 days (accounting for a weekend 
+        discrepancy)."""
+        quote_date = "2020-01-02"
+        maturity_date = "2025-01-01"
+        coupon_dates = get_coupon_dates(quote_date, maturity_date)
+        coupon_dates_ql = get_coupon_dates_ql(quote_date, maturity_date)
+
+        # Check that each date is approximately 6 months apart
+        for i in range(1, len(coupon_dates)):
+            delta = (coupon_dates[i] - coupon_dates[i-1]).days
+            assert 170 <= delta <= 190  # Allow some leeway for month length variations
+
+        # Check that each date is less than 3 days apart between the "coupon_dates" and "coupon_dates_ql"
+        assert len(coupon_dates) == len(coupon_dates_ql)
+        for i in range(1, len(coupon_dates)):
+            delta = (coupon_dates[i] - coupon_dates_ql[i]).days
+            assert delta <= 3  # Allow some leeway for month length variations

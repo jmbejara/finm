@@ -118,9 +118,18 @@ def load_he_kelly_manela_all(
 if __name__ == "__main__":
 
     # Get location of current file and parent folder
-    current_file_path = Path(__file__).resolve()    
-    current_dir = current_file_path.parent
+    # for .py file
+    current_file_path = Path(__file__).resolve()
+    HKM_DIR = current_file_path.parent
+    DATA_DIR = HKM_DIR.parent
+    FINM_DIR = DATA_DIR.parent
+    SRC_DIR = FINM_DIR.parent
+    BASE_FINM_DIR = SRC_DIR.parent
+    DATA_CACHE_DIR = Path(BASE_FINM_DIR) / "data_cache"
 
-    data_dir = current_dir
-    pull_he_kelly_manela(data_dir=data_dir)
-    data_dir.mkdir(parents=True, exist_ok=True)
+    # for Jupyter notebook
+    # EXAMPLES_DIR = Path.cwd().resolve()
+    # BASE_FINM_DIR = EXAMPLES_DIR.parent
+    # DATA_CACHE_DIR = Path(BASE_FINM_DIR) / "data_cache"
+
+    pull_he_kelly_manela(data_dir=DATA_CACHE_DIR)

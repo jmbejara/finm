@@ -4,9 +4,6 @@ import requests
 from io import BytesIO
 from pathlib import Path
 
-# from settings import config
-# DATA_DIR = config('DATA_DIR')
-
 
 def pull_fed_yield_curve() -> tuple[pd.DataFrame, pd.DataFrame]:
     """
@@ -78,22 +75,30 @@ def load_fed_yield_curve(
     path = data_dir / "fed_yield_curve.parquet"
     _df = pd.read_parquet(path)
     return _df
-
-# def _demo():
-#     _df = load_fed_yield_curve(data_dir=DATA_DIR)
     
 
 if __name__ == "__main__":
 
     # Get location of current file and parent folder
-    current_file_path = Path(__file__).resolve()    
-    current_dir = current_file_path.parent
+    # for .py file
+    current_file_path = Path(__file__).resolve()
+    FR_DIR = current_file_path.parent
+    DATA_DIR = FR_DIR.parent
+    FINM_DIR = DATA_DIR.parent
+    SRC_DIR = FINM_DIR.parent
+    BASE_FINM_DIR = SRC_DIR.parent
+    DATA_CACHE_DIR = Path(BASE_FINM_DIR) / "data_cache"
+
+    # for Jupyter notebook
+    # EXAMPLES_DIR = Path.cwd().resolve()
+    # BASE_FINM_DIR = EXAMPLES_DIR.parent
+    # DATA_CACHE_DIR = Path(BASE_FINM_DIR) / "data_cache"
 
     # Download and save the yield curve data
     df_all, df = pull_fed_yield_curve()
 
-    path = Path(current_dir) / "fed_yield_curve_all.parquet"
+    path = Path(DATA_CACHE_DIR) / "fed_yield_curve_all.parquet"
     df_all.to_parquet(path)
     
-    path = Path(current_dir) / "fed_yield_curve.parquet"
+    path = Path(DATA_CACHE_DIR) / "fed_yield_curve.parquet"
     df.to_parquet(path)

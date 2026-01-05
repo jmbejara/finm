@@ -17,7 +17,6 @@ https://doi.org/10.1016/j.jmoneco.2007.06.029
 Acknowledgements:
 - The function to create the cashflows is from Mark Hendricks.
 - Younghun Lee assisted with writing this code.
-
 """
 
 import matplotlib.pyplot as plt
@@ -59,6 +58,7 @@ def get_coupon_dates(quote_date, maturity_date):
     return out
 
 
+# Function required for GSW analysis
 def filter_treasury_cashflows(
     CF, filter_maturity_dates=False, filter_benchmark_dates=False, filter_CF_strict=True
 ):
@@ -97,6 +97,7 @@ def filter_treasury_cashflows(
     return CF_filtered
 
 
+# Function required for GSW analysis
 def calc_cashflows(quote_data, filter_maturity_dates=False):
     CF = pd.DataFrame(
         dtype=float,
@@ -126,6 +127,7 @@ def calc_cashflows(quote_data, filter_maturity_dates=False):
     return CF
 
 
+# Function required for GSW analysis
 def plot_spot_curve(params):
     """Plot the spot curve for the fitted NelsonSeigelSvensson instance"""
     t = np.linspace(1, 30, 100)
@@ -138,6 +140,7 @@ def plot_spot_curve(params):
     return ax
 
 
+# Function required for GSW analysis
 def spot(maturities, params=PARAMS0):
     """Calculate Nelson-Siegel-Svensson spot rates for given maturities.
 
@@ -158,6 +161,7 @@ def spot(maturities, params=PARAMS0):
     )
 
 
+# Function required for GSW analysis
 def discount(t, params=PARAMS0):
     """Calculate discount factors from spot rates.
 
@@ -170,6 +174,7 @@ def discount(t, params=PARAMS0):
     return np.exp(-spot(t, params=params) * t)
 
 
+# Function required for GSW analysis
 def predict_prices(quote_date, df_all, params=PARAMS0):
     """Calculate security prices from the parameters"""
     df = df_all[df_all["caldt"] == quote_date]
@@ -185,6 +190,7 @@ def predict_prices(quote_date, df_all, params=PARAMS0):
     return predicted_prices
 
 
+# Function required for GSW analysis
 def fit(quote_date, df_all, params0=PARAMS0):
     """Fit NSS model to Treasury security data using nonlinear least squares.
 
@@ -275,6 +281,7 @@ def fit(quote_date, df_all, params0=PARAMS0):
     return param_star, mean_squared_error(param_star)
 
 
+# Function required for GSW analysis
 def gurkaynak_sack_wright_filters(dff):
     """Apply Treasury security filters based on Gürkaynak, Sack, and Wright (2006).
 
@@ -354,6 +361,7 @@ def gurkaynak_sack_wright_filters(dff):
     return df
 
 
+# Function required for GSW analysis
 def compare_fit(quote_date, df_all, params_star, actual_params, df):
     predicted_prices = predict_prices(quote_date, df_all, params=params_star)
     gsw_predicted_prices = predict_prices(quote_date, df_all, params=actual_params)

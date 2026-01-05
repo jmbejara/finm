@@ -161,10 +161,22 @@ def load_WRDS_corp_bond_monthly(
 if __name__ == "__main__":
 
     # Get location of current file and parent folder
-    current_file_path = Path(__file__).resolve()    
-    current_dir = current_file_path.parent
+    # for .py file
+    current_file_path = Path(__file__).resolve()
+    WRDS_DIR = current_file_path.parent
+    DATA_DIR = WRDS_DIR.parent
+    FINM_DIR = DATA_DIR.parent
+    SRC_DIR = FINM_DIR.parent
+    BASE_FINM_DIR = SRC_DIR.parent
+    DATA_CACHE_DIR = Path(BASE_FINM_DIR) / "data_cache"
 
-    WRDS_USERNAME = "jszajkowski"  # Replace with your WRDS username
+    # for Jupyter notebook
+    # EXAMPLES_DIR = Path.cwd().resolve()
+    # BASE_FINM_DIR = EXAMPLES_DIR.parent
+    # DATA_CACHE_DIR = Path(BASE_FINM_DIR) / "data_cache"
+
+    # Replace with your WRDS username
+    WRDS_USERNAME = "jszajkowski"
 
     # Download and save the corporate bond data
     df = pull_WRDS_corp_bond_monthly(
@@ -173,5 +185,5 @@ if __name__ == "__main__":
         wrds_username=WRDS_USERNAME,
     )
 
-    path = Path(current_dir) / "WRDS_Corp_Bond_Monthly.parquet"
+    path = Path(DATA_CACHE_DIR) / "WRDS_Corp_Bond_Monthly.parquet"
     df.to_parquet(path)

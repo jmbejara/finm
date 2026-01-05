@@ -20,6 +20,7 @@ from finm.data.WRDS.pull_WRDS_corp_bond import (
 )
 
 __all__ = [
+    # from finm.data.WRDS.pull_CRSP_treasury
     "pull_CRSP_treasury_daily",
     "pull_CRSP_treasury_info",
     "calc_runness",
@@ -27,6 +28,8 @@ __all__ = [
     "load_CRSP_treasury_daily",
     "load_CRSP_treasury_info",
     "load_CRSP_treasury_consolidated",
+
+    # from from finm.data.WRDS.pull_WRDS_corp_bond
     "pull_WRDS_corp_bond_monthly",
     "load_WRDS_corp_bond_monthly",
 ]
