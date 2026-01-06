@@ -25,6 +25,8 @@ import pandas as pd
 
 from scipy.optimize import minimize
 
+from finm.fixedincome.pricing import get_coupon_dates
+
 # from ..data.CRSP import pull_CRSP_treasury
 # from ..data.Federal_Reserve import pull_yield_curve_data
 
@@ -38,25 +40,6 @@ from scipy.optimize import minimize
 # "tau1", "tau2", "beta1", "beta2", "beta3", "beta4"
 PARAM_NAMES = ("tau1", "tau2", "beta1", "beta2", "beta3", "beta4")
 PARAMS0 = np.array([1.0, 10.0, 3.0, 3.0, 3.0, 3.0])
-
-
-def get_coupon_dates(quote_date, maturity_date):
-    """Calculate semiannual coupon payment dates between settlement and maturity."""
-    quote_date = pd.to_datetime(quote_date)
-    maturity_date = pd.to_datetime(maturity_date)
-
-    # divide by 180 just to be safe
-    temp = pd.date_range(
-        end=maturity_date,
-        periods=int(np.ceil((maturity_date - quote_date).days / 180)),
-        freq=pd.DateOffset(months=6),
-    )
-    # filter out if one date too many
-    temp = pd.DataFrame(data=temp[temp > quote_date])
-
-    out = temp[0]
-    return out
-
 
 # Function required for GSW analysis
 def filter_treasury_cashflows(
