@@ -24,11 +24,14 @@ import pandas as pd
 from dotenv import load_dotenv
 
 import finm
+from finm.data import open_source_bond
 
 load_dotenv()
 
 DATA_DIR = Path(os.environ.get("DATA_DIR", "./_data"))
 DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+print(f"Data directory: {DATA_DIR}")
 
 # %% [markdown]
 # ## Data Cleaning - He, Kelly, and Manella (HKM) follow Nozawa (2017)
@@ -92,7 +95,7 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 # %%
 # Pull the He-Kelly-Manela data
-finm.pull_he_kelly_manela(data_dir=DATA_DIR)
+finm.pull_he_kelly_manela(data_dir=DATA_DIR, accept_license=True)
 
 # %%
 hkm = finm.load_he_kelly_manela_all(data_dir=DATA_DIR)
@@ -110,27 +113,28 @@ copr_bonds_hkm.describe()
 copr_bonds_hkm.isnull().sum()
 
 # %% [markdown]
-# ## FTSFR Dataset - Based on TRACE Data from OpenBondAssetPricing.com
+# ## Open Source Bond Asset Pricing Data
 #
-# The **FTSFR** (Financial Time Series for Fixed-income Analysis) dataset is
-# constructed using the TRACE (Trade Reporting and Compliance Engine) data
-# available at [openbondassetpricing.com](https://openbondassetpricing.com/).
-# This dataset provides a comprehensive collection of corporate bond data,
-# including market microstructure-adjusted prices and returns, as detailed
-# in the Monthly TRACE Data README.
+# The Open Source Bond Asset Pricing project provides:
+# - **Monthly corporate bond returns** with 108 factor signals
+# - Data based on TRACE (Trade Reporting and Compliance Engine)
+# - Market microstructure-adjusted prices and returns
+#
+# Website: [openbondassetpricing.com](https://openbondassetpricing.com/)
+# GitHub: [trace-data-pipeline](https://github.com/Alexander-M-Dickerson/trace-data-pipeline)
 
 # %% [markdown]
 # ## Data Cleaning and Construction - Following Nozawa (2017)
 #
-# The FTSFR dataset adheres to the rigorous data cleaning methodology
+# The dataset adheres to the rigorous data cleaning methodology
 # established by Nozawa (2017), ensuring high-quality and reliable corporate
 # bond return data. The key cleaning steps are mentioned above.
 
 # %% [markdown]
 # ## Understanding the TRACE Dataset
 #
-# The TRACE dataset, as utilized in the FTSFR dataset, is meticulously curated
-# to provide accurate and comprehensive corporate bond data. Key aspects include:
+# The TRACE dataset is meticulously curated to provide accurate and
+# comprehensive corporate bond data. Key aspects include:
 #
 # * **Market Microstructure Adjustments**:
 #   * Implementation of corrections for market microstructure noise (MMN) to
@@ -144,15 +148,22 @@ copr_bonds_hkm.isnull().sum()
 #     * Removal of bonds with insufficient outstanding amounts or missing
 #       critical information.
 #
-# By leveraging the TRACE dataset from openbondassetpricing.com, the FTSFR
+# By leveraging the TRACE dataset from openbondassetpricing.com, the
 # dataset ensures a robust foundation for analyzing corporate bond returns,
 # adhering to established methodologies and incorporating comprehensive data
 # cleaning procedures.
 
 # %%
-corp_bonds_returns = finm.calc_corp_bond_returns(
-    data_dir=DATA_DIR / "corp_bond_returns"
+# Pull corporate bond monthly returns from Open Source Bond Asset Pricing
+open_source_bond.pull(
+    data_dir=DATA_DIR,
+    variant="corporate_monthly",
+    accept_license=True,
 )
+print("Corporate bond data downloaded successfully.")
+
+# %%
+corp_bonds_returns = finm.calc_corp_bond_returns(data_dir=DATA_DIR)
 
 # %%
 corp_bonds_returns.describe()
