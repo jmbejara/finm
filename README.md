@@ -1,244 +1,149 @@
+[![PyPI - Version](https://img.shields.io/badge/PyPI-v0.1.0-blue?logo=pypi)](https://pypi.org/project/finm)
+[![PyPI - Python Version](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue?logo=python)](https://pypi.org/project/finm)
+[![GitHub Stars](https://img.shields.io/github/stars/jmbejara/finm?style=flat&logo=github)](https://github.com/jmbejara/finm)
+[![Documentation](https://img.shields.io/badge/docs-jeremybejarano.com%2Ffinm-blue)](https://jeremybejarano.com/finm/)
+
 # finm
 
-**Financial Mathematics Python Package**
+A Python package for financial mathematics and quantitative finance education, created by students and educators at the University of Chicago Financial Mathematics program.
 
-A student-led Python package for financial mathematics and quantitative finance education, created by students and educators at the **University of Chicago Financial Mathematics** program.
-
----
-
-> ⚠️ **IMPORTANT DISCLAIMER**
->
-> This package is for **learning purposes only**. There are likely errors in the implementations, and this software should **NOT** be used for any purposes beyond education and research. The authors make no guarantees about the correctness, accuracy, or reliability of any calculations.
->
-> **Do not use this package for:**
-> - Production trading systems
-> - Real financial decision-making
-> - Any commercial applications
->
-> If you need reliable financial calculations, please use professionally audited and maintained libraries.
-
----
-
-## About
-
-**finm** is a collaborative, open-source project designed to help students learn financial mathematics concepts through practical Python implementations. The package covers various topics in quantitative finance including:
-
-- Fixed Income (bond pricing, duration, convexity, yield calculations)
-- *More modules coming soon...*
-
-This project is maintained by students and educators at the University of Chicago Financial Mathematics program as a learning resource for the quantitative finance community.
+> [!CAUTION]
+> This package is for **learning purposes only**. There are likely errors in the implementations, and this software should not be used for production trading systems, real financial decision-making, or commercial applications. Always verify calculations independently.
 
 ## Installation
-
-### From PyPI (when published)
 
 ```bash
 pip install finm
 ```
 
-### From Source
+For all optional dependencies (CLI, data access):
 
 ```bash
-git clone https://github.com/uchicago-finmath/finm.git
-cd finm
-pip install .
+pip install finm[all]
 ```
 
-## Quick Start
+## Data Access
+
+Load financial data from multiple sources with a consistent interface. See the [Data Module documentation](https://jeremybejarano.com/finm/data_module.html) for details.
 
 ```python
 import finm
 
-# Calculate bond price
+# Fama-French factors (bundled data, no download needed)
+factors = finm.load_fama_french_factors()
+factors = finm.load_fama_french_factors(start="2020-01-01", end="2023-12-31")
+
+# Pull fresh data from Ken French's Data Library
+finm.pull_fama_french_factors(data_dir="./data")
+
+# Federal Reserve yield curve (GSW model)
+finm.pull_fed_yield_curve(data_dir="./data")
+yields = finm.load_fed_yield_curve(data_dir="./data")
+
+# He-Kelly-Manela intermediary capital factors
+finm.pull_he_kelly_manela(data_dir="./data")
+hkm = finm.load_he_kelly_manela_factors_monthly(data_dir="./data")
+
+# Open Source Bond Asset Pricing data
+finm.pull_open_source_bond(data_dir="./data")
+treasury = finm.load_treasury_returns(data_dir="./data")
+corporate = finm.load_corporate_bond_returns(data_dir="./data")
+
+# WRDS data (requires authentication)
+finm.pull_wrds_treasury(
+    data_dir="./data",
+    wrds_username="your_username",
+    start_date="2020-01-01",
+    end_date="2023-12-31"
+)
+```
+
+## Analytics
+
+Calculate risk metrics and factor exposures.
+
+```python
+import finm
+
+# Load factors
+factors = finm.load_fama_french_factors()
+
+# Fama-French 3-factor exposures
+exposures = finm.calculate_factor_exposures(stock_returns, factors)
+print(f"Market Beta: {exposures['market_beta']:.3f}")
+print(f"SMB Beta:    {exposures['smb_beta']:.3f}")
+print(f"HML Beta:    {exposures['hml_beta']:.3f}")
+print(f"Sharpe:      {exposures['sharpe_ratio']:.3f}")
+
+# Individual metrics
+beta = finm.calculate_beta(stock_returns, market_returns)
+sharpe = finm.calculate_sharpe_ratio(returns, risk_free_rate=0.02)
+```
+
+## Fixed Income
+
+Bond pricing, duration, and yield curve modeling.
+
+```python
+import finm
+
+# Bond pricing
 price = finm.bond_price(
     face_value=1000,
-    coupon_rate=0.06,    # 6% annual coupon
-    ytm=0.05,            # 5% yield to maturity
-    periods=10,          # 10 semi-annual periods (5 years)
-    frequency=2          # Semi-annual payments
+    coupon_rate=0.05,
+    ytm=0.04,
+    periods=10,
+    frequency=2  # semiannual
 )
-print(f"Bond Price: ${price:.2f}")
 
-# Calculate present value
-pv = finm.present_value(
-    future_value=1000,
-    rate=0.05,
-    periods=2
+# Duration and convexity
+dur = finm.duration(1000, 0.05, 0.04, 10, frequency=2)
+mod_dur = finm.modified_duration(1000, 0.05, 0.04, 10, frequency=2)
+conv = finm.convexity(1000, 0.05, 0.04, 10, frequency=2)
+
+# Yield to maturity
+ytm = finm.yield_to_maturity(
+    price=1050,
+    face_value=1000,
+    coupon_rate=0.05,
+    periods=10,
+    frequency=2
 )
-print(f"Present Value: ${pv:.2f}")
 
-# Calculate duration and convexity
-dur = finm.duration(1000, 0.06, 0.05, 10, frequency=2)
-mod_dur = finm.modified_duration(1000, 0.06, 0.05, 10, frequency=2)
-conv = finm.convexity(1000, 0.06, 0.05, 10, frequency=2)
-
-print(f"Macaulay Duration: {dur:.4f} years")
-print(f"Modified Duration: {mod_dur:.4f}")
-print(f"Convexity: {conv:.4f}")
+# Time value of money
+pv = finm.present_value(future_value=1000, rate=0.05, periods=3)
+fv = finm.future_value(present_value=1000, rate=0.05, periods=3)
 ```
 
-## Available Functions
+The package also includes an implementation of the Gurkaynak-Sack-Wright (2006) yield curve model. See the [API documentation](https://jeremybejarano.com/finm/apidocs/index.html) for `spot`, `discount`, `fit`, and related functions.
 
-### Fixed Income Module (`finm.fixedincome`)
+## Command Line Interface
 
-| Function | Description |
-|----------|-------------|
-| `present_value()` | Calculate present value of a future cash flow |
-| `future_value()` | Calculate future value of a present cash flow |
-| `bond_price()` | Calculate the price of a coupon bond |
-| `yield_to_maturity()` | Calculate YTM using Newton-Raphson method |
-| `duration()` | Calculate Macaulay duration |
-| `modified_duration()` | Calculate modified duration |
-| `convexity()` | Calculate bond convexity |
-
----
-
-## For Developers
-
-This section provides instructions for setting up the development environment, running tests, and building the package locally.
-
-### Prerequisites
-
-- Python 3.9 or higher
-- [Hatch](https://hatch.pypa.io/) - Modern Python project manager
-
-### Installing Hatch
+Manage data downloads from the terminal. See the [CLI documentation](https://jeremybejarano.com/finm/cli.html) for details.
 
 ```bash
-# Using pip
-pip install hatch
+# List available datasets
+finm list
 
-# Using pipx (recommended for CLI tools)
-pipx install hatch
+# Get info about a dataset
+finm info fama_french
 
-# On macOS with Homebrew
-brew install hatch
+# Pull data
+finm pull fama_french --data-dir=./data
+finm pull fed_yield_curve --data-dir=./data
+
+# Pull WRDS data (requires credentials)
+finm pull wrds_treasury --wrds-username=myuser --start-date=2020-01-01 --end-date=2023-12-31
 ```
 
-### Setting Up Development Environment
+## Documentation
 
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/uchicago-finmath/finm.git
-   cd finm
-   ```
-
-2. **Install in development mode:**
-
-   Using pip with editable install:
-   ```bash
-   pip install -e ".[dev]"
-   ```
-
-   Or using Hatch (creates an isolated environment):
-   ```bash
-   hatch shell
-   ```
-
-### Running Tests
-
-**Using pytest directly:**
-```bash
-pytest tests/
-```
-
-**Using pytest with coverage:**
-```bash
-pytest --cov=finm --cov-report=term-missing tests/
-```
-
-**Using Hatch scripts:**
-```bash
-# Run tests
-hatch run test
-
-# Run tests with coverage
-hatch run test-cov
-```
-
-### Code Quality
-
-**Format code with Black:**
-```bash
-hatch run lint:fmt
-```
-
-**Check code with Ruff:**
-```bash
-hatch run lint:check
-```
-
-**Type checking with mypy:**
-```bash
-hatch run lint:typing
-```
-
-**Run all linting checks:**
-```bash
-hatch run lint:all
-```
-
-### Building the Package
-
-**Build distribution packages:**
-```bash
-hatch build
-```
-
-This creates both source distribution (`.tar.gz`) and wheel (`.whl`) files in the `dist/` directory.
-
-**Clean build artifacts:**
-```bash
-hatch clean
-```
-
-### Project Structure
-
-```
-finm/
-├── pyproject.toml          # Project configuration (hatch/hatchling)
-├── README.md               # This file
-├── LICENSE                 # MIT License
-├── src/
-│   └── finm/               # Main package
-│       ├── __init__.py     # Package initialization
-│       └── fixedincome/    # Fixed income submodule
-│           ├── __init__.py
-│           └── bonds.py    # Bond calculations
-└── tests/
-    ├── __init__.py
-    └── test_fixedincome.py # Tests for fixed income module
-```
-
-### Contributing
-
-We welcome contributions from students and educators! Here's how you can help:
-
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/new-function`)
-3. **Write** your code with docstrings and type hints
-4. **Add** tests for your new functionality
-5. **Run** the test suite to ensure everything passes
-6. **Submit** a pull request
-
-Please ensure your code:
-- Follows PEP 8 style guidelines (use `black` for formatting)
-- Includes comprehensive docstrings with examples
-- Has corresponding unit tests
-- Passes all existing tests
-
----
+Full documentation is available at [jeremybejarano.com/finm](https://jeremybejarano.com/finm/).
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License. See [LICENSE](LICENSE) for details.
 
 ## Acknowledgments
 
-This project is created and maintained by students and educators at the **University of Chicago Financial Mathematics** program. We thank all contributors who have helped make this educational resource possible.
-
----
-
-*Remember: This is an educational project. Always verify calculations independently before using them for any real-world applications.*
-
+Created and maintained by students and educators at the University of Chicago Financial Mathematics program.

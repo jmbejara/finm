@@ -90,6 +90,7 @@ cli
 :caption: Developer Guide
 
 adding_data_sources
+development
 ```
 
 ```{toctree}
