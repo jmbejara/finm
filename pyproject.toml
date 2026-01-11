@@ -40,13 +40,24 @@ dependencies = [
     "QuantLib",
 ]
 
+[project.scripts]
+finm = "finm.data._cli:main"
+
 [project.optional-dependencies]
+data = [
+    "pandas-datareader>=0.10.0",
+]
+cli = [
+    "typer>=0.9.0",
+    "python-dotenv>=1.0.0",
+]
 dev = [
     "pytest>=7.0.0",
     "pytest-cov>=4.0.0",
     "black>=23.0.0",
     "ruff>=0.1.0",
     "mypy>=1.0.0",
+    "pandas-datareader>=0.10.0",
 ]
 docs = [
     "sphinx>=7.3.7",
@@ -67,7 +78,7 @@ build = [
     "python-dotenv>=1.0.0",
 ]
 all = [
-    "finm[dev,docs,build]",
+    "finm[data,cli,dev,docs,build]",
 ]
 
 [project.urls]
@@ -77,6 +88,11 @@ Repository = "https://github.com/uchicago-finmath/finm"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/finm"]
+
+[tool.hatch.build]
+include = [
+    "src/finm/**/*.csv",
+]
 
 [tool.hatch.build.targets.sdist]
 include = [

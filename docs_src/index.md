@@ -32,6 +32,11 @@ price = finm.bond_price(
     frequency=2
 )
 print(f"Bond Price: ${price:.2f}")
+
+# Load Fama-French factors and calculate factor exposures
+factors = finm.load_fama_french_factors(start="2020-01-01", end="2023-12-31")
+exposures = finm.calculate_factor_exposures(stock_returns, factors)
+print(f"Market Beta: {exposures['market_beta']:.2f}")
 ```
 
 ## Installation
@@ -48,6 +53,12 @@ pip install finm[all]
 
 ## Features
 
+### Analytics
+
+- **Factor Exposures**: Calculate Fama-French 3-factor model exposures (market beta, SMB, HML)
+- **Beta Calculation**: Compute beta with respect to any factor
+- **Sharpe Ratio**: Annualized Sharpe ratio calculation
+
 ### Fixed Income Analytics
 
 - **Bond Pricing**: Calculate bond prices with various compounding methods
@@ -58,12 +69,28 @@ pip install finm[all]
 
 ### Data Access
 
+- **Fama-French Factors**: Load bundled or pull live Fama-French 3-factor data from Ken French's Data Library
 - **Federal Reserve**: Download yield curve parameters from the Fed
 - **WRDS**: Pull CRSP Treasury and corporate bond data
 - **He-Kelly-Manela**: Access credit risk factor data
 - **Open Source Bond**: Load open source bond market returns
 
 ## Table of Contents
+
+```{toctree}
+:maxdepth: 2
+:caption: User Guide
+
+data_module
+cli
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: Developer Guide
+
+adding_data_sources
+```
 
 ```{toctree}
 :maxdepth: 2

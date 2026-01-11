@@ -13,6 +13,7 @@
 :titlesonly:
 :maxdepth: 3
 
+finm.analytics
 finm.data
 finm.fixedincome
 ```

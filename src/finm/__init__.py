@@ -5,40 +5,44 @@ A student-led Python package for financial mathematics and quantitative finance
 education, created by students and educators at the University of Chicago
 Financial Mathematics program.
 
-⚠️  DISCLAIMER: This package is for learning purposes only. There are likely
+DISCLAIMER: This package is for learning purposes only. There are likely
 errors and this should NOT be used for any purposes beyond education and research.
 """
 
-from finm.data.federal_reserve.pull_yield_curve_data import (
+from finm.analytics.factor_analysis import (
+    calculate_beta,
+    calculate_factor_exposures,
+    calculate_sharpe_ratio,
+)
+from finm.data import (
+    # Submodules
+    fama_french,
+    federal_reserve,
+    he_kelly_manela,
+    open_source_bond,
+    wrds,
+    # Federal Reserve
     load_fed_yield_curve,
     load_fed_yield_curve_all,
     pull_fed_yield_curve,
-)
-from finm.data.he_kelly_manela.pull_he_kelly_manela import (
+    # Fama-French
+    load_fama_french_factors,
+    pull_fama_french_factors,
+    # He-Kelly-Manela
     load_he_kelly_manela_all,
     load_he_kelly_manela_factors_daily,
     load_he_kelly_manela_factors_monthly,
     pull_he_kelly_manela,
-)
-from finm.data.open_source_bond.pull_open_source_bond import (
-    download_data,
-    download_file,
+    # Open Source Bond
     load_corporate_bond_returns,
-    load_data_into_dataframe,
     load_treasury_returns,
-)
-from finm.data.wrds_data.pull_CRSP_treasury import (
-    calc_runness,
-    load_CRSP_treasury_consolidated,
-    load_CRSP_treasury_daily,
-    load_CRSP_treasury_info,
-    pull_CRSP_treasury_consolidated,
-    pull_CRSP_treasury_daily,
-    pull_CRSP_treasury_info,
-)
-from finm.data.wrds_data.pull_WRDS_corp_bond import (
-    load_WRDS_corp_bond_monthly,
-    pull_WRDS_corp_bond_monthly,
+    pull_open_source_bond,
+    # WRDS
+    calc_treasury_runness,
+    load_wrds_corp_bond,
+    load_wrds_treasury,
+    pull_wrds_corp_bond,
+    pull_wrds_treasury,
 )
 from finm.fixedincome.bonds import (
     convexity,
@@ -76,44 +80,50 @@ __version__ = "0.1.0"
 __author__ = "University of Chicago Financial Mathematics Program"
 
 __all__ = [
-    # from finm.data.federal_reserve.pull_yield_curve_data
+    # Data submodules
+    "fama_french",
+    "federal_reserve",
+    "he_kelly_manela",
+    "open_source_bond",
+    "wrds",
+    # Analytics
+    "calculate_beta",
+    "calculate_sharpe_ratio",
+    "calculate_factor_exposures",
+    # Federal Reserve data
     "pull_fed_yield_curve",
     "load_fed_yield_curve_all",
     "load_fed_yield_curve",
-    # from finm.data.he_kelly_manela.pull_he_kelly_manela
+    # Fama-French data
+    "pull_fama_french_factors",
+    "load_fama_french_factors",
+    # He-Kelly-Manela data
     "pull_he_kelly_manela",
     "load_he_kelly_manela_factors_monthly",
     "load_he_kelly_manela_factors_daily",
     "load_he_kelly_manela_all",
-    # from finm.data.open_source_bond.pull_open_source_bond
-    "download_file",
-    "download_data",
-    "load_data_into_dataframe",
+    # Open Source Bond data
+    "pull_open_source_bond",
     "load_treasury_returns",
     "load_corporate_bond_returns",
-    # from finm.data.wrds_data.pull_CRSP_treasury
-    "pull_CRSP_treasury_daily",
-    "pull_CRSP_treasury_info",
-    "calc_runness",
-    "pull_CRSP_treasury_consolidated",
-    "load_CRSP_treasury_daily",
-    "load_CRSP_treasury_info",
-    "load_CRSP_treasury_consolidated",
-    # from finm.data.wrds_data.pull_WRDS_corp_bond
-    "pull_WRDS_corp_bond_monthly",
-    "load_WRDS_corp_bond_monthly",
-    # from finm.fixedincome.bonds
+    # WRDS data
+    "pull_wrds_treasury",
+    "load_wrds_treasury",
+    "pull_wrds_corp_bond",
+    "load_wrds_corp_bond",
+    "calc_treasury_runness",
+    # Fixed income - bonds
     "present_value",
     "future_value",
     "yield_to_maturity",
     "duration",
     "modified_duration",
     "convexity",
-    # from finm.fixedincome.calc_corp_bond_returns
+    # Fixed income - corporate bond returns
     "assign_cs_deciles",
     "calc_value_weighted_decile_returns",
     "calc_corp_bond_returns",
-    # from finm.fixedincome.gsw2006_yield_curve
+    # Fixed income - GSW yield curve
     "get_coupon_dates",
     "filter_treasury_cashflows",
     "calc_cashflows",
@@ -124,8 +134,7 @@ __all__ = [
     "fit",
     "gurkaynak_sack_wright_filters",
     "compare_fit",
-    # from finm.fixedincome.pricing import
-    "get_coupon_dates",
+    # Fixed income - pricing
     "get_coupon_dates_ql",
     "bond_price",
     "bond_price_ql",
