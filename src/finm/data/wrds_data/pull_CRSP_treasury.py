@@ -24,16 +24,16 @@ Data Description:
 Thank you to Younghun Lee for preparing this script for use in class.
 """
 
+from pathlib import Path
+
 import pandas as pd
 import wrds
 
-from datetime import datetime
-from pathlib import Path
 
 def pull_CRSP_treasury_daily(
-    start_date: str, # "1970-01-01"
-    end_date: str, # "2023-12-31"
-    wrds_username: str, # "WRDS_USERNAME"
+    start_date: str,  # "1970-01-01"
+    end_date: str,  # "2023-12-31"
+    wrds_username: str,  # "WRDS_USERNAME"
 ) -> pd.DataFrame:
     """Pull daily CRSP Treasury data from WRDS within the specified date range.
 
@@ -100,7 +100,7 @@ def pull_CRSP_treasury_daily(
 
 
 def pull_CRSP_treasury_info(
-    wrds_username: str, # "WRDS_USERNAME"
+    wrds_username: str,  # "WRDS_USERNAME"
 ) -> pd.DataFrame:
     """Pull Treasury issue information from CRSP.
 
@@ -207,9 +207,9 @@ def calc_runness(
 
 
 def pull_CRSP_treasury_consolidated(
-    start_date: str, # "1970-01-01"
-    end_date: str, # datetime.today().strftime("%Y-%m-%d")
-    wrds_username: str, # "WRDS_USERNAME"
+    start_date: str,  # "1970-01-01"
+    end_date: str,  # datetime.today().strftime("%Y-%m-%d")
+    wrds_username: str,  # "WRDS_USERNAME"
 ) -> pd.DataFrame:
     """Pull consolidated CRSP Treasury data with all relevant fields.
 
@@ -346,7 +346,7 @@ def pull_CRSP_treasury_consolidated(
 
 
 def load_CRSP_treasury_daily(
-    data_dir: Path | str, # DATA_DIR
+    data_dir: Path | str,  # DATA_DIR
 ) -> pd.DataFrame:
     """Load daily CRSP Treasury data from a Parquet file.
 
@@ -369,7 +369,7 @@ def load_CRSP_treasury_daily(
 
 
 def load_CRSP_treasury_info(
-    data_dir: Path | str, # DATA_DIR
+    data_dir: Path | str,  # DATA_DIR
 ) -> pd.DataFrame:
     """Load CRSP Treasury issue information from a Parquet file.
 
@@ -392,7 +392,7 @@ def load_CRSP_treasury_info(
 
 
 def load_CRSP_treasury_consolidated(
-    data_dir: Path | str, # DATA_DIR 
+    data_dir: Path | str,  # DATA_DIR
     with_runness: bool = True,
 ) -> pd.DataFrame:
     """Load consolidated CRSP Treasury data from a Parquet file.
@@ -436,7 +436,6 @@ def load_CRSP_treasury_consolidated(
 
 
 if __name__ == "__main__":
-
     # Get location of current file and parent folder
     # for .py file
     current_file_path = Path(__file__).resolve()
@@ -452,8 +451,12 @@ if __name__ == "__main__":
     # BASE_FINM_DIR = EXAMPLES_DIR.parent
     # DATA_CACHE_DIR = Path(BASE_FINM_DIR) / "data_cache"
 
-    # Replace with your WRDS username
-    WRDS_USERNAME = "jszajkowski"  
+    # Load WRDS username from environment variable
+    import os
+
+    WRDS_USERNAME = os.environ.get("WRDS_USERNAME", "")
+    if not WRDS_USERNAME:
+        raise ValueError("WRDS_USERNAME environment variable must be set")
 
     # Download and save the treasury data
     df = pull_CRSP_treasury_daily(
@@ -465,9 +468,7 @@ if __name__ == "__main__":
     path = Path(DATA_CACHE_DIR) / "CRSP_TFZ_DAILY.parquet"
     df.to_parquet(path)
 
-    df = pull_CRSP_treasury_info(
-        wrds_username=WRDS_USERNAME
-    )
+    df = pull_CRSP_treasury_info(wrds_username=WRDS_USERNAME)
 
     path = Path(DATA_CACHE_DIR) / "CRSP_TFZ_INFO.parquet"
     df.to_parquet(path)

@@ -103,6 +103,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+!.env.example
 
 # Spyder project settings
 .spyderproject
@@ -148,6 +149,18 @@ Thumbs.db
 *.csv
 *.zip
 data_cache/
+_data/
+
+# Build outputs
+_output/
+docs/
+
+# PyDoit
+.doit-db.sqlite
+.doit.db.db
+
+# Credentials
+.pgpass
 
 # README files
 *.pdf

@@ -22,7 +22,6 @@ Acknowledgements:
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-
 from scipy.optimize import minimize
 
 from finm.fixedincome.pricing import get_coupon_dates
@@ -40,6 +39,7 @@ from finm.fixedincome.pricing import get_coupon_dates
 # "tau1", "tau2", "beta1", "beta2", "beta3", "beta4"
 PARAM_NAMES = ("tau1", "tau2", "beta1", "beta2", "beta3", "beta4")
 PARAMS0 = np.array([1.0, 10.0, 3.0, 3.0, 3.0, 3.0])
+
 
 # Function required for GSW analysis
 def filter_treasury_cashflows(
@@ -111,11 +111,29 @@ def calc_cashflows(quote_data, filter_maturity_dates=False):
 
 
 # Function required for GSW analysis
-def plot_spot_curve(params):
-    """Plot the spot curve for the fitted NelsonSeigelSvensson instance"""
+def plot_spot_curve(params, alt_text=None):
+    """Plot the spot curve for the fitted NelsonSeigelSvensson instance.
+
+    Args:
+        params: NSS parameters (tau1, tau2, beta1, beta2, beta3, beta4)
+        alt_text: Alternative text for accessibility. If None, auto-generated.
+    """
     t = np.linspace(1, 30, 100)
     spots = pd.Series(spot(t, params), index=t)
-    ax = spots.plot(title="Spot Curve", xlabel="Maturity", ylabel="Spot Rate")
+    fig, ax = plt.subplots()
+    spots.plot(ax=ax, title="Spot Curve", xlabel="Maturity", ylabel="Spot Rate")
+
+    # Generate alt text if not provided
+    if alt_text is None:
+        min_rate = spots.min()
+        max_rate = spots.max()
+        alt_text = (
+            f"Nelson-Siegel-Svensson spot rate curve from 1 to 30 years maturity. "
+            f"Rates range from {min_rate:.2f}% to {max_rate:.2f}%."
+        )
+
+    # Set figure label for accessibility (used by nbconvert for alt text)
+    fig.set_label(alt_text)
 
     plt.tight_layout()
     plt.show()
@@ -188,30 +206,30 @@ def fit(quote_date, df_all, params0=PARAMS0):
     Implements the Gurkaynak-Sack-Wright (2006) objective function:
 
     ```math
-    \min_{\beta,\tau} \sum_{i=1}^N \frac{(P_i^{obs} - P_i^{model})^2}{D_i}
+    \\min_{\beta,\tau} \\sum_{i=1}^N \frac{(P_i^{obs} - P_i^{model})^2}{D_i}
     ```
 
     Where:
-    - \(P_i^{obs}\) = Observed clean price (including accrued interest)
-    - \(P_i^{model}\) = Model-implied price
-    - \(D_i\) = Duration of security i
+    - \\(P_i^{obs}\\) = Observed clean price (including accrued interest)
+    - \\(P_i^{model}\\) = Model-implied price
+    - \\(D_i\\) = Duration of security i
 
     ## Relationship to Yield Errors
 
     The price error objective is approximately equivalent to minimizing unweighted yield errors:
 
     ```math
-    \frac{(P_i^{obs} - P_i^{model})^2}{D_i} \approx D_i \cdot (y_i^{obs} - y_i^{model})^2
+    \frac{(P_i^{obs} - P_i^{model})^2}{D_i} \approx D_i \\cdot (y_i^{obs} - y_i^{model})^2
     ```
 
     This approximation comes from the duration relationship:
     ```math
-    P^{obs} - P^{model} \approx -D \cdot (y^{obs} - y^{model})
+    P^{obs} - P^{model} \approx -D \\cdot (y^{obs} - y^{model})
     ```
 
     Making the objective function:
     ```math
-    \sum D_i \cdot (y_i^{obs} - y_i^{model})^2
+    \\sum D_i \\cdot (y_i^{obs} - y_i^{model})^2
     ```
 
     ## Why Price Errors Instead of Yield Errors?

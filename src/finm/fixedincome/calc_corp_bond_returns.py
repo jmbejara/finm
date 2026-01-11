@@ -1,11 +1,11 @@
-import finm
-import pandas as pd
-import sys
-import warnings
-
 from pathlib import Path
 
+import pandas as pd
+
+import finm
+
 # warnings.filterwarnings("ignore", category=DeprecationWarning)
+
 
 def assign_cs_deciles(
     df: pd.DataFrame,

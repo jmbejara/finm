@@ -1,6 +1,7 @@
 import sys
 import zipfile
 from pathlib import Path
+
 import urllib3
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -48,12 +49,12 @@ def load_he_kelly_manela_factors_monthly(
 ) -> pd.DataFrame:
     """
     Load CSV file of the He-Kelly-Manela monthly factors.
-    
+
     Parameters
     ----------
     data_dir : Path
         The directory where the CSV file is stored.
-        
+
     Returns
     -------
     pd.DataFrame
@@ -72,18 +73,18 @@ def load_he_kelly_manela_factors_daily(
 ) -> pd.DataFrame:
     """
     Load CSV file of the He-Kelly-Manela daily factors.
-    
+
     Parameters
     ----------
     data_dir : Path
         The directory where the CSV file is stored.
-        
+
     Returns
     -------
     pd.DataFrame
         The He-Kelly-Manela daily factors data.
     """
-    
+
     data_dir = Path(data_dir)
     path = data_dir / "He_Kelly_Manela_Factors_daily.csv"
     _df = pd.read_csv(path)
@@ -116,7 +117,6 @@ def load_he_kelly_manela_all(
 
 
 if __name__ == "__main__":
-
     # Get location of current file and parent folder
     # for .py file
     current_file_path = Path(__file__).resolve()

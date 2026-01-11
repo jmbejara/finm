@@ -50,16 +50,16 @@ Data Description:
 Note: For any field above, it is not included below if preceded by #.
 """
 
+from pathlib import Path
+
 import pandas as pd
 import wrds
 
-from datetime import datetime
-from pathlib import Path
 
 def pull_WRDS_corp_bond_monthly(
-    start_date: str, # "2002-07-31"
-    end_date: str, # "2024-08-31"
-    wrds_username: str, # "WRDS_USERNAME"
+    start_date: str,  # "2002-07-31"
+    end_date: str,  # "2024-08-31"
+    wrds_username: str,  # "WRDS_USERNAME"
 ) -> pd.DataFrame:
     """
     Pull monthly WRDS corporate bond data from WRDS within the specified date range.
@@ -136,8 +136,9 @@ def pull_WRDS_corp_bond_monthly(
     db.close()
     return df
 
+
 def load_WRDS_corp_bond_monthly(
-    data_dir: Path | str, # DATA_DIR
+    data_dir: Path | str,  # DATA_DIR
 ) -> pd.DataFrame:
     """Load monthly WRDS corporate bond data from a Parquet file.
 
@@ -159,7 +160,6 @@ def load_WRDS_corp_bond_monthly(
 
 
 if __name__ == "__main__":
-
     # Get location of current file and parent folder
     # for .py file
     current_file_path = Path(__file__).resolve()
@@ -175,8 +175,12 @@ if __name__ == "__main__":
     # BASE_FINM_DIR = EXAMPLES_DIR.parent
     # DATA_CACHE_DIR = Path(BASE_FINM_DIR) / "data_cache"
 
-    # Replace with your WRDS username
-    WRDS_USERNAME = "jszajkowski"
+    # Load WRDS username from environment variable
+    import os
+
+    WRDS_USERNAME = os.environ.get("WRDS_USERNAME", "")
+    if not WRDS_USERNAME:
+        raise ValueError("WRDS_USERNAME environment variable must be set")
 
     # Download and save the corporate bond data
     df = pull_WRDS_corp_bond_monthly(

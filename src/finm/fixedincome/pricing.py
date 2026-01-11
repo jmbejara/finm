@@ -2,12 +2,9 @@
 Various functions related to bonds, including pricing, etc.
 """
 
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import QuantLib as ql
-
-from scipy.optimize import minimize
 
 
 def get_coupon_dates(quote_date, maturity_date):
@@ -26,7 +23,6 @@ def get_coupon_dates(quote_date, maturity_date):
 
     out = temp[0]
     return out
-
 
 
 def get_coupon_dates_ql(
@@ -90,12 +86,9 @@ def get_coupon_dates_ql(
 
     return pd.Series(dates)
 
+
 def bond_price(
-    face_value: float,
-    coupon_rate: float,
-    ytm: float,
-    periods: int,
-    frequency: int = 2
+    face_value: float, coupon_rate: float, ytm: float, periods: int, frequency: int = 2
 ) -> float:
     """
     Calculate the price of a bond.
@@ -130,12 +123,15 @@ def bond_price(
     if periodic_ytm == 0:
         pv_coupons = coupon_payment * periods
     else:
-        pv_coupons = coupon_payment * (1 - (1 + periodic_ytm) ** (-periods)) / periodic_ytm
+        pv_coupons = (
+            coupon_payment * (1 - (1 + periodic_ytm) ** (-periods)) / periodic_ytm
+        )
 
     # Present value of face value
     pv_face = face_value / ((1 + periodic_ytm) ** periods)
 
     return pv_coupons + pv_face
+
 
 def bond_price_ql(
     face_value: float,
@@ -189,16 +185,15 @@ def bond_price_ql(
     return price * (face_value / 100.0)
 
 
-
 if __name__ == "__main__":
     quote_date = "2020-01-02"
     maturity_date = "2025-01-01"
-    
+
     coupon_dates = get_coupon_dates(
         quote_date=quote_date,
         maturity_date=maturity_date,
     )
-    
+
     print(coupon_dates)
 
     coupon_dates_ql = get_coupon_dates_ql(

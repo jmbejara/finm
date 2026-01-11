@@ -37,10 +37,9 @@ pandas
 pyarrow
 # pydata-sphinx-theme==0.15.4
 pytest
-# python-decouple==3.8
 python-dotenv
 # pyxlsb==1.0.10
-# chartbook @ git+https://github.com/jmbejara/chartbook@main
+chartbook
 quantlib
 requests
 # ruff

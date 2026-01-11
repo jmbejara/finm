@@ -9,10 +9,15 @@ List of datasets:
 - ftsfr_he_kelly_manela_all: all factors from He, Kelly, and Manela (2017)
 """
 
-import pull_he_kelly_manela
-from settings import config
+import os
+from pathlib import Path
 
-DATA_DIR = config("DATA_DIR")
+import pull_he_kelly_manela
+from dotenv import load_dotenv
+
+load_dotenv()
+
+DATA_DIR = Path(os.environ.get("DATA_DIR", "./_data"))
 # DATA_DIR = DATA_DIR / "he_kelly_manela"
 
 he_kelly_manela_factors_monthly = (

@@ -1,26 +1,24 @@
-import finm
-import numpy as np
-import pandas as pd
-
+import os
 from pathlib import Path
 
-# Get location of current file and parent folder
-# for .py file
-current_file_path = Path(__file__).resolve()
-TESTS_DIR = current_file_path.parent
-BASE_FINM_DIR = TESTS_DIR.parent
-DATA_CACHE_DIR = Path(BASE_FINM_DIR) / "data_cache"
+import numpy as np
+import pandas as pd
+from dotenv import load_dotenv
 
-# for Jupyter notebook
-# EXAMPLES_DIR = Path.cwd().resolve()
-# BASE_FINM_DIR = EXAMPLES_DIR.parent
-# DATA_CACHE_DIR = Path(BASE_FINM_DIR) / "data_cache"
+import finm
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Get data directory from environment or use default
+DATA_CACHE_DIR = Path(os.environ.get("DATA_DIR", "./_data"))
+
 
 def test_fit_on_several_days():
     """
     Fit the Nelson-Siegel-Svensson model to the CRSP Treasury data for a specific date
     """
-    
+
     ## Load Gurkaynak Sack Wright data from Federal Reserve's website
     # See here: https://www.federalreserve.gov/data/nominal-yield-curve.htm
     # and here: https://www.federalreserve.gov/data/yield-curve-tables/feds200628_1.html
@@ -32,7 +30,6 @@ def test_fit_on_several_days():
     # Convert percentage points to decimals for beta parameters
     beta_columns = ["BETA0", "BETA1", "BETA2", "BETA3"]
     actual_params_all[beta_columns] = actual_params_all[beta_columns] / 100
-
 
     ## Load CRSP Treasury data from Wharton Research Data Services
     # We will fit a Nelson-Siegel-Svensson model to this data to see
@@ -155,5 +152,3 @@ def test_cashflow_construction():
     assert np.allclose(expected_cashflow, cashflow.values)
     ttm = (cashflow.columns - sample_data.loc[0, "caldt"]).days / 365
     assert np.allclose(expected_ttm, ttm, atol=1e-2)
-
-

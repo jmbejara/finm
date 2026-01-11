@@ -48,6 +48,27 @@ dev = [
     "ruff>=0.1.0",
     "mypy>=1.0.0",
 ]
+docs = [
+    "sphinx>=7.3.7",
+    "sphinx-book-theme>=1.1.3",
+    "sphinx-autodoc2>=0.5.0",
+    "myst-nb>=1.1.2",
+    "myst-parser>=2.0.0",
+    "sphinx_design>=0.6.1",
+    "sphinx-copybutton>=0.5.2",
+    "linkify-it-py>=2.0.3",
+]
+build = [
+    "doit>=0.36.0",
+    "jupytext>=1.16.0",
+    "jupyter>=1.0.0",
+    "nbconvert>=7.0.0",
+    "colorama>=0.4.6",
+    "python-dotenv>=1.0.0",
+]
+all = [
+    "finm[dev,docs,build]",
+]
 
 [project.urls]
 Homepage = "https://github.com/uchicago-finmath/finm"
@@ -61,6 +82,10 @@ packages = ["src/finm"]
 include = [
     "/src",
     "/tests",
+]
+exclude = [
+    "/src/*.py",
+    "/src/*.ipynb",
 ]
 
 [tool.hatch.envs.default]
@@ -113,4 +138,14 @@ disallow_untyped_defs = true
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
+filterwarnings = [
+    # Ignore QuantLib SWIG deprecation warnings (external library)
+    "ignore:builtin type Swig.*:DeprecationWarning",
+]
+
+[tool.hatch.envs.docs]
+features = ["docs"]
+
+[tool.hatch.envs.docs.scripts]
+build = "sphinx-build -b html docs_src docs"
 

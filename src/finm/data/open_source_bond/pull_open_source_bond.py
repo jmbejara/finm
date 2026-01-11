@@ -49,7 +49,7 @@ def download_file(
     Path
         Path to the downloaded file.
     """
-    
+
     response = requests.get(url)
     response.raise_for_status()
     with open(output_path, "wb") as f:
@@ -131,7 +131,7 @@ def load_treasury_returns(
     pd.DataFrame
         DataFrame containing the treasury bond returns data.
     """
-    
+
     return pd.read_parquet(data_dir / "treasury_bond_returns.parquet")
 
 
@@ -166,7 +166,6 @@ def load_corporate_bond_returns(
 
 
 if __name__ == "__main__":
-
     # Get location of current file and parent folder
     # for .py file
     current_file_path = Path(__file__).resolve()

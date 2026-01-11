@@ -8,16 +8,20 @@ List of datasets:
 - corp_bond_returns_long: individual corporate bond returns in long format
 """
 
+import os
+from pathlib import Path
+
+from dotenv import load_dotenv
+
 import finm.calc_corp_bond_returns
 import finm.pull_open_source_bond
-from settings import config
 
-DATA_DIR = config("DATA_DIR")
+load_dotenv()
+
+DATA_DIR = Path(os.environ.get("DATA_DIR", "./_data"))
 # DATA_DIR = DATA_DIR / "corp_bond_returns"
 
-df_individual_bonds = finm.load_corporate_bond_returns(
-    data_dir=DATA_DIR
-)
+df_individual_bonds = finm.load_corporate_bond_returns(data_dir=DATA_DIR)
 
 # Create long format DataFrame with unique_id, ds, and y columns
 df_individual_bonds_returns = df_individual_bonds[["cusip", "date", "bond_ret"]].copy()
