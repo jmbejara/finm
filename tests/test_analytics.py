@@ -4,9 +4,13 @@ import numpy as np
 import pandas as pd
 
 from finm.analytics import (
+    RegressionResult,
     calculate_beta,
     calculate_factor_exposures,
     calculate_sharpe_ratio,
+    run_capm_regression,
+    run_factor_regression,
+    run_fama_french_regression,
 )
 
 
@@ -181,3 +185,243 @@ class TestCalculateFactorExposures:
                 "hml_beta",
             ]
         )
+
+
+class TestRunFactorRegression:
+    """Tests for run_factor_regression and related functions."""
+
+    def test_returns_regression_result(self):
+        """Should return a RegressionResult dataclass."""
+        dates = pd.date_range("2020-01-01", periods=100, freq="D")
+        np.random.seed(42)
+        returns = pd.Series(np.random.randn(100) * 0.01, index=dates)
+        factor = pd.Series(np.random.randn(100) * 0.01, index=dates, name="factor")
+
+        result = run_factor_regression(returns, factor)
+        assert isinstance(result, RegressionResult)
+
+    def test_beta_matches_calculate_beta(self):
+        """CAPM beta should match simple beta calculation."""
+        dates = pd.date_range("2020-01-01", periods=100, freq="D")
+        np.random.seed(42)
+        returns = pd.Series(np.random.randn(100) * 0.01, index=dates)
+        factor = pd.Series(np.random.randn(100) * 0.01, index=dates)
+
+        result = run_factor_regression(returns, factor)
+        simple_beta = calculate_beta(returns, factor)
+
+        # Should be very close (small differences due to OLS vs covariance)
+        assert np.isclose(result.betas["factor"], simple_beta, rtol=0.01)
+
+    def test_alpha_near_zero_for_perfect_fit(self):
+        """Perfect linear relationship should have alpha near zero."""
+        dates = pd.date_range("2020-01-01", periods=100, freq="D")
+        np.random.seed(42)
+        factor = pd.Series(np.random.randn(100) * 0.01, index=dates)
+        # returns = 1.5 * factor exactly
+        returns = factor * 1.5
+
+        result = run_factor_regression(returns, factor)
+        assert np.isclose(result.alpha, 0.0, atol=1e-10)
+        assert np.isclose(result.betas["factor"], 1.5, rtol=1e-6)
+
+    def test_r_squared_one_for_perfect_fit(self):
+        """Perfect linear relationship should have R^2 = 1."""
+        dates = pd.date_range("2020-01-01", periods=100, freq="D")
+        np.random.seed(42)
+        factor = pd.Series(np.random.randn(100) * 0.01, index=dates)
+        returns = factor * 2.0 + 0.001  # Perfect linear relationship
+
+        result = run_factor_regression(returns, factor)
+        assert np.isclose(result.r_squared, 1.0, rtol=1e-6)
+
+    def test_multi_factor_returns_all_betas(self):
+        """Multi-factor regression should return all betas."""
+        dates = pd.date_range("2020-01-01", periods=100, freq="D")
+        np.random.seed(42)
+        returns = pd.Series(np.random.randn(100) * 0.01, index=dates)
+        factors = pd.DataFrame(
+            {
+                "Mkt-RF": np.random.randn(100) * 0.01,
+                "SMB": np.random.randn(100) * 0.005,
+                "HML": np.random.randn(100) * 0.005,
+            },
+            index=dates,
+        )
+
+        result = run_factor_regression(returns, factors)
+
+        assert "Mkt-RF" in result.betas
+        assert "SMB" in result.betas
+        assert "HML" in result.betas
+        assert len(result.betas) == 3
+
+    def test_annualization_factor(self):
+        """Annualized alpha should be scaled correctly."""
+        dates = pd.date_range("2020-01-01", periods=100, freq="D")
+        np.random.seed(42)
+        returns = pd.Series(np.random.randn(100) * 0.01 + 0.001, index=dates)
+        factor = pd.Series(np.random.randn(100) * 0.01, index=dates)
+
+        result = run_factor_regression(returns, factor, annualization_factor=12)
+
+        assert result.alpha_annualized is not None
+        assert result.annualization_factor == 12
+        assert np.isclose(result.alpha_annualized, result.alpha * 12, rtol=1e-6)
+
+    def test_no_annualization(self):
+        """Without annualization_factor, alpha_annualized should be None."""
+        dates = pd.date_range("2020-01-01", periods=100, freq="D")
+        np.random.seed(42)
+        returns = pd.Series(np.random.randn(100) * 0.01, index=dates)
+        factor = pd.Series(np.random.randn(100) * 0.01, index=dates)
+
+        result = run_factor_regression(returns, factor)
+
+        assert result.alpha_annualized is None
+        assert result.annualization_factor is None
+
+    def test_t_stats_and_pvalues(self):
+        """Should return valid t-statistics and p-values."""
+        dates = pd.date_range("2020-01-01", periods=100, freq="D")
+        np.random.seed(42)
+        returns = pd.Series(np.random.randn(100) * 0.01, index=dates)
+        factor = pd.Series(np.random.randn(100) * 0.01, index=dates)
+
+        result = run_factor_regression(returns, factor)
+
+        # t-stats can be any real number
+        assert isinstance(result.alpha_tstat, float)
+        assert isinstance(result.beta_tstats["factor"], float)
+
+        # p-values should be between 0 and 1
+        assert 0 <= result.alpha_pvalue <= 1
+        assert 0 <= result.beta_pvalues["factor"] <= 1
+
+    def test_n_observations(self):
+        """Should return correct number of observations."""
+        dates = pd.date_range("2020-01-01", periods=100, freq="D")
+        np.random.seed(42)
+        returns = pd.Series(np.random.randn(100) * 0.01, index=dates)
+        factor = pd.Series(np.random.randn(100) * 0.01, index=dates)
+
+        result = run_factor_regression(returns, factor)
+        assert result.n_observations == 100
+
+
+class TestRunCAPMRegression:
+    """Tests for run_capm_regression convenience function."""
+
+    def test_returns_mkt_rf_beta(self):
+        """Should return beta with key 'Mkt-RF'."""
+        dates = pd.date_range("2020-01-01", periods=100, freq="D")
+        np.random.seed(42)
+        excess_ret = pd.Series(np.random.randn(100) * 0.01, index=dates)
+        mkt_excess = pd.Series(np.random.randn(100) * 0.01, index=dates)
+
+        result = run_capm_regression(excess_ret, mkt_excess)
+
+        assert "Mkt-RF" in result.betas
+        assert len(result.betas) == 1
+
+    def test_matches_run_factor_regression(self):
+        """Should give same results as run_factor_regression."""
+        dates = pd.date_range("2020-01-01", periods=100, freq="D")
+        np.random.seed(42)
+        excess_ret = pd.Series(np.random.randn(100) * 0.01, index=dates)
+        mkt_excess = pd.Series(np.random.randn(100) * 0.01, index=dates)
+
+        result_capm = run_capm_regression(excess_ret, mkt_excess)
+        result_manual = run_factor_regression(
+            excess_ret, mkt_excess.to_frame(name="Mkt-RF")
+        )
+
+        assert np.isclose(result_capm.alpha, result_manual.alpha)
+        assert np.isclose(
+            result_capm.betas["Mkt-RF"], result_manual.betas["Mkt-RF"]
+        )
+
+
+class TestRunFamaFrenchRegression:
+    """Tests for run_fama_french_regression convenience function."""
+
+    def test_returns_all_three_betas(self):
+        """Should return betas for Mkt-RF, SMB, HML."""
+        dates = pd.date_range("2020-01-01", periods=100, freq="D")
+        np.random.seed(42)
+        returns = pd.Series(np.random.randn(100) * 0.01, index=dates)
+        factors = pd.DataFrame(
+            {
+                "Mkt-RF": np.random.randn(100) * 0.01,
+                "SMB": np.random.randn(100) * 0.005,
+                "HML": np.random.randn(100) * 0.005,
+                "RF": np.full(100, 0.0001),
+            },
+            index=dates,
+        )
+
+        result = run_fama_french_regression(returns, factors)
+
+        assert "Mkt-RF" in result.betas
+        assert "SMB" in result.betas
+        assert "HML" in result.betas
+        assert len(result.betas) == 3
+
+    def test_computes_excess_returns(self):
+        """Should subtract RF from returns internally."""
+        dates = pd.date_range("2020-01-01", periods=100, freq="D")
+        np.random.seed(42)
+
+        # Create returns with known alpha and betas
+        mkt_rf = np.random.randn(100) * 0.01
+        smb = np.random.randn(100) * 0.005
+        hml = np.random.randn(100) * 0.005
+        rf = np.full(100, 0.001)
+        # excess_returns = 1.0 * Mkt-RF + 0.5 * SMB + 0.3 * HML + alpha
+        excess_returns = mkt_rf + 0.5 * smb + 0.3 * hml + 0.002
+        raw_returns = excess_returns + rf
+
+        returns = pd.Series(raw_returns, index=dates)
+        factors = pd.DataFrame(
+            {
+                "Mkt-RF": mkt_rf,
+                "SMB": smb,
+                "HML": hml,
+                "RF": rf,
+            },
+            index=dates,
+        )
+
+        result = run_fama_french_regression(returns, factors)
+
+        # Market beta should be close to 1
+        assert np.isclose(result.betas["Mkt-RF"], 1.0, rtol=0.05)
+        # SMB beta should be close to 0.5
+        assert np.isclose(result.betas["SMB"], 0.5, rtol=0.1)
+        # HML beta should be close to 0.3
+        assert np.isclose(result.betas["HML"], 0.3, rtol=0.15)
+        # Alpha should be close to 0.002
+        assert np.isclose(result.alpha, 0.002, atol=0.001)
+
+    def test_handles_misaligned_dates(self):
+        """Should handle returns and factors with different dates."""
+        dates_returns = pd.date_range("2020-01-01", periods=100, freq="D")
+        dates_factors = pd.date_range("2020-01-15", periods=120, freq="D")
+
+        np.random.seed(42)
+        returns = pd.Series(np.random.randn(100) * 0.01, index=dates_returns)
+        factors = pd.DataFrame(
+            {
+                "Mkt-RF": np.random.randn(120) * 0.01,
+                "SMB": np.random.randn(120) * 0.005,
+                "HML": np.random.randn(120) * 0.005,
+                "RF": np.full(120, 0.0001),
+            },
+            index=dates_factors,
+        )
+
+        result = run_fama_french_regression(returns, factors)
+
+        # Should use the intersection of dates
+        assert result.n_observations < 100
+        assert result.n_observations > 0

@@ -106,6 +106,11 @@ notebook_tasks = {
         "file_dep": [],
         "targets": [],
     },
+    "05_factor_regression_example_ipynb": {
+        "path": "./src/05_factor_regression_example_ipynb.py",
+        "file_dep": [],
+        "targets": [],
+    },
 }
 
 

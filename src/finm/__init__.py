@@ -10,9 +10,13 @@ errors and this should NOT be used for any purposes beyond education and researc
 """
 
 from finm.analytics.factor_analysis import (
+    RegressionResult,
     calculate_beta,
     calculate_factor_exposures,
     calculate_sharpe_ratio,
+    run_capm_regression,
+    run_factor_regression,
+    run_fama_french_regression,
 )
 from finm.data import (
     # WRDS
@@ -87,9 +91,13 @@ __all__ = [
     "open_source_bond",
     "wrds",
     # Analytics
+    "RegressionResult",
     "calculate_beta",
     "calculate_sharpe_ratio",
     "calculate_factor_exposures",
+    "run_factor_regression",
+    "run_capm_regression",
+    "run_fama_french_regression",
     # Federal Reserve data
     "pull_fed_yield_curve",
     "load_fed_yield_curve_all",

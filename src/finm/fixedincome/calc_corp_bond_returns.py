@@ -118,7 +118,7 @@ def calc_corp_bond_returns(
     This function supports both the old data format (with columns CS, BOND_VALUE,
     bond_ret) and the new Open Source Bond format (with columns cs, sze, ret_vw).
     """
-    bond_returns = finm.load_corporate_bond_returns(data_dir=data_dir)
+    bond_returns = finm.load_corporate_bond_returns(data_dir=data_dir).to_pandas()
 
     # Detect column format (old vs new)
     if "CS" in bond_returns.columns:
