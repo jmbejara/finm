@@ -171,24 +171,28 @@ def to_long_format(df: pd.DataFrame) -> pd.DataFrame:
 
 ## Step 5: Create Public Interface
 
-Create `__init__.py` with the standard interface:
+Create `__init__.py` with the standard interface. Note that all `load()` functions
+should return **polars DataFrames** by default and support the `pull_if_not_found`
+and `lazy` parameters:
 
 ```python
 """Your data source module.
 
 Standard interface:
-    - pull(data_dir): Download data from source
-    - load(data_dir, format): Load cached data
+    - pull(data_dir, accept_license): Download data from source
+    - load(data_dir, format, pull_if_not_found, lazy): Load cached data (returns polars)
     - to_long_format(df): Convert to long format
 """
 
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Literal
+from typing import Literal, Union
 
 import pandas as pd
+import polars as pl
 
+from finm.data.your_source._constants import PARQUET_FILE
 from finm.data.your_source._load import load_data
 from finm.data.your_source._pull import pull_data
 from finm.data.your_source._transform import to_long_format
@@ -196,26 +200,34 @@ from finm.data.your_source._transform import to_long_format
 FormatType = Literal["wide", "long"]
 
 
-def pull(data_dir: Path | str) -> pd.DataFrame:
+def pull(
+    data_dir: Path | str,
+    accept_license: bool = False,
+) -> pd.DataFrame:
     """Download data from source.
 
     Parameters
     ----------
     data_dir : Path or str
         Directory to save downloaded data.
+    accept_license : bool, default False
+        Must be True to acknowledge the data provider's license terms.
 
     Returns
     -------
     pd.DataFrame
         Downloaded data.
     """
-    return pull_data(data_dir=data_dir)
+    return pull_data(data_dir=data_dir, accept_license=accept_license)
 
 
 def load(
     data_dir: Path | str,
     format: FormatType = "wide",
-) -> pd.DataFrame:
+    pull_if_not_found: bool = False,
+    accept_license: bool = False,
+    lazy: bool = False,
+) -> Union[pl.DataFrame, pl.LazyFrame]:
     """Load data from cache.
 
     Parameters
@@ -224,18 +236,40 @@ def load(
         Directory containing the parquet file.
     format : {"wide", "long"}, default "wide"
         Output format.
+    pull_if_not_found : bool, default False
+        If True and data doesn't exist locally, pull from source.
+        Requires accept_license=True.
+    accept_license : bool, default False
+        Must be True when pull_if_not_found=True.
+    lazy : bool, default False
+        If True, return a polars LazyFrame instead of DataFrame.
 
     Returns
     -------
-    pd.DataFrame
-        Loaded data.
+    pl.DataFrame or pl.LazyFrame
+        Loaded data as polars DataFrame (default) or LazyFrame.
     """
+    from finm.data._utils import pandas_to_polars
+
+    data_path = Path(data_dir)
+
+    # Handle pull_if_not_found
+    if pull_if_not_found:
+        if not accept_license:
+            raise ValueError(
+                "When pull_if_not_found=True, accept_license must also be True."
+            )
+        if not (data_path / PARQUET_FILE).exists():
+            pull_data(data_dir=data_dir, accept_license=True)
+
+    # Load data (internally uses pandas)
     df = load_data(data_dir=data_dir)
 
     if format == "long":
         df = to_long_format(df)
 
-    return df
+    # Convert to polars (always)
+    return pandas_to_polars(df, lazy=lazy)
 
 
 __all__ = ["pull", "load", "to_long_format"]

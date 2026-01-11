@@ -50,24 +50,16 @@ WRDS_USERNAME = os.environ.get("WRDS_USERNAME", "")
 # the parameters and fields that are included in the data from WRDS.
 
 # %%
-# Download and save the corporate bond data
-df = finm.pull_WRDS_corp_bond_monthly(
+# Load corporate bond data with auto-pull from WRDS if not found locally
+# Requires WRDS credentials
+df = finm.load_wrds_corp_bond(
+    data_dir=DATA_DIR,
+    pull_if_not_found=True,
+    wrds_username=WRDS_USERNAME,
     start_date="2020-01-01",
     end_date="2020-12-31",
-    wrds_username=WRDS_USERNAME,
-)
-
-path = DATA_DIR / "WRDS_Corp_Bond_Monthly.parquet"
-df.to_parquet(path)
-
-# %% [markdown]
-# ## Load Data
-#
-# Next, we will load the bond data.
-
-# %%
-# Load data and display
-df = finm.load_WRDS_corp_bond_monthly(data_dir=DATA_DIR)
+).to_pandas()
+print(f"Corporate bond data loaded: {df.shape}")
 df
 
 # %% [markdown]

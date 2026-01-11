@@ -94,11 +94,12 @@ print(f"Data directory: {DATA_DIR}")
 # credit loss** and **risk premium** components.
 
 # %%
-# Pull the He-Kelly-Manela data
-finm.pull_he_kelly_manela(data_dir=DATA_DIR, accept_license=True)
-
-# %%
-hkm = finm.load_he_kelly_manela_all(data_dir=DATA_DIR)
+# Load He-Kelly-Manela data with auto-pull if not found locally
+hkm = finm.load_he_kelly_manela_all(
+    data_dir=DATA_DIR,
+    pull_if_not_found=True,
+    accept_license=True,
+).to_pandas()
 copr_bonds_hkm = hkm.iloc[:, 44:54].copy()
 copr_bonds_hkm["yyyymm"] = hkm["yyyymm"]
 copr_bonds_hkm.head()
@@ -154,13 +155,14 @@ copr_bonds_hkm.isnull().sum()
 # cleaning procedures.
 
 # %%
-# Pull corporate bond monthly returns from Open Source Bond Asset Pricing
-open_source_bond.pull(
+# Load corporate bond monthly returns with auto-pull if not found locally
+corp_monthly = open_source_bond.load(
     data_dir=DATA_DIR,
     variant="corporate_monthly",
+    pull_if_not_found=True,
     accept_license=True,
-)
-print("Corporate bond data downloaded successfully.")
+).to_pandas()
+print(f"Corporate bond data loaded: {corp_monthly.shape}")
 
 # %%
 corp_bonds_returns = finm.calc_corp_bond_returns(data_dir=DATA_DIR)

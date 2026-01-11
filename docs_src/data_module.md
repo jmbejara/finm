@@ -1,7 +1,7 @@
 # Data Module Guide
 
 The `finm.data` module provides access to financial data from various sources with a
-standardized interface.
+standardized interface. All load functions return **polars DataFrames** by default.
 
 ## Standard Interface
 
@@ -11,16 +11,68 @@ Each data source submodule follows the same pattern:
 from finm.data import federal_reserve
 
 # Download data from source
-federal_reserve.pull(data_dir="./data")
+federal_reserve.pull(data_dir="./data", accept_license=True)
 
-# Load cached data (wide format)
+# Load cached data (returns polars DataFrame)
 df = federal_reserve.load(data_dir="./data")
 
 # Load in long format for time series analysis
 df_long = federal_reserve.load(data_dir="./data", format="long")
 
+# Get a LazyFrame for deferred computation
+lf = federal_reserve.load(data_dir="./data", lazy=True)
+
 # Manual conversion to long format
 df_long = federal_reserve.to_long_format(df)
+```
+
+## Caching with `pull_if_not_found`
+
+Each load function supports automatic downloading when data is missing locally:
+
+```python
+from finm.data import federal_reserve
+
+# Will pull data if not found locally
+df = federal_reserve.load(
+    data_dir="./data",
+    pull_if_not_found=True,
+    accept_license=True,
+)
+```
+
+When using `pull_if_not_found=True`, you must also set `accept_license=True` to
+acknowledge the data provider's license terms.
+
+### WRDS Special Handling
+
+WRDS data requires credentials when pulling:
+
+```python
+from finm.data import wrds
+
+df = wrds.load(
+    data_dir="./data",
+    variant="treasury",
+    pull_if_not_found=True,
+    wrds_username="your_username",
+    start_date="2020-01-01",
+    end_date="2023-12-31",
+)
+```
+
+## Polars DataFrames
+
+All load functions return polars DataFrames by default for better performance.
+Use the `lazy=True` parameter to get a LazyFrame instead:
+
+```python
+# Returns polars.DataFrame (default)
+df = federal_reserve.load(data_dir="./data")
+
+# Returns polars.LazyFrame for deferred computation
+lf = federal_reserve.load(data_dir="./data", lazy=True)
+result = lf.filter(pl.col("SVENY01") > 0.03).collect()
 ```
 
 ### Long Format

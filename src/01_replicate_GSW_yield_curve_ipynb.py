@@ -189,17 +189,14 @@ finm.plot_spot_curve(params)
 # Load Gurkaynak Sack Wright data from Federal Reserve's website
 # See here: https://www.federalreserve.gov/data/nominal-yield-curve.htm
 # and here: https://www.federalreserve.gov/data/yield-curve-tables/feds200628_1.html
+# Auto-pulls data if not found locally
 
-df_all, df = finm.pull_fed_yield_curve()
-
-path = Path(DATA_DIR) / "fed_yield_curve_all.parquet"
-df_all.to_parquet(path)
-
-path = Path(DATA_DIR) / "fed_yield_curve.parquet"
-df.to_parquet(path)
-
-# %%
-actual_all = finm.load_fed_yield_curve_all(data_dir=DATA_DIR)
+actual_all = finm.load_fed_yield_curve_all(
+    data_dir=DATA_DIR,
+    pull_if_not_found=True,
+    accept_license=True,
+).to_pandas()
+actual_all = actual_all.set_index("Date")
 
 # Create copy of parameter DataFrame to avoid view vs copy issues
 actual_params_all = actual_all.loc[
@@ -214,21 +211,16 @@ actual_params_all[beta_columns] = actual_params_all[beta_columns] / 100
 # Load CRSP Treasury data from Wharton Research Data Services
 # We will fit a Nelson-Siegel-Svensson model to this data to see
 # if we can replicate the Gurkaynak Sack Wright results above.
-df = finm.pull_CRSP_treasury_consolidated(
+# Auto-pulls from WRDS if not found locally (requires WRDS credentials).
+df_all = finm.load_wrds_treasury(
+    data_dir=DATA_DIR,
+    variant="consolidated",
+    with_runness=True,
+    pull_if_not_found=True,
+    wrds_username=WRDS_USERNAME,
     start_date="1970-01-01",
     end_date=datetime.today().strftime("%Y-%m-%d"),
-    wrds_username=WRDS_USERNAME,
-)
-
-path = Path(DATA_DIR) / "CRSP_TFZ_consolidated.parquet"
-df.to_parquet(path)
-
-df = finm.calc_runness(df)
-
-path = Path(DATA_DIR) / "CRSP_TFZ_with_runness.parquet"
-df.to_parquet(path)
-
-df_all = finm.load_CRSP_treasury_consolidated(data_dir=DATA_DIR)
+).to_pandas()
 
 # %%
 df_all.tail()
@@ -247,7 +239,13 @@ df_all.describe()
 # First, we load and clean the CRSP Treasury data
 
 # %%
-df_all = finm.load_CRSP_treasury_consolidated(data_dir=DATA_DIR)
+# Data was already loaded above with pull_if_not_found=True
+# Just reload with filters if needed
+df_all = finm.load_wrds_treasury(
+    data_dir=DATA_DIR,
+    variant="consolidated",
+    with_runness=True,
+).to_pandas()
 
 # %% [markdown]
 # ### 2. Cashflow Construction
@@ -336,8 +334,9 @@ cashflow
 # official GSW yields published by the Federal Reserve:
 
 # %%
-# Load Gurkaynak Sack Wright data from Federal Reserve's website
-actual_all = finm.load_fed_yield_curve_all(data_dir=DATA_DIR)
+# Load Gurkaynak Sack Wright data from Federal Reserve's website (already cached)
+actual_all = finm.load_fed_yield_curve_all(data_dir=DATA_DIR).to_pandas()
+actual_all = actual_all.set_index("Date")
 # Create copy of parameter DataFrame to avoid view vs copy issues
 actual_params_all = actual_all.loc[
     :, ["TAU1", "TAU2", "BETA0", "BETA1", "BETA2", "BETA3"]
@@ -347,8 +346,12 @@ beta_columns = ["BETA0", "BETA1", "BETA2", "BETA3"]
 actual_params_all[beta_columns] = actual_params_all[beta_columns] / 100
 
 
-# Load CRSP Treasury data from Wharton Research Data Services
-df_all = finm.load_CRSP_treasury_consolidated(data_dir=DATA_DIR)
+# Load CRSP Treasury data from local cache (already pulled above)
+df_all = finm.load_wrds_treasury(
+    data_dir=DATA_DIR,
+    variant="consolidated",
+    with_runness=True,
+).to_pandas()
 df_all = finm.gurkaynak_sack_wright_filters(df_all)
 
 quote_dates = pd.date_range("2000-01-02", "2024-06-30", freq="BMS")

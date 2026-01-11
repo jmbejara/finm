@@ -168,3 +168,4 @@ docs/
 
 # Julia compiled files
 *.jl 
+*.ipynb
