@@ -47,6 +47,10 @@ orphan: true
   - ```{autodoc2-docstring} finm.data.he_kelly_manela._constants.FACTOR_COLUMNS
     :summary:
     ```
+* - {py:obj}`LICENSE_INFO <finm.data.he_kelly_manela._constants.LICENSE_INFO>`
+  - ```{autodoc2-docstring} finm.data.he_kelly_manela._constants.LICENSE_INFO
+    :summary:
+    ```
 ````
 
 ### API
@@ -124,6 +128,17 @@ orphan: true
    ['intermediary_capital_ratio', 'intermediary_capital_risk_factor', 'intermediary_value_weighted_inve...
 
 ```{autodoc2-docstring} finm.data.he_kelly_manela._constants.FACTOR_COLUMNS
+```
+
+````
+
+````{py:data} LICENSE_INFO
+:canonical: finm.data.he_kelly_manela._constants.LICENSE_INFO
+:type: typing.Final[dict]
+:value: >
+   None
+
+```{autodoc2-docstring} finm.data.he_kelly_manela._constants.LICENSE_INFO
 ```
 
 ````

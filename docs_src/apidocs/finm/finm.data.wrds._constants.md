@@ -27,6 +27,10 @@ orphan: true
   - ```{autodoc2-docstring} finm.data.wrds._constants.DISPLAY_NAME
     :summary:
     ```
+* - {py:obj}`LICENSE_INFO <finm.data.wrds._constants.LICENSE_INFO>`
+  - ```{autodoc2-docstring} finm.data.wrds._constants.LICENSE_INFO
+    :summary:
+    ```
 * - {py:obj}`PARQUET_CORP_BOND <finm.data.wrds._constants.PARQUET_CORP_BOND>`
   - ```{autodoc2-docstring} finm.data.wrds._constants.PARQUET_CORP_BOND
     :summary:
@@ -69,6 +73,17 @@ orphan: true
    'WRDS Financial Data'
 
 ```{autodoc2-docstring} finm.data.wrds._constants.DISPLAY_NAME
+```
+
+````
+
+````{py:data} LICENSE_INFO
+:canonical: finm.data.wrds._constants.LICENSE_INFO
+:type: typing.Final[dict]
+:value: >
+   None
+
+```{autodoc2-docstring} finm.data.wrds._constants.LICENSE_INFO
 ```
 
 ````

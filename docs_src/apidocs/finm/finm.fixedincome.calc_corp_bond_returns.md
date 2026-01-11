@@ -31,7 +31,7 @@
 
 ### API
 
-````{py:function} assign_cs_deciles(df: pandas.DataFrame) -> pandas.Series
+````{py:function} assign_cs_deciles(df: pandas.DataFrame, cs_col: str = 'cs') -> pandas.DataFrame
 :canonical: finm.fixedincome.calc_corp_bond_returns.assign_cs_deciles
 
 ```{autodoc2-docstring} finm.fixedincome.calc_corp_bond_returns.assign_cs_deciles
@@ -45,7 +45,7 @@
 ```
 ````
 
-````{py:function} calc_value_weighted_decile_returns(df, value_col='BOND_VALUE')
+````{py:function} calc_value_weighted_decile_returns(df: pandas.DataFrame, value_col: str = 'sze', ret_col: str = 'ret_vw') -> pandas.DataFrame
 :canonical: finm.fixedincome.calc_corp_bond_returns.calc_value_weighted_decile_returns
 
 ```{autodoc2-docstring} finm.fixedincome.calc_corp_bond_returns.calc_value_weighted_decile_returns

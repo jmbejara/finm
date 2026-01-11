@@ -63,14 +63,14 @@
 
 ````
 
-````{py:function} load(data_dir: pathlib.Path | str, variant: finm.data.federal_reserve.VariantType = 'standard', format: finm.data.federal_reserve.FormatType = 'wide') -> pandas.DataFrame
+````{py:function} load(data_dir: pathlib.Path | str, variant: finm.data.federal_reserve.VariantType = 'standard', format: finm.data.federal_reserve.FormatType = 'wide', pull_if_not_found: bool = False, accept_license: bool = False, lazy: bool = False) -> typing.Union[polars.DataFrame, polars.LazyFrame]
 :canonical: finm.data.federal_reserve.load
 
 ```{autodoc2-docstring} finm.data.federal_reserve.load
 ```
 ````
 
-````{py:function} pull(data_dir: pathlib.Path | str) -> tuple[pandas.DataFrame, pandas.DataFrame]
+````{py:function} pull(data_dir: pathlib.Path | str, accept_license: bool = False) -> tuple[pandas.DataFrame, pandas.DataFrame]
 :canonical: finm.data.federal_reserve.pull
 
 ```{autodoc2-docstring} finm.data.federal_reserve.pull

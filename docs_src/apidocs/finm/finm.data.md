@@ -32,8 +32,16 @@ finm.data.wrds
   - ```{autodoc2-docstring} finm.data.calc_treasury_runness
     :summary:
     ```
+* - {py:obj}`load_corporate_bond_prices_daily <finm.data.load_corporate_bond_prices_daily>`
+  - ```{autodoc2-docstring} finm.data.load_corporate_bond_prices_daily
+    :summary:
+    ```
 * - {py:obj}`load_corporate_bond_returns <finm.data.load_corporate_bond_returns>`
   - ```{autodoc2-docstring} finm.data.load_corporate_bond_returns
+    :summary:
+    ```
+* - {py:obj}`load_corporate_bond_returns_monthly <finm.data.load_corporate_bond_returns_monthly>`
+  - ```{autodoc2-docstring} finm.data.load_corporate_bond_returns_monthly
     :summary:
     ```
 * - {py:obj}`load_fama_french_factors <finm.data.load_fama_french_factors>`
@@ -129,70 +137,84 @@ finm.data.wrds
 ```
 ````
 
-````{py:function} load_corporate_bond_returns(data_dir: pathlib.Path | str, format: finm.data.FormatType = 'wide') -> pandas.DataFrame
+````{py:function} load_corporate_bond_prices_daily(data_dir: pathlib.Path | str, format: finm.data.FormatType = 'wide', pull_if_not_found: bool = False, accept_license: bool = False, lazy: bool = False) -> typing.Union[polars.DataFrame, polars.LazyFrame]
+:canonical: finm.data.load_corporate_bond_prices_daily
+
+```{autodoc2-docstring} finm.data.load_corporate_bond_prices_daily
+```
+````
+
+````{py:function} load_corporate_bond_returns(data_dir: pathlib.Path | str, format: finm.data.FormatType = 'wide', pull_if_not_found: bool = False, accept_license: bool = False, lazy: bool = False) -> typing.Union[polars.DataFrame, polars.LazyFrame]
 :canonical: finm.data.load_corporate_bond_returns
 
 ```{autodoc2-docstring} finm.data.load_corporate_bond_returns
 ```
 ````
 
-````{py:function} load_fama_french_factors(data_dir: pathlib.Path | str | None = None, start: str | datetime.datetime | None = None, end: str | datetime.datetime | None = None, format: finm.data.FormatType = 'wide') -> pandas.DataFrame
+````{py:function} load_corporate_bond_returns_monthly(data_dir: pathlib.Path | str, format: finm.data.FormatType = 'wide', pull_if_not_found: bool = False, accept_license: bool = False, lazy: bool = False) -> typing.Union[polars.DataFrame, polars.LazyFrame]
+:canonical: finm.data.load_corporate_bond_returns_monthly
+
+```{autodoc2-docstring} finm.data.load_corporate_bond_returns_monthly
+```
+````
+
+````{py:function} load_fama_french_factors(data_dir: pathlib.Path | str | None = None, start: str | datetime.datetime | None = None, end: str | datetime.datetime | None = None, format: finm.data.FormatType = 'wide', frequency: typing.Literal[daily, monthly] = 'daily', pull_if_not_found: bool = False, accept_license: bool = False, lazy: bool = False) -> typing.Union[polars.DataFrame, polars.LazyFrame]
 :canonical: finm.data.load_fama_french_factors
 
 ```{autodoc2-docstring} finm.data.load_fama_french_factors
 ```
 ````
 
-````{py:function} load_fed_yield_curve(data_dir: pathlib.Path | str, format: finm.data.FormatType = 'wide') -> pandas.DataFrame
+````{py:function} load_fed_yield_curve(data_dir: pathlib.Path | str, format: finm.data.FormatType = 'wide', pull_if_not_found: bool = False, accept_license: bool = False, lazy: bool = False) -> typing.Union[polars.DataFrame, polars.LazyFrame]
 :canonical: finm.data.load_fed_yield_curve
 
 ```{autodoc2-docstring} finm.data.load_fed_yield_curve
 ```
 ````
 
-````{py:function} load_fed_yield_curve_all(data_dir: pathlib.Path | str, format: finm.data.FormatType = 'wide') -> pandas.DataFrame
+````{py:function} load_fed_yield_curve_all(data_dir: pathlib.Path | str, format: finm.data.FormatType = 'wide', pull_if_not_found: bool = False, accept_license: bool = False, lazy: bool = False) -> typing.Union[polars.DataFrame, polars.LazyFrame]
 :canonical: finm.data.load_fed_yield_curve_all
 
 ```{autodoc2-docstring} finm.data.load_fed_yield_curve_all
 ```
 ````
 
-````{py:function} load_he_kelly_manela_all(data_dir: pathlib.Path | str, format: finm.data.FormatType = 'wide') -> pandas.DataFrame
+````{py:function} load_he_kelly_manela_all(data_dir: pathlib.Path | str, format: finm.data.FormatType = 'wide', pull_if_not_found: bool = False, accept_license: bool = False, lazy: bool = False) -> typing.Union[polars.DataFrame, polars.LazyFrame]
 :canonical: finm.data.load_he_kelly_manela_all
 
 ```{autodoc2-docstring} finm.data.load_he_kelly_manela_all
 ```
 ````
 
-````{py:function} load_he_kelly_manela_factors_daily(data_dir: pathlib.Path | str, format: finm.data.FormatType = 'wide') -> pandas.DataFrame
+````{py:function} load_he_kelly_manela_factors_daily(data_dir: pathlib.Path | str, format: finm.data.FormatType = 'wide', pull_if_not_found: bool = False, accept_license: bool = False, lazy: bool = False) -> typing.Union[polars.DataFrame, polars.LazyFrame]
 :canonical: finm.data.load_he_kelly_manela_factors_daily
 
 ```{autodoc2-docstring} finm.data.load_he_kelly_manela_factors_daily
 ```
 ````
 
-````{py:function} load_he_kelly_manela_factors_monthly(data_dir: pathlib.Path | str, format: finm.data.FormatType = 'wide') -> pandas.DataFrame
+````{py:function} load_he_kelly_manela_factors_monthly(data_dir: pathlib.Path | str, format: finm.data.FormatType = 'wide', pull_if_not_found: bool = False, accept_license: bool = False, lazy: bool = False) -> typing.Union[polars.DataFrame, polars.LazyFrame]
 :canonical: finm.data.load_he_kelly_manela_factors_monthly
 
 ```{autodoc2-docstring} finm.data.load_he_kelly_manela_factors_monthly
 ```
 ````
 
-````{py:function} load_treasury_returns(data_dir: pathlib.Path | str, format: finm.data.FormatType = 'wide') -> pandas.DataFrame
+````{py:function} load_treasury_returns(data_dir: pathlib.Path | str, format: finm.data.FormatType = 'wide', pull_if_not_found: bool = False, accept_license: bool = False, lazy: bool = False) -> typing.Union[polars.DataFrame, polars.LazyFrame]
 :canonical: finm.data.load_treasury_returns
 
 ```{autodoc2-docstring} finm.data.load_treasury_returns
 ```
 ````
 
-````{py:function} load_wrds_corp_bond(data_dir: pathlib.Path | str, format: finm.data.FormatType = 'wide') -> pandas.DataFrame
+````{py:function} load_wrds_corp_bond(data_dir: pathlib.Path | str, format: finm.data.FormatType = 'wide', pull_if_not_found: bool = False, wrds_username: str | None = None, start_date: str | None = None, end_date: str | None = None, lazy: bool = False) -> typing.Union[polars.DataFrame, polars.LazyFrame]
 :canonical: finm.data.load_wrds_corp_bond
 
 ```{autodoc2-docstring} finm.data.load_wrds_corp_bond
 ```
 ````
 
-````{py:function} load_wrds_treasury(data_dir: pathlib.Path | str, variant: typing.Literal[daily, info, consolidated] = 'consolidated', with_runness: bool = True, format: finm.data.FormatType = 'wide') -> pandas.DataFrame
+````{py:function} load_wrds_treasury(data_dir: pathlib.Path | str, variant: typing.Literal[daily, info, consolidated] = 'consolidated', with_runness: bool = True, format: finm.data.FormatType = 'wide', pull_if_not_found: bool = False, wrds_username: str | None = None, start_date: str | None = None, end_date: str | None = None, lazy: bool = False) -> typing.Union[polars.DataFrame, polars.LazyFrame]
 :canonical: finm.data.load_wrds_treasury
 
 ```{autodoc2-docstring} finm.data.load_wrds_treasury
@@ -213,14 +235,14 @@ finm.data.wrds
 ```
 ````
 
-````{py:function} pull_he_kelly_manela(data_dir: pathlib.Path | str) -> None
+````{py:function} pull_he_kelly_manela(data_dir: pathlib.Path | str, accept_license: bool = False) -> None
 :canonical: finm.data.pull_he_kelly_manela
 
 ```{autodoc2-docstring} finm.data.pull_he_kelly_manela
 ```
 ````
 
-````{py:function} pull_open_source_bond(data_dir: pathlib.Path | str, variant: typing.Literal[treasury, corporate, all] = 'all') -> None
+````{py:function} pull_open_source_bond(data_dir: pathlib.Path | str, variant: typing.Literal[treasury, corporate_daily, corporate_monthly, corporate_all, all] = 'all', accept_license: bool = False) -> None
 :canonical: finm.data.pull_open_source_bond
 
 ```{autodoc2-docstring} finm.data.pull_open_source_bond

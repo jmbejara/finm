@@ -49,7 +49,7 @@ orphan: true
 
 ````
 
-````{py:function} pull_data(data_dir: pathlib.Path | str, start: str | datetime.datetime | None = None, end: str | datetime.datetime | None = None, frequency: finm.data.fama_french._pull.FrequencyType = 'daily') -> pandas.DataFrame
+````{py:function} pull_data(data_dir: pathlib.Path | str, start: str | datetime.datetime | None = None, end: str | datetime.datetime | None = None, frequency: finm.data.fama_french._pull.FrequencyType = 'daily', accept_license: bool = False) -> pandas.DataFrame
 :canonical: finm.data.fama_french._pull.pull_data
 
 ```{autodoc2-docstring} finm.data.fama_french._pull.pull_data

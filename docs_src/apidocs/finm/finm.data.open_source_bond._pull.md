@@ -31,6 +31,10 @@ orphan: true
 :class: autosummary longtable
 :align: left
 
+* - {py:obj}`PullVariantType <finm.data.open_source_bond._pull.PullVariantType>`
+  - ```{autodoc2-docstring} finm.data.open_source_bond._pull.PullVariantType
+    :summary:
+    ```
 * - {py:obj}`VariantType <finm.data.open_source_bond._pull.VariantType>`
   - ```{autodoc2-docstring} finm.data.open_source_bond._pull.VariantType
     :summary:
@@ -38,6 +42,16 @@ orphan: true
 ````
 
 ### API
+
+````{py:data} PullVariantType
+:canonical: finm.data.open_source_bond._pull.PullVariantType
+:value: >
+   None
+
+```{autodoc2-docstring} finm.data.open_source_bond._pull.PullVariantType
+```
+
+````
 
 ````{py:data} VariantType
 :canonical: finm.data.open_source_bond._pull.VariantType
@@ -49,7 +63,7 @@ orphan: true
 
 ````
 
-````{py:function} pull_data(data_dir: pathlib.Path | str, variant: finm.data.open_source_bond._pull.VariantType = 'all', download_readme: bool = True) -> None
+````{py:function} pull_data(data_dir: pathlib.Path | str, variant: finm.data.open_source_bond._pull.PullVariantType = 'all', accept_license: bool = False, download_readme: bool = True) -> None
 :canonical: finm.data.open_source_bond._pull.pull_data
 
 ```{autodoc2-docstring} finm.data.open_source_bond._pull.pull_data

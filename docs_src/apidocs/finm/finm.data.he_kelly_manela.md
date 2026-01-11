@@ -63,14 +63,14 @@
 
 ````
 
-````{py:function} load(data_dir: pathlib.Path | str, variant: finm.data.he_kelly_manela.VariantType = 'factors_monthly', format: finm.data.he_kelly_manela.FormatType = 'wide') -> pandas.DataFrame
+````{py:function} load(data_dir: pathlib.Path | str, variant: finm.data.he_kelly_manela.VariantType = 'factors_monthly', format: finm.data.he_kelly_manela.FormatType = 'wide', pull_if_not_found: bool = False, accept_license: bool = False, lazy: bool = False) -> typing.Union[polars.DataFrame, polars.LazyFrame]
 :canonical: finm.data.he_kelly_manela.load
 
 ```{autodoc2-docstring} finm.data.he_kelly_manela.load
 ```
 ````
 
-````{py:function} pull(data_dir: pathlib.Path | str) -> None
+````{py:function} pull(data_dir: pathlib.Path | str, accept_license: bool = False) -> None
 :canonical: finm.data.he_kelly_manela.pull
 
 ```{autodoc2-docstring} finm.data.he_kelly_manela.pull

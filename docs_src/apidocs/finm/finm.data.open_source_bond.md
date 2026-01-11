@@ -77,14 +77,14 @@
 
 ````
 
-````{py:function} load(data_dir: pathlib.Path | str, variant: finm.data.open_source_bond.VariantType = 'treasury', format: finm.data.open_source_bond.FormatType = 'wide') -> pandas.DataFrame
+````{py:function} load(data_dir: pathlib.Path | str, variant: finm.data.open_source_bond.VariantType = 'treasury', format: finm.data.open_source_bond.FormatType = 'wide', pull_if_not_found: bool = False, accept_license: bool = False, lazy: bool = False) -> typing.Union[polars.DataFrame, polars.LazyFrame]
 :canonical: finm.data.open_source_bond.load
 
 ```{autodoc2-docstring} finm.data.open_source_bond.load
 ```
 ````
 
-````{py:function} pull(data_dir: pathlib.Path | str, variant: finm.data.open_source_bond.PullVariantType = 'all', download_readme: bool = True) -> None
+````{py:function} pull(data_dir: pathlib.Path | str, variant: finm.data.open_source_bond.PullVariantType = 'all', accept_license: bool = False, download_readme: bool = True) -> None
 :canonical: finm.data.open_source_bond.pull
 
 ```{autodoc2-docstring} finm.data.open_source_bond.pull

@@ -27,7 +27,7 @@ orphan: true
 
 ### API
 
-````{py:function} pull_data(data_dir: pathlib.Path | str) -> None
+````{py:function} pull_data(data_dir: pathlib.Path | str, accept_license: bool = False) -> None
 :canonical: finm.data.he_kelly_manela._pull.pull_data
 
 ```{autodoc2-docstring} finm.data.he_kelly_manela._pull.pull_data

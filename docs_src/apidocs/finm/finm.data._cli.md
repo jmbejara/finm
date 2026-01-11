@@ -121,6 +121,26 @@ Bases: {py:obj}`str`, {py:obj}`enum.Enum`
 
 ````
 
+````{py:attribute} open_source_bond_corporate_daily
+:canonical: finm.data._cli.Dataset.open_source_bond_corporate_daily
+:value: >
+   'open_source_bond_corporate_daily'
+
+```{autodoc2-docstring} finm.data._cli.Dataset.open_source_bond_corporate_daily
+```
+
+````
+
+````{py:attribute} open_source_bond_corporate_monthly
+:canonical: finm.data._cli.Dataset.open_source_bond_corporate_monthly
+:value: >
+   'open_source_bond_corporate_monthly'
+
+```{autodoc2-docstring} finm.data._cli.Dataset.open_source_bond_corporate_monthly
+```
+
+````
+
 ````{py:attribute} open_source_bond_treasury
 :canonical: finm.data._cli.Dataset.open_source_bond_treasury
 :value: >
@@ -220,7 +240,7 @@ Bases: {py:obj}`str`, {py:obj}`enum.Enum`
 ```
 ````
 
-````{py:function} pull(dataset: typing.Annotated[finm.data._cli.Dataset, typer.Argument(help='Dataset to pull')], data_dir: typing.Annotated[typing.Optional[pathlib.Path], typer.Option('--data-dir', '-d', help='Directory for data storage. Overrides DATA_DIR env var.')] = None, wrds_username: typing.Annotated[typing.Optional[str], typer.Option('--wrds-username', help='WRDS username (overrides env var). Required for WRDS datasets.')] = None, start_date: typing.Annotated[typing.Optional[str], typer.Option('--start-date', help='Start date (YYYY-MM-DD)')] = None, end_date: typing.Annotated[typing.Optional[str], typer.Option('--end-date', help='End date (YYYY-MM-DD)')] = None, output_format: typing.Annotated[finm.data._cli.Format, typer.Option('--format', '-f', help='Output format')] = Format.wide) -> None
+````{py:function} pull(dataset: typing.Annotated[finm.data._cli.Dataset, typer.Argument(help='Dataset to pull')], data_dir: typing.Annotated[typing.Optional[pathlib.Path], typer.Option('--data-dir', '-d', help='Directory for data storage. Overrides DATA_DIR env var.')] = None, accept_license: typing.Annotated[bool, typer.Option('--accept-license', help="Acknowledge the data provider's license terms to proceed.")] = False, wrds_username: typing.Annotated[typing.Optional[str], typer.Option('--wrds-username', help='WRDS username (overrides env var). Required for WRDS datasets.')] = None, start_date: typing.Annotated[typing.Optional[str], typer.Option('--start-date', help='Start date (YYYY-MM-DD)')] = None, end_date: typing.Annotated[typing.Optional[str], typer.Option('--end-date', help='End date (YYYY-MM-DD)')] = None, output_format: typing.Annotated[finm.data._cli.Format, typer.Option('--format', '-f', help='Output format')] = Format.wide) -> None
 :canonical: finm.data._cli.pull
 
 ```{autodoc2-docstring} finm.data._cli.pull

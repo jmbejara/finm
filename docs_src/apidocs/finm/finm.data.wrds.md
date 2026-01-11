@@ -77,7 +77,7 @@
 
 ````
 
-````{py:function} load(data_dir: pathlib.Path | str, variant: finm.data.wrds.DatasetType, format: finm.data.wrds.FormatType = 'wide', treasury_variant: finm.data.wrds.TreasuryVariantType = 'consolidated', with_runness: bool = True) -> pandas.DataFrame
+````{py:function} load(data_dir: pathlib.Path | str, variant: finm.data.wrds.DatasetType, format: finm.data.wrds.FormatType = 'wide', treasury_variant: finm.data.wrds.TreasuryVariantType = 'consolidated', with_runness: bool = True, pull_if_not_found: bool = False, wrds_username: str | None = None, start_date: str | None = None, end_date: str | None = None, lazy: bool = False) -> typing.Union[polars.DataFrame, polars.LazyFrame]
 :canonical: finm.data.wrds.load
 
 ```{autodoc2-docstring} finm.data.wrds.load

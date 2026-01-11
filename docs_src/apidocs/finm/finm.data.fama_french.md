@@ -63,14 +63,14 @@
 
 ````
 
-````{py:function} load(data_dir: pathlib.Path | str | None = None, start: str | datetime.datetime | None = None, end: str | datetime.datetime | None = None, format: finm.data.fama_french.FormatType = 'wide') -> pandas.DataFrame
+````{py:function} load(data_dir: pathlib.Path | str | None = None, start: str | datetime.datetime | None = None, end: str | datetime.datetime | None = None, format: finm.data.fama_french.FormatType = 'wide', frequency: finm.data.fama_french.FrequencyType = 'daily', pull_if_not_found: bool = False, accept_license: bool = False, lazy: bool = False) -> typing.Union[polars.DataFrame, polars.LazyFrame]
 :canonical: finm.data.fama_french.load
 
 ```{autodoc2-docstring} finm.data.fama_french.load
 ```
 ````
 
-````{py:function} pull(data_dir: pathlib.Path | str, start: str | datetime.datetime | None = None, end: str | datetime.datetime | None = None, frequency: finm.data.fama_french.FrequencyType = 'daily') -> pandas.DataFrame
+````{py:function} pull(data_dir: pathlib.Path | str, start: str | datetime.datetime | None = None, end: str | datetime.datetime | None = None, frequency: finm.data.fama_french.FrequencyType = 'daily', accept_license: bool = False) -> pandas.DataFrame
 :canonical: finm.data.fama_french.pull
 
 ```{autodoc2-docstring} finm.data.fama_french.pull

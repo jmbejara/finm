@@ -43,6 +43,10 @@ orphan: true
   - ```{autodoc2-docstring} finm.data.fama_french._constants.DISPLAY_NAME
     :summary:
     ```
+* - {py:obj}`LICENSE_INFO <finm.data.fama_french._constants.LICENSE_INFO>`
+  - ```{autodoc2-docstring} finm.data.fama_french._constants.LICENSE_INFO
+    :summary:
+    ```
 ````
 
 ### API
@@ -109,6 +113,17 @@ orphan: true
    'Fama-French Factors'
 
 ```{autodoc2-docstring} finm.data.fama_french._constants.DISPLAY_NAME
+```
+
+````
+
+````{py:data} LICENSE_INFO
+:canonical: finm.data.fama_french._constants.LICENSE_INFO
+:type: typing.Final[dict]
+:value: >
+   None
+
+```{autodoc2-docstring} finm.data.fama_french._constants.LICENSE_INFO
 ```
 
 ````

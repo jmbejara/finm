@@ -27,7 +27,7 @@ orphan: true
 
 ### API
 
-````{py:function} pull_data(data_dir: pathlib.Path | str) -> tuple[pandas.DataFrame, pandas.DataFrame]
+````{py:function} pull_data(data_dir: pathlib.Path | str, accept_license: bool = False) -> tuple[pandas.DataFrame, pandas.DataFrame]
 :canonical: finm.data.federal_reserve._pull.pull_data
 
 ```{autodoc2-docstring} finm.data.federal_reserve._pull.pull_data

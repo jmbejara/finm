@@ -27,6 +27,10 @@ orphan: true
   - ```{autodoc2-docstring} finm.data.federal_reserve._constants.DISPLAY_NAME
     :summary:
     ```
+* - {py:obj}`LICENSE_INFO <finm.data.federal_reserve._constants.LICENSE_INFO>`
+  - ```{autodoc2-docstring} finm.data.federal_reserve._constants.LICENSE_INFO
+    :summary:
+    ```
 * - {py:obj}`PARQUET_ALL <finm.data.federal_reserve._constants.PARQUET_ALL>`
   - ```{autodoc2-docstring} finm.data.federal_reserve._constants.PARQUET_ALL
     :summary:
@@ -65,6 +69,17 @@ orphan: true
    'Federal Reserve Yield Curve'
 
 ```{autodoc2-docstring} finm.data.federal_reserve._constants.DISPLAY_NAME
+```
+
+````
+
+````{py:data} LICENSE_INFO
+:canonical: finm.data.federal_reserve._constants.LICENSE_INFO
+:type: typing.Final[dict]
+:value: >
+   None
+
+```{autodoc2-docstring} finm.data.federal_reserve._constants.LICENSE_INFO
 ```
 
 ````
