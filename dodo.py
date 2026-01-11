@@ -85,8 +85,6 @@ def copy_file(origin_path, destination_path, mkdir=True):
 
 
 # Define notebook tasks - notebooks in src/ with _ipynb.py suffix
-# NOTE: 03_corp_bond_returns_ftsfr_HKM_ipynb is excluded because it requires
-# external data from openbondassetpricing.com that must be manually downloaded
 notebook_tasks = {
     "01_replicate_GSW_yield_curve_ipynb": {
         "path": "./src/01_replicate_GSW_yield_curve_ipynb.py",
@@ -95,6 +93,16 @@ notebook_tasks = {
     },
     "02_corp_bond_returns_ipynb": {
         "path": "./src/02_corp_bond_returns_ipynb.py",
+        "file_dep": [],
+        "targets": [],
+    },
+    "03_corp_bond_returns_ftsfr_HKM_ipynb": {
+        "path": "./src/03_corp_bond_returns_ftsfr_HKM_ipynb.py",
+        "file_dep": [],
+        "targets": [],
+    },
+    "04_data_integration_tests_ipynb": {
+        "path": "./src/04_data_integration_tests_ipynb.py",
         "file_dep": [],
         "targets": [],
     },
@@ -185,4 +193,3 @@ def task_build_package():
         ],
         "clean": True,
     }
-

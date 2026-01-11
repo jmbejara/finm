@@ -4,7 +4,7 @@ Provides access to CRSP Treasury and corporate bond data from WRDS.
 
 Standard interface:
     - pull(data_dir, variant, ...): Download data from WRDS
-    - load(data_dir, variant, format): Load cached data
+    - load(data_dir, variant, format): Load cached data (returns polars)
     - to_long_format(df): Convert to long format
 
 Requires WRDS credentials (username).
@@ -13,10 +13,18 @@ Requires WRDS credentials (username).
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Literal
+from typing import Literal, Union
 
 import pandas as pd
+import polars as pl
 
+from finm.data.wrds._constants import (
+    PARQUET_CORP_BOND,
+    PARQUET_TREASURY_CONSOLIDATED,
+    PARQUET_TREASURY_DAILY,
+    PARQUET_TREASURY_INFO,
+    PARQUET_TREASURY_WITH_RUNNESS,
+)
 from finm.data.wrds._load import load_corp_bond, load_treasury
 from finm.data.wrds._pull import calc_runness, pull_corp_bond, pull_treasury
 from finm.data.wrds._transform import corp_bond_to_long_format, treasury_to_long_format
@@ -89,7 +97,12 @@ def load(
     format: FormatType = "wide",
     treasury_variant: TreasuryVariantType = "consolidated",
     with_runness: bool = True,
-) -> pd.DataFrame:
+    pull_if_not_found: bool = False,
+    wrds_username: str | None = None,
+    start_date: str | None = None,
+    end_date: str | None = None,
+    lazy: bool = False,
+) -> Union[pl.DataFrame, pl.LazyFrame]:
     """Load WRDS data from local cache.
 
     Parameters
@@ -104,12 +117,80 @@ def load(
         For treasury data, which variant to load.
     with_runness : bool, default True
         For consolidated treasury, whether to load version with runness.
+    pull_if_not_found : bool, default False
+        If True and data doesn't exist locally, pull from WRDS.
+        Requires wrds_username, start_date, and end_date.
+    wrds_username : str, optional
+        WRDS username. Required when pull_if_not_found=True.
+    start_date : str, optional
+        Start date ('YYYY-MM-DD'). Required when pull_if_not_found=True
+        (except for treasury info variant).
+    end_date : str, optional
+        End date ('YYYY-MM-DD'). Required when pull_if_not_found=True
+        (except for treasury info variant).
+    lazy : bool, default False
+        If True, return a polars LazyFrame instead of DataFrame.
 
     Returns
     -------
-    pd.DataFrame
-        Loaded data.
+    pl.DataFrame or pl.LazyFrame
+        Loaded data as polars DataFrame (default) or LazyFrame.
+
+    Raises
+    ------
+    ValueError
+        If pull_if_not_found=True but required credentials/dates not provided.
     """
+    from finm.data._utils import pandas_to_polars
+
+    data_path = Path(data_dir)
+
+    # Determine expected file
+    if variant == "treasury":
+        if treasury_variant == "consolidated":
+            expected_file = (
+                PARQUET_TREASURY_WITH_RUNNESS if with_runness else PARQUET_TREASURY_CONSOLIDATED
+            )
+        elif treasury_variant == "daily":
+            expected_file = PARQUET_TREASURY_DAILY
+        else:  # info
+            expected_file = PARQUET_TREASURY_INFO
+    else:  # corp_bond
+        expected_file = PARQUET_CORP_BOND
+
+    # Handle pull_if_not_found
+    if pull_if_not_found:
+        if not wrds_username:
+            raise ValueError(
+                "wrds_username is required when pull_if_not_found=True."
+            )
+        # Check date requirements
+        if variant == "corp_bond" or (variant == "treasury" and treasury_variant != "info"):
+            if not start_date or not end_date:
+                raise ValueError(
+                    "start_date and end_date are required when pull_if_not_found=True "
+                    "(except for treasury info variant)."
+                )
+
+        if not (data_path / expected_file).exists():
+            if variant == "treasury":
+                pull_treasury(
+                    data_dir=data_dir,
+                    wrds_username=wrds_username,
+                    start_date=start_date or "",
+                    end_date=end_date or "",
+                    variant=treasury_variant,
+                    with_runness=with_runness,
+                )
+            else:
+                pull_corp_bond(
+                    data_dir=data_dir,
+                    wrds_username=wrds_username,
+                    start_date=start_date or "",
+                    end_date=end_date or "",
+                )
+
+    # Load data (internally uses pandas)
     if variant == "treasury":
         df = load_treasury(
             data_dir=data_dir,
@@ -125,7 +206,8 @@ def load(
     else:
         raise ValueError(f"variant must be 'treasury' or 'corp_bond', got '{variant}'")
 
-    return df
+    # Convert to polars
+    return pandas_to_polars(df, lazy=lazy)
 
 
 __all__ = [

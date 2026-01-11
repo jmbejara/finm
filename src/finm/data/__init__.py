@@ -1,7 +1,7 @@
 """Data module.
 
 This module provides functions for pulling, loading, and transforming financial
-data from various sources.
+data from various sources. All load functions return polars DataFrames by default.
 
 Submodules:
     - federal_reserve: Federal Reserve yield curve data (GSW model)
@@ -12,21 +12,30 @@ Submodules:
 
 Each submodule follows a standard interface:
     - pull(data_dir, ...): Download data from source
-    - load(data_dir, variant, format): Load cached data
+    - load(data_dir, variant, format, pull_if_not_found, lazy): Load cached data (returns polars)
     - to_long_format(df): Convert to long format [unique_id, ds, y]
 
 Example usage:
     from finm.data import federal_reserve
-    federal_reserve.pull(data_dir="./data")
-    df = federal_reserve.load(data_dir="./data", format="long")
+
+    # Load with auto-pull if data doesn't exist
+    df = federal_reserve.load(
+        data_dir="./data",
+        pull_if_not_found=True,
+        accept_license=True,
+    )
+
+    # Get a LazyFrame for deferred computation
+    lf = federal_reserve.load(data_dir="./data", lazy=True)
 """
 
 from __future__ import annotations
 
 from pathlib import Path
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Literal, Union
 
 import pandas as pd
+import polars as pl
 
 # Import submodules for direct access
 from finm.data import (
@@ -67,7 +76,10 @@ def pull_fed_yield_curve(data_dir: Path | str) -> tuple[pd.DataFrame, pd.DataFra
 def load_fed_yield_curve(
     data_dir: Path | str,
     format: FormatType = "wide",
-) -> pd.DataFrame:
+    pull_if_not_found: bool = False,
+    accept_license: bool = False,
+    lazy: bool = False,
+) -> Union[pl.DataFrame, pl.LazyFrame]:
     """Load Federal Reserve yield curve data (SVENY01-30).
 
     Parameters
@@ -76,19 +88,35 @@ def load_fed_yield_curve(
         Directory containing the parquet files.
     format : {"wide", "long"}, default "wide"
         Output format.
+    pull_if_not_found : bool, default False
+        If True and data doesn't exist locally, pull from source.
+    accept_license : bool, default False
+        Must be True when pull_if_not_found=True.
+    lazy : bool, default False
+        If True, return a polars LazyFrame instead of DataFrame.
 
     Returns
     -------
-    pd.DataFrame
+    pl.DataFrame or pl.LazyFrame
         Yield curve data.
     """
-    return federal_reserve.load(data_dir=data_dir, variant="standard", format=format)
+    return federal_reserve.load(
+        data_dir=data_dir,
+        variant="standard",
+        format=format,
+        pull_if_not_found=pull_if_not_found,
+        accept_license=accept_license,
+        lazy=lazy,
+    )
 
 
 def load_fed_yield_curve_all(
     data_dir: Path | str,
     format: FormatType = "wide",
-) -> pd.DataFrame:
+    pull_if_not_found: bool = False,
+    accept_license: bool = False,
+    lazy: bool = False,
+) -> Union[pl.DataFrame, pl.LazyFrame]:
     """Load full Federal Reserve yield curve data.
 
     Parameters
@@ -97,13 +125,26 @@ def load_fed_yield_curve_all(
         Directory containing the parquet files.
     format : {"wide", "long"}, default "wide"
         Output format.
+    pull_if_not_found : bool, default False
+        If True and data doesn't exist locally, pull from source.
+    accept_license : bool, default False
+        Must be True when pull_if_not_found=True.
+    lazy : bool, default False
+        If True, return a polars LazyFrame instead of DataFrame.
 
     Returns
     -------
-    pd.DataFrame
+    pl.DataFrame or pl.LazyFrame
         Full yield curve data.
     """
-    return federal_reserve.load(data_dir=data_dir, variant="all", format=format)
+    return federal_reserve.load(
+        data_dir=data_dir,
+        variant="all",
+        format=format,
+        pull_if_not_found=pull_if_not_found,
+        accept_license=accept_license,
+        lazy=lazy,
+    )
 
 
 # ==============================================================================
@@ -145,7 +186,11 @@ def load_fama_french_factors(
     start: str | datetime | None = None,
     end: str | datetime | None = None,
     format: FormatType = "wide",
-) -> pd.DataFrame:
+    frequency: Literal["daily", "monthly"] = "daily",
+    pull_if_not_found: bool = False,
+    accept_license: bool = False,
+    lazy: bool = False,
+) -> Union[pl.DataFrame, pl.LazyFrame]:
     """Load Fama-French factors from bundled or cached data.
 
     Parameters
@@ -158,13 +203,30 @@ def load_fama_french_factors(
         End date to filter.
     format : {"wide", "long"}, default "wide"
         Output format.
+    frequency : {"daily", "monthly"}, default "daily"
+        Data frequency to pull if pull_if_not_found=True.
+    pull_if_not_found : bool, default False
+        If True and data doesn't exist locally, pull from source.
+    accept_license : bool, default False
+        Must be True when pull_if_not_found=True.
+    lazy : bool, default False
+        If True, return a polars LazyFrame instead of DataFrame.
 
     Returns
     -------
-    pd.DataFrame
+    pl.DataFrame or pl.LazyFrame
         Factor data.
     """
-    return fama_french.load(data_dir=data_dir, start=start, end=end, format=format)
+    return fama_french.load(
+        data_dir=data_dir,
+        start=start,
+        end=end,
+        format=format,
+        frequency=frequency,
+        pull_if_not_found=pull_if_not_found,
+        accept_license=accept_license,
+        lazy=lazy,
+    )
 
 
 # ==============================================================================
@@ -191,7 +253,10 @@ def pull_he_kelly_manela(
 def load_he_kelly_manela_factors_monthly(
     data_dir: Path | str,
     format: FormatType = "wide",
-) -> pd.DataFrame:
+    pull_if_not_found: bool = False,
+    accept_license: bool = False,
+    lazy: bool = False,
+) -> Union[pl.DataFrame, pl.LazyFrame]:
     """Load He-Kelly-Manela monthly factors.
 
     Parameters
@@ -200,21 +265,35 @@ def load_he_kelly_manela_factors_monthly(
         Directory containing the data.
     format : {"wide", "long"}, default "wide"
         Output format.
+    pull_if_not_found : bool, default False
+        If True and data doesn't exist locally, pull from source.
+    accept_license : bool, default False
+        Must be True when pull_if_not_found=True.
+    lazy : bool, default False
+        If True, return a polars LazyFrame instead of DataFrame.
 
     Returns
     -------
-    pd.DataFrame
+    pl.DataFrame or pl.LazyFrame
         Monthly factor data.
     """
     return he_kelly_manela.load(
-        data_dir=data_dir, variant="factors_monthly", format=format
+        data_dir=data_dir,
+        variant="factors_monthly",
+        format=format,
+        pull_if_not_found=pull_if_not_found,
+        accept_license=accept_license,
+        lazy=lazy,
     )
 
 
 def load_he_kelly_manela_factors_daily(
     data_dir: Path | str,
     format: FormatType = "wide",
-) -> pd.DataFrame:
+    pull_if_not_found: bool = False,
+    accept_license: bool = False,
+    lazy: bool = False,
+) -> Union[pl.DataFrame, pl.LazyFrame]:
     """Load He-Kelly-Manela daily factors.
 
     Parameters
@@ -223,21 +302,35 @@ def load_he_kelly_manela_factors_daily(
         Directory containing the data.
     format : {"wide", "long"}, default "wide"
         Output format.
+    pull_if_not_found : bool, default False
+        If True and data doesn't exist locally, pull from source.
+    accept_license : bool, default False
+        Must be True when pull_if_not_found=True.
+    lazy : bool, default False
+        If True, return a polars LazyFrame instead of DataFrame.
 
     Returns
     -------
-    pd.DataFrame
+    pl.DataFrame or pl.LazyFrame
         Daily factor data.
     """
     return he_kelly_manela.load(
-        data_dir=data_dir, variant="factors_daily", format=format
+        data_dir=data_dir,
+        variant="factors_daily",
+        format=format,
+        pull_if_not_found=pull_if_not_found,
+        accept_license=accept_license,
+        lazy=lazy,
     )
 
 
 def load_he_kelly_manela_all(
     data_dir: Path | str,
     format: FormatType = "wide",
-) -> pd.DataFrame:
+    pull_if_not_found: bool = False,
+    accept_license: bool = False,
+    lazy: bool = False,
+) -> Union[pl.DataFrame, pl.LazyFrame]:
     """Load He-Kelly-Manela factors and test assets.
 
     Parameters
@@ -246,13 +339,26 @@ def load_he_kelly_manela_all(
         Directory containing the data.
     format : {"wide", "long"}, default "wide"
         Output format.
+    pull_if_not_found : bool, default False
+        If True and data doesn't exist locally, pull from source.
+    accept_license : bool, default False
+        Must be True when pull_if_not_found=True.
+    lazy : bool, default False
+        If True, return a polars LazyFrame instead of DataFrame.
 
     Returns
     -------
-    pd.DataFrame
+    pl.DataFrame or pl.LazyFrame
         Factors and test assets data.
     """
-    return he_kelly_manela.load(data_dir=data_dir, variant="all", format=format)
+    return he_kelly_manela.load(
+        data_dir=data_dir,
+        variant="all",
+        format=format,
+        pull_if_not_found=pull_if_not_found,
+        accept_license=accept_license,
+        lazy=lazy,
+    )
 
 
 # ==============================================================================
@@ -294,7 +400,10 @@ def pull_open_source_bond(
 def load_treasury_returns(
     data_dir: Path | str,
     format: FormatType = "wide",
-) -> pd.DataFrame:
+    pull_if_not_found: bool = False,
+    accept_license: bool = False,
+    lazy: bool = False,
+) -> Union[pl.DataFrame, pl.LazyFrame]:
     """Load treasury bond returns.
 
     Parameters
@@ -303,19 +412,35 @@ def load_treasury_returns(
         Directory containing the data.
     format : {"wide", "long"}, default "wide"
         Output format.
+    pull_if_not_found : bool, default False
+        If True and data doesn't exist locally, pull from source.
+    accept_license : bool, default False
+        Must be True when pull_if_not_found=True.
+    lazy : bool, default False
+        If True, return a polars LazyFrame instead of DataFrame.
 
     Returns
     -------
-    pd.DataFrame
+    pl.DataFrame or pl.LazyFrame
         Treasury bond returns.
     """
-    return open_source_bond.load(data_dir=data_dir, variant="treasury", format=format)
+    return open_source_bond.load(
+        data_dir=data_dir,
+        variant="treasury",
+        format=format,
+        pull_if_not_found=pull_if_not_found,
+        accept_license=accept_license,
+        lazy=lazy,
+    )
 
 
 def load_corporate_bond_returns(
     data_dir: Path | str,
     format: FormatType = "wide",
-) -> pd.DataFrame:
+    pull_if_not_found: bool = False,
+    accept_license: bool = False,
+    lazy: bool = False,
+) -> Union[pl.DataFrame, pl.LazyFrame]:
     """Load corporate bond returns (monthly).
 
     This loads the monthly corporate bond returns with 108 factor signals.
@@ -327,10 +452,16 @@ def load_corporate_bond_returns(
         Directory containing the data.
     format : {"wide", "long"}, default "wide"
         Output format.
+    pull_if_not_found : bool, default False
+        If True and data doesn't exist locally, pull from source.
+    accept_license : bool, default False
+        Must be True when pull_if_not_found=True.
+    lazy : bool, default False
+        If True, return a polars LazyFrame instead of DataFrame.
 
     Returns
     -------
-    pd.DataFrame
+    pl.DataFrame or pl.LazyFrame
         Corporate bond returns (monthly). Key columns:
         - cusip: Bond identifier
         - date: Month-end date
@@ -339,14 +470,22 @@ def load_corporate_bond_returns(
         - tret: Duration-matched Treasury return
     """
     return open_source_bond.load(
-        data_dir=data_dir, variant="corporate_monthly", format=format
+        data_dir=data_dir,
+        variant="corporate_monthly",
+        format=format,
+        pull_if_not_found=pull_if_not_found,
+        accept_license=accept_license,
+        lazy=lazy,
     )
 
 
 def load_corporate_bond_prices_daily(
     data_dir: Path | str,
     format: FormatType = "wide",
-) -> pd.DataFrame:
+    pull_if_not_found: bool = False,
+    accept_license: bool = False,
+    lazy: bool = False,
+) -> Union[pl.DataFrame, pl.LazyFrame]:
     """Load daily corporate bond prices (TRACE Stage 1).
 
     This is PRICE data, not returns. For returns, use load_corporate_bond_returns().
@@ -357,10 +496,16 @@ def load_corporate_bond_prices_daily(
         Directory containing the data.
     format : {"wide", "long"}, default "wide"
         Output format.
+    pull_if_not_found : bool, default False
+        If True and data doesn't exist locally, pull from source.
+    accept_license : bool, default False
+        Must be True when pull_if_not_found=True.
+    lazy : bool, default False
+        If True, return a polars LazyFrame instead of DataFrame.
 
     Returns
     -------
-    pd.DataFrame
+    pl.DataFrame or pl.LazyFrame
         Daily corporate bond prices. Key columns:
         - cusip_id: Bond identifier
         - trd_exctn_dt: Trade execution date
@@ -369,14 +514,22 @@ def load_corporate_bond_prices_daily(
         - ytm: Yield to maturity
     """
     return open_source_bond.load(
-        data_dir=data_dir, variant="corporate_daily", format=format
+        data_dir=data_dir,
+        variant="corporate_daily",
+        format=format,
+        pull_if_not_found=pull_if_not_found,
+        accept_license=accept_license,
+        lazy=lazy,
     )
 
 
 def load_corporate_bond_returns_monthly(
     data_dir: Path | str,
     format: FormatType = "wide",
-) -> pd.DataFrame:
+    pull_if_not_found: bool = False,
+    accept_license: bool = False,
+    lazy: bool = False,
+) -> Union[pl.DataFrame, pl.LazyFrame]:
     """Load monthly corporate bond returns with factor signals.
 
     Parameters
@@ -385,14 +538,25 @@ def load_corporate_bond_returns_monthly(
         Directory containing the data.
     format : {"wide", "long"}, default "wide"
         Output format.
+    pull_if_not_found : bool, default False
+        If True and data doesn't exist locally, pull from source.
+    accept_license : bool, default False
+        Must be True when pull_if_not_found=True.
+    lazy : bool, default False
+        If True, return a polars LazyFrame instead of DataFrame.
 
     Returns
     -------
-    pd.DataFrame
+    pl.DataFrame or pl.LazyFrame
         Corporate bond returns (monthly) with 108 factor signals.
     """
     return open_source_bond.load(
-        data_dir=data_dir, variant="corporate_monthly", format=format
+        data_dir=data_dir,
+        variant="corporate_monthly",
+        format=format,
+        pull_if_not_found=pull_if_not_found,
+        accept_license=accept_license,
+        lazy=lazy,
     )
 
 
@@ -447,7 +611,12 @@ def load_wrds_treasury(
     variant: Literal["daily", "info", "consolidated"] = "consolidated",
     with_runness: bool = True,
     format: FormatType = "wide",
-) -> pd.DataFrame:
+    pull_if_not_found: bool = False,
+    wrds_username: str | None = None,
+    start_date: str | None = None,
+    end_date: str | None = None,
+    lazy: bool = False,
+) -> Union[pl.DataFrame, pl.LazyFrame]:
     """Load CRSP Treasury data from local cache.
 
     Parameters
@@ -460,10 +629,20 @@ def load_wrds_treasury(
         For consolidated variant, whether to load version with runness.
     format : {"wide", "long"}, default "wide"
         Output format.
+    pull_if_not_found : bool, default False
+        If True and data doesn't exist locally, pull from WRDS.
+    wrds_username : str, optional
+        WRDS username. Required when pull_if_not_found=True.
+    start_date : str, optional
+        Start date ('YYYY-MM-DD'). Required when pull_if_not_found=True.
+    end_date : str, optional
+        End date ('YYYY-MM-DD'). Required when pull_if_not_found=True.
+    lazy : bool, default False
+        If True, return a polars LazyFrame instead of DataFrame.
 
     Returns
     -------
-    pd.DataFrame
+    pl.DataFrame or pl.LazyFrame
         Treasury data.
     """
     return wrds.load(
@@ -472,6 +651,11 @@ def load_wrds_treasury(
         format=format,
         treasury_variant=variant,
         with_runness=with_runness,
+        pull_if_not_found=pull_if_not_found,
+        wrds_username=wrds_username,
+        start_date=start_date,
+        end_date=end_date,
+        lazy=lazy,
     )
 
 
@@ -511,7 +695,12 @@ def pull_wrds_corp_bond(
 def load_wrds_corp_bond(
     data_dir: Path | str,
     format: FormatType = "wide",
-) -> pd.DataFrame:
+    pull_if_not_found: bool = False,
+    wrds_username: str | None = None,
+    start_date: str | None = None,
+    end_date: str | None = None,
+    lazy: bool = False,
+) -> Union[pl.DataFrame, pl.LazyFrame]:
     """Load corporate bond data from local cache.
 
     Parameters
@@ -520,13 +709,32 @@ def load_wrds_corp_bond(
         Directory containing the parquet file.
     format : {"wide", "long"}, default "wide"
         Output format.
+    pull_if_not_found : bool, default False
+        If True and data doesn't exist locally, pull from WRDS.
+    wrds_username : str, optional
+        WRDS username. Required when pull_if_not_found=True.
+    start_date : str, optional
+        Start date ('YYYY-MM-DD'). Required when pull_if_not_found=True.
+    end_date : str, optional
+        End date ('YYYY-MM-DD'). Required when pull_if_not_found=True.
+    lazy : bool, default False
+        If True, return a polars LazyFrame instead of DataFrame.
 
     Returns
     -------
-    pd.DataFrame
+    pl.DataFrame or pl.LazyFrame
         Corporate bond data.
     """
-    return wrds.load(data_dir=data_dir, variant="corp_bond", format=format)
+    return wrds.load(
+        data_dir=data_dir,
+        variant="corp_bond",
+        format=format,
+        pull_if_not_found=pull_if_not_found,
+        wrds_username=wrds_username,
+        start_date=start_date,
+        end_date=end_date,
+        lazy=lazy,
+    )
 
 
 def calc_treasury_runness(data: pd.DataFrame) -> pd.DataFrame:

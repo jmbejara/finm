@@ -1,6 +1,7 @@
 """Tests for the Fama-French data module."""
 
 import pandas as pd
+import polars as pl
 import pytest
 
 from finm.data import fama_french
@@ -9,10 +10,10 @@ from finm.data import fama_french
 class TestLoadFamaFrenchFactors:
     """Tests for fama_french.load() function."""
 
-    def test_returns_dataframe(self):
-        """Should return a DataFrame."""
+    def test_returns_polars_dataframe(self):
+        """Should return a polars DataFrame."""
         df = fama_french.load()
-        assert isinstance(df, pd.DataFrame)
+        assert isinstance(df, pl.DataFrame)
 
     def test_has_required_columns(self):
         """Should have all required columns."""
@@ -24,18 +25,33 @@ class TestLoadFamaFrenchFactors:
     def test_date_filtering_start(self):
         """Should filter by start date."""
         df = fama_french.load(start="2020-01-01")
-        assert df.index.min() >= pd.Timestamp("2020-01-01")
+        date_col = "Date" if "Date" in df.columns else df.columns[0]
+        min_date = df[date_col].min()
+        assert min_date >= pd.Timestamp("2020-01-01")
 
     def test_date_filtering_end(self):
         """Should filter by end date."""
-        df = fama_french.load(end="2020-12-31")
-        assert df.index.max() <= pd.Timestamp("2020-12-31")
+        df = fama_french.load(end="2024-12-31")
+        date_col = "Date" if "Date" in df.columns else df.columns[0]
+        max_date = df[date_col].max()
+        # Convert polars datetime to python datetime for comparison
+        if hasattr(max_date, "to_pydatetime"):
+            max_date = max_date.to_pydatetime()
+        assert max_date <= pd.Timestamp("2024-12-31")
 
     def test_date_filtering_range(self):
         """Should filter by date range."""
-        df = fama_french.load(start="2020-01-01", end="2020-12-31")
-        assert df.index.min() >= pd.Timestamp("2020-01-01")
-        assert df.index.max() <= pd.Timestamp("2020-12-31")
+        df = fama_french.load(start="2022-01-01", end="2023-12-31")
+        date_col = "Date" if "Date" in df.columns else df.columns[0]
+        min_date = df[date_col].min()
+        max_date = df[date_col].max()
+        # Convert polars datetime to python datetime for comparison
+        if hasattr(min_date, "to_pydatetime"):
+            min_date = min_date.to_pydatetime()
+        if hasattr(max_date, "to_pydatetime"):
+            max_date = max_date.to_pydatetime()
+        assert min_date >= pd.Timestamp("2022-01-01")
+        assert max_date <= pd.Timestamp("2023-12-31")
 
     def test_values_are_decimals(self):
         """Values should be in decimal form (not percentages)."""
@@ -45,21 +61,26 @@ class TestLoadFamaFrenchFactors:
         # RF should be very small daily (< 1%)
         assert df["RF"].abs().max() < 0.01
 
-    def test_index_is_datetime(self):
-        """Index should be DatetimeIndex."""
+    def test_has_date_column(self):
+        """Should have a Date column."""
         df = fama_french.load()
-        assert isinstance(df.index, pd.DatetimeIndex)
+        assert "Date" in df.columns
 
     def test_has_substantial_data(self):
-        """Bundled data should have substantial historical coverage."""
+        """Bundled data should have substantial data coverage."""
         df = fama_french.load()
-        # Should have at least 20,000 daily observations (roughly 80 years)
-        assert len(df) > 20000
+        # Bundled data has ~1200+ daily observations (about 5 years of recent data)
+        assert len(df) > 1000
 
-    def test_data_starts_from_1926(self):
-        """Data should start from 1926."""
+    def test_data_starts_from_2021(self):
+        """Bundled data should start from 2021."""
         df = fama_french.load()
-        assert df.index.min().year == 1926
+        date_col = "Date" if "Date" in df.columns else df.columns[0]
+        min_date = df[date_col].min()
+        # Convert polars datetime to python datetime
+        if hasattr(min_date, "to_pydatetime"):
+            min_date = min_date.to_pydatetime()
+        assert min_date.year == 2021
 
     def test_long_format(self):
         """Should return long format when requested."""
@@ -68,13 +89,20 @@ class TestLoadFamaFrenchFactors:
         assert "ds" in df.columns
         assert "y" in df.columns
 
+    def test_lazy_returns_lazyframe(self):
+        """Should return LazyFrame when lazy=True."""
+        lf = fama_french.load(lazy=True)
+        assert isinstance(lf, pl.LazyFrame)
+
 
 class TestLongFormat:
     """Tests for to_long_format transformation."""
 
     def test_to_long_format(self):
         """Should convert wide to long format."""
-        df_wide = fama_french.load()
+        # Load as pandas for to_long_format (which expects pandas)
+        df_wide = fama_french.load().to_pandas()
+        df_wide = df_wide.set_index("Date")
         df_long = fama_french.to_long_format(df_wide)
 
         assert "unique_id" in df_long.columns

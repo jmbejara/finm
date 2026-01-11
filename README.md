@@ -26,6 +26,9 @@ pip install finm[all]
 
 Load financial data from multiple sources with a consistent interface. See the [Data Module documentation](https://jeremybejarano.com/finm/data_module.html) for details.
 
+> [!IMPORTANT]
+> **License Acknowledgment Required:** All data pull functions require `accept_license=True` to confirm you understand that the data is subject to the original provider's licensing terms. See [Data Licensing](#data-licensing) below.
+
 ```python
 import finm
 
@@ -34,18 +37,18 @@ factors = finm.load_fama_french_factors()
 factors = finm.load_fama_french_factors(start="2020-01-01", end="2023-12-31")
 
 # Pull fresh data from Ken French's Data Library
-finm.pull_fama_french_factors(data_dir="./data")
+finm.pull_fama_french_factors(data_dir="./data", accept_license=True)
 
 # Federal Reserve yield curve (GSW model)
-finm.pull_fed_yield_curve(data_dir="./data")
+finm.pull_fed_yield_curve(data_dir="./data", accept_license=True)
 yields = finm.load_fed_yield_curve(data_dir="./data")
 
 # He-Kelly-Manela intermediary capital factors
-finm.pull_he_kelly_manela(data_dir="./data")
+finm.pull_he_kelly_manela(data_dir="./data", accept_license=True)
 hkm = finm.load_he_kelly_manela_factors_monthly(data_dir="./data")
 
 # Open Source Bond Asset Pricing data
-finm.pull_open_source_bond(data_dir="./data")
+finm.pull_open_source_bond(data_dir="./data", accept_license=True)
 treasury = finm.load_treasury_returns(data_dir="./data")
 corporate = finm.load_corporate_bond_returns(data_dir="./data")
 
@@ -128,17 +131,53 @@ finm list
 # Get info about a dataset
 finm info fama_french
 
-# Pull data
-finm pull fama_french --data-dir=./data
-finm pull fed_yield_curve --data-dir=./data
+# Pull data (--accept-license flag required)
+finm pull fama_french --data-dir=./data --accept-license
+finm pull fed_yield_curve --data-dir=./data --accept-license
 
 # Pull WRDS data (requires credentials)
-finm pull wrds_treasury --wrds-username=myuser --start-date=2020-01-01 --end-date=2023-12-31
+finm pull wrds_treasury --wrds-username=myuser --start-date=2020-01-01 --end-date=2023-12-31 --accept-license
 ```
 
 ## Documentation
 
 Full documentation is available at [jeremybejarano.com/finm](https://jeremybejarano.com/finm/).
+
+## Data Licensing
+
+> [!WARNING]
+> **Third-Party Data Disclaimer:** The `finm.data` module provides convenient access to financial datasets from various third-party sources. **The finm package maintainers are not responsible for the accuracy, completeness, or licensing of this data.** Usage is subject to the original data provider's terms and conditions.
+
+### Citation Requirements
+
+When using data from these sources in academic work, please cite appropriately:
+
+| Data Source | Citation |
+|-------------|----------|
+| **Fama-French** | Fama, E.F. and French, K.R. (1993). Common Risk Factors in the Returns on Stocks and Bonds. *Journal of Financial Economics* 33(1): 3-56. |
+| **Federal Reserve** | Board of Governors of the Federal Reserve System. GSW Yield Curve Data. https://www.federalreserve.gov/ |
+| **He-Kelly-Manela** | He, Z., Kelly, B., and Manela, A. (2017). Intermediary Asset Pricing: New Evidence from Many Asset Classes. *Journal of Financial Economics* 126(1): 1-35. |
+| **Open Source Bond** | Dickerson, A., Robotti, C., and Rossetti, G. (2026). The Corporate Bond Factor Replication Crisis. Working Paper. |
+| **WRDS** | Wharton Research Data Services. https://wrds-www.wharton.upenn.edu/ |
+
+### License Types
+
+| Data Source | License | Terms URL |
+|-------------|---------|-----------|
+| Fama-French | Copyright Fama & French | [Ken French Data Library](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html) |
+| Federal Reserve | Public Domain | [Federal Reserve Disclaimer](https://www.federalreserve.gov/disclaimer.htm) |
+| He-Kelly-Manela | Academic Use | [HKM Website](https://asaf.manela.org/papers/hkm/intermediarycapitalrisk/) |
+| Open Source Bond | MIT License | [GitHub Repository](https://github.com/Alexander-M-Dickerson/trace-data-pipeline) |
+| WRDS | Subscription-based | [WRDS Terms](https://wrds-www.wharton.upenn.edu/) |
+
+### Fair Use
+
+The data access functionality in this package is provided for:
+- Educational purposes
+- Academic research
+- Personal, non-commercial analysis
+
+For commercial use, please consult the original data provider's licensing terms.
 
 ## License
 

@@ -8,7 +8,7 @@ Terms: https://www.federalreserve.gov/disclaimer.htm
 
 Standard interface:
     - pull(data_dir, accept_license): Download data from source
-    - load(data_dir, variant, format): Load cached data
+    - load(data_dir, variant, format): Load cached data (returns polars)
     - to_long_format(df): Convert to long format
 
 License:
@@ -18,11 +18,16 @@ License:
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Literal
+from typing import Literal, Union
 
 import pandas as pd
+import polars as pl
 
-from finm.data.federal_reserve._constants import LICENSE_INFO
+from finm.data.federal_reserve._constants import (
+    LICENSE_INFO,
+    PARQUET_ALL,
+    PARQUET_STANDARD,
+)
 from finm.data.federal_reserve._load import load_data
 from finm.data.federal_reserve._pull import pull_data
 from finm.data.federal_reserve._transform import to_long_format
@@ -67,7 +72,10 @@ def load(
     data_dir: Path | str,
     variant: VariantType = "standard",
     format: FormatType = "wide",
-) -> pd.DataFrame:
+    pull_if_not_found: bool = False,
+    accept_license: bool = False,
+    lazy: bool = False,
+) -> Union[pl.DataFrame, pl.LazyFrame]:
     """Load Federal Reserve yield curve data.
 
     Parameters
@@ -82,18 +90,49 @@ def load(
         Output format:
         - "wide": Original format with yield columns
         - "long": Melted format with [unique_id, ds, y] columns
+    pull_if_not_found : bool, default False
+        If True and data doesn't exist locally, pull from source.
+        Requires accept_license=True.
+    accept_license : bool, default False
+        Must be True when pull_if_not_found=True.
+    lazy : bool, default False
+        If True, return a polars LazyFrame instead of DataFrame.
 
     Returns
     -------
-    pd.DataFrame
-        Yield curve data.
+    pl.DataFrame or pl.LazyFrame
+        Yield curve data as polars DataFrame (default) or LazyFrame.
+
+    Raises
+    ------
+    ValueError
+        If pull_if_not_found=True but accept_license=False.
+    FileNotFoundError
+        If data doesn't exist and pull_if_not_found=False.
     """
+    from finm.data._utils import pandas_to_polars
+
+    data_path = Path(data_dir)
+    expected_file = PARQUET_STANDARD if variant == "standard" else PARQUET_ALL
+
+    # Handle pull_if_not_found
+    if pull_if_not_found:
+        if not accept_license:
+            raise ValueError(
+                "When pull_if_not_found=True, accept_license must also be True. "
+                "This acknowledges the data provider's license terms."
+            )
+        if not (data_path / expected_file).exists():
+            pull_data(data_dir=data_dir, accept_license=True)
+
+    # Load data (internally uses pandas)
     df = load_data(data_dir=data_dir, variant=variant)
 
     if format == "long":
         df = to_long_format(df)
 
-    return df
+    # Convert to polars
+    return pandas_to_polars(df, lazy=lazy)
 
 
 __all__ = ["pull", "load", "to_long_format", "LICENSE_INFO"]

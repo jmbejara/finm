@@ -8,7 +8,7 @@ Paper: https://doi.org/10.1016/j.jfineco.2017.08.002
 
 Standard interface:
     - pull(data_dir, accept_license): Download data from source
-    - load(data_dir, variant, format): Load cached data
+    - load(data_dir, variant, format): Load cached data (returns polars)
     - to_long_format(df): Convert to long format
 
 License:
@@ -18,17 +18,30 @@ License:
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Literal
+from typing import Literal, Union
 
 import pandas as pd
+import polars as pl
 
-from finm.data.he_kelly_manela._constants import LICENSE_INFO
+from finm.data.he_kelly_manela._constants import (
+    CSV_ALL,
+    CSV_DAILY,
+    CSV_MONTHLY,
+    LICENSE_INFO,
+)
 from finm.data.he_kelly_manela._load import load_data
 from finm.data.he_kelly_manela._pull import pull_data
 from finm.data.he_kelly_manela._transform import to_long_format
 
 FormatType = Literal["wide", "long"]
 VariantType = Literal["factors_monthly", "factors_daily", "all"]
+
+# Map variant to expected file
+_VARIANT_FILES = {
+    "factors_monthly": CSV_MONTHLY,
+    "factors_daily": CSV_DAILY,
+    "all": CSV_ALL,
+}
 
 
 def pull(data_dir: Path | str, accept_license: bool = False) -> None:
@@ -61,7 +74,10 @@ def load(
     data_dir: Path | str,
     variant: VariantType = "factors_monthly",
     format: FormatType = "wide",
-) -> pd.DataFrame:
+    pull_if_not_found: bool = False,
+    accept_license: bool = False,
+    lazy: bool = False,
+) -> Union[pl.DataFrame, pl.LazyFrame]:
     """Load He-Kelly-Manela factor data.
 
     Parameters
@@ -77,18 +93,47 @@ def load(
         Output format:
         - "wide": Original format with factor columns
         - "long": Melted format with [unique_id, ds, y] columns
+    pull_if_not_found : bool, default False
+        If True and data doesn't exist locally, pull from source.
+        Requires accept_license=True.
+    accept_license : bool, default False
+        Must be True when pull_if_not_found=True.
+    lazy : bool, default False
+        If True, return a polars LazyFrame instead of DataFrame.
 
     Returns
     -------
-    pd.DataFrame
-        Factor data.
+    pl.DataFrame or pl.LazyFrame
+        Factor data as polars DataFrame (default) or LazyFrame.
+
+    Raises
+    ------
+    ValueError
+        If pull_if_not_found=True but accept_license=False.
     """
+    from finm.data._utils import pandas_to_polars
+
+    data_path = Path(data_dir)
+    expected_file = _VARIANT_FILES[variant]
+
+    # Handle pull_if_not_found
+    if pull_if_not_found:
+        if not accept_license:
+            raise ValueError(
+                "When pull_if_not_found=True, accept_license must also be True. "
+                "This acknowledges the data provider's license terms."
+            )
+        if not (data_path / expected_file).exists():
+            pull_data(data_dir=data_dir, accept_license=True)
+
+    # Load data (internally uses pandas)
     df = load_data(data_dir=data_dir, variant=variant)
 
     if format == "long":
         df = to_long_format(df)
 
-    return df
+    # Convert to polars
+    return pandas_to_polars(df, lazy=lazy)
 
 
-__all__ = ["pull", "load", "to_long_format"]
+__all__ = ["pull", "load", "to_long_format", "LICENSE_INFO"]
