@@ -27,9 +27,7 @@ def to_long_format(df: pd.DataFrame) -> pd.DataFrame:
     available_columns = [col for col in FACTOR_COLUMNS if col in df.columns]
 
     if not available_columns:
-        raise ValueError(
-            f"No factor columns found. Expected one of: {FACTOR_COLUMNS}"
-        )
+        raise ValueError(f"No factor columns found. Expected one of: {FACTOR_COLUMNS}")
 
     # Melt from wide to long
     long_df = df.melt(

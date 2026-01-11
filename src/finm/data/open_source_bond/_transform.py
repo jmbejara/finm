@@ -1,28 +1,42 @@
-"""Transform functions for Open Source Bond data."""
+"""Transform functions for Open Source Bond data.
+
+Website: https://openbondassetpricing.com/
+Data Dictionary: https://github.com/Alexander-M-Dickerson/trace-data-pipeline/blob/main/stage2/DATA_DICTIONARY.md
+"""
 
 from __future__ import annotations
 
+from typing import Literal
+
 import pandas as pd
+
+from finm.data.open_source_bond._constants import DATA_INFO
+
+VariantType = Literal["treasury", "corporate_daily", "corporate_monthly"]
 
 
 def to_long_format(
     df: pd.DataFrame,
-    id_column: str = "cusip",
-    date_column: str = "date",
-    value_column: str = "bond_ret",
+    id_column: str | None = None,
+    date_column: str | None = None,
+    value_column: str | None = None,
+    variant: VariantType | None = None,
 ) -> pd.DataFrame:
-    """Convert bond returns data to long format.
+    """Convert bond data to long format.
 
     Parameters
     ----------
     df : pd.DataFrame
-        DataFrame with bond returns data.
-    id_column : str, default "cusip"
-        Column to use as unique identifier.
-    date_column : str, default "date"
-        Column containing dates.
-    value_column : str, default "bond_ret"
-        Column containing return values.
+        DataFrame with bond data.
+    id_column : str, optional
+        Column to use as unique identifier. Auto-detected if variant provided.
+    date_column : str, optional
+        Column containing dates. Auto-detected if variant provided.
+    value_column : str, optional
+        Column containing values (returns or prices). Auto-detected if variant.
+    variant : {"treasury", "corporate_daily", "corporate_monthly"}, optional
+        Dataset variant for auto-detection of columns. If provided, column
+        parameters are inferred from DATA_INFO.
 
     Returns
     -------
@@ -30,9 +44,33 @@ def to_long_format(
         Long-format DataFrame with columns:
         - unique_id: Bond identifier (e.g., CUSIP)
         - ds: Date
-        - y: Return value
+        - y: Value (return or price)
+
+    Notes
+    -----
+    Column defaults by variant:
+    - treasury: cusip, date, bond_ret
+    - corporate_daily: cusip_id, trd_exctn_dt, pr
+    - corporate_monthly: cusip, date, ret_vw
+
+    Examples
+    --------
+    >>> df = load(data_dir, variant="corporate_monthly")
+    >>> long_df = to_long_format(df, variant="corporate_monthly")
     """
-    # Select relevant columns
+    # Auto-detect columns based on variant
+    if variant and variant in DATA_INFO:
+        info = DATA_INFO[variant]
+        id_column = id_column or info.get("id_column", "cusip")
+        date_column = date_column or info.get("date_column", "date")
+        value_column = value_column or info.get("value_column", "bond_ret")
+    else:
+        # Defaults for backward compatibility
+        id_column = id_column or "cusip"
+        date_column = date_column or "date"
+        value_column = value_column or "bond_ret"
+
+    # Validation
     if id_column not in df.columns:
         raise ValueError(f"Column '{id_column}' not found in DataFrame")
     if date_column not in df.columns:

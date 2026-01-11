@@ -222,6 +222,7 @@ def calc_runness(data: pd.DataFrame) -> pd.DataFrame:
     pd.DataFrame
         Input DataFrame with additional 'run' column.
     """
+
     def _calc_runness(df: pd.DataFrame) -> pd.Series:
         temp = df.sort_values(by=["caldt", "original_maturity", "tdatdt"])
         next_temp = (

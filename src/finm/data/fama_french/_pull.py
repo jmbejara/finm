@@ -1,4 +1,7 @@
-"""Pull functions for Fama-French factor data."""
+"""Pull functions for Fama-French factor data.
+
+Website: https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html
+"""
 
 from __future__ import annotations
 
@@ -10,10 +13,11 @@ from typing import TYPE_CHECKING, Literal
 import pandas as pd
 
 from finm.data.fama_french._constants import (
-    BUNDLED_DATA_DIR,
     BUNDLED_CSV,
+    BUNDLED_DATA_DIR,
     DATASET_DAILY,
     DATASET_MONTHLY,
+    LICENSE_INFO,
 )
 
 if TYPE_CHECKING:
@@ -40,15 +44,35 @@ warnings.filterwarnings("ignore", category=FutureWarning, message=".*date_parser
 FrequencyType = Literal["daily", "monthly"]
 
 
+def _check_license_accepted(accept_license: bool) -> None:
+    """Check if the user has accepted the license terms."""
+    if not accept_license:
+        msg = (
+            f"\n{'='*70}\n"
+            f"DATA LICENSE ACKNOWLEDGMENT REQUIRED\n"
+            f"{'='*70}\n"
+            f"Source: {LICENSE_INFO['terms_url']}\n"
+            f"License: {LICENSE_INFO['license_type']}\n"
+            f"\n{LICENSE_INFO['disclaimer']}\n"
+            f"\nCitation:\n{LICENSE_INFO['citation']}\n"
+            f"\nTo proceed, set accept_license=True\n"
+            f"{'='*70}\n"
+        )
+        raise ValueError(msg)
+
+
 def pull_data(
     data_dir: Path | str,
     start: str | datetime | None = None,
     end: str | datetime | None = None,
     frequency: FrequencyType = "daily",
+    accept_license: bool = False,
 ) -> pd.DataFrame:
     """Download Fama-French factors from Ken French's Data Library.
 
     Requires pandas_datareader to be installed.
+
+    Website: https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html
 
     Parameters
     ----------
@@ -60,6 +84,8 @@ def pull_data(
         End date of the data. Format: 'YYYY-MM-DD'.
     frequency : {"daily", "monthly"}, default "daily"
         Data frequency.
+    accept_license : bool, default False
+        Must be set to True to acknowledge the data provider's terms.
 
     Returns
     -------
@@ -72,11 +98,15 @@ def pull_data(
 
     Raises
     ------
+    ValueError
+        If accept_license is False.
     ImportError
         If pandas_datareader is not installed.
     ValueError
         If frequency is not "daily" or "monthly".
     """
+    _check_license_accepted(accept_license)
+
     if not HAS_DATAREADER or web is None:
         raise ImportError(
             "pandas_datareader is required to pull live Fama-French data. "

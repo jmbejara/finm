@@ -3,10 +3,16 @@
 Provides access to intermediary capital risk factors from
 He, Kelly, and Manela (2017).
 
+Website: https://asaf.manela.org/papers/hkm/intermediarycapitalrisk/
+Paper: https://doi.org/10.1016/j.jfineco.2017.08.002
+
 Standard interface:
-    - pull(data_dir): Download data from source
+    - pull(data_dir, accept_license): Download data from source
     - load(data_dir, variant, format): Load cached data
     - to_long_format(df): Convert to long format
+
+License:
+    Academic (no explicit license). Please cite the paper.
 """
 
 from __future__ import annotations
@@ -16,6 +22,7 @@ from typing import Literal
 
 import pandas as pd
 
+from finm.data.he_kelly_manela._constants import LICENSE_INFO
 from finm.data.he_kelly_manela._load import load_data
 from finm.data.he_kelly_manela._pull import pull_data
 from finm.data.he_kelly_manela._transform import to_long_format
@@ -24,21 +31,30 @@ FormatType = Literal["wide", "long"]
 VariantType = Literal["factors_monthly", "factors_daily", "all"]
 
 
-def pull(data_dir: Path | str) -> None:
+def pull(data_dir: Path | str, accept_license: bool = False) -> None:
     """Download He-Kelly-Manela factors and test portfolios.
 
     Downloads a zip file containing the HKM factors and extracts it.
+
+    Website: https://asaf.manela.org/papers/hkm/intermediarycapitalrisk/
 
     Parameters
     ----------
     data_dir : Path or str
         Directory to save extracted data.
+    accept_license : bool, default False
+        Must be set to True to acknowledge the data provider's terms.
 
     Returns
     -------
     None
+
+    Raises
+    ------
+    ValueError
+        If accept_license is False.
     """
-    return pull_data(data_dir=data_dir)
+    return pull_data(data_dir=data_dir, accept_license=accept_license)
 
 
 def load(

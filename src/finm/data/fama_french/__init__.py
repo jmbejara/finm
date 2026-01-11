@@ -2,10 +2,15 @@
 
 Provides access to Fama-French 3 factors from Ken French's Data Library.
 
+Website: https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html
+
 Standard interface:
-    - pull(data_dir): Download data from source
+    - pull(data_dir, accept_license): Download data from source
     - load(data_dir, format): Load cached or bundled data
     - to_long_format(df): Convert to long format
+
+License:
+    Copyright Fama & French. Please cite the papers when using this data.
 """
 
 from __future__ import annotations
@@ -15,6 +20,7 @@ from typing import TYPE_CHECKING, Literal
 
 import pandas as pd
 
+from finm.data.fama_french._constants import LICENSE_INFO
 from finm.data.fama_french._load import load_data
 from finm.data.fama_french._pull import pull_data
 from finm.data.fama_french._transform import to_long_format
@@ -31,10 +37,13 @@ def pull(
     start: str | datetime | None = None,
     end: str | datetime | None = None,
     frequency: FrequencyType = "daily",
+    accept_license: bool = False,
 ) -> pd.DataFrame:
     """Download Fama-French factors from Ken French's Data Library.
 
     Requires pandas_datareader to be installed.
+
+    Website: https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html
 
     Parameters
     ----------
@@ -46,6 +55,8 @@ def pull(
         End date of the data. Format: 'YYYY-MM-DD'.
     frequency : {"daily", "monthly"}, default "daily"
         Data frequency.
+    accept_license : bool, default False
+        Must be set to True to acknowledge the data provider's terms.
 
     Returns
     -------
@@ -55,12 +66,18 @@ def pull(
         - SMB: Small Minus Big (size factor)
         - HML: High Minus Low (value factor)
         - RF: Risk-free rate
+
+    Raises
+    ------
+    ValueError
+        If accept_license is False.
     """
     return pull_data(
         data_dir=data_dir,
         start=start,
         end=end,
         frequency=frequency,
+        accept_license=accept_license,
     )
 
 
@@ -98,4 +115,4 @@ def load(
     return df
 
 
-__all__ = ["pull", "load", "to_long_format"]
+__all__ = ["pull", "load", "to_long_format", "LICENSE_INFO"]

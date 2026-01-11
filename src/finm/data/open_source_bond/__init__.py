@@ -1,12 +1,24 @@
 """Open Source Bond Asset Pricing data module.
 
-Provides access to treasury and corporate bond returns from
-the Open Bond Asset Pricing project.
+Provides access to treasury and corporate bond data from the Open Bond Asset
+Pricing project.
+
+Website: https://openbondassetpricing.com/
+GitHub: https://github.com/Alexander-M-Dickerson/trace-data-pipeline
+Data Dictionary: https://github.com/Alexander-M-Dickerson/trace-data-pipeline/blob/main/stage2/DATA_DICTIONARY.md
+
+Available datasets:
+    - treasury: Treasury bond returns (daily)
+    - corporate_daily: Corporate bond PRICES from TRACE Stage 1 (~29.8M rows)
+    - corporate_monthly: Corporate bond RETURNS with 108 factor signals (~1.86M rows)
 
 Standard interface:
-    - pull(data_dir, variant): Download data from source
+    - pull(data_dir, variant, accept_license): Download data from source
     - load(data_dir, variant, format): Load cached data
-    - to_long_format(df): Convert to long format
+    - to_long_format(df, variant): Convert to long format
+
+License:
+    MIT License. See LICENSE_INFO for citation requirements.
 """
 
 from __future__ import annotations
@@ -16,6 +28,11 @@ from typing import Literal
 
 import pandas as pd
 
+from finm.data.open_source_bond._constants import (
+    DATA_INFO,
+    DOCUMENTATION,
+    LICENSE_INFO,
+)
 from finm.data.open_source_bond._load import load_data
 from finm.data.open_source_bond._pull import pull_data
 from finm.data.open_source_bond._transform import (
@@ -24,33 +41,61 @@ from finm.data.open_source_bond._transform import (
 )
 
 FormatType = Literal["wide", "long"]
-VariantType = Literal["treasury", "corporate"]
-PullVariantType = Literal["treasury", "corporate", "all"]
+VariantType = Literal["treasury", "corporate_daily", "corporate_monthly"]
+PullVariantType = Literal[
+    "treasury", "corporate_daily", "corporate_monthly", "corporate_all", "all"
+]
 
 
 def pull(
     data_dir: Path | str,
     variant: PullVariantType = "all",
+    accept_license: bool = False,
     download_readme: bool = True,
 ) -> None:
     """Download Open Source Bond data.
+
+    Downloads data from the Open Source Bond Asset Pricing project.
+
+    Website: https://openbondassetpricing.com/
+    Data Dictionary: https://github.com/Alexander-M-Dickerson/trace-data-pipeline/blob/main/stage2/DATA_DICTIONARY.md
 
     Parameters
     ----------
     data_dir : Path or str
         Directory to save downloaded data.
-    variant : {"treasury", "corporate", "all"}, default "all"
-        Which dataset(s) to download.
+    variant : str
+        Which dataset(s) to download. One of:
+        - "treasury": Treasury bond returns (CSV, ~120MB)
+        - "corporate_daily": Daily corporate bond PRICES (~1.8GB ZIP)
+        - "corporate_monthly": Monthly RETURNS with 108 factor signals (~1.2GB)
+        - "corporate_all": Both corporate datasets
+        - "all": All datasets
+    accept_license : bool, default False
+        Must be set to True to acknowledge the data provider's license terms.
+        The data is provided under the MIT License. Citation is required.
     download_readme : bool, default True
-        Whether to also download the README PDF files.
+        Whether to save README files when available.
 
-    Returns
-    -------
-    None
+    Raises
+    ------
+    ValueError
+        If accept_license is False.
+
+    Notes
+    -----
+    - corporate_daily contains PRICES (not returns)
+    - corporate_monthly contains RETURNS (ready to use)
+    - corporate_monthly includes 108 factor signals for asset pricing research
+
+    Citation:
+        Dickerson, A., Robotti, C., & Rossetti, G. (2026).
+        The Corporate Bond Factor Replication Crisis: A New Protocol.
     """
     return pull_data(
         data_dir=data_dir,
         variant=variant,
+        accept_license=accept_license,
         download_readme=download_readme,
     )
 
@@ -66,29 +111,50 @@ def load(
     ----------
     data_dir : Path or str
         Directory containing the parquet files.
-    variant : {"treasury", "corporate"}, default "treasury"
-        Which dataset to load.
+    variant : {"treasury", "corporate_daily", "corporate_monthly"}
+        Which dataset to load:
+        - "treasury": Treasury bond returns
+        - "corporate_daily": Daily corporate bond PRICES (not returns)
+        - "corporate_monthly": Monthly corporate bond RETURNS with factor signals
     format : {"wide", "long"}, default "wide"
         Output format:
-        - "wide": Original format
+        - "wide": Original format with all columns
         - "long": Melted format with [unique_id, ds, y] columns
 
     Returns
     -------
     pd.DataFrame
-        Bond returns data.
+        Bond data.
+
+    Notes
+    -----
+    - treasury and corporate_monthly contain RETURNS
+    - corporate_daily contains PRICES (columns: pr, prc_vw_par, etc.)
+    - corporate_monthly has return column 'ret_vw' (volume-weighted)
+
+    Key columns by variant:
+        treasury: cusip, date, bond_ret
+        corporate_daily: cusip_id, trd_exctn_dt, pr
+        corporate_monthly: cusip, date, ret_vw, rfret, tret, + 108 factor signals
+
+    See Also
+    --------
+    https://openbondassetpricing.com/ : Official website
     """
     df = load_data(data_dir=data_dir, variant=variant)
 
     if format == "long":
-        # Use appropriate columns based on variant
-        if variant == "corporate":
-            df = to_long_format(df, id_column="cusip", value_column="bond_ret")
-        else:
-            # Treasury data may have different column structure
-            df = to_long_format(df)
+        df = to_long_format(df, variant=variant)
 
     return df
 
 
-__all__ = ["pull", "load", "to_long_format", "portfolio_to_long_format"]
+__all__ = [
+    "pull",
+    "load",
+    "to_long_format",
+    "portfolio_to_long_format",
+    "DATA_INFO",
+    "DOCUMENTATION",
+    "LICENSE_INFO",
+]

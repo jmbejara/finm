@@ -29,11 +29,13 @@ from typing import TYPE_CHECKING, Literal
 import pandas as pd
 
 # Import submodules for direct access
-from finm.data import fama_french
-from finm.data import federal_reserve
-from finm.data import he_kelly_manela
-from finm.data import open_source_bond
-from finm.data import wrds
+from finm.data import (
+    fama_french,
+    federal_reserve,
+    he_kelly_manela,
+    open_source_bond,
+    wrds,
+)
 
 if TYPE_CHECKING:
     from datetime import datetime
@@ -133,7 +135,9 @@ def pull_fama_french_factors(
     pd.DataFrame
         Factor data.
     """
-    return fama_french.pull(data_dir=data_dir, start=start, end=end, frequency=frequency)
+    return fama_french.pull(
+        data_dir=data_dir, start=start, end=end, frequency=frequency
+    )
 
 
 def load_fama_french_factors(
@@ -168,15 +172,20 @@ def load_fama_french_factors(
 # ==============================================================================
 
 
-def pull_he_kelly_manela(data_dir: Path | str) -> None:
+def pull_he_kelly_manela(
+    data_dir: Path | str,
+    accept_license: bool = False,
+) -> None:
     """Download He-Kelly-Manela factors.
 
     Parameters
     ----------
     data_dir : Path or str
         Directory to save downloaded data.
+    accept_license : bool, default False
+        Must be set to True to acknowledge the data provider's terms.
     """
-    return he_kelly_manela.pull(data_dir=data_dir)
+    return he_kelly_manela.pull(data_dir=data_dir, accept_license=accept_license)
 
 
 def load_he_kelly_manela_factors_monthly(
@@ -197,7 +206,9 @@ def load_he_kelly_manela_factors_monthly(
     pd.DataFrame
         Monthly factor data.
     """
-    return he_kelly_manela.load(data_dir=data_dir, variant="factors_monthly", format=format)
+    return he_kelly_manela.load(
+        data_dir=data_dir, variant="factors_monthly", format=format
+    )
 
 
 def load_he_kelly_manela_factors_daily(
@@ -218,7 +229,9 @@ def load_he_kelly_manela_factors_daily(
     pd.DataFrame
         Daily factor data.
     """
-    return he_kelly_manela.load(data_dir=data_dir, variant="factors_daily", format=format)
+    return he_kelly_manela.load(
+        data_dir=data_dir, variant="factors_daily", format=format
+    )
 
 
 def load_he_kelly_manela_all(
@@ -249,18 +262,33 @@ def load_he_kelly_manela_all(
 
 def pull_open_source_bond(
     data_dir: Path | str,
-    variant: Literal["treasury", "corporate", "all"] = "all",
+    variant: Literal[
+        "treasury", "corporate_daily", "corporate_monthly", "corporate_all", "all"
+    ] = "all",
+    accept_license: bool = False,
 ) -> None:
     """Download Open Source Bond data.
+
+    Website: https://openbondassetpricing.com/
+    License: MIT License (citation required)
 
     Parameters
     ----------
     data_dir : Path or str
         Directory to save downloaded data.
-    variant : {"treasury", "corporate", "all"}, default "all"
-        Which dataset(s) to download.
+    variant : str, default "all"
+        Which dataset(s) to download:
+        - "treasury": Treasury bond returns
+        - "corporate_daily": Daily corporate bond PRICES
+        - "corporate_monthly": Monthly corporate bond RETURNS with factor signals
+        - "corporate_all": Both corporate datasets
+        - "all": All datasets
+    accept_license : bool, default False
+        Must be True to acknowledge the data provider's license terms.
     """
-    return open_source_bond.pull(data_dir=data_dir, variant=variant)
+    return open_source_bond.pull(
+        data_dir=data_dir, variant=variant, accept_license=accept_license
+    )
 
 
 def load_treasury_returns(
@@ -288,7 +316,10 @@ def load_corporate_bond_returns(
     data_dir: Path | str,
     format: FormatType = "wide",
 ) -> pd.DataFrame:
-    """Load corporate bond returns.
+    """Load corporate bond returns (monthly).
+
+    This loads the monthly corporate bond returns with 108 factor signals.
+    For daily prices, use load_corporate_bond_prices_daily().
 
     Parameters
     ----------
@@ -300,9 +331,69 @@ def load_corporate_bond_returns(
     Returns
     -------
     pd.DataFrame
-        Corporate bond returns.
+        Corporate bond returns (monthly). Key columns:
+        - cusip: Bond identifier
+        - date: Month-end date
+        - ret_vw: Volume-weighted total return
+        - rfret: Risk-free rate
+        - tret: Duration-matched Treasury return
     """
-    return open_source_bond.load(data_dir=data_dir, variant="corporate", format=format)
+    return open_source_bond.load(
+        data_dir=data_dir, variant="corporate_monthly", format=format
+    )
+
+
+def load_corporate_bond_prices_daily(
+    data_dir: Path | str,
+    format: FormatType = "wide",
+) -> pd.DataFrame:
+    """Load daily corporate bond prices (TRACE Stage 1).
+
+    This is PRICE data, not returns. For returns, use load_corporate_bond_returns().
+
+    Parameters
+    ----------
+    data_dir : Path or str
+        Directory containing the data.
+    format : {"wide", "long"}, default "wide"
+        Output format.
+
+    Returns
+    -------
+    pd.DataFrame
+        Daily corporate bond prices. Key columns:
+        - cusip_id: Bond identifier
+        - trd_exctn_dt: Trade execution date
+        - pr: Price
+        - mod_dur: Modified duration
+        - ytm: Yield to maturity
+    """
+    return open_source_bond.load(
+        data_dir=data_dir, variant="corporate_daily", format=format
+    )
+
+
+def load_corporate_bond_returns_monthly(
+    data_dir: Path | str,
+    format: FormatType = "wide",
+) -> pd.DataFrame:
+    """Load monthly corporate bond returns with factor signals.
+
+    Parameters
+    ----------
+    data_dir : Path or str
+        Directory containing the data.
+    format : {"wide", "long"}, default "wide"
+        Output format.
+
+    Returns
+    -------
+    pd.DataFrame
+        Corporate bond returns (monthly) with 108 factor signals.
+    """
+    return open_source_bond.load(
+        data_dir=data_dir, variant="corporate_monthly", format=format
+    )
 
 
 # ==============================================================================
@@ -477,6 +568,8 @@ __all__ = [
     "pull_open_source_bond",
     "load_treasury_returns",
     "load_corporate_bond_returns",
+    "load_corporate_bond_prices_daily",
+    "load_corporate_bond_returns_monthly",
     # WRDS
     "pull_wrds_treasury",
     "load_wrds_treasury",
