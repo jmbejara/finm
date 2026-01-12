@@ -1,0 +1,1097 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>finm.data &#8212; finm Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=55cd40c9" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=61571c06"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'apidocs/finm/finm.data';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="finm.data.fama_french" href="finm.data.fama_french.html" />
+    <link rel="prev" title="finm.analytics.factor_analysis" href="finm.analytics.factor_analysis.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search documentation..."
+         aria-label="Search documentation..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="finm Documentation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="finm Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    finm - Financial Mathematics Python Package
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../data_module.html">Data Module Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">CLI Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../examples/index.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/01_replicate_GSW_yield_curve_ipynb.html">Replicating the Gurkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/02_corp_bond_returns_ipynb.html">Example - Analyzing Corporate Bond Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/03_corp_bond_returns_ftsfr_HKM_ipynb.html">Cleaning Summary: Corporate Bond Returns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/04_data_integration_tests_ipynb.html">Data Module Integration Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/05_factor_regression_example_ipynb.html">Factor Regression Analysis with finm</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../adding_data_sources.html">Adding New Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="finm.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm</span></code></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="finm.analytics.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="finm.analytics.factor_analysis.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics.factor_analysis</span></code></a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 current active has-children"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data</span></code></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="finm.data.fama_french.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.fama_french</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="finm.data.federal_reserve.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.federal_reserve</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="finm.data.he_kelly_manela.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.he_kelly_manela</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="finm.data.open_source_bond.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.open_source_bond</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="finm.data.wrds.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.wrds</span></code></a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="finm.fixedincome.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="finm.fixedincome.bonds.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.bonds</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="finm.fixedincome.calc_corp_bond_returns.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.calc_corp_bond_returns</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="finm.fixedincome.gsw2006_yield_curve.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.gsw2006_yield_curve</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="finm.fixedincome.pricing.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.pricing</span></code></a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/finm" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/finm/issues/new?title=Issue%20on%20page%20%2Fapidocs/finm/finm.data.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/apidocs/finm/finm.data.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>finm.data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subpackages">Subpackages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#package-contents">Package Contents</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api">API</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.FormatType"><code class="docutils literal notranslate"><span class="pre">FormatType</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.calc_treasury_runness"><code class="docutils literal notranslate"><span class="pre">calc_treasury_runness()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_corporate_bond_prices_daily"><code class="docutils literal notranslate"><span class="pre">load_corporate_bond_prices_daily()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_corporate_bond_returns"><code class="docutils literal notranslate"><span class="pre">load_corporate_bond_returns()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_corporate_bond_returns_monthly"><code class="docutils literal notranslate"><span class="pre">load_corporate_bond_returns_monthly()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_fama_french_factors"><code class="docutils literal notranslate"><span class="pre">load_fama_french_factors()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_fed_yield_curve"><code class="docutils literal notranslate"><span class="pre">load_fed_yield_curve()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_fed_yield_curve_all"><code class="docutils literal notranslate"><span class="pre">load_fed_yield_curve_all()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_he_kelly_manela_all"><code class="docutils literal notranslate"><span class="pre">load_he_kelly_manela_all()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_he_kelly_manela_factors_daily"><code class="docutils literal notranslate"><span class="pre">load_he_kelly_manela_factors_daily()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_he_kelly_manela_factors_monthly"><code class="docutils literal notranslate"><span class="pre">load_he_kelly_manela_factors_monthly()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_treasury_returns"><code class="docutils literal notranslate"><span class="pre">load_treasury_returns()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_wrds_corp_bond"><code class="docutils literal notranslate"><span class="pre">load_wrds_corp_bond()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_wrds_treasury"><code class="docutils literal notranslate"><span class="pre">load_wrds_treasury()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.pull_fama_french_factors"><code class="docutils literal notranslate"><span class="pre">pull_fama_french_factors()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.pull_fed_yield_curve"><code class="docutils literal notranslate"><span class="pre">pull_fed_yield_curve()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.pull_he_kelly_manela"><code class="docutils literal notranslate"><span class="pre">pull_he_kelly_manela()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.pull_open_source_bond"><code class="docutils literal notranslate"><span class="pre">pull_open_source_bond()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.pull_wrds_corp_bond"><code class="docutils literal notranslate"><span class="pre">pull_wrds_corp_bond()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.pull_wrds_treasury"><code class="docutils literal notranslate"><span class="pre">pull_wrds_treasury()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="module-finm.data">
+<span id="finm-data"></span><h1><a class="reference internal" href="#module-finm.data" title="finm.data"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data</span></code></a><a class="headerlink" href="#module-finm.data" title="Link to this heading">#</a></h1>
+<p>Data module.</p>
+<p>This module provides functions for pulling, loading, and transforming financial
+data from various sources. All load functions return polars DataFrames by default.</p>
+<p>Submodules:
+- federal_reserve: Federal Reserve yield curve data (GSW model)
+- fama_french: Fama-French 3 factors
+- he_kelly_manela: He-Kelly-Manela intermediary capital factors
+- open_source_bond: Open Source Bond Asset Pricing data
+- wrds: WRDS CRSP Treasury and corporate bond data</p>
+<p>Each submodule follows a standard interface:
+- pull(data_dir, …): Download data from source
+- load(data_dir, variant, format, pull_if_not_found, lazy): Load cached data (returns polars)
+- to_long_format(df): Convert to long format [unique_id, ds, y]</p>
+<p>Example usage:
+from finm.data import federal_reserve</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Load with auto-pull if data doesn&#39;t exist
+df = federal_reserve.load(
+    data_dir=&quot;./data&quot;,
+    pull_if_not_found=True,
+    accept_license=True,
+)
+
+# Get a LazyFrame for deferred computation
+lf = federal_reserve.load(data_dir=&quot;./data&quot;, lazy=True)
+</pre></div>
+</div>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="finm.data.fama_french.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.fama_french</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="finm.data.federal_reserve.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.federal_reserve</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="finm.data.he_kelly_manela.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.he_kelly_manela</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="finm.data.open_source_bond.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.open_source_bond</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="finm.data.wrds.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.wrds</span></code></a></li>
+</ul>
+</div>
+</section>
+<section id="package-contents">
+<h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading">#</a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table table-left">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#finm.data.calc_treasury_runness" title="finm.data.calc_treasury_runness"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc_treasury_runness</span></code></a></p></td>
+<td><p>Calculate on-the-run/off-the-run status for Treasury securities.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#finm.data.load_corporate_bond_prices_daily" title="finm.data.load_corporate_bond_prices_daily"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_corporate_bond_prices_daily</span></code></a></p></td>
+<td><p>Load daily corporate bond prices (TRACE Stage 1).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#finm.data.load_corporate_bond_returns" title="finm.data.load_corporate_bond_returns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_corporate_bond_returns</span></code></a></p></td>
+<td><p>Load corporate bond returns (monthly).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#finm.data.load_corporate_bond_returns_monthly" title="finm.data.load_corporate_bond_returns_monthly"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_corporate_bond_returns_monthly</span></code></a></p></td>
+<td><p>Load monthly corporate bond returns with factor signals.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#finm.data.load_fama_french_factors" title="finm.data.load_fama_french_factors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_fama_french_factors</span></code></a></p></td>
+<td><p>Load Fama-French factors from bundled or cached data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#finm.data.load_fed_yield_curve" title="finm.data.load_fed_yield_curve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_fed_yield_curve</span></code></a></p></td>
+<td><p>Load Federal Reserve yield curve data (SVENY01-30).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#finm.data.load_fed_yield_curve_all" title="finm.data.load_fed_yield_curve_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_fed_yield_curve_all</span></code></a></p></td>
+<td><p>Load full Federal Reserve yield curve data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#finm.data.load_he_kelly_manela_all" title="finm.data.load_he_kelly_manela_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_he_kelly_manela_all</span></code></a></p></td>
+<td><p>Load He-Kelly-Manela factors and test assets.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#finm.data.load_he_kelly_manela_factors_daily" title="finm.data.load_he_kelly_manela_factors_daily"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_he_kelly_manela_factors_daily</span></code></a></p></td>
+<td><p>Load He-Kelly-Manela daily factors.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#finm.data.load_he_kelly_manela_factors_monthly" title="finm.data.load_he_kelly_manela_factors_monthly"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_he_kelly_manela_factors_monthly</span></code></a></p></td>
+<td><p>Load He-Kelly-Manela monthly factors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#finm.data.load_treasury_returns" title="finm.data.load_treasury_returns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_treasury_returns</span></code></a></p></td>
+<td><p>Load treasury bond returns.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#finm.data.load_wrds_corp_bond" title="finm.data.load_wrds_corp_bond"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_wrds_corp_bond</span></code></a></p></td>
+<td><p>Load corporate bond data from local cache.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#finm.data.load_wrds_treasury" title="finm.data.load_wrds_treasury"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_wrds_treasury</span></code></a></p></td>
+<td><p>Load CRSP Treasury data from local cache.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#finm.data.pull_fama_french_factors" title="finm.data.pull_fama_french_factors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pull_fama_french_factors</span></code></a></p></td>
+<td><p>Download Fama-French factors from Ken French’s Data Library.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#finm.data.pull_fed_yield_curve" title="finm.data.pull_fed_yield_curve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pull_fed_yield_curve</span></code></a></p></td>
+<td><p>Download Federal Reserve yield curve data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#finm.data.pull_he_kelly_manela" title="finm.data.pull_he_kelly_manela"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pull_he_kelly_manela</span></code></a></p></td>
+<td><p>Download He-Kelly-Manela factors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#finm.data.pull_open_source_bond" title="finm.data.pull_open_source_bond"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pull_open_source_bond</span></code></a></p></td>
+<td><p>Download Open Source Bond data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#finm.data.pull_wrds_corp_bond" title="finm.data.pull_wrds_corp_bond"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pull_wrds_corp_bond</span></code></a></p></td>
+<td><p>Pull corporate bond data from WRDS.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#finm.data.pull_wrds_treasury" title="finm.data.pull_wrds_treasury"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pull_wrds_treasury</span></code></a></p></td>
+<td><p>Pull CRSP Treasury data from WRDS.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="data">
+<h3>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table table-left">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#finm.data.FormatType" title="finm.data.FormatType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormatType</span></code></a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="api">
+<h3>API<a class="headerlink" href="#api" title="Link to this heading">#</a></h3>
+<dl class="py data">
+<dt class="sig sig-object py" id="finm.data.FormatType">
+<span class="sig-prename descclassname"><span class="pre">finm.data.</span></span><span class="sig-name descname"><span class="pre">FormatType</span></span><a class="headerlink" href="#finm.data.FormatType" title="Link to this definition">#</a></dt>
+<dd><p>None</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.data.calc_treasury_runness">
+<span class="sig-prename descclassname"><span class="pre">finm.data.</span></span><span class="sig-name descname"><span class="pre">calc_treasury_runness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.3.3)"><span class="pre">pandas.DataFrame</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.3.3)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="reference internal" href="../../_modules/finm/data.html#calc_treasury_runness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.data.calc_treasury_runness" title="Link to this definition">#</a></dt>
+<dd><p>Calculate on-the-run/off-the-run status for Treasury securities.</p>
+<h2 class="rubric" id="id35">Parameters</h2>
+<p>data : pd.DataFrame
+DataFrame with Treasury data.</p>
+<h2 class="rubric" id="id36">Returns</h2>
+<p>pd.DataFrame
+Data with ‘run’ column added.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.data.load_corporate_bond_prices_daily">
+<span class="sig-prename descclassname"><span class="pre">finm.data.</span></span><span class="sig-name descname"><span class="pre">load_corporate_bond_prices_daily</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">pathlib.Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">finm.data.FormatType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'wide'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pull_if_not_found</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accept_license</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.14)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><span class="pre">polars.DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">polars.LazyFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/finm/data.html#load_corporate_bond_prices_daily"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.data.load_corporate_bond_prices_daily" title="Link to this definition">#</a></dt>
+<dd><p>Load daily corporate bond prices (TRACE Stage 1).</p>
+<p>This is PRICE data, not returns. For returns, use load_corporate_bond_returns().</p>
+<h2 class="rubric" id="id37">Parameters</h2>
+<p>data_dir : Path or str
+Directory containing the data.
+format : {“wide”, “long”}, default “wide”
+Output format.
+pull_if_not_found : bool, default False
+If True and data doesn’t exist locally, pull from source.
+accept_license : bool, default False
+Must be True when pull_if_not_found=True.
+lazy : bool, default False
+If True, return a polars LazyFrame instead of DataFrame.</p>
+<h2 class="rubric" id="id38">Returns</h2>
+<p>pl.DataFrame or pl.LazyFrame
+Daily corporate bond prices. Key columns:
+- cusip_id: Bond identifier
+- trd_exctn_dt: Trade execution date
+- pr: Price
+- mod_dur: Modified duration
+- ytm: Yield to maturity</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.data.load_corporate_bond_returns">
+<span class="sig-prename descclassname"><span class="pre">finm.data.</span></span><span class="sig-name descname"><span class="pre">load_corporate_bond_returns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">pathlib.Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">finm.data.FormatType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'wide'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pull_if_not_found</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accept_license</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.14)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><span class="pre">polars.DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">polars.LazyFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/finm/data.html#load_corporate_bond_returns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.data.load_corporate_bond_returns" title="Link to this definition">#</a></dt>
+<dd><p>Load corporate bond returns (monthly).</p>
+<p>This loads the monthly corporate bond returns with 108 factor signals.
+For daily prices, use load_corporate_bond_prices_daily().</p>
+<h2 class="rubric" id="id39">Parameters</h2>
+<p>data_dir : Path or str
+Directory containing the data.
+format : {“wide”, “long”}, default “wide”
+Output format.
+pull_if_not_found : bool, default False
+If True and data doesn’t exist locally, pull from source.
+accept_license : bool, default False
+Must be True when pull_if_not_found=True.
+lazy : bool, default False
+If True, return a polars LazyFrame instead of DataFrame.</p>
+<h2 class="rubric" id="id40">Returns</h2>
+<p>pl.DataFrame or pl.LazyFrame
+Corporate bond returns (monthly). Key columns:
+- cusip: Bond identifier
+- date: Month-end date
+- ret_vw: Volume-weighted total return
+- rfret: Risk-free rate
+- tret: Duration-matched Treasury return</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.data.load_corporate_bond_returns_monthly">
+<span class="sig-prename descclassname"><span class="pre">finm.data.</span></span><span class="sig-name descname"><span class="pre">load_corporate_bond_returns_monthly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">pathlib.Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">finm.data.FormatType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'wide'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pull_if_not_found</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accept_license</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.14)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><span class="pre">polars.DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">polars.LazyFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/finm/data.html#load_corporate_bond_returns_monthly"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.data.load_corporate_bond_returns_monthly" title="Link to this definition">#</a></dt>
+<dd><p>Load monthly corporate bond returns with factor signals.</p>
+<h2 class="rubric" id="id41">Parameters</h2>
+<p>data_dir : Path or str
+Directory containing the data.
+format : {“wide”, “long”}, default “wide”
+Output format.
+pull_if_not_found : bool, default False
+If True and data doesn’t exist locally, pull from source.
+accept_license : bool, default False
+Must be True when pull_if_not_found=True.
+lazy : bool, default False
+If True, return a polars LazyFrame instead of DataFrame.</p>
+<h2 class="rubric" id="id42">Returns</h2>
+<p>pl.DataFrame or pl.LazyFrame
+Corporate bond returns (monthly) with 108 factor signals.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.data.load_fama_french_factors">
+<span class="sig-prename descclassname"><span class="pre">finm.data.</span></span><span class="sig-name descname"><span class="pre">load_fama_french_factors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">pathlib.Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.14)"><span class="pre">datetime.datetime</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.14)"><span class="pre">datetime.datetime</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">finm.data.FormatType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'wide'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="pre">daily</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">monthly</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'daily'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pull_if_not_found</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accept_license</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.14)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><span class="pre">polars.DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">polars.LazyFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/finm/data.html#load_fama_french_factors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.data.load_fama_french_factors" title="Link to this definition">#</a></dt>
+<dd><p>Load Fama-French factors from bundled or cached data.</p>
+<h2 class="rubric" id="id43">Parameters</h2>
+<p>data_dir : Path or str, optional
+Directory containing the data. If None, loads bundled data.
+start : str or datetime, optional
+Start date to filter.
+end : str or datetime, optional
+End date to filter.
+format : {“wide”, “long”}, default “wide”
+Output format.
+frequency : {“daily”, “monthly”}, default “daily”
+Data frequency to pull if pull_if_not_found=True.
+pull_if_not_found : bool, default False
+If True and data doesn’t exist locally, pull from source.
+accept_license : bool, default False
+Must be True when pull_if_not_found=True.
+lazy : bool, default False
+If True, return a polars LazyFrame instead of DataFrame.</p>
+<h2 class="rubric" id="id44">Returns</h2>
+<p>pl.DataFrame or pl.LazyFrame
+Factor data.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.data.load_fed_yield_curve">
+<span class="sig-prename descclassname"><span class="pre">finm.data.</span></span><span class="sig-name descname"><span class="pre">load_fed_yield_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">pathlib.Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">finm.data.FormatType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'wide'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pull_if_not_found</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accept_license</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.14)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><span class="pre">polars.DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">polars.LazyFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/finm/data.html#load_fed_yield_curve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.data.load_fed_yield_curve" title="Link to this definition">#</a></dt>
+<dd><p>Load Federal Reserve yield curve data (SVENY01-30).</p>
+<h2 class="rubric" id="id45">Parameters</h2>
+<p>data_dir : Path or str
+Directory containing the parquet files.
+format : {“wide”, “long”}, default “wide”
+Output format.
+pull_if_not_found : bool, default False
+If True and data doesn’t exist locally, pull from source.
+accept_license : bool, default False
+Must be True when pull_if_not_found=True.
+lazy : bool, default False
+If True, return a polars LazyFrame instead of DataFrame.</p>
+<h2 class="rubric" id="id46">Returns</h2>
+<p>pl.DataFrame or pl.LazyFrame
+Yield curve data.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.data.load_fed_yield_curve_all">
+<span class="sig-prename descclassname"><span class="pre">finm.data.</span></span><span class="sig-name descname"><span class="pre">load_fed_yield_curve_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">pathlib.Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">finm.data.FormatType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'wide'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pull_if_not_found</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accept_license</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.14)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><span class="pre">polars.DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">polars.LazyFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/finm/data.html#load_fed_yield_curve_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.data.load_fed_yield_curve_all" title="Link to this definition">#</a></dt>
+<dd><p>Load full Federal Reserve yield curve data.</p>
+<h2 class="rubric" id="id47">Parameters</h2>
+<p>data_dir : Path or str
+Directory containing the parquet files.
+format : {“wide”, “long”}, default “wide”
+Output format.
+pull_if_not_found : bool, default False
+If True and data doesn’t exist locally, pull from source.
+accept_license : bool, default False
+Must be True when pull_if_not_found=True.
+lazy : bool, default False
+If True, return a polars LazyFrame instead of DataFrame.</p>
+<h2 class="rubric" id="id48">Returns</h2>
+<p>pl.DataFrame or pl.LazyFrame
+Full yield curve data.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.data.load_he_kelly_manela_all">
+<span class="sig-prename descclassname"><span class="pre">finm.data.</span></span><span class="sig-name descname"><span class="pre">load_he_kelly_manela_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">pathlib.Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">finm.data.FormatType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'wide'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pull_if_not_found</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accept_license</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.14)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><span class="pre">polars.DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">polars.LazyFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/finm/data.html#load_he_kelly_manela_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.data.load_he_kelly_manela_all" title="Link to this definition">#</a></dt>
+<dd><p>Load He-Kelly-Manela factors and test assets.</p>
+<h2 class="rubric" id="id49">Parameters</h2>
+<p>data_dir : Path or str
+Directory containing the data.
+format : {“wide”, “long”}, default “wide”
+Output format.
+pull_if_not_found : bool, default False
+If True and data doesn’t exist locally, pull from source.
+accept_license : bool, default False
+Must be True when pull_if_not_found=True.
+lazy : bool, default False
+If True, return a polars LazyFrame instead of DataFrame.</p>
+<h2 class="rubric" id="id50">Returns</h2>
+<p>pl.DataFrame or pl.LazyFrame
+Factors and test assets data.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.data.load_he_kelly_manela_factors_daily">
+<span class="sig-prename descclassname"><span class="pre">finm.data.</span></span><span class="sig-name descname"><span class="pre">load_he_kelly_manela_factors_daily</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">pathlib.Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">finm.data.FormatType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'wide'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pull_if_not_found</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accept_license</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.14)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><span class="pre">polars.DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">polars.LazyFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/finm/data.html#load_he_kelly_manela_factors_daily"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.data.load_he_kelly_manela_factors_daily" title="Link to this definition">#</a></dt>
+<dd><p>Load He-Kelly-Manela daily factors.</p>
+<h2 class="rubric" id="id51">Parameters</h2>
+<p>data_dir : Path or str
+Directory containing the data.
+format : {“wide”, “long”}, default “wide”
+Output format.
+pull_if_not_found : bool, default False
+If True and data doesn’t exist locally, pull from source.
+accept_license : bool, default False
+Must be True when pull_if_not_found=True.
+lazy : bool, default False
+If True, return a polars LazyFrame instead of DataFrame.</p>
+<h2 class="rubric" id="id52">Returns</h2>
+<p>pl.DataFrame or pl.LazyFrame
+Daily factor data.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.data.load_he_kelly_manela_factors_monthly">
+<span class="sig-prename descclassname"><span class="pre">finm.data.</span></span><span class="sig-name descname"><span class="pre">load_he_kelly_manela_factors_monthly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">pathlib.Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">finm.data.FormatType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'wide'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pull_if_not_found</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accept_license</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.14)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><span class="pre">polars.DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">polars.LazyFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/finm/data.html#load_he_kelly_manela_factors_monthly"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.data.load_he_kelly_manela_factors_monthly" title="Link to this definition">#</a></dt>
+<dd><p>Load He-Kelly-Manela monthly factors.</p>
+<h2 class="rubric" id="id53">Parameters</h2>
+<p>data_dir : Path or str
+Directory containing the data.
+format : {“wide”, “long”}, default “wide”
+Output format.
+pull_if_not_found : bool, default False
+If True and data doesn’t exist locally, pull from source.
+accept_license : bool, default False
+Must be True when pull_if_not_found=True.
+lazy : bool, default False
+If True, return a polars LazyFrame instead of DataFrame.</p>
+<h2 class="rubric" id="id54">Returns</h2>
+<p>pl.DataFrame or pl.LazyFrame
+Monthly factor data.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.data.load_treasury_returns">
+<span class="sig-prename descclassname"><span class="pre">finm.data.</span></span><span class="sig-name descname"><span class="pre">load_treasury_returns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">pathlib.Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">finm.data.FormatType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'wide'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pull_if_not_found</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accept_license</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.14)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><span class="pre">polars.DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">polars.LazyFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/finm/data.html#load_treasury_returns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.data.load_treasury_returns" title="Link to this definition">#</a></dt>
+<dd><p>Load treasury bond returns.</p>
+<h2 class="rubric" id="id55">Parameters</h2>
+<p>data_dir : Path or str
+Directory containing the data.
+format : {“wide”, “long”}, default “wide”
+Output format.
+pull_if_not_found : bool, default False
+If True and data doesn’t exist locally, pull from source.
+accept_license : bool, default False
+Must be True when pull_if_not_found=True.
+lazy : bool, default False
+If True, return a polars LazyFrame instead of DataFrame.</p>
+<h2 class="rubric" id="id56">Returns</h2>
+<p>pl.DataFrame or pl.LazyFrame
+Treasury bond returns.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.data.load_wrds_corp_bond">
+<span class="sig-prename descclassname"><span class="pre">finm.data.</span></span><span class="sig-name descname"><span class="pre">load_wrds_corp_bond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">pathlib.Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">finm.data.FormatType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'wide'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pull_if_not_found</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wrds_username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.14)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><span class="pre">polars.DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">polars.LazyFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/finm/data.html#load_wrds_corp_bond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.data.load_wrds_corp_bond" title="Link to this definition">#</a></dt>
+<dd><p>Load corporate bond data from local cache.</p>
+<h2 class="rubric" id="id57">Parameters</h2>
+<p>data_dir : Path or str
+Directory containing the parquet file.
+format : {“wide”, “long”}, default “wide”
+Output format.
+pull_if_not_found : bool, default False
+If True and data doesn’t exist locally, pull from WRDS.
+wrds_username : str, optional
+WRDS username. Required when pull_if_not_found=True.
+start_date : str, optional
+Start date (‘YYYY-MM-DD’). Required when pull_if_not_found=True.
+end_date : str, optional
+End date (‘YYYY-MM-DD’). Required when pull_if_not_found=True.
+lazy : bool, default False
+If True, return a polars LazyFrame instead of DataFrame.</p>
+<h2 class="rubric" id="id58">Returns</h2>
+<p>pl.DataFrame or pl.LazyFrame
+Corporate bond data.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.data.load_wrds_treasury">
+<span class="sig-prename descclassname"><span class="pre">finm.data.</span></span><span class="sig-name descname"><span class="pre">load_wrds_treasury</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">pathlib.Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">variant</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="pre">daily</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">info</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">consolidated</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'consolidated'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_runness</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">finm.data.FormatType</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'wide'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pull_if_not_found</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wrds_username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lazy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.14)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><span class="pre">polars.DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">polars.LazyFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/finm/data.html#load_wrds_treasury"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.data.load_wrds_treasury" title="Link to this definition">#</a></dt>
+<dd><p>Load CRSP Treasury data from local cache.</p>
+<h2 class="rubric" id="id59">Parameters</h2>
+<p>data_dir : Path or str
+Directory containing the parquet files.
+variant : {“daily”, “info”, “consolidated”}, default “consolidated”
+Which data variant to load.
+with_runness : bool, default True
+For consolidated variant, whether to load version with runness.
+format : {“wide”, “long”}, default “wide”
+Output format.
+pull_if_not_found : bool, default False
+If True and data doesn’t exist locally, pull from WRDS.
+wrds_username : str, optional
+WRDS username. Required when pull_if_not_found=True.
+start_date : str, optional
+Start date (‘YYYY-MM-DD’). Required when pull_if_not_found=True.
+end_date : str, optional
+End date (‘YYYY-MM-DD’). Required when pull_if_not_found=True.
+lazy : bool, default False
+If True, return a polars LazyFrame instead of DataFrame.</p>
+<h2 class="rubric" id="id60">Returns</h2>
+<p>pl.DataFrame or pl.LazyFrame
+Treasury data.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.data.pull_fama_french_factors">
+<span class="sig-prename descclassname"><span class="pre">finm.data.</span></span><span class="sig-name descname"><span class="pre">pull_fama_french_factors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">pathlib.Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.14)"><span class="pre">datetime.datetime</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.14)"><span class="pre">datetime.datetime</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="pre">daily</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">monthly</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'daily'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.3.3)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="reference internal" href="../../_modules/finm/data.html#pull_fama_french_factors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.data.pull_fama_french_factors" title="Link to this definition">#</a></dt>
+<dd><p>Download Fama-French factors from Ken French’s Data Library.</p>
+<h2 class="rubric" id="id61">Parameters</h2>
+<p>data_dir : Path or str
+Directory to save downloaded data.
+start : str or datetime, optional
+Start date.
+end : str or datetime, optional
+End date.
+frequency : {“daily”, “monthly”}, default “daily”
+Data frequency.</p>
+<h2 class="rubric" id="id62">Returns</h2>
+<p>pd.DataFrame
+Factor data.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.data.pull_fed_yield_curve">
+<span class="sig-prename descclassname"><span class="pre">finm.data.</span></span><span class="sig-name descname"><span class="pre">pull_fed_yield_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">pathlib.Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.3.3)"><span class="pre">pandas.DataFrame</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.3.3)"><span class="pre">pandas.DataFrame</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/finm/data.html#pull_fed_yield_curve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.data.pull_fed_yield_curve" title="Link to this definition">#</a></dt>
+<dd><p>Download Federal Reserve yield curve data.</p>
+<h2 class="rubric" id="id63">Parameters</h2>
+<p>data_dir : Path or str
+Directory to save downloaded data.</p>
+<h2 class="rubric" id="id64">Returns</h2>
+<p>tuple[pd.DataFrame, pd.DataFrame]
+(df_all, df_standard) - Full dataset and filtered dataset.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.data.pull_he_kelly_manela">
+<span class="sig-prename descclassname"><span class="pre">finm.data.</span></span><span class="sig-name descname"><span class="pre">pull_he_kelly_manela</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">pathlib.Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">accept_license</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../_modules/finm/data.html#pull_he_kelly_manela"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.data.pull_he_kelly_manela" title="Link to this definition">#</a></dt>
+<dd><p>Download He-Kelly-Manela factors.</p>
+<h2 class="rubric" id="id65">Parameters</h2>
+<p>data_dir : Path or str
+Directory to save downloaded data.
+accept_license : bool, default False
+Must be set to True to acknowledge the data provider’s terms.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.data.pull_open_source_bond">
+<span class="sig-prename descclassname"><span class="pre">finm.data.</span></span><span class="sig-name descname"><span class="pre">pull_open_source_bond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">pathlib.Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">variant</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="pre">treasury</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">corporate_daily</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">corporate_monthly</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">corporate_all</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">all</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accept_license</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../_modules/finm/data.html#pull_open_source_bond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.data.pull_open_source_bond" title="Link to this definition">#</a></dt>
+<dd><p>Download Open Source Bond data.</p>
+<p>Website: <a class="reference external" href="https://openbondassetpricing.com/">https://openbondassetpricing.com/</a>
+License: MIT License (citation required)</p>
+<h2 class="rubric" id="id66">Parameters</h2>
+<p>data_dir : Path or str
+Directory to save downloaded data.
+variant : str, default “all”
+Which dataset(s) to download:
+- “treasury”: Treasury bond returns
+- “corporate_daily”: Daily corporate bond PRICES
+- “corporate_monthly”: Monthly corporate bond RETURNS with factor signals
+- “corporate_all”: Both corporate datasets
+- “all”: All datasets
+accept_license : bool, default False
+Must be True to acknowledge the data provider’s license terms.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.data.pull_wrds_corp_bond">
+<span class="sig-prename descclassname"><span class="pre">finm.data.</span></span><span class="sig-name descname"><span class="pre">pull_wrds_corp_bond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">pathlib.Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">wrds_username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.3.3)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="reference internal" href="../../_modules/finm/data.html#pull_wrds_corp_bond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.data.pull_wrds_corp_bond" title="Link to this definition">#</a></dt>
+<dd><p>Pull corporate bond data from WRDS.</p>
+<h2 class="rubric" id="id67">Parameters</h2>
+<p>data_dir : Path or str
+Directory to save the data.
+wrds_username : str
+WRDS username.
+start_date : str
+Start date in ‘YYYY-MM-DD’ format.
+end_date : str
+End date in ‘YYYY-MM-DD’ format.</p>
+<h2 class="rubric" id="id68">Returns</h2>
+<p>pd.DataFrame
+Corporate bond data.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.data.pull_wrds_treasury">
+<span class="sig-prename descclassname"><span class="pre">finm.data.</span></span><span class="sig-name descname"><span class="pre">pull_wrds_treasury</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">pathlib.Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">wrds_username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">variant</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="pre">daily</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">info</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">consolidated</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'consolidated'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_runness</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.3.3)"><span class="pre">pandas.DataFrame</span></a></span></span><a class="reference internal" href="../../_modules/finm/data.html#pull_wrds_treasury"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.data.pull_wrds_treasury" title="Link to this definition">#</a></dt>
+<dd><p>Pull CRSP Treasury data from WRDS.</p>
+<h2 class="rubric" id="id69">Parameters</h2>
+<p>data_dir : Path or str
+Directory to save the data.
+wrds_username : str
+WRDS username.
+start_date : str
+Start date in ‘YYYY-MM-DD’ format.
+end_date : str
+End date in ‘YYYY-MM-DD’ format.
+variant : {“daily”, “info”, “consolidated”}, default “consolidated”
+Which data variant to pull.
+with_runness : bool, default True
+Whether to calculate runness for consolidated data.</p>
+<h2 class="rubric" id="id70">Returns</h2>
+<p>pd.DataFrame
+Treasury data.</p>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="finm.analytics.factor_analysis.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics.factor_analysis</span></code></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="finm.data.fama_french.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.fama_french</span></code></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subpackages">Subpackages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#package-contents">Package Contents</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api">API</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.FormatType"><code class="docutils literal notranslate"><span class="pre">FormatType</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.calc_treasury_runness"><code class="docutils literal notranslate"><span class="pre">calc_treasury_runness()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_corporate_bond_prices_daily"><code class="docutils literal notranslate"><span class="pre">load_corporate_bond_prices_daily()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_corporate_bond_returns"><code class="docutils literal notranslate"><span class="pre">load_corporate_bond_returns()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_corporate_bond_returns_monthly"><code class="docutils literal notranslate"><span class="pre">load_corporate_bond_returns_monthly()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_fama_french_factors"><code class="docutils literal notranslate"><span class="pre">load_fama_french_factors()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_fed_yield_curve"><code class="docutils literal notranslate"><span class="pre">load_fed_yield_curve()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_fed_yield_curve_all"><code class="docutils literal notranslate"><span class="pre">load_fed_yield_curve_all()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_he_kelly_manela_all"><code class="docutils literal notranslate"><span class="pre">load_he_kelly_manela_all()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_he_kelly_manela_factors_daily"><code class="docutils literal notranslate"><span class="pre">load_he_kelly_manela_factors_daily()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_he_kelly_manela_factors_monthly"><code class="docutils literal notranslate"><span class="pre">load_he_kelly_manela_factors_monthly()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_treasury_returns"><code class="docutils literal notranslate"><span class="pre">load_treasury_returns()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_wrds_corp_bond"><code class="docutils literal notranslate"><span class="pre">load_wrds_corp_bond()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.load_wrds_treasury"><code class="docutils literal notranslate"><span class="pre">load_wrds_treasury()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.pull_fama_french_factors"><code class="docutils literal notranslate"><span class="pre">pull_fama_french_factors()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.pull_fed_yield_curve"><code class="docutils literal notranslate"><span class="pre">pull_fed_yield_curve()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.pull_he_kelly_manela"><code class="docutils literal notranslate"><span class="pre">pull_he_kelly_manela()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.pull_open_source_bond"><code class="docutils literal notranslate"><span class="pre">pull_open_source_bond()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.pull_wrds_corp_bond"><code class="docutils literal notranslate"><span class="pre">pull_wrds_corp_bond()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.data.pull_wrds_treasury"><code class="docutils literal notranslate"><span class="pre">pull_wrds_treasury()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,796 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>finm.data.open_source_bond._pull &#8212; finm Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=55cd40c9" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../_static/documentation_options.js?v=61571c06"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/finm/data/open_source_bond/_pull';</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search documentation..."
+         aria-label="Search documentation..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/logo.png" class="logo__image only-light" alt="finm Documentation - Home"/>
+    <script>document.write(`<img src="../../../../_static/logo.png" class="logo__image only-dark" alt="finm Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../../index.html">
+                    finm - Financial Mathematics Python Package
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../data_module.html">Data Module Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../cli.html">CLI Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../examples/index.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/01_replicate_GSW_yield_curve_ipynb.html">Replicating the Gurkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/02_corp_bond_returns_ipynb.html">Example - Analyzing Corporate Bond Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/03_corp_bond_returns_ftsfr_HKM_ipynb.html">Cleaning Summary: Corporate Bond Returns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/04_data_integration_tests_ipynb.html">Data Module Integration Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../examples/05_factor_regression_example_ipynb.html">Factor Regression Analysis with finm</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../adding_data_sources.html">Adding New Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../development.html">Development Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../apidocs/index.html">API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../apidocs/finm/finm.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../apidocs/finm/finm.analytics.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../apidocs/finm/finm.analytics.factor_analysis.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics.factor_analysis</span></code></a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../apidocs/finm/finm.data.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../apidocs/finm/finm.data.fama_french.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.fama_french</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../apidocs/finm/finm.data.federal_reserve.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.federal_reserve</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../apidocs/finm/finm.data.he_kelly_manela.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.he_kelly_manela</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../apidocs/finm/finm.data.open_source_bond.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.open_source_bond</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../apidocs/finm/finm.data.wrds.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.wrds</span></code></a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../apidocs/finm/finm.fixedincome.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../apidocs/finm/finm.fixedincome.bonds.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.bonds</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../apidocs/finm/finm.fixedincome.calc_corp_bond_returns.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.calc_corp_bond_returns</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../apidocs/finm/finm.fixedincome.gsw2006_yield_curve.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.gsw2006_yield_curve</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../apidocs/finm/finm.fixedincome.pricing.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.pricing</span></code></a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/finm" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/finm/issues/new?title=Issue%20on%20page%20%2F_modules/finm/data/open_source_bond/_pull.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for finm.data.open_source_bond._pull</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Pull functions for Open Source Bond data.</span>
+
+<span class="sd">Downloads data from the Open Source Bond Asset Pricing project.</span>
+
+<span class="sd">Website: https://openbondassetpricing.com/</span>
+<span class="sd">GitHub: https://github.com/Alexander-M-Dickerson/trace-data-pipeline</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Literal</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="kn">from</span> <span class="nn">finm.data.open_source_bond._constants</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DATA_INFO</span><span class="p">,</span>
+    <span class="n">LICENSE_INFO</span><span class="p">,</span>
+    <span class="n">MIN_N_ROWS_EXPECTED</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">VariantType</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;treasury&quot;</span><span class="p">,</span> <span class="s2">&quot;corporate_daily&quot;</span><span class="p">,</span> <span class="s2">&quot;corporate_monthly&quot;</span><span class="p">]</span>
+<span class="n">PullVariantType</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span>
+    <span class="s2">&quot;treasury&quot;</span><span class="p">,</span> <span class="s2">&quot;corporate_daily&quot;</span><span class="p">,</span> <span class="s2">&quot;corporate_monthly&quot;</span><span class="p">,</span> <span class="s2">&quot;corporate_all&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span>
+<span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_check_license_accepted</span><span class="p">(</span><span class="n">accept_license</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if the user has accepted the license terms.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    accept_license : bool</span>
+<span class="sd">        Whether the user has accepted the license terms.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If accept_license is False.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">accept_license</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">70</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;DATA LICENSE ACKNOWLEDGMENT REQUIRED</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">70</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Source: </span><span class="si">{</span><span class="n">LICENSE_INFO</span><span class="p">[</span><span class="s1">&#39;terms_url&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;License: </span><span class="si">{</span><span class="n">LICENSE_INFO</span><span class="p">[</span><span class="s1">&#39;license_type&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;License URL: </span><span class="si">{</span><span class="n">LICENSE_INFO</span><span class="p">[</span><span class="s1">&#39;license_url&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">LICENSE_INFO</span><span class="p">[</span><span class="s1">&#39;disclaimer&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Citation:</span><span class="se">\n</span><span class="si">{</span><span class="n">LICENSE_INFO</span><span class="p">[</span><span class="s1">&#39;citation&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">To proceed, set accept_license=True</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">70</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_download_file</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Download a file from URL.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    url : str</span>
+<span class="sd">        URL to download from.</span>
+<span class="sd">    output_path : Path</span>
+<span class="sd">        Path to save the file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Path</span>
+<span class="sd">        Path to downloaded file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output_path</span>
+
+
+<span class="k">def</span> <span class="nf">_download_and_extract_zip_parquet</span><span class="p">(</span>
+    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">expected_parquet</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">expected_readme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Download ZIP file and extract parquet (and optionally README).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    url : str</span>
+<span class="sd">        URL to download from.</span>
+<span class="sd">    output_dir : Path</span>
+<span class="sd">        Directory to extract files to.</span>
+<span class="sd">    expected_parquet : str</span>
+<span class="sd">        Expected parquet filename inside ZIP.</span>
+<span class="sd">    expected_readme : str, optional</span>
+<span class="sd">        Expected README filename inside ZIP.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple[Path, Path | None]</span>
+<span class="sd">        (parquet_path, readme_path) - paths to extracted files.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Downloading from </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Extracting ZIP contents...&quot;</span><span class="p">)</span>
+    <span class="n">zip_file</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+    <span class="n">readme_path</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zf</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">expected_parquet</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">zf</span><span class="o">.</span><span class="n">namelist</span><span class="p">():</span>
+            <span class="n">available</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">zf</span><span class="o">.</span><span class="n">namelist</span><span class="p">())</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="n">expected_parquet</span><span class="si">}</span><span class="s2"> not found in ZIP. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Available files: </span><span class="si">{</span><span class="n">available</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="n">zf</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">expected_parquet</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span>
+        <span class="n">parquet_path</span> <span class="o">=</span> <span class="n">output_dir</span> <span class="o">/</span> <span class="n">expected_parquet</span>
+
+        <span class="k">if</span> <span class="n">expected_readme</span> <span class="ow">and</span> <span class="n">expected_readme</span> <span class="ow">in</span> <span class="n">zf</span><span class="o">.</span><span class="n">namelist</span><span class="p">():</span>
+            <span class="n">zf</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">expected_readme</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span>
+            <span class="n">readme_path</span> <span class="o">=</span> <span class="n">output_dir</span> <span class="o">/</span> <span class="n">expected_readme</span>
+
+    <span class="k">return</span> <span class="n">parquet_path</span><span class="p">,</span> <span class="n">readme_path</span>
+
+
+<span class="k">def</span> <span class="nf">_load_and_validate_csv</span><span class="p">(</span>
+    <span class="n">csv_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">min_rows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">check_n_rows</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load CSV and validate row count.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    csv_path : Path</span>
+<span class="sd">        Path to CSV file.</span>
+<span class="sd">    min_rows : int, default 500</span>
+<span class="sd">        Minimum expected row count.</span>
+<span class="sd">    check_n_rows : bool, default True</span>
+<span class="sd">        Whether to validate minimum row count.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pd.DataFrame</span>
+<span class="sd">        Loaded DataFrame.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">csv_path</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s2">&quot;date&quot;</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">check_n_rows</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">min_rows</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Expected at least </span><span class="si">{</span><span class="n">min_rows</span><span class="si">}</span><span class="s2"> rows, but found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">. &quot;</span>
+            <span class="s2">&quot;Validate the csv file or set &#39;check_n_rows=False&#39;.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span>
+
+
+<span class="k">def</span> <span class="nf">_validate_parquet</span><span class="p">(</span><span class="n">parquet_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">min_rows</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate parquet file has minimum expected rows.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    parquet_path : Path</span>
+<span class="sd">        Path to parquet file.</span>
+<span class="sd">    min_rows : int</span>
+<span class="sd">        Minimum expected row count.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If row count is below minimum.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">parquet_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">min_rows</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Expected at least </span><span class="si">{</span><span class="n">min_rows</span><span class="si">}</span><span class="s2"> rows, but found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">. &quot;</span>
+            <span class="s2">&quot;Data file may be corrupted or incomplete.&quot;</span>
+        <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_pull_csv_dataset</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">info</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">download_readme</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Pull a CSV-based dataset (treasury).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path</span>
+<span class="sd">        Directory to save data.</span>
+<span class="sd">    info : dict</span>
+<span class="sd">        Dataset info from DATA_INFO.</span>
+<span class="sd">    download_readme : bool, default True</span>
+<span class="sd">        Whether to download README.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Downloading </span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;csv&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+    <span class="n">csv_path</span> <span class="o">=</span> <span class="n">data_dir</span> <span class="o">/</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;csv&quot;</span><span class="p">]</span>
+    <span class="n">_download_file</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">],</span> <span class="n">csv_path</span><span class="p">)</span>
+
+    <span class="n">min_rows</span> <span class="o">=</span> <span class="n">MIN_N_ROWS_EXPECTED</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;treasury&quot;</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">_load_and_validate_csv</span><span class="p">(</span><span class="n">csv_path</span><span class="p">,</span> <span class="n">min_rows</span><span class="o">=</span><span class="n">min_rows</span><span class="p">)</span>
+
+    <span class="n">parquet_path</span> <span class="o">=</span> <span class="n">data_dir</span> <span class="o">/</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;parquet&quot;</span><span class="p">]</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">parquet_path</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved to </span><span class="si">{</span><span class="n">parquet_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">csv_path</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">download_readme</span> <span class="ow">and</span> <span class="s2">&quot;readme_url&quot;</span> <span class="ow">in</span> <span class="n">info</span><span class="p">:</span>
+        <span class="n">readme_path</span> <span class="o">=</span> <span class="n">data_dir</span> <span class="o">/</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;readme_file&quot;</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Downloading README to </span><span class="si">{</span><span class="n">readme_path</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+        <span class="n">_download_file</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;readme_url&quot;</span><span class="p">],</span> <span class="n">readme_path</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_pull_zip_parquet_dataset</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">variant_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">info</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">download_readme</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Pull a ZIP-containing-parquet dataset (corporate).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path</span>
+<span class="sd">        Directory to save data.</span>
+<span class="sd">    variant_name : str</span>
+<span class="sd">        Name of the variant (for min_rows lookup).</span>
+<span class="sd">    info : dict</span>
+<span class="sd">        Dataset info from DATA_INFO.</span>
+<span class="sd">    download_readme : bool, default True</span>
+<span class="sd">        Whether to save README if present in ZIP.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">extracted_parquet</span><span class="p">,</span> <span class="n">extracted_readme</span> <span class="o">=</span> <span class="n">_download_and_extract_zip_parquet</span><span class="p">(</span>
+        <span class="n">url</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">],</span>
+        <span class="n">output_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">expected_parquet</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;zip_contents&quot;</span><span class="p">],</span>
+        <span class="n">expected_readme</span><span class="o">=</span><span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;readme_contents&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">download_readme</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">min_rows</span> <span class="o">=</span> <span class="n">MIN_N_ROWS_EXPECTED</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">variant_name</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+    <span class="n">_validate_parquet</span><span class="p">(</span><span class="n">extracted_parquet</span><span class="p">,</span> <span class="n">min_rows</span><span class="p">)</span>
+
+    <span class="n">final_parquet_path</span> <span class="o">=</span> <span class="n">data_dir</span> <span class="o">/</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;parquet&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">extracted_parquet</span> <span class="o">!=</span> <span class="n">final_parquet_path</span><span class="p">:</span>
+        <span class="n">extracted_parquet</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">final_parquet_path</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved to </span><span class="si">{</span><span class="n">final_parquet_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">extracted_readme</span> <span class="ow">and</span> <span class="s2">&quot;readme_file&quot;</span> <span class="ow">in</span> <span class="n">info</span><span class="p">:</span>
+        <span class="n">final_readme_path</span> <span class="o">=</span> <span class="n">data_dir</span> <span class="o">/</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;readme_file&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">extracted_readme</span> <span class="o">!=</span> <span class="n">final_readme_path</span><span class="p">:</span>
+            <span class="n">extracted_readme</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">final_readme_path</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved README to </span><span class="si">{</span><span class="n">final_readme_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="pull_data">
+<a class="viewcode-back" href="../../../../apidocs/finm/finm.data.open_source_bond._pull.html#finm.data.open_source_bond._pull.pull_data">[docs]</a>
+<span class="k">def</span> <span class="nf">pull_data</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">variant</span><span class="p">:</span> <span class="n">PullVariantType</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span><span class="p">,</span>
+    <span class="n">accept_license</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">download_readme</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Download Open Source Bond data.</span>
+
+<span class="sd">    Downloads data from the Open Source Bond Asset Pricing project.</span>
+
+<span class="sd">    Website: https://openbondassetpricing.com/</span>
+<span class="sd">    Data Dictionary: https://github.com/Alexander-M-Dickerson/trace-data-pipeline/blob/main/stage2/DATA_DICTIONARY.md</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path or str</span>
+<span class="sd">        Directory to save downloaded data.</span>
+<span class="sd">    variant : str</span>
+<span class="sd">        Which dataset(s) to download. One of:</span>
+<span class="sd">        - &quot;treasury&quot;: Treasury bond returns (CSV, ~120MB)</span>
+<span class="sd">        - &quot;corporate_daily&quot;: Daily corporate bond prices, TRACE Stage 1 (~1.8GB)</span>
+<span class="sd">        - &quot;corporate_monthly&quot;: Monthly returns with 108 factor signals (~1.2GB)</span>
+<span class="sd">        - &quot;corporate_all&quot;: Both corporate datasets</span>
+<span class="sd">        - &quot;all&quot;: All datasets (treasury + corporate_daily + corporate_monthly)</span>
+<span class="sd">    accept_license : bool, default False</span>
+<span class="sd">        Must be set to True to acknowledge the data provider&#39;s license terms.</span>
+<span class="sd">        The data is provided under the MIT License. See LICENSE_INFO for details.</span>
+<span class="sd">    download_readme : bool, default True</span>
+<span class="sd">        Whether to save README files when available.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If accept_license is False.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - corporate_daily contains PRICES (not returns)</span>
+<span class="sd">    - corporate_monthly contains RETURNS (ready to use)</span>
+<span class="sd">    - corporate_monthly includes 108 factor signals for asset pricing research</span>
+
+<span class="sd">    Citation:</span>
+<span class="sd">        Dickerson, A., Robotti, C., &amp; Rossetti, G. (2026).</span>
+<span class="sd">        The Corporate Bond Factor Replication Crisis: A New Protocol. Working Paper.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_check_license_accepted</span><span class="p">(</span><span class="n">accept_license</span><span class="p">)</span>
+
+    <span class="n">data_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>
+    <span class="n">data_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Handle deprecated &quot;corporate&quot; variant</span>
+    <span class="k">if</span> <span class="n">variant</span> <span class="o">==</span> <span class="s2">&quot;corporate&quot;</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;variant=&#39;corporate&#39; is deprecated. Use &#39;corporate_monthly&#39; for returns &quot;</span>
+            <span class="s2">&quot;or &#39;corporate_daily&#39; for prices. Defaulting to &#39;corporate_monthly&#39;.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+            <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">variant</span> <span class="o">=</span> <span class="s2">&quot;corporate_monthly&quot;</span>
+
+    <span class="c1"># Determine which datasets to download</span>
+    <span class="k">if</span> <span class="n">variant</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
+        <span class="n">datasets</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;treasury&quot;</span><span class="p">,</span> <span class="s2">&quot;corporate_daily&quot;</span><span class="p">,</span> <span class="s2">&quot;corporate_monthly&quot;</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">variant</span> <span class="o">==</span> <span class="s2">&quot;corporate_all&quot;</span><span class="p">:</span>
+        <span class="n">datasets</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;corporate_daily&quot;</span><span class="p">,</span> <span class="s2">&quot;corporate_monthly&quot;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">datasets</span> <span class="o">=</span> <span class="p">[</span><span class="n">variant</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">dataset_name</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">dataset_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">DATA_INFO</span><span class="p">:</span>
+            <span class="n">valid_variants</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">DATA_INFO</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Unknown variant &#39;</span><span class="si">{</span><span class="n">dataset_name</span><span class="si">}</span><span class="s2">&#39;. Valid variants: </span><span class="si">{</span><span class="n">valid_variants</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">info</span> <span class="o">=</span> <span class="n">DATA_INFO</span><span class="p">[</span><span class="n">dataset_name</span><span class="p">]</span>
+        <span class="n">source_format</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;source_format&quot;</span><span class="p">,</span> <span class="s2">&quot;csv&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- Pulling </span><span class="si">{</span><span class="n">dataset_name</span><span class="si">}</span><span class="s2"> ---&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">source_format</span> <span class="o">==</span> <span class="s2">&quot;csv&quot;</span><span class="p">:</span>
+            <span class="n">_pull_csv_dataset</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">download_readme</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">source_format</span> <span class="o">==</span> <span class="s2">&quot;zip_parquet&quot;</span><span class="p">:</span>
+            <span class="n">_pull_zip_parquet_dataset</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">dataset_name</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">download_readme</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown source_format: </span><span class="si">{</span><span class="n">source_format</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Done!&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,892 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>finm.fixedincome.gsw2006_yield_curve &#8212; finm Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=55cd40c9" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=61571c06"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/finm/fixedincome/gsw2006_yield_curve';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search documentation..."
+         aria-label="Search documentation..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="finm Documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="finm Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../index.html">
+                    finm - Financial Mathematics Python Package
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../data_module.html">Data Module Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cli.html">CLI Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../examples/index.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/01_replicate_GSW_yield_curve_ipynb.html">Replicating the Gurkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/02_corp_bond_returns_ipynb.html">Example - Analyzing Corporate Bond Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/03_corp_bond_returns_ftsfr_HKM_ipynb.html">Cleaning Summary: Corporate Bond Returns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/04_data_integration_tests_ipynb.html">Data Module Integration Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/05_factor_regression_example_ipynb.html">Factor Regression Analysis with finm</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../adding_data_sources.html">Adding New Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../development.html">Development Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../apidocs/index.html">API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../apidocs/finm/finm.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../apidocs/finm/finm.analytics.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../apidocs/finm/finm.analytics.factor_analysis.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics.factor_analysis</span></code></a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../apidocs/finm/finm.data.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../apidocs/finm/finm.data.fama_french.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.fama_french</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../apidocs/finm/finm.data.federal_reserve.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.federal_reserve</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../apidocs/finm/finm.data.he_kelly_manela.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.he_kelly_manela</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../apidocs/finm/finm.data.open_source_bond.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.open_source_bond</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../apidocs/finm/finm.data.wrds.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.wrds</span></code></a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../apidocs/finm/finm.fixedincome.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../apidocs/finm/finm.fixedincome.bonds.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.bonds</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../apidocs/finm/finm.fixedincome.calc_corp_bond_returns.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.calc_corp_bond_returns</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../apidocs/finm/finm.fixedincome.gsw2006_yield_curve.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.gsw2006_yield_curve</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../apidocs/finm/finm.fixedincome.pricing.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.pricing</span></code></a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/finm" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/finm/issues/new?title=Issue%20on%20page%20%2F_modules/finm/fixedincome/gsw2006_yield_curve.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for finm.fixedincome.gsw2006_yield_curve</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Implementation of Nelson-Siegel-Svensson yield curve model following Gurkaynak,</span>
+<span class="sd">Sack, and Wright (2006).</span>
+
+<span class="sd">Key components:</span>
+<span class="sd">- Treasury security filtering based on GSW methodology</span>
+<span class="sd">- Cash flow calculation for coupon-bearing bonds</span>
+<span class="sd">- Nonlinear optimization for parameter estimation</span>
+<span class="sd">- Spot rate and discount factor calculations</span>
+
+<span class="sd">References:</span>
+<span class="sd">Gürkaynak, Refet S., Brian Sack, and Jonathan H. Wright.</span>
+<span class="sd">&quot;The US Treasury yield curve: 1961 to the present.&quot;</span>
+<span class="sd"> Journal of monetary Economics 54, no. 8 (2007): 2291-2304.</span>
+<span class="sd">https://doi.org/10.1016/j.jmoneco.2007.06.029</span>
+
+<span class="sd">Acknowledgements:</span>
+<span class="sd">- The function to create the cashflows is from Mark Hendricks.</span>
+<span class="sd">- Younghun Lee assisted with writing this code.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+
+<span class="kn">from</span> <span class="nn">finm.fixedincome.pricing</span> <span class="kn">import</span> <span class="n">get_coupon_dates</span>
+
+<span class="c1"># from ..data.CRSP import pull_CRSP_treasury</span>
+<span class="c1"># from ..data.Federal_Reserve import pull_yield_curve_data</span>
+
+<span class="c1"># from settings import config</span>
+
+<span class="c1"># --------------------------</span>
+<span class="c1"># Model Configuration</span>
+<span class="c1"># --------------------------</span>
+<span class="c1"># DATA_DIR = config(&quot;DATA_DIR&quot;)</span>
+<span class="c1"># Nelson-Siegel-Svensson parameters</span>
+<span class="c1"># &quot;tau1&quot;, &quot;tau2&quot;, &quot;beta1&quot;, &quot;beta2&quot;, &quot;beta3&quot;, &quot;beta4&quot;</span>
+<span class="n">PARAM_NAMES</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;tau1&quot;</span><span class="p">,</span> <span class="s2">&quot;tau2&quot;</span><span class="p">,</span> <span class="s2">&quot;beta1&quot;</span><span class="p">,</span> <span class="s2">&quot;beta2&quot;</span><span class="p">,</span> <span class="s2">&quot;beta3&quot;</span><span class="p">,</span> <span class="s2">&quot;beta4&quot;</span><span class="p">)</span>
+<span class="n">PARAMS0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
+
+
+<span class="c1"># Function required for GSW analysis</span>
+<div class="viewcode-block" id="filter_treasury_cashflows">
+<a class="viewcode-back" href="../../../apidocs/finm/finm.fixedincome.gsw2006_yield_curve.html#finm.fixedincome.gsw2006_yield_curve.filter_treasury_cashflows">[docs]</a>
+<span class="k">def</span> <span class="nf">filter_treasury_cashflows</span><span class="p">(</span>
+    <span class="n">CF</span><span class="p">,</span> <span class="n">filter_maturity_dates</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">filter_benchmark_dates</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">filter_CF_strict</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">):</span>
+    <span class="n">mask_benchmark_dts</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Filter by using only benchmark treasury dates</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">CF</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">filter_benchmark_dates</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">col</span><span class="o">.</span><span class="n">month</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span> <span class="ow">and</span> <span class="n">col</span><span class="o">.</span><span class="n">day</span> <span class="o">==</span> <span class="mi">15</span><span class="p">:</span>
+                <span class="n">mask_benchmark_dts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mask_benchmark_dts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">filter_maturity_dates</span><span class="p">:</span>
+        <span class="n">mask_maturity_dts</span> <span class="o">=</span> <span class="n">CF</span><span class="o">.</span><span class="n">columns</span><span class="p">[(</span><span class="n">CF</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">()]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">mask_maturity_dts</span> <span class="o">=</span> <span class="n">CF</span><span class="o">.</span><span class="n">columns</span>
+
+    <span class="n">mask</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">mask_benchmark_dts</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">mask_maturity_dts</span><span class="p">]</span>
+
+    <span class="n">CF_filtered</span> <span class="o">=</span> <span class="n">CF</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">filter_CF_strict</span><span class="p">:</span>
+        <span class="c1"># drop issues that had CF on excluded dates</span>
+        <span class="n">mask_bnds</span> <span class="o">=</span> <span class="n">CF_filtered</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">CF</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">CF_filtered</span> <span class="o">=</span> <span class="n">CF_filtered</span><span class="p">[</span><span class="n">mask_bnds</span><span class="p">]</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># drop issues that have no CF on included dates</span>
+        <span class="n">mask_bnds</span> <span class="o">=</span> <span class="n">CF_filtered</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="n">CF_filtered</span> <span class="o">=</span> <span class="n">CF_filtered</span><span class="p">[</span><span class="n">mask_bnds</span><span class="p">]</span>
+
+    <span class="c1"># update to drop dates with no CF</span>
+    <span class="n">CF_filtered</span> <span class="o">=</span> <span class="n">CF_filtered</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">(</span><span class="n">CF_filtered</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">()]</span>
+
+    <span class="k">return</span> <span class="n">CF_filtered</span></div>
+
+
+
+<span class="c1"># Function required for GSW analysis</span>
+<div class="viewcode-block" id="calc_cashflows">
+<a class="viewcode-back" href="../../../apidocs/finm/finm.fixedincome.gsw2006_yield_curve.html#finm.fixedincome.gsw2006_yield_curve.calc_cashflows">[docs]</a>
+<span class="k">def</span> <span class="nf">calc_cashflows</span><span class="p">(</span><span class="n">quote_data</span><span class="p">,</span> <span class="n">filter_maturity_dates</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">CF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="n">data</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">index</span><span class="o">=</span><span class="n">quote_data</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+        <span class="n">columns</span><span class="o">=</span><span class="n">quote_data</span><span class="p">[</span><span class="s2">&quot;tmatdt&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">(),</span>
+    <span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">quote_data</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+        <span class="n">coupon_dates</span> <span class="o">=</span> <span class="n">get_coupon_dates</span><span class="p">(</span>
+            <span class="n">quote_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;caldt&quot;</span><span class="p">],</span> <span class="n">quote_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;tmatdt&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">coupon_dates</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">CF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">coupon_dates</span><span class="p">]</span> <span class="o">=</span> <span class="n">quote_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;tcouprt&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span>
+
+        <span class="n">CF</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">quote_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;tmatdt&quot;</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">100</span>
+
+    <span class="c1"># Sort columns by maturity date</span>
+    <span class="n">CF</span> <span class="o">=</span> <span class="n">CF</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># Drop columns (dates) that are all zeros</span>
+    <span class="n">CF</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">CF</span><span class="o">.</span><span class="n">columns</span><span class="p">[(</span><span class="n">CF</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">filter_maturity_dates</span><span class="p">:</span>
+        <span class="n">CF</span> <span class="o">=</span> <span class="n">filter_treasury_cashflows</span><span class="p">(</span><span class="n">CF</span><span class="p">,</span> <span class="n">filter_maturity_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">CF</span></div>
+
+
+
+<span class="c1"># Function required for GSW analysis</span>
+<div class="viewcode-block" id="plot_spot_curve">
+<a class="viewcode-back" href="../../../apidocs/finm/finm.fixedincome.gsw2006_yield_curve.html#finm.fixedincome.gsw2006_yield_curve.plot_spot_curve">[docs]</a>
+<span class="k">def</span> <span class="nf">plot_spot_curve</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">alt_text</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot the spot curve for the fitted NelsonSeigelSvensson instance.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        params: NSS parameters (tau1, tau2, beta1, beta2, beta3, beta4)</span>
+<span class="sd">        alt_text: Alternative text for accessibility. If None, auto-generated.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">spots</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">spot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">spots</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Spot Curve&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Maturity&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Spot Rate&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Generate alt text if not provided</span>
+    <span class="k">if</span> <span class="n">alt_text</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">min_rate</span> <span class="o">=</span> <span class="n">spots</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="n">max_rate</span> <span class="o">=</span> <span class="n">spots</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="n">alt_text</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Nelson-Siegel-Svensson spot rate curve from 1 to 30 years maturity. &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Rates range from </span><span class="si">{</span><span class="n">min_rate</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">% to </span><span class="si">{</span><span class="n">max_rate</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Set figure label for accessibility (used by nbconvert for alt text)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">alt_text</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">ax</span></div>
+
+
+
+<span class="c1"># Function required for GSW analysis</span>
+<div class="viewcode-block" id="spot">
+<a class="viewcode-back" href="../../../apidocs/finm/finm.fixedincome.gsw2006_yield_curve.html#finm.fixedincome.gsw2006_yield_curve.spot">[docs]</a>
+<span class="k">def</span> <span class="nf">spot</span><span class="p">(</span><span class="n">maturities</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">PARAMS0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate Nelson-Siegel-Svensson spot rates for given maturities.</span>
+
+<span class="sd">    These are the zero-coupon yields, from equation (22) in</span>
+<span class="sd">    Gurkaynak, Sack, and Wright (2006)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tau1</span><span class="p">,</span> <span class="n">tau2</span><span class="p">,</span> <span class="n">beta1</span><span class="p">,</span> <span class="n">beta2</span><span class="p">,</span> <span class="n">beta3</span><span class="p">,</span> <span class="n">beta4</span> <span class="o">=</span> <span class="n">params</span>
+
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">maturities</span><span class="p">)</span>
+    <span class="n">tau1_exp</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="n">tau1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="n">tau1</span><span class="p">)</span>
+    <span class="n">tau2_exp</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="n">tau2</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="n">tau2</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">beta1</span>
+        <span class="o">+</span> <span class="n">beta2</span> <span class="o">*</span> <span class="n">tau1_exp</span>
+        <span class="o">+</span> <span class="n">beta3</span> <span class="o">*</span> <span class="p">(</span><span class="n">tau1_exp</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="n">tau1</span><span class="p">))</span>
+        <span class="o">+</span> <span class="n">beta4</span> <span class="o">*</span> <span class="p">(</span><span class="n">tau2_exp</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="n">tau2</span><span class="p">))</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="c1"># Function required for GSW analysis</span>
+<div class="viewcode-block" id="discount">
+<a class="viewcode-back" href="../../../apidocs/finm/finm.fixedincome.gsw2006_yield_curve.html#finm.fixedincome.gsw2006_yield_curve.discount">[docs]</a>
+<span class="k">def</span> <span class="nf">discount</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">PARAMS0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate discount factors from spot rates.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        t: Array of times to maturity in years</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        array: Discount factors for each maturity</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">spot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># Function required for GSW analysis</span>
+<div class="viewcode-block" id="predict_prices">
+<a class="viewcode-back" href="../../../apidocs/finm/finm.fixedincome.gsw2006_yield_curve.html#finm.fixedincome.gsw2006_yield_curve.predict_prices">[docs]</a>
+<span class="k">def</span> <span class="nf">predict_prices</span><span class="p">(</span><span class="n">quote_date</span><span class="p">,</span> <span class="n">df_all</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">PARAMS0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate security prices from the parameters&quot;&quot;&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df_all</span><span class="p">[</span><span class="n">df_all</span><span class="p">[</span><span class="s2">&quot;caldt&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">quote_date</span><span class="p">]</span>
+    <span class="n">cashflows</span> <span class="o">=</span> <span class="n">calc_cashflows</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="c1"># Calculate time in years from quote date to each payment date</span>
+    <span class="n">payment_dates</span> <span class="o">=</span> <span class="n">cashflows</span><span class="o">.</span><span class="n">columns</span>
+    <span class="n">time_deltas</span> <span class="o">=</span> <span class="n">payment_dates</span> <span class="o">-</span> <span class="n">quote_date</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="n">time_deltas</span><span class="o">.</span><span class="n">days</span> <span class="o">/</span> <span class="mf">365.25</span>  <span class="c1"># Convert to fractional years</span>
+
+    <span class="n">disc</span> <span class="o">=</span> <span class="n">discount</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">predicted_prices</span> <span class="o">=</span> <span class="n">cashflows</span> <span class="o">@</span> <span class="n">disc</span>
+    <span class="n">predicted_prices</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;tcusip&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">predicted_prices</span></div>
+
+
+
+<span class="c1"># Function required for GSW analysis</span>
+<div class="viewcode-block" id="fit">
+<a class="viewcode-back" href="../../../apidocs/finm/finm.fixedincome.gsw2006_yield_curve.html#finm.fixedincome.gsw2006_yield_curve.fit">[docs]</a>
+<span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">quote_date</span><span class="p">,</span> <span class="n">df_all</span><span class="p">,</span> <span class="n">params0</span><span class="o">=</span><span class="n">PARAMS0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fit NSS model to Treasury security data using nonlinear least squares.</span>
+
+<span class="sd">    Optimization objective minimizes price errors weighted by duration:</span>
+<span class="sd">        min Σ [(P_observed - P_model)^2 / D]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: (optimized_parameters, objective_value)</span>
+
+<span class="sd">    ## Optimization Objective</span>
+
+<span class="sd">    Implements the Gurkaynak-Sack-Wright (2006) objective function:</span>
+
+<span class="sd">    ```math</span>
+<span class="sd">    \\min_{\beta,\tau} \\sum_{i=1}^N \frac{(P_i^{obs} - P_i^{model})^2}{D_i}</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    Where:</span>
+<span class="sd">    - \\(P_i^{obs}\\) = Observed clean price (including accrued interest)</span>
+<span class="sd">    - \\(P_i^{model}\\) = Model-implied price</span>
+<span class="sd">    - \\(D_i\\) = Duration of security i</span>
+
+<span class="sd">    ## Relationship to Yield Errors</span>
+
+<span class="sd">    The price error objective is approximately equivalent to minimizing unweighted yield errors:</span>
+
+<span class="sd">    ```math</span>
+<span class="sd">    \frac{(P_i^{obs} - P_i^{model})^2}{D_i} \approx D_i \\cdot (y_i^{obs} - y_i^{model})^2</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    This approximation comes from the duration relationship:</span>
+<span class="sd">    ```math</span>
+<span class="sd">    P^{obs} - P^{model} \approx -D \\cdot (y^{obs} - y^{model})</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    Making the objective function:</span>
+<span class="sd">    ```math</span>
+<span class="sd">    \\sum D_i \\cdot (y_i^{obs} - y_i^{model})^2</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    ## Why Price Errors Instead of Yield Errors?</span>
+
+<span class="sd">    1. **Non-linear relationship**: The price/yield relationship is convex</span>
+<span class="sd">       (convexity adjustment matters more for long-duration bonds)</span>
+<span class="sd">    2. **Coupon effects**: Directly accounts for differential cash flow timing</span>
+<span class="sd">    3. **Numerical stability**: Prices have linear sensitivity to parameters via</span>
+<span class="sd">       discount factors, while yields require non-linear root-finding</span>
+<span class="sd">    4. **Economic meaning**: Aligns with trader behavior that thinks in terms of</span>
+<span class="sd">       price arbitrage</span>
+
+<span class="sd">    Reference: Gurkaynak, Sack, and Wright (2006)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Data preparation</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df_all</span><span class="p">[</span><span class="n">df_all</span><span class="p">[</span><span class="s2">&quot;caldt&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">quote_date</span><span class="p">)]</span>
+    <span class="n">cashflows</span> <span class="o">=</span> <span class="n">calc_cashflows</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+    <span class="c1"># Time calculations</span>
+    <span class="n">payment_dates</span> <span class="o">=</span> <span class="n">cashflows</span><span class="o">.</span><span class="n">columns</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="p">(</span><span class="n">payment_dates</span> <span class="o">-</span> <span class="n">quote_date</span><span class="p">)</span><span class="o">.</span><span class="n">days</span> <span class="o">/</span> <span class="mf">365.25</span>
+
+    <span class="c1"># Optimization components</span>
+    <span class="n">observed_prices</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;tdduratn&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>  <span class="c1"># Square root of duration, since it</span>
+    <span class="c1"># will be squared later</span>
+
+    <span class="k">def</span> <span class="nf">mean_squared_error</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+        <span class="n">predicted_prices</span> <span class="o">=</span> <span class="n">cashflows</span> <span class="o">@</span> <span class="n">discount</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(((</span><span class="n">observed_prices</span> <span class="o">-</span> <span class="n">predicted_prices</span><span class="p">)</span> <span class="o">*</span> <span class="n">weights</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Bounds and constraints</span>
+    <span class="n">bounds</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="mf">1e-06</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+        <span class="p">(</span><span class="mf">1e-06</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+        <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+        <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+        <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+        <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span>
+        <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">params0</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;maxiter&quot;</span><span class="p">:</span> <span class="mf">1e5</span><span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimization failed: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">param_star</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span>
+
+    <span class="k">return</span> <span class="n">param_star</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">param_star</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># Function required for GSW analysis</span>
+<div class="viewcode-block" id="gurkaynak_sack_wright_filters">
+<a class="viewcode-back" href="../../../apidocs/finm/finm.fixedincome.gsw2006_yield_curve.html#finm.fixedincome.gsw2006_yield_curve.gurkaynak_sack_wright_filters">[docs]</a>
+<span class="k">def</span> <span class="nf">gurkaynak_sack_wright_filters</span><span class="p">(</span><span class="n">dff</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply Treasury security filters based on Gürkaynak, Sack, and Wright (2006).</span>
+
+<span class="sd">    Implemented filters:</span>
+<span class="sd">    1. Exclude securities with &lt; 3 months to maturity</span>
+<span class="sd">    2. Exclude on-the-run and first off-the-run issues after 1980</span>
+<span class="sd">    3. Exclude T-bills (only keep notes and bonds)</span>
+<span class="sd">    4. Exclude 20-year bonds after 1996 with decay</span>
+<span class="sd">    5. Exclude callable bonds</span>
+
+<span class="sd">    Still missing:</span>
+<span class="sd">    - Ad hoc exclusions for specific issues</span>
+
+<span class="sd">    ## Notes</span>
+<span class="sd">    For (2), this is what the paper says:</span>
+
+<span class="sd">    We exclude the two most recently issued securities with maturities of two,</span>
+<span class="sd">    three, four, five, seven, ten, twenty, and thirty years for securities</span>
+<span class="sd">    issued in 1980 or later. These are the &quot;on-the-run&quot; and &quot;first off-the-run&quot;</span>
+<span class="sd">    issues that often trade at a premium to other Treasury securities, owing to</span>
+<span class="sd">    their greater liquidity and their frequent specialness in the repo market.8</span>
+<span class="sd">    Earlier in the sample, the concept of an on-the-run issue was not well</span>
+<span class="sd">    defined, since the Treasury did not conduct regular auctions and the repo</span>
+<span class="sd">    market was not well developed (as discussed by Garbade (2004)). Our cut-off</span>
+<span class="sd">    point for excluding onthe- run and first off-the-run issues is somewhat</span>
+<span class="sd">    arbitrary but is a conservative choice (in the sense of potentially erring</span>
+<span class="sd">    on the side of being too early).</span>
+
+<span class="sd">    For (4), this is what the paper says:</span>
+
+<span class="sd">    We begin to exclude twenty-year bonds in 1996, because those securities</span>
+<span class="sd">    often appeared cheap relative to ten-year notes with comparable duration.</span>
+<span class="sd">    This cheapness could reflect their lower liquidity or the fact that their</span>
+<span class="sd">    high coupon rates made them unattractive to hold for tax-related reasons.</span>
+
+<span class="sd">    To avoid an abrupt change to the sample, we allow their weights to linearly</span>
+<span class="sd">    decay from 1 to 0 over the year ending on January 2, 1996.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">dff</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># Filter 1: Exclude &lt; 3 months to maturity</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;days_to_maturity&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">92</span><span class="p">]</span>
+
+    <span class="c1"># Filter 2: Exclude on-the-run and first off-the-run after 1980</span>
+    <span class="n">post_1980</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;caldt&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;1980-01-01&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="p">(</span><span class="n">post_1980</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">))]</span>
+
+    <span class="c1"># Filter 3: Only include notes (2) and bonds (1)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;itype&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])]</span>
+
+    <span class="c1"># Filter 4: Exclude 20-year bonds after 1996 with decay</span>
+    <span class="n">cutoff_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s2">&quot;1996-01-02&quot;</span><span class="p">)</span>
+    <span class="n">decay_start</span> <span class="o">=</span> <span class="n">cutoff_date</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">years</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="c1"># Apply linear decay only during 1995-01-02 to 1996-01-02</span>
+    <span class="n">mask_decay</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;original_maturity&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">20</span><span class="p">)</span>
+        <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;caldt&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">decay_start</span><span class="p">)</span>
+        <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;caldt&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">cutoff_date</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="c1"># Calculate proper decay factor for the transition year</span>
+    <span class="n">decay_days</span> <span class="o">=</span> <span class="p">(</span><span class="n">cutoff_date</span> <span class="o">-</span> <span class="n">decay_start</span><span class="p">)</span><span class="o">.</span><span class="n">days</span>
+    <span class="n">decay_factor</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;caldt&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">decay_start</span><span class="p">)</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">days</span> <span class="o">/</span> <span class="n">decay_days</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask_decay</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">]</span> <span class="o">*=</span> <span class="n">decay_factor</span>
+
+    <span class="c1"># Completely exclude 20-year bonds after cutoff date</span>
+    <span class="n">mask_exclude</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;original_maturity&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">20</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;caldt&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">cutoff_date</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask_exclude</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Filter 5: Exclude callable bonds</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;callable&quot;</span><span class="p">]]</span>
+
+    <span class="c1"># Remove securities with zero/negative weights</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<span class="c1"># Function required for GSW analysis</span>
+<div class="viewcode-block" id="compare_fit">
+<a class="viewcode-back" href="../../../apidocs/finm/finm.fixedincome.gsw2006_yield_curve.html#finm.fixedincome.gsw2006_yield_curve.compare_fit">[docs]</a>
+<span class="k">def</span> <span class="nf">compare_fit</span><span class="p">(</span><span class="n">quote_date</span><span class="p">,</span> <span class="n">df_all</span><span class="p">,</span> <span class="n">params_star</span><span class="p">,</span> <span class="n">actual_params</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+    <span class="n">predicted_prices</span> <span class="o">=</span> <span class="n">predict_prices</span><span class="p">(</span><span class="n">quote_date</span><span class="p">,</span> <span class="n">df_all</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params_star</span><span class="p">)</span>
+    <span class="n">gsw_predicted_prices</span> <span class="o">=</span> <span class="n">predict_prices</span><span class="p">(</span><span class="n">quote_date</span><span class="p">,</span> <span class="n">df_all</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">actual_params</span><span class="p">)</span>
+
+    <span class="n">actual_prices</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;tcusip&quot;</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;tcusip&quot;</span><span class="p">)[</span><span class="s2">&quot;price&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Compare with actual prices</span>
+    <span class="n">price_comparison</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Actual Price&quot;</span><span class="p">:</span> <span class="n">actual_prices</span><span class="p">,</span>
+            <span class="s2">&quot;GSW Predicted Price&quot;</span><span class="p">:</span> <span class="n">gsw_predicted_prices</span><span class="p">,</span>
+            <span class="s2">&quot;Model Predicted Price&quot;</span><span class="p">:</span> <span class="n">predicted_prices</span><span class="p">,</span>
+            <span class="s2">&quot;Predicted - Actual %&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">predicted_prices</span> <span class="o">-</span> <span class="n">actual_prices</span><span class="p">)</span> <span class="o">/</span> <span class="n">actual_prices</span><span class="p">,</span>
+            <span class="s2">&quot;Predicted - GSW %&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">predicted_prices</span> <span class="o">-</span> <span class="n">gsw_predicted_prices</span><span class="p">)</span>
+            <span class="o">/</span> <span class="n">gsw_predicted_prices</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">price_comparison</span></div>
+
+
+
+<span class="c1"># def _demo():</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     Demo of how the Nelson-Siegel-Svensson model works</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+
+<span class="c1">#     actual_all = pull_yield_curve_data.load_fed_yield_curve_all(data_dir=DATA_DIR)</span>
+<span class="c1">#     # Create copy of parameter DataFrame to avoid view vs copy issues</span>
+<span class="c1">#     actual_params_all = actual_all.loc[</span>
+<span class="c1">#         :, [&quot;TAU1&quot;, &quot;TAU2&quot;, &quot;BETA0&quot;, &quot;BETA1&quot;, &quot;BETA2&quot;, &quot;BETA3&quot;]</span>
+<span class="c1">#     ].copy()</span>
+
+<span class="c1">#     # Convert percentage points to decimals for beta parameters</span>
+<span class="c1">#     beta_columns = [&quot;BETA0&quot;, &quot;BETA1&quot;, &quot;BETA2&quot;, &quot;BETA3&quot;]</span>
+<span class="c1">#     actual_params_all[beta_columns] = actual_params_all[beta_columns] / 100</span>
+
+<span class="c1">#     df_all = pull_CRSP_treasury.load_CRSP_treasury_consolidated(data_dir=DATA_DIR)</span>
+<span class="c1">#     df_all = gurkaynak_sack_wright_filters(df_all)</span>
+<span class="c1">#     df_all.info()</span>
+
+<span class="c1">#     quote_dates = pd.date_range(&quot;2000-01-02&quot;, &quot;2024-06-30&quot;, freq=&quot;BMS&quot;)</span>
+<span class="c1">#     quote_date = quote_dates[-1]</span>
+<span class="c1">#     # Subset df_all to quote_date</span>
+<span class="c1">#     df = df_all[df_all[&quot;caldt&quot;] == quote_date]</span>
+<span class="c1">#     actual_params = actual_params_all[actual_params_all.index == quote_date].values[0]</span>
+
+<span class="c1">#     # &quot;tau1&quot;, &quot;tau2&quot;, &quot;beta1&quot;, &quot;beta2&quot;, &quot;beta3&quot;, &quot;beta4&quot;</span>
+<span class="c1">#     # params0 = np.array([1.0, 10.0, 3.0, 3.0, 3.0, 3.0])</span>
+<span class="c1">#     params0 = np.array([0.989721, 9.955324, 3.685087, 1.579927, 3.637107, 9.814584])</span>
+<span class="c1">#     # params0 = np.array([1.0, 1.0, 0.001, 0.001, 0.001, 0.001])</span>
+
+<span class="c1">#     params_star, error = fit(quote_date, df_all, params0)</span>
+<span class="c1">#     print(params_star)</span>
+<span class="c1">#     print(error)</span>
+
+<span class="c1">#     plot_spot_curve(params_star)</span>
+<span class="c1">#     plot_spot_curve(actual_params)</span>
+
+<span class="c1">#     price_comparison = compare_fit(quote_date, df_all, params_star, actual_params, df)</span>
+<span class="c1">#     return price_comparison, params_star</span>
+
+
+<span class="c1"># if __name__ == &quot;__main__&quot;:</span>
+<span class="c1">#     pass</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1449 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Cleaning Summary: Corporate Bond Returns &#8212; finm Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=55cd40c9" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=61571c06"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/03_corp_bond_returns_ftsfr_HKM_ipynb';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Data Module Integration Tests" href="04_data_integration_tests_ipynb.html" />
+    <link rel="prev" title="Example - Analyzing Corporate Bond Data" href="02_corp_bond_returns_ipynb.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search documentation..."
+         aria-label="Search documentation..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="finm Documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="finm Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    finm - Financial Mathematics Python Package
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data_module.html">Data Module Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_replicate_GSW_yield_curve_ipynb.html">Replicating the Gurkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_corp_bond_returns_ipynb.html">Example - Analyzing Corporate Bond Data</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Cleaning Summary: Corporate Bond Returns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_data_integration_tests_ipynb.html">Data Module Integration Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_factor_regression_example_ipynb.html">Factor Regression Analysis with finm</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../adding_data_sources.html">Adding New Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../apidocs/index.html">API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../apidocs/finm/finm.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../apidocs/finm/finm.analytics.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.analytics.factor_analysis.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics.factor_analysis</span></code></a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../apidocs/finm/finm.data.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.data.fama_french.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.fama_french</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.data.federal_reserve.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.federal_reserve</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.data.he_kelly_manela.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.he_kelly_manela</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.data.open_source_bond.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.open_source_bond</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.data.wrds.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.wrds</span></code></a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../apidocs/finm/finm.fixedincome.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.fixedincome.bonds.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.bonds</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.fixedincome.calc_corp_bond_returns.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.calc_corp_bond_returns</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.fixedincome.gsw2006_yield_curve.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.gsw2006_yield_curve</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.fixedincome.pricing.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.pricing</span></code></a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/finm" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/finm/issues/new?title=Issue%20on%20page%20%2Fexamples/03_corp_bond_returns_ftsfr_HKM_ipynb.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/examples/03_corp_bond_returns_ftsfr_HKM_ipynb.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Cleaning Summary: Corporate Bond Returns</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning-he-kelly-and-manella-hkm-follow-nozawa-2017">Data Cleaning - He, Kelly, and Manella (HKM) follow Nozawa (2017)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning-summary-nozawa-2017">Data Cleaning Summary - Nozawa (2017)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bond-selection-criteria">Bond Selection Criteria</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sources-used">Data Sources Used</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#synthetic-treasury-construction">Synthetic Treasury Construction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-adjustments">Additional Adjustments</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-source-bond-asset-pricing-data">Open Source Bond Asset Pricing Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning-and-construction-following-nozawa-2017">Data Cleaning and Construction - Following Nozawa (2017)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-trace-dataset">Understanding the TRACE Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-returns-are-computed">How Returns Are Computed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-ftsfr-with-he-kelly-manela">Comparing FTSFR with He Kelly Manela</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-corporate-bond-portfolio-returns-ftsfr-deciles-vs-hkm-portfolios">Comparison of Corporate Bond Portfolio Returns: FTSFR Deciles vs. HKM Portfolios</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">Observations</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="cleaning-summary-corporate-bond-returns">
+<h1>Cleaning Summary: Corporate Bond Returns<a class="headerlink" href="#cleaning-summary-corporate-bond-returns" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+
+<span class="kn">import</span> <span class="nn">finm</span>
+<span class="kn">from</span> <span class="nn">finm.data</span> <span class="kn">import</span> <span class="n">open_source_bond</span>
+
+<span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;DATA_DIR&quot;</span><span class="p">,</span> <span class="s2">&quot;./_data&quot;</span><span class="p">))</span>
+<span class="n">DATA_DIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data directory: </span><span class="si">{</span><span class="n">DATA_DIR</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data directory: /Users/jbejarano/GitRepositories/finm/_data
+</pre></div>
+</div>
+</div>
+</div>
+<section id="data-cleaning-he-kelly-and-manella-hkm-follow-nozawa-2017">
+<h2>Data Cleaning - He, Kelly, and Manella (HKM) follow Nozawa (2017)<a class="headerlink" href="#data-cleaning-he-kelly-and-manella-hkm-follow-nozawa-2017" title="Link to this heading">#</a></h2>
+<p>The data cleaning procedure used by <strong>He, Kelly, and Manella</strong> is based on
+the meticulous framework established in <strong>Nozawa (2017)</strong>. This process
+ensures consistency, comparability, and robustness in corporate bond
+return analysis.</p>
+</section>
+<section id="data-cleaning-summary-nozawa-2017">
+<h2>Data Cleaning Summary - Nozawa (2017)<a class="headerlink" href="#data-cleaning-summary-nozawa-2017" title="Link to this heading">#</a></h2>
+<p>Nozawa (2017) constructs a high-quality corporate bond dataset by applying
+the following key cleaning steps:</p>
+<section id="bond-selection-criteria">
+<h3>Bond Selection Criteria<a class="headerlink" href="#bond-selection-criteria" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Exclude bonds</strong> with:</p>
+<ul>
+<li><p><strong>Floating rate coupons</strong></p></li>
+<li><p><strong>Non-callable option features</strong> (e.g., puts, convertibles). However,
+callable bonds are retained due to their prevalence in historical data.</p></li>
+</ul>
+</li>
+<li><p><strong>Price filters</strong>:</p>
+<ul>
+<li><p>Remove observations where the <strong>corporate bond price exceeds</strong> the price
+of its matched Treasury.</p></li>
+<li><p>Drop observations where price &lt; <strong><span class="math notranslate nohighlight">\(0.01 per \)</span>1 face value</strong>.</p></li>
+</ul>
+</li>
+<li><p><strong>Return reversals</strong>:</p>
+<ul>
+<li><p>Eliminate both return observations if the <strong>product of adjacent returns
+is &lt; -0.04</strong>, suggesting a data entry error or extreme correction.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="data-sources-used">
+<h3>Data Sources Used<a class="headerlink" href="#data-sources-used" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Combined data from:</p>
+<ul>
+<li><p><strong>Lehman Brothers Fixed Income Database</strong></p></li>
+<li><p><strong>Mergent FISD/NAIC Database</strong></p></li>
+<li><p><strong>TRACE</strong></p></li>
+<li><p><strong>DataStream</strong></p></li>
+</ul>
+</li>
+<li><p>Defaults are verified and completed using <strong>Moody’s Default Risk Service</strong>.</p></li>
+<li><p><strong>CRSP</strong> and <strong>Compustat</strong> are used to supplement with equity and
+accounting data.</p></li>
+</ul>
+</section>
+<section id="synthetic-treasury-construction">
+<h3>Synthetic Treasury Construction<a class="headerlink" href="#synthetic-treasury-construction" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>For each corporate bond, a <strong>synthetic Treasury bond</strong> with an identical
+cash flow structure is constructed.</p></li>
+<li><p>Treasury prices are based on <strong>Federal Reserve constant-maturity yield data</strong>.</p></li>
+<li><p>This enables clean computation of <strong>excess returns</strong> and <strong>credit spreads</strong>,
+expressed in <strong>price terms</strong> rather than yield spreads, to maintain
+linearity and reduce approximation error.</p></li>
+</ul>
+</section>
+<section id="additional-adjustments">
+<h3>Additional Adjustments<a class="headerlink" href="#additional-adjustments" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Callable bonds are retained and accounted for using <strong>fixed effects</strong> in
+regression models (callability has minor pricing impact, ~9 bps).</p></li>
+<li><p>The study uses <strong>monthly returns</strong>, avoiding the need for reinvestment
+assumptions.</p></li>
+</ul>
+<p>This rigorous cleaning pipeline underpins Nozawa’s variance decomposition
+framework, enabling a reliable split of credit spreads into <strong>expected
+credit loss</strong> and <strong>risk premium</strong> components.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load He-Kelly-Manela data with auto-pull if not found locally</span>
+<span class="n">hkm</span> <span class="o">=</span> <span class="n">finm</span><span class="o">.</span><span class="n">load_he_kelly_manela_all</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="n">DATA_DIR</span><span class="p">,</span>
+    <span class="n">pull_if_not_found</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">accept_license</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+<span class="n">copr_bonds_hkm</span> <span class="o">=</span> <span class="n">hkm</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">44</span><span class="p">:</span><span class="mi">54</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">copr_bonds_hkm</span><span class="p">[</span><span class="s2">&quot;yyyymm&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hkm</span><span class="p">[</span><span class="s2">&quot;yyyymm&quot;</span><span class="p">]</span>
+<span class="n">copr_bonds_hkm</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>US_bonds_11</th>
+      <th>US_bonds_12</th>
+      <th>US_bonds_13</th>
+      <th>US_bonds_14</th>
+      <th>US_bonds_15</th>
+      <th>US_bonds_16</th>
+      <th>US_bonds_17</th>
+      <th>US_bonds_18</th>
+      <th>US_bonds_19</th>
+      <th>US_bonds_20</th>
+      <th>yyyymm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>197001.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>197002.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>197003.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>197004.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>197005.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">copr_bonds_hkm</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>US_bonds_11</th>
+      <th>US_bonds_12</th>
+      <th>US_bonds_13</th>
+      <th>US_bonds_14</th>
+      <th>US_bonds_15</th>
+      <th>US_bonds_16</th>
+      <th>US_bonds_17</th>
+      <th>US_bonds_18</th>
+      <th>US_bonds_19</th>
+      <th>US_bonds_20</th>
+      <th>yyyymm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>511</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>201208.0</td>
+    </tr>
+    <tr>
+      <th>512</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>201209.0</td>
+    </tr>
+    <tr>
+      <th>513</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>201210.0</td>
+    </tr>
+    <tr>
+      <th>514</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>201211.0</td>
+    </tr>
+    <tr>
+      <th>515</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>201212.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">copr_bonds_hkm</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>US_bonds_11</th>
+      <th>US_bonds_12</th>
+      <th>US_bonds_13</th>
+      <th>US_bonds_14</th>
+      <th>US_bonds_15</th>
+      <th>US_bonds_16</th>
+      <th>US_bonds_17</th>
+      <th>US_bonds_18</th>
+      <th>US_bonds_19</th>
+      <th>US_bonds_20</th>
+      <th>yyyymm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>456.000000</td>
+      <td>456.000000</td>
+      <td>456.000000</td>
+      <td>456.000000</td>
+      <td>456.000000</td>
+      <td>456.000000</td>
+      <td>456.000000</td>
+      <td>456.000000</td>
+      <td>456.000000</td>
+      <td>456.000000</td>
+      <td>516.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.005923</td>
+      <td>0.006518</td>
+      <td>0.006743</td>
+      <td>0.006581</td>
+      <td>0.007048</td>
+      <td>0.007016</td>
+      <td>0.007262</td>
+      <td>0.007460</td>
+      <td>0.007438</td>
+      <td>0.010098</td>
+      <td>199106.500000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.018431</td>
+      <td>0.019738</td>
+      <td>0.020000</td>
+      <td>0.020199</td>
+      <td>0.020059</td>
+      <td>0.019479</td>
+      <td>0.018882</td>
+      <td>0.018618</td>
+      <td>0.018568</td>
+      <td>0.023779</td>
+      <td>1242.176409</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-0.078800</td>
+      <td>-0.076400</td>
+      <td>-0.078300</td>
+      <td>-0.078600</td>
+      <td>-0.081800</td>
+      <td>-0.080200</td>
+      <td>-0.081700</td>
+      <td>-0.083500</td>
+      <td>-0.087200</td>
+      <td>-0.102100</td>
+      <td>197001.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>-0.002600</td>
+      <td>-0.003225</td>
+      <td>-0.003125</td>
+      <td>-0.002800</td>
+      <td>-0.002525</td>
+      <td>-0.002200</td>
+      <td>-0.000725</td>
+      <td>-0.000125</td>
+      <td>0.000575</td>
+      <td>0.000300</td>
+      <td>198009.750000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.006200</td>
+      <td>0.006400</td>
+      <td>0.006300</td>
+      <td>0.006700</td>
+      <td>0.006900</td>
+      <td>0.007250</td>
+      <td>0.007600</td>
+      <td>0.007900</td>
+      <td>0.007950</td>
+      <td>0.010000</td>
+      <td>199106.500000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.014125</td>
+      <td>0.015925</td>
+      <td>0.016325</td>
+      <td>0.016625</td>
+      <td>0.016800</td>
+      <td>0.015900</td>
+      <td>0.015425</td>
+      <td>0.015125</td>
+      <td>0.015000</td>
+      <td>0.020225</td>
+      <td>200203.250000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>0.127400</td>
+      <td>0.124300</td>
+      <td>0.132600</td>
+      <td>0.120700</td>
+      <td>0.126800</td>
+      <td>0.129300</td>
+      <td>0.125700</td>
+      <td>0.128800</td>
+      <td>0.110300</td>
+      <td>0.148300</td>
+      <td>201212.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">copr_bonds_hkm</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>US_bonds_11    60
+US_bonds_12    60
+US_bonds_13    60
+US_bonds_14    60
+US_bonds_15    60
+US_bonds_16    60
+US_bonds_17    60
+US_bonds_18    60
+US_bonds_19    60
+US_bonds_20    60
+yyyymm          0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="open-source-bond-asset-pricing-data">
+<h2>Open Source Bond Asset Pricing Data<a class="headerlink" href="#open-source-bond-asset-pricing-data" title="Link to this heading">#</a></h2>
+<p>The Open Source Bond Asset Pricing project provides:</p>
+<ul class="simple">
+<li><p><strong>Monthly corporate bond returns</strong> with 108 factor signals</p></li>
+<li><p>Data based on TRACE (Trade Reporting and Compliance Engine)</p></li>
+<li><p>Market microstructure-adjusted prices and returns</p></li>
+</ul>
+<p>Website: <a class="reference external" href="https://openbondassetpricing.com/">openbondassetpricing.com</a>
+GitHub: <a class="reference external" href="https://github.com/Alexander-M-Dickerson/trace-data-pipeline">trace-data-pipeline</a></p>
+</section>
+<section id="data-cleaning-and-construction-following-nozawa-2017">
+<h2>Data Cleaning and Construction - Following Nozawa (2017)<a class="headerlink" href="#data-cleaning-and-construction-following-nozawa-2017" title="Link to this heading">#</a></h2>
+<p>The dataset adheres to the rigorous data cleaning methodology
+established by Nozawa (2017), ensuring high-quality and reliable corporate
+bond return data. The key cleaning steps are mentioned above.</p>
+</section>
+<section id="understanding-the-trace-dataset">
+<h2>Understanding the TRACE Dataset<a class="headerlink" href="#understanding-the-trace-dataset" title="Link to this heading">#</a></h2>
+<p>The TRACE dataset is meticulously curated to provide accurate and
+comprehensive corporate bond data. Key aspects include:</p>
+<ul class="simple">
+<li><p><strong>Market Microstructure Adjustments</strong>:</p>
+<ul>
+<li><p>Implementation of corrections for market microstructure noise (MMN) to
+enhance the reliability of bond price and return data.</p></li>
+</ul>
+</li>
+<li><p><strong>Data Filters</strong>:</p>
+<ul>
+<li><p>Application of stringent filters to ensure data quality, such as:</p>
+<ul>
+<li><p>Inclusion of only U.S.-domiciled firms.</p></li>
+<li><p>Exclusion of private placements, convertible bonds, and bonds with
+non-standard interest payment structures.</p></li>
+<li><p>Removal of bonds with insufficient outstanding amounts or missing
+critical information.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>By leveraging the TRACE dataset from <a class="reference external" href="http://openbondassetpricing.com">openbondassetpricing.com</a>, the
+dataset ensures a robust foundation for analyzing corporate bond returns,
+adhering to established methodologies and incorporating comprehensive data
+cleaning procedures.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load corporate bond monthly returns with auto-pull if not found locally</span>
+<span class="n">corp_monthly</span> <span class="o">=</span> <span class="n">open_source_bond</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="n">DATA_DIR</span><span class="p">,</span>
+    <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;corporate_monthly&quot;</span><span class="p">,</span>
+    <span class="n">pull_if_not_found</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">accept_license</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Corporate bond data loaded: </span><span class="si">{</span><span class="n">corp_monthly</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Corporate bond data loaded: (1859546, 140)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">corp_bonds_returns</span> <span class="o">=</span> <span class="n">finm</span><span class="o">.</span><span class="n">calc_corp_bond_returns</span><span class="p">(</span><span class="n">data_dir</span><span class="o">=</span><span class="n">DATA_DIR</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jbejarano/GitRepositories/finm/src/finm/fixedincome/calc_corp_bond_returns.py:47: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  return df.groupby(&quot;date&quot;, group_keys=False).apply(assign_deciles)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">corp_bonds_returns</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>cs_decile</th>
+      <th>1.0</th>
+      <th>2.0</th>
+      <th>3.0</th>
+      <th>4.0</th>
+      <th>5.0</th>
+      <th>6.0</th>
+      <th>7.0</th>
+      <th>8.0</th>
+      <th>9.0</th>
+      <th>10.0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>269.000000</td>
+      <td>269.000000</td>
+      <td>269.000000</td>
+      <td>269.000000</td>
+      <td>269.000000</td>
+      <td>269.000000</td>
+      <td>269.000000</td>
+      <td>269.000000</td>
+      <td>269.000000</td>
+      <td>269.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.003514</td>
+      <td>0.004218</td>
+      <td>0.004707</td>
+      <td>0.004874</td>
+      <td>0.004991</td>
+      <td>0.005662</td>
+      <td>0.005901</td>
+      <td>0.006415</td>
+      <td>0.007719</td>
+      <td>0.007371</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.010835</td>
+      <td>0.014543</td>
+      <td>0.016579</td>
+      <td>0.019123</td>
+      <td>0.020533</td>
+      <td>0.021498</td>
+      <td>0.021977</td>
+      <td>0.023988</td>
+      <td>0.036159</td>
+      <td>0.052666</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-0.039874</td>
+      <td>-0.039339</td>
+      <td>-0.044883</td>
+      <td>-0.059339</td>
+      <td>-0.069163</td>
+      <td>-0.075524</td>
+      <td>-0.074917</td>
+      <td>-0.103130</td>
+      <td>-0.183776</td>
+      <td>-0.297770</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>-0.000906</td>
+      <td>-0.002051</td>
+      <td>-0.003592</td>
+      <td>-0.004401</td>
+      <td>-0.005613</td>
+      <td>-0.004835</td>
+      <td>-0.006520</td>
+      <td>-0.003742</td>
+      <td>-0.005507</td>
+      <td>-0.008326</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.002647</td>
+      <td>0.003365</td>
+      <td>0.005076</td>
+      <td>0.005577</td>
+      <td>0.006314</td>
+      <td>0.007863</td>
+      <td>0.007974</td>
+      <td>0.007328</td>
+      <td>0.007759</td>
+      <td>0.008154</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.007214</td>
+      <td>0.010536</td>
+      <td>0.012644</td>
+      <td>0.014221</td>
+      <td>0.015714</td>
+      <td>0.016117</td>
+      <td>0.016689</td>
+      <td>0.017248</td>
+      <td>0.017744</td>
+      <td>0.024568</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>0.088565</td>
+      <td>0.119262</td>
+      <td>0.108928</td>
+      <td>0.106005</td>
+      <td>0.085645</td>
+      <td>0.081520</td>
+      <td>0.078264</td>
+      <td>0.104339</td>
+      <td>0.314782</td>
+      <td>0.258807</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="how-returns-are-computed">
+<h2>How Returns Are Computed<a class="headerlink" href="#how-returns-are-computed" title="Link to this heading">#</a></h2>
+<p>For each decile, the <strong>monthly return</strong> is computed as a <strong>value-weighted
+average of bond-level returns</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+r_{portfolio, t} = \sum_{i \in \text{portfolio}} w_{i,t} \cdot \text{bond\_ret}_{i,t}
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">bond_ret</span></code> is the <strong>monthly return</strong> of an individual bond.</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_{i,t} = \frac{\text{bond value}_{i,t}}{\sum_{j \in \text{portfolio}} \text{bond value}_{j,t}}\)</span>
+is the <strong>weight</strong> of bond <span class="math notranslate nohighlight">\(i\)</span> in the portfolio at time <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bond</span> <span class="pre">value</span></code> is calculated as the product of the <strong>MMN-adjusted clean price</strong>
+and <strong>amount outstanding</strong>.</p></li>
+</ul>
+<p>This weighting ensures that larger bonds have a proportionally larger impact
+on the portfolio return.</p>
+</section>
+<section id="comparing-ftsfr-with-he-kelly-manela">
+<h2>Comparing FTSFR with He Kelly Manela<a class="headerlink" href="#comparing-ftsfr-with-he-kelly-manela" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert yyyymm to datetime (last day of each month)</span>
+<span class="n">copr_bonds_hkm</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span>
+    <span class="n">copr_bonds_hkm</span><span class="p">[</span><span class="s2">&quot;yyyymm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;%Y%m&quot;</span>
+<span class="p">)</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">MonthEnd</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">copr_bonds_hkm</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Now both DataFrames have datetime index with last day of month</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HKM Corporate Bonds shape:&quot;</span><span class="p">,</span> <span class="n">copr_bonds_hkm</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Corporate Bond Returns shape:&quot;</span><span class="p">,</span> <span class="n">corp_bonds_returns</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># Display the date ranges to verify alignment</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">HKM Corporate Bonds date range:&quot;</span><span class="p">,</span>
+    <span class="n">copr_bonds_hkm</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
+    <span class="s2">&quot;to&quot;</span><span class="p">,</span>
+    <span class="n">copr_bonds_hkm</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Corporate Bond Returns date range:&quot;</span><span class="p">,</span>
+    <span class="n">corp_bonds_returns</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
+    <span class="s2">&quot;to&quot;</span><span class="p">,</span>
+    <span class="n">corp_bonds_returns</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>
+<span class="p">)</span>
+
+<span class="c1"># Merge the dataframes</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+    <span class="n">corp_bonds_returns</span><span class="p">,</span> <span class="n">copr_bonds_hkm</span><span class="p">,</span> <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Create subplots for each pair of columns</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">col1</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># Column from corp_bonds_returns</span>
+    <span class="n">col2</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;US_bonds_</span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">11</span><span class="si">}</span><span class="s2">&quot;</span>  <span class="c1"># Column from copr_bonds_hkm</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">merged_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">merged_df</span><span class="p">[</span><span class="n">col1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Decile </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">merged_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">merged_df</span><span class="p">[</span><span class="n">col2</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;HKM </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">11</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Comparison: Decile </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> vs HKM </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">11</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Rotate x-axis labels for better readability</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Print correlation between corresponding columns</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Correlations between corresponding columns:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">col1</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">col2</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;US_bonds_</span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">11</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">corr</span> <span class="o">=</span> <span class="n">merged_df</span><span class="p">[</span><span class="n">col1</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">merged_df</span><span class="p">[</span><span class="n">col2</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Decile </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> vs HKM </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">11</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">corr</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HKM Corporate Bonds shape: (516, 11)
+Corporate Bond Returns shape: (269, 10)
+
+HKM Corporate Bonds date range: 1970-01-31 00:00:00 to 2012-12-31 00:00:00
+Corporate Bond Returns date range: 2002-08-31 00:00:00 to 2024-12-31 00:00:00
+</pre></div>
+</div>
+<img alt="../_images/115bff16e19c29b462556450607935f1b86be8eb432714bbefafd9ea766b5c28.png" src="../_images/115bff16e19c29b462556450607935f1b86be8eb432714bbefafd9ea766b5c28.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlations between corresponding columns:
+Decile 1 vs HKM 11: 0.8306
+Decile 2 vs HKM 12: 0.9248
+Decile 3 vs HKM 13: 0.9475
+Decile 4 vs HKM 14: 0.9149
+Decile 5 vs HKM 15: 0.8881
+Decile 6 vs HKM 16: 0.8166
+Decile 7 vs HKM 17: 0.8477
+Decile 8 vs HKM 18: 0.8957
+Decile 9 vs HKM 19: 0.7198
+Decile 10 vs HKM 20: 0.8280
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="comparison-of-corporate-bond-portfolio-returns-ftsfr-deciles-vs-hkm-portfolios">
+<h2>Comparison of Corporate Bond Portfolio Returns: FTSFR Deciles vs. HKM Portfolios<a class="headerlink" href="#comparison-of-corporate-bond-portfolio-returns-ftsfr-deciles-vs-hkm-portfolios" title="Link to this heading">#</a></h2>
+<p>The figure above compares the time-series returns of corporate bond portfolios:</p>
+<ul class="simple">
+<li><p><strong>Deciles 1-10</strong> (in blue): Portfolios constructed by <strong>FTSFR</strong>, where bonds
+are sorted into deciles based on a chosen signal.</p></li>
+<li><p><strong>HKM Portfolios 11-20</strong> (in red): Portfolios from <strong>He, Kelly, and Manella
+(HKM)</strong> that correspond to the same strategy but are indexed from 11 to 20.</p></li>
+</ul>
+<p>The HKM portfolios are indexed from <strong>11 to 20</strong>, with portfolio 11
+corresponding to the lowest decile (Decile 1) and portfolio 20 corresponding
+to the highest (Decile 10). Therefore, the matching scheme is:</p>
+<ul class="simple">
+<li><p><strong>Decile 1 -&gt; HKM 11</strong></p></li>
+<li><p><strong>Decile 2 -&gt; HKM 12</strong></p></li>
+<li><p>…</p></li>
+<li><p><strong>Decile 5 -&gt; HKM 15</strong></p></li>
+<li><p>…</p></li>
+<li><p><strong>Decile 10 -&gt; HKM 20</strong></p></li>
+</ul>
+</section>
+<section id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The plotted returns between <strong>FTSFR deciles (blue)</strong> and <strong>HKM portfolios
+(red)</strong> are <strong>visibly similar</strong>, indicating that both datasets reflect
+consistent underlying return dynamics.</p></li>
+<li><p>Particularly during volatile periods like the <strong>2008 financial crisis</strong>,
+both series exhibit synchronized spikes or drops, reflecting shared
+exposure to credit market risk.</p></li>
+<li><p>Deviations are expected due to:</p>
+<ul>
+<li><p>Variation in data sources and MMN adjustments.</p></li>
+<li><p>Differences in exact sorting filters.</p></li>
+</ul>
+</li>
+</ul>
+<p>These comparisons validate that the FTSFR replication accurately captures
+the structure and behavior of the HKM portfolio.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_corp_bond_returns_ipynb.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Example - Analyzing Corporate Bond Data</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="04_data_integration_tests_ipynb.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Data Module Integration Tests</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning-he-kelly-and-manella-hkm-follow-nozawa-2017">Data Cleaning - He, Kelly, and Manella (HKM) follow Nozawa (2017)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning-summary-nozawa-2017">Data Cleaning Summary - Nozawa (2017)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bond-selection-criteria">Bond Selection Criteria</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-sources-used">Data Sources Used</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#synthetic-treasury-construction">Synthetic Treasury Construction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-adjustments">Additional Adjustments</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-source-bond-asset-pricing-data">Open Source Bond Asset Pricing Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning-and-construction-following-nozawa-2017">Data Cleaning and Construction - Following Nozawa (2017)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-trace-dataset">Understanding the TRACE Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-returns-are-computed">How Returns Are Computed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-ftsfr-with-he-kelly-manela">Comparing FTSFR with He Kelly Manela</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-corporate-bond-portfolio-returns-ftsfr-deciles-vs-hkm-portfolios">Comparison of Corporate Bond Portfolio Returns: FTSFR Deciles vs. HKM Portfolios</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#observations">Observations</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

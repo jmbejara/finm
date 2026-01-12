@@ -1,0 +1,967 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>finm.analytics.factor_analysis &#8212; finm Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=55cd40c9" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=61571c06"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'apidocs/finm/finm.analytics.factor_analysis';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="finm.data" href="finm.data.html" />
+    <link rel="prev" title="finm.analytics" href="finm.analytics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search documentation..."
+         aria-label="Search documentation..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="finm Documentation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="finm Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    finm - Financial Mathematics Python Package
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../data_module.html">Data Module Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">CLI Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../examples/index.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/01_replicate_GSW_yield_curve_ipynb.html">Replicating the Gurkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/02_corp_bond_returns_ipynb.html">Example - Analyzing Corporate Bond Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/03_corp_bond_returns_ftsfr_HKM_ipynb.html">Cleaning Summary: Corporate Bond Returns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/04_data_integration_tests_ipynb.html">Data Module Integration Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/05_factor_regression_example_ipynb.html">Factor Regression Analysis with finm</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../adding_data_sources.html">Adding New Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="finm.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm</span></code></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="finm.analytics.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics</span></code></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4 current active"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics.factor_analysis</span></code></a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="finm.data.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="finm.data.fama_french.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.fama_french</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="finm.data.federal_reserve.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.federal_reserve</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="finm.data.he_kelly_manela.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.he_kelly_manela</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="finm.data.open_source_bond.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.open_source_bond</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="finm.data.wrds.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.wrds</span></code></a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="finm.fixedincome.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="finm.fixedincome.bonds.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.bonds</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="finm.fixedincome.calc_corp_bond_returns.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.calc_corp_bond_returns</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="finm.fixedincome.gsw2006_yield_curve.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.gsw2006_yield_curve</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="finm.fixedincome.pricing.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.pricing</span></code></a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/finm" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/finm/issues/new?title=Issue%20on%20page%20%2Fapidocs/finm/finm.analytics.factor_analysis.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/apidocs/finm/finm.analytics.factor_analysis.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>finm.analytics.factor_analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-contents">Module Contents</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api">API</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult"><code class="docutils literal notranslate"><span class="pre">RegressionResult</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.adj_r_squared"><code class="docutils literal notranslate"><span class="pre">RegressionResult.adj_r_squared</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.alpha"><code class="docutils literal notranslate"><span class="pre">RegressionResult.alpha</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.alpha_annualized"><code class="docutils literal notranslate"><span class="pre">RegressionResult.alpha_annualized</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.alpha_pvalue"><code class="docutils literal notranslate"><span class="pre">RegressionResult.alpha_pvalue</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.alpha_se"><code class="docutils literal notranslate"><span class="pre">RegressionResult.alpha_se</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.alpha_tstat"><code class="docutils literal notranslate"><span class="pre">RegressionResult.alpha_tstat</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.annualization_factor"><code class="docutils literal notranslate"><span class="pre">RegressionResult.annualization_factor</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.beta_pvalues"><code class="docutils literal notranslate"><span class="pre">RegressionResult.beta_pvalues</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.beta_ses"><code class="docutils literal notranslate"><span class="pre">RegressionResult.beta_ses</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.beta_tstats"><code class="docutils literal notranslate"><span class="pre">RegressionResult.beta_tstats</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.betas"><code class="docutils literal notranslate"><span class="pre">RegressionResult.betas</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.n_observations"><code class="docutils literal notranslate"><span class="pre">RegressionResult.n_observations</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.r_squared"><code class="docutils literal notranslate"><span class="pre">RegressionResult.r_squared</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.residual_std"><code class="docutils literal notranslate"><span class="pre">RegressionResult.residual_std</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.calculate_beta"><code class="docutils literal notranslate"><span class="pre">calculate_beta()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.calculate_factor_exposures"><code class="docutils literal notranslate"><span class="pre">calculate_factor_exposures()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.calculate_sharpe_ratio"><code class="docutils literal notranslate"><span class="pre">calculate_sharpe_ratio()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.run_capm_regression"><code class="docutils literal notranslate"><span class="pre">run_capm_regression()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.run_factor_regression"><code class="docutils literal notranslate"><span class="pre">run_factor_regression()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.run_fama_french_regression"><code class="docutils literal notranslate"><span class="pre">run_fama_french_regression()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="module-finm.analytics.factor_analysis">
+<span id="finm-analytics-factor-analysis"></span><h1><a class="reference internal" href="#module-finm.analytics.factor_analysis" title="finm.analytics.factor_analysis"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics.factor_analysis</span></code></a><a class="headerlink" href="#module-finm.analytics.factor_analysis" title="Link to this heading">#</a></h1>
+<p>Factor analysis and risk metrics.</p>
+<p>This module provides asset-class-agnostic functions for:</p>
+<ul class="simple">
+<li><p>Beta calculations</p></li>
+<li><p>Sharpe ratio calculations</p></li>
+<li><p>Multi-factor exposure analysis (Fama-French 3-factor)</p></li>
+<li><p>OLS regression with full statistics (alpha, beta, t-stats, R-squared)</p></li>
+</ul>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">#</a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table table-left">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#finm.analytics.factor_analysis.RegressionResult" title="finm.analytics.factor_analysis.RegressionResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegressionResult</span></code></a></p></td>
+<td><p>Results from OLS regression of asset returns on factor(s).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table table-left">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#finm.analytics.factor_analysis.calculate_beta" title="finm.analytics.factor_analysis.calculate_beta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_beta</span></code></a></p></td>
+<td><p>Calculate beta with respect to any factor.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#finm.analytics.factor_analysis.calculate_factor_exposures" title="finm.analytics.factor_analysis.calculate_factor_exposures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_factor_exposures</span></code></a></p></td>
+<td><p>Calculate factor exposures (betas) and summary statistics.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#finm.analytics.factor_analysis.calculate_sharpe_ratio" title="finm.analytics.factor_analysis.calculate_sharpe_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_sharpe_ratio</span></code></a></p></td>
+<td><p>Calculate the annualized Sharpe ratio.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#finm.analytics.factor_analysis.run_capm_regression" title="finm.analytics.factor_analysis.run_capm_regression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_capm_regression</span></code></a></p></td>
+<td><p>Run CAPM regression (single-factor model).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#finm.analytics.factor_analysis.run_factor_regression" title="finm.analytics.factor_analysis.run_factor_regression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_factor_regression</span></code></a></p></td>
+<td><p>Run OLS regression of returns on factor(s) with full statistics.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#finm.analytics.factor_analysis.run_fama_french_regression" title="finm.analytics.factor_analysis.run_fama_french_regression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_fama_french_regression</span></code></a></p></td>
+<td><p>Run Fama-French 3-factor regression.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="api">
+<h3>API<a class="headerlink" href="#api" title="Link to this heading">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.RegressionResult">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">finm.analytics.factor_analysis.</span></span><span class="sig-name descname"><span class="pre">RegressionResult</span></span><a class="reference internal" href="../../_modules/finm/analytics/factor_analysis.html#RegressionResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.analytics.factor_analysis.RegressionResult" title="Link to this definition">#</a></dt>
+<dd><p>Results from OLS regression of asset returns on factor(s).</p>
+<p>This dataclass holds all standard OLS statistics commonly used
+in asset pricing analysis, including Jensen’s alpha.</p>
+<h2 class="rubric" id="id16">Attributes</h2>
+<p>alpha : float
+Intercept (Jensen’s alpha) from the regression.
+alpha_tstat : float
+t-statistic for alpha.
+alpha_pvalue : float
+Two-sided p-value for alpha.
+alpha_se : float
+Standard error of alpha.
+betas : dict[str, float]
+Factor betas, keyed by factor name.
+beta_tstats : dict[str, float]
+t-statistics for betas, keyed by factor name.
+beta_pvalues : dict[str, float]
+Two-sided p-values for betas, keyed by factor name.
+beta_ses : dict[str, float]
+Standard errors of betas, keyed by factor name.
+r_squared : float
+R-squared (coefficient of determination).
+adj_r_squared : float
+Adjusted R-squared.
+n_observations : int
+Number of observations used in regression.
+residual_std : float
+Standard deviation of residuals.
+alpha_annualized : float or None
+Annualized alpha (if annualization_factor was provided).
+annualization_factor : float or None
+Factor used to annualize alpha.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.RegressionResult.adj_r_squared">
+<span class="sig-name descname"><span class="pre">adj_r_squared</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#finm.analytics.factor_analysis.RegressionResult.adj_r_squared" title="Link to this definition">#</a></dt>
+<dd><p>None</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.RegressionResult.alpha">
+<span class="sig-name descname"><span class="pre">alpha</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#finm.analytics.factor_analysis.RegressionResult.alpha" title="Link to this definition">#</a></dt>
+<dd><p>None</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.RegressionResult.alpha_annualized">
+<span class="sig-name descname"><span class="pre">alpha_annualized</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#finm.analytics.factor_analysis.RegressionResult.alpha_annualized" title="Link to this definition">#</a></dt>
+<dd><p>None</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.RegressionResult.alpha_pvalue">
+<span class="sig-name descname"><span class="pre">alpha_pvalue</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#finm.analytics.factor_analysis.RegressionResult.alpha_pvalue" title="Link to this definition">#</a></dt>
+<dd><p>None</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.RegressionResult.alpha_se">
+<span class="sig-name descname"><span class="pre">alpha_se</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#finm.analytics.factor_analysis.RegressionResult.alpha_se" title="Link to this definition">#</a></dt>
+<dd><p>None</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.RegressionResult.alpha_tstat">
+<span class="sig-name descname"><span class="pre">alpha_tstat</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#finm.analytics.factor_analysis.RegressionResult.alpha_tstat" title="Link to this definition">#</a></dt>
+<dd><p>None</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.RegressionResult.annualization_factor">
+<span class="sig-name descname"><span class="pre">annualization_factor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#finm.analytics.factor_analysis.RegressionResult.annualization_factor" title="Link to this definition">#</a></dt>
+<dd><p>None</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.RegressionResult.beta_pvalues">
+<span class="sig-name descname"><span class="pre">beta_pvalues</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#finm.analytics.factor_analysis.RegressionResult.beta_pvalues" title="Link to this definition">#</a></dt>
+<dd><p>None</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.RegressionResult.beta_ses">
+<span class="sig-name descname"><span class="pre">beta_ses</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#finm.analytics.factor_analysis.RegressionResult.beta_ses" title="Link to this definition">#</a></dt>
+<dd><p>None</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.RegressionResult.beta_tstats">
+<span class="sig-name descname"><span class="pre">beta_tstats</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#finm.analytics.factor_analysis.RegressionResult.beta_tstats" title="Link to this definition">#</a></dt>
+<dd><p>None</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.RegressionResult.betas">
+<span class="sig-name descname"><span class="pre">betas</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#finm.analytics.factor_analysis.RegressionResult.betas" title="Link to this definition">#</a></dt>
+<dd><p>None</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.RegressionResult.n_observations">
+<span class="sig-name descname"><span class="pre">n_observations</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></em><a class="headerlink" href="#finm.analytics.factor_analysis.RegressionResult.n_observations" title="Link to this definition">#</a></dt>
+<dd><p>None</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.RegressionResult.r_squared">
+<span class="sig-name descname"><span class="pre">r_squared</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#finm.analytics.factor_analysis.RegressionResult.r_squared" title="Link to this definition">#</a></dt>
+<dd><p>None</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.RegressionResult.residual_std">
+<span class="sig-name descname"><span class="pre">residual_std</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#finm.analytics.factor_analysis.RegressionResult.residual_std" title="Link to this definition">#</a></dt>
+<dd><p>None</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.calculate_beta">
+<span class="sig-prename descclassname"><span class="pre">finm.analytics.factor_analysis.</span></span><span class="sig-name descname"><span class="pre">calculate_beta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">returns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v2.3.3)"><span class="pre">pandas.Series</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor_returns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v2.3.3)"><span class="pre">pandas.Series</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></span><a class="reference internal" href="../../_modules/finm/analytics/factor_analysis.html#calculate_beta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.analytics.factor_analysis.calculate_beta" title="Link to this definition">#</a></dt>
+<dd><p>Calculate beta with respect to any factor.</p>
+<p>Beta is computed as Cov(returns, factor) / Var(factor).</p>
+<h2 class="rubric" id="id17">Parameters</h2>
+<p>returns : pd.Series
+Asset or portfolio returns (should be excess returns if factor is excess).
+factor_returns : pd.Series
+Factor returns to regress against.</p>
+<h2 class="rubric" id="id18">Returns</h2>
+<p>float
+The beta coefficient.</p>
+<h2 class="rubric" id="id19">Example</h2>
+<blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><p>import pandas as pd
+stock_returns = pd.Series([0.01, 0.02, -0.01, 0.03])
+market_returns = pd.Series([0.005, 0.015, -0.005, 0.02])
+beta = calculate_beta(stock_returns, market_returns)</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.calculate_factor_exposures">
+<span class="sig-prename descclassname"><span class="pre">finm.analytics.factor_analysis.</span></span><span class="sig-name descname"><span class="pre">calculate_factor_exposures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">returns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v2.3.3)"><span class="pre">pandas.Series</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">factors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.3.3)"><span class="pre">pandas.DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">annualization_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">252.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/finm/analytics/factor_analysis.html#calculate_factor_exposures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.analytics.factor_analysis.calculate_factor_exposures" title="Link to this definition">#</a></dt>
+<dd><p>Calculate factor exposures (betas) and summary statistics.</p>
+<p>Computes betas for Fama-French 3 factors (Mkt-RF, SMB, HML) plus
+summary statistics including average return, volatility, and Sharpe ratio.</p>
+<h2 class="rubric" id="id20">Parameters</h2>
+<p>returns : pd.Series
+Asset or portfolio returns (raw returns, not excess).
+factors : pd.DataFrame
+DataFrame with columns: ‘Mkt-RF’, ‘SMB’, ‘HML’, ‘RF’.
+Index should be dates aligning with returns.
+annualization_factor : float, default 252.0
+Factor to annualize statistics. Use 252 for daily, 12 for monthly.</p>
+<h2 class="rubric" id="id21">Returns</h2>
+<p>dict[str, float]
+Dictionary containing:
+- ‘average_return’: Annualized average return
+- ‘volatility’: Annualized volatility (standard deviation)
+- ‘sharpe_ratio’: Annualized Sharpe ratio
+- ‘market_beta’: Beta with respect to market excess return
+- ‘smb_beta’: Beta with respect to SMB factor
+- ‘hml_beta’: Beta with respect to HML factor</p>
+<h2 class="rubric" id="id22">Example</h2>
+<blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><p>import finm
+factors = finm.load_fama_french_factors()</p>
+<h1 class="rubric" id="id23">Assume stock_returns is a pd.Series with matching dates</h1>
+<p>exposures = finm.calculate_factor_exposures(stock_returns, factors)
+print(f”Market Beta: {exposures[‘market_beta’]:.2f}”)</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.calculate_sharpe_ratio">
+<span class="sig-prename descclassname"><span class="pre">finm.analytics.factor_analysis.</span></span><span class="sig-name descname"><span class="pre">calculate_sharpe_ratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">returns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v2.3.3)"><span class="pre">pandas.Series</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">risk_free_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v2.3.3)"><span class="pre">pandas.Series</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">annualization_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">252.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></span><a class="reference internal" href="../../_modules/finm/analytics/factor_analysis.html#calculate_sharpe_ratio"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.analytics.factor_analysis.calculate_sharpe_ratio" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the annualized Sharpe ratio.</p>
+<h2 class="rubric" id="id24">Parameters</h2>
+<p>returns : pd.Series
+Asset or portfolio returns.
+risk_free_rate : pd.Series or float
+Risk-free rate. If Series, should align with returns index.
+annualization_factor : float, default 252.0
+Factor to annualize. Use 252 for daily, 12 for monthly, 1 for annual.</p>
+<h2 class="rubric" id="id25">Returns</h2>
+<p>float
+Annualized Sharpe ratio.</p>
+<h2 class="rubric" id="id26">Example</h2>
+<blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><p>import pandas as pd
+returns = pd.Series([0.01, 0.02, -0.01, 0.03, 0.005])
+rf = 0.0001  # daily risk-free rate
+sharpe = calculate_sharpe_ratio(returns, rf)</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.run_capm_regression">
+<span class="sig-prename descclassname"><span class="pre">finm.analytics.factor_analysis.</span></span><span class="sig-name descname"><span class="pre">run_capm_regression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">excess_returns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v2.3.3)"><span class="pre">pandas.Series</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">market_excess_returns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v2.3.3)"><span class="pre">pandas.Series</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">annualization_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#finm.analytics.factor_analysis.RegressionResult" title="finm.analytics.factor_analysis.RegressionResult"><span class="pre">finm.analytics.factor_analysis.RegressionResult</span></a></span></span><a class="reference internal" href="../../_modules/finm/analytics/factor_analysis.html#run_capm_regression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.analytics.factor_analysis.run_capm_regression" title="Link to this definition">#</a></dt>
+<dd><p>Run CAPM regression (single-factor model).</p>
+<p>Convenience wrapper around run_factor_regression for CAPM.
+Regresses portfolio excess returns on market excess returns.</p>
+<h2 class="rubric" id="id27">Parameters</h2>
+<p>excess_returns : pd.Series
+Portfolio or asset excess returns (returns - risk-free rate).
+market_excess_returns : pd.Series
+Market excess returns (market return - risk-free rate).
+annualization_factor : float, optional
+Factor to annualize alpha. Use 12 for monthly, 252 for daily.</p>
+<h2 class="rubric" id="id28">Returns</h2>
+<p>RegressionResult
+Regression results with alpha, market beta, and statistics.</p>
+<h2 class="rubric" id="id29">Example</h2>
+<blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><p>result = finm.run_capm_regression(
+…     portfolio_excess_ret, market_excess_ret, annualization_factor=12
+… )
+print(f”Alpha: {result.alpha:.4f}“)
+print(f”Market Beta: {result.betas[‘Mkt-RF’]:.2f}”)</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.run_factor_regression">
+<span class="sig-prename descclassname"><span class="pre">finm.analytics.factor_analysis.</span></span><span class="sig-name descname"><span class="pre">run_factor_regression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">returns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v2.3.3)"><span class="pre">pandas.Series</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">factors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.3.3)"><span class="pre">pandas.DataFrame</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v2.3.3)"><span class="pre">pandas.Series</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">annualization_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#finm.analytics.factor_analysis.RegressionResult" title="finm.analytics.factor_analysis.RegressionResult"><span class="pre">finm.analytics.factor_analysis.RegressionResult</span></a></span></span><a class="reference internal" href="../../_modules/finm/analytics/factor_analysis.html#run_factor_regression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.analytics.factor_analysis.run_factor_regression" title="Link to this definition">#</a></dt>
+<dd><p>Run OLS regression of returns on factor(s) with full statistics.</p>
+<p>This function performs OLS regression and returns Jensen’s alpha,
+factor betas, t-statistics, p-values, and R-squared. It handles
+both single-factor (CAPM) and multi-factor (Fama-French) regressions.</p>
+<h2 class="rubric" id="id30">Parameters</h2>
+<p>returns : pd.Series
+Asset or portfolio excess returns. Index should be dates.
+These should be excess returns (returns minus risk-free rate).
+factors : pd.DataFrame or pd.Series
+Factor returns to regress against. If Series, treated as single
+factor. If DataFrame, each column is a factor.
+Index should be dates aligning with returns.
+annualization_factor : float, optional
+Factor to annualize alpha. Use 12 for monthly data, 252 for daily.
+If None, alpha_annualized will be None.</p>
+<h2 class="rubric" id="id31">Returns</h2>
+<p>RegressionResult
+Dataclass containing alpha, betas, t-stats, p-values, R-squared.</p>
+<h2 class="rubric" id="id32">Example</h2>
+<blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><p>import pandas as pd
+import finm</p>
+<h1 class="rubric" id="id33">CAPM regression (single factor)</h1>
+<p>portfolio_excess = pd.Series([0.01, -0.02, 0.015], index=dates)
+market_excess = pd.Series([0.005, -0.01, 0.01], index=dates)
+result = finm.run_factor_regression(portfolio_excess, market_excess)
+print(f”Alpha: {result.alpha:.4f} (t={result.alpha_tstat:.2f})“)
+print(f”Beta: {result.betas[‘factor’]:.2f}”)</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><h1 class="rubric" id="id34">Fama-French 3-factor regression</h1>
+<p>factors = pd.DataFrame({
+…     ‘Mkt-RF’: mkt_rf, ‘SMB’: smb, ‘HML’: hml
+… })
+result = finm.run_factor_regression(
+…     portfolio_excess, factors, annualization_factor=12
+… )
+print(f”Alpha: {result.alpha_annualized:.2%} annualized”)</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="finm.analytics.factor_analysis.run_fama_french_regression">
+<span class="sig-prename descclassname"><span class="pre">finm.analytics.factor_analysis.</span></span><span class="sig-name descname"><span class="pre">run_fama_french_regression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">returns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v2.3.3)"><span class="pre">pandas.Series</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">factors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.3.3)"><span class="pre">pandas.DataFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">annualization_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#finm.analytics.factor_analysis.RegressionResult" title="finm.analytics.factor_analysis.RegressionResult"><span class="pre">finm.analytics.factor_analysis.RegressionResult</span></a></span></span><a class="reference internal" href="../../_modules/finm/analytics/factor_analysis.html#run_fama_french_regression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#finm.analytics.factor_analysis.run_fama_french_regression" title="Link to this definition">#</a></dt>
+<dd><p>Run Fama-French 3-factor regression.</p>
+<p>Computes excess returns internally and regresses on Mkt-RF, SMB, HML.</p>
+<h2 class="rubric" id="id35">Parameters</h2>
+<p>returns : pd.Series
+Asset or portfolio returns (raw returns, not excess).
+factors : pd.DataFrame
+Must contain columns: ‘Mkt-RF’, ‘SMB’, ‘HML’, ‘RF’.
+annualization_factor : float, optional
+Factor to annualize alpha. Use 12 for monthly, 252 for daily.</p>
+<h2 class="rubric" id="id36">Returns</h2>
+<p>RegressionResult
+Regression results with alpha and betas for all three factors.</p>
+<h2 class="rubric" id="id37">Example</h2>
+<blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><p>factors = finm.load_fama_french_factors()
+result = finm.run_fama_french_regression(
+…     portfolio_returns, factors, annualization_factor=12
+… )
+print(f”Alpha: {result.alpha_annualized:.2%} annualized”)
+print(f”Market Beta: {result.betas[‘Mkt-RF’]:.2f}“)
+print(f”SMB Beta: {result.betas[‘SMB’]:.2f}”)
+print(f”HML Beta: {result.betas[‘HML’]:.2f}”)</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="finm.analytics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics</span></code></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="finm.data.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data</span></code></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-contents">Module Contents</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api">API</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult"><code class="docutils literal notranslate"><span class="pre">RegressionResult</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.adj_r_squared"><code class="docutils literal notranslate"><span class="pre">RegressionResult.adj_r_squared</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.alpha"><code class="docutils literal notranslate"><span class="pre">RegressionResult.alpha</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.alpha_annualized"><code class="docutils literal notranslate"><span class="pre">RegressionResult.alpha_annualized</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.alpha_pvalue"><code class="docutils literal notranslate"><span class="pre">RegressionResult.alpha_pvalue</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.alpha_se"><code class="docutils literal notranslate"><span class="pre">RegressionResult.alpha_se</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.alpha_tstat"><code class="docutils literal notranslate"><span class="pre">RegressionResult.alpha_tstat</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.annualization_factor"><code class="docutils literal notranslate"><span class="pre">RegressionResult.annualization_factor</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.beta_pvalues"><code class="docutils literal notranslate"><span class="pre">RegressionResult.beta_pvalues</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.beta_ses"><code class="docutils literal notranslate"><span class="pre">RegressionResult.beta_ses</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.beta_tstats"><code class="docutils literal notranslate"><span class="pre">RegressionResult.beta_tstats</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.betas"><code class="docutils literal notranslate"><span class="pre">RegressionResult.betas</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.n_observations"><code class="docutils literal notranslate"><span class="pre">RegressionResult.n_observations</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.r_squared"><code class="docutils literal notranslate"><span class="pre">RegressionResult.r_squared</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.RegressionResult.residual_std"><code class="docutils literal notranslate"><span class="pre">RegressionResult.residual_std</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.calculate_beta"><code class="docutils literal notranslate"><span class="pre">calculate_beta()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.calculate_factor_exposures"><code class="docutils literal notranslate"><span class="pre">calculate_factor_exposures()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.calculate_sharpe_ratio"><code class="docutils literal notranslate"><span class="pre">calculate_sharpe_ratio()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.run_capm_regression"><code class="docutils literal notranslate"><span class="pre">run_capm_regression()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.run_factor_regression"><code class="docutils literal notranslate"><span class="pre">run_factor_regression()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finm.analytics.factor_analysis.run_fama_french_regression"><code class="docutils literal notranslate"><span class="pre">run_fama_french_regression()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

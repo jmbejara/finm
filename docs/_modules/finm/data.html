@@ -1,0 +1,1281 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>finm.data &#8212; finm Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=55cd40c9" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=61571c06"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/finm/data';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search documentation..."
+         aria-label="Search documentation..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="finm Documentation - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="finm Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    finm - Financial Mathematics Python Package
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../data_module.html">Data Module Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">CLI Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../examples/index.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/01_replicate_GSW_yield_curve_ipynb.html">Replicating the Gurkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/02_corp_bond_returns_ipynb.html">Example - Analyzing Corporate Bond Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/03_corp_bond_returns_ftsfr_HKM_ipynb.html">Cleaning Summary: Corporate Bond Returns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/04_data_integration_tests_ipynb.html">Data Module Integration Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/05_factor_regression_example_ipynb.html">Factor Regression Analysis with finm</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../adding_data_sources.html">Adding New Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../apidocs/index.html">API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../apidocs/finm/finm.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../apidocs/finm/finm.analytics.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../apidocs/finm/finm.analytics.factor_analysis.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics.factor_analysis</span></code></a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../apidocs/finm/finm.data.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../apidocs/finm/finm.data.fama_french.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.fama_french</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../apidocs/finm/finm.data.federal_reserve.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.federal_reserve</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../apidocs/finm/finm.data.he_kelly_manela.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.he_kelly_manela</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../apidocs/finm/finm.data.open_source_bond.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.open_source_bond</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../apidocs/finm/finm.data.wrds.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.wrds</span></code></a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../apidocs/finm/finm.fixedincome.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../apidocs/finm/finm.fixedincome.bonds.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.bonds</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../apidocs/finm/finm.fixedincome.calc_corp_bond_returns.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.calc_corp_bond_returns</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../apidocs/finm/finm.fixedincome.gsw2006_yield_curve.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.gsw2006_yield_curve</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../apidocs/finm/finm.fixedincome.pricing.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.pricing</span></code></a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/finm" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/finm/issues/new?title=Issue%20on%20page%20%2F_modules/finm/data.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for finm.data</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Data module.</span>
+
+<span class="sd">This module provides functions for pulling, loading, and transforming financial</span>
+<span class="sd">data from various sources. All load functions return polars DataFrames by default.</span>
+
+<span class="sd">Submodules:</span>
+<span class="sd">    - federal_reserve: Federal Reserve yield curve data (GSW model)</span>
+<span class="sd">    - fama_french: Fama-French 3 factors</span>
+<span class="sd">    - he_kelly_manela: He-Kelly-Manela intermediary capital factors</span>
+<span class="sd">    - open_source_bond: Open Source Bond Asset Pricing data</span>
+<span class="sd">    - wrds: WRDS CRSP Treasury and corporate bond data</span>
+
+<span class="sd">Each submodule follows a standard interface:</span>
+<span class="sd">    - pull(data_dir, ...): Download data from source</span>
+<span class="sd">    - load(data_dir, variant, format, pull_if_not_found, lazy): Load cached data (returns polars)</span>
+<span class="sd">    - to_long_format(df): Convert to long format [unique_id, ds, y]</span>
+
+<span class="sd">Example usage:</span>
+<span class="sd">    from finm.data import federal_reserve</span>
+
+<span class="sd">    # Load with auto-pull if data doesn&#39;t exist</span>
+<span class="sd">    df = federal_reserve.load(</span>
+<span class="sd">        data_dir=&quot;./data&quot;,</span>
+<span class="sd">        pull_if_not_found=True,</span>
+<span class="sd">        accept_license=True,</span>
+<span class="sd">    )</span>
+
+<span class="sd">    # Get a LazyFrame for deferred computation</span>
+<span class="sd">    lf = federal_reserve.load(data_dir=&quot;./data&quot;, lazy=True)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">polars</span> <span class="k">as</span> <span class="nn">pl</span>
+
+<span class="c1"># Import submodules for direct access</span>
+<span class="kn">from</span> <span class="nn">finm.data</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">fama_french</span><span class="p">,</span>
+    <span class="n">federal_reserve</span><span class="p">,</span>
+    <span class="n">he_kelly_manela</span><span class="p">,</span>
+    <span class="n">open_source_bond</span><span class="p">,</span>
+    <span class="n">wrds</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="n">FormatType</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;wide&quot;</span><span class="p">,</span> <span class="s2">&quot;long&quot;</span><span class="p">]</span>
+
+
+<span class="c1"># ==============================================================================</span>
+<span class="c1"># Federal Reserve - Descriptive wrapper functions</span>
+<span class="c1"># ==============================================================================</span>
+
+
+<div class="viewcode-block" id="pull_fed_yield_curve">
+<a class="viewcode-back" href="../../apidocs/finm/finm.data.html#finm.data.pull_fed_yield_curve">[docs]</a>
+<span class="k">def</span> <span class="nf">pull_fed_yield_curve</span><span class="p">(</span><span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Download Federal Reserve yield curve data.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path or str</span>
+<span class="sd">        Directory to save downloaded data.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple[pd.DataFrame, pd.DataFrame]</span>
+<span class="sd">        (df_all, df_standard) - Full dataset and filtered dataset.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">federal_reserve</span><span class="o">.</span><span class="n">pull</span><span class="p">(</span><span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="load_fed_yield_curve">
+<a class="viewcode-back" href="../../apidocs/finm/finm.data.html#finm.data.load_fed_yield_curve">[docs]</a>
+<span class="k">def</span> <span class="nf">load_fed_yield_curve</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="n">FormatType</span> <span class="o">=</span> <span class="s2">&quot;wide&quot;</span><span class="p">,</span>
+    <span class="n">pull_if_not_found</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">accept_license</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">lazy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pl</span><span class="o">.</span><span class="n">LazyFrame</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load Federal Reserve yield curve data (SVENY01-30).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path or str</span>
+<span class="sd">        Directory containing the parquet files.</span>
+<span class="sd">    format : {&quot;wide&quot;, &quot;long&quot;}, default &quot;wide&quot;</span>
+<span class="sd">        Output format.</span>
+<span class="sd">    pull_if_not_found : bool, default False</span>
+<span class="sd">        If True and data doesn&#39;t exist locally, pull from source.</span>
+<span class="sd">    accept_license : bool, default False</span>
+<span class="sd">        Must be True when pull_if_not_found=True.</span>
+<span class="sd">    lazy : bool, default False</span>
+<span class="sd">        If True, return a polars LazyFrame instead of DataFrame.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pl.DataFrame or pl.LazyFrame</span>
+<span class="sd">        Yield curve data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">federal_reserve</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;standard&quot;</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span>
+        <span class="n">pull_if_not_found</span><span class="o">=</span><span class="n">pull_if_not_found</span><span class="p">,</span>
+        <span class="n">accept_license</span><span class="o">=</span><span class="n">accept_license</span><span class="p">,</span>
+        <span class="n">lazy</span><span class="o">=</span><span class="n">lazy</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="load_fed_yield_curve_all">
+<a class="viewcode-back" href="../../apidocs/finm/finm.data.html#finm.data.load_fed_yield_curve_all">[docs]</a>
+<span class="k">def</span> <span class="nf">load_fed_yield_curve_all</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="n">FormatType</span> <span class="o">=</span> <span class="s2">&quot;wide&quot;</span><span class="p">,</span>
+    <span class="n">pull_if_not_found</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">accept_license</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">lazy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pl</span><span class="o">.</span><span class="n">LazyFrame</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load full Federal Reserve yield curve data.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path or str</span>
+<span class="sd">        Directory containing the parquet files.</span>
+<span class="sd">    format : {&quot;wide&quot;, &quot;long&quot;}, default &quot;wide&quot;</span>
+<span class="sd">        Output format.</span>
+<span class="sd">    pull_if_not_found : bool, default False</span>
+<span class="sd">        If True and data doesn&#39;t exist locally, pull from source.</span>
+<span class="sd">    accept_license : bool, default False</span>
+<span class="sd">        Must be True when pull_if_not_found=True.</span>
+<span class="sd">    lazy : bool, default False</span>
+<span class="sd">        If True, return a polars LazyFrame instead of DataFrame.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pl.DataFrame or pl.LazyFrame</span>
+<span class="sd">        Full yield curve data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">federal_reserve</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span>
+        <span class="n">pull_if_not_found</span><span class="o">=</span><span class="n">pull_if_not_found</span><span class="p">,</span>
+        <span class="n">accept_license</span><span class="o">=</span><span class="n">accept_license</span><span class="p">,</span>
+        <span class="n">lazy</span><span class="o">=</span><span class="n">lazy</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="c1"># ==============================================================================</span>
+<span class="c1"># Fama-French - Descriptive wrapper functions</span>
+<span class="c1"># ==============================================================================</span>
+
+
+<div class="viewcode-block" id="pull_fama_french_factors">
+<a class="viewcode-back" href="../../apidocs/finm/finm.data.html#finm.data.pull_fama_french_factors">[docs]</a>
+<span class="k">def</span> <span class="nf">pull_fama_french_factors</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">start</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">end</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">frequency</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;daily&quot;</span><span class="p">,</span> <span class="s2">&quot;monthly&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;daily&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Download Fama-French factors from Ken French&#39;s Data Library.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path or str</span>
+<span class="sd">        Directory to save downloaded data.</span>
+<span class="sd">    start : str or datetime, optional</span>
+<span class="sd">        Start date.</span>
+<span class="sd">    end : str or datetime, optional</span>
+<span class="sd">        End date.</span>
+<span class="sd">    frequency : {&quot;daily&quot;, &quot;monthly&quot;}, default &quot;daily&quot;</span>
+<span class="sd">        Data frequency.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pd.DataFrame</span>
+<span class="sd">        Factor data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">fama_french</span><span class="o">.</span><span class="n">pull</span><span class="p">(</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="n">frequency</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="load_fama_french_factors">
+<a class="viewcode-back" href="../../apidocs/finm/finm.data.html#finm.data.load_fama_french_factors">[docs]</a>
+<span class="k">def</span> <span class="nf">load_fama_french_factors</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">start</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">end</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="n">FormatType</span> <span class="o">=</span> <span class="s2">&quot;wide&quot;</span><span class="p">,</span>
+    <span class="n">frequency</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;daily&quot;</span><span class="p">,</span> <span class="s2">&quot;monthly&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;daily&quot;</span><span class="p">,</span>
+    <span class="n">pull_if_not_found</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">accept_license</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">lazy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pl</span><span class="o">.</span><span class="n">LazyFrame</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load Fama-French factors from bundled or cached data.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path or str, optional</span>
+<span class="sd">        Directory containing the data. If None, loads bundled data.</span>
+<span class="sd">    start : str or datetime, optional</span>
+<span class="sd">        Start date to filter.</span>
+<span class="sd">    end : str or datetime, optional</span>
+<span class="sd">        End date to filter.</span>
+<span class="sd">    format : {&quot;wide&quot;, &quot;long&quot;}, default &quot;wide&quot;</span>
+<span class="sd">        Output format.</span>
+<span class="sd">    frequency : {&quot;daily&quot;, &quot;monthly&quot;}, default &quot;daily&quot;</span>
+<span class="sd">        Data frequency to pull if pull_if_not_found=True.</span>
+<span class="sd">    pull_if_not_found : bool, default False</span>
+<span class="sd">        If True and data doesn&#39;t exist locally, pull from source.</span>
+<span class="sd">    accept_license : bool, default False</span>
+<span class="sd">        Must be True when pull_if_not_found=True.</span>
+<span class="sd">    lazy : bool, default False</span>
+<span class="sd">        If True, return a polars LazyFrame instead of DataFrame.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pl.DataFrame or pl.LazyFrame</span>
+<span class="sd">        Factor data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">fama_french</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span>
+        <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span>
+        <span class="n">frequency</span><span class="o">=</span><span class="n">frequency</span><span class="p">,</span>
+        <span class="n">pull_if_not_found</span><span class="o">=</span><span class="n">pull_if_not_found</span><span class="p">,</span>
+        <span class="n">accept_license</span><span class="o">=</span><span class="n">accept_license</span><span class="p">,</span>
+        <span class="n">lazy</span><span class="o">=</span><span class="n">lazy</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="c1"># ==============================================================================</span>
+<span class="c1"># He-Kelly-Manela - Descriptive wrapper functions</span>
+<span class="c1"># ==============================================================================</span>
+
+
+<div class="viewcode-block" id="pull_he_kelly_manela">
+<a class="viewcode-back" href="../../apidocs/finm/finm.data.html#finm.data.pull_he_kelly_manela">[docs]</a>
+<span class="k">def</span> <span class="nf">pull_he_kelly_manela</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">accept_license</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Download He-Kelly-Manela factors.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path or str</span>
+<span class="sd">        Directory to save downloaded data.</span>
+<span class="sd">    accept_license : bool, default False</span>
+<span class="sd">        Must be set to True to acknowledge the data provider&#39;s terms.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">he_kelly_manela</span><span class="o">.</span><span class="n">pull</span><span class="p">(</span><span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">accept_license</span><span class="o">=</span><span class="n">accept_license</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="load_he_kelly_manela_factors_monthly">
+<a class="viewcode-back" href="../../apidocs/finm/finm.data.html#finm.data.load_he_kelly_manela_factors_monthly">[docs]</a>
+<span class="k">def</span> <span class="nf">load_he_kelly_manela_factors_monthly</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="n">FormatType</span> <span class="o">=</span> <span class="s2">&quot;wide&quot;</span><span class="p">,</span>
+    <span class="n">pull_if_not_found</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">accept_license</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">lazy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pl</span><span class="o">.</span><span class="n">LazyFrame</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load He-Kelly-Manela monthly factors.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path or str</span>
+<span class="sd">        Directory containing the data.</span>
+<span class="sd">    format : {&quot;wide&quot;, &quot;long&quot;}, default &quot;wide&quot;</span>
+<span class="sd">        Output format.</span>
+<span class="sd">    pull_if_not_found : bool, default False</span>
+<span class="sd">        If True and data doesn&#39;t exist locally, pull from source.</span>
+<span class="sd">    accept_license : bool, default False</span>
+<span class="sd">        Must be True when pull_if_not_found=True.</span>
+<span class="sd">    lazy : bool, default False</span>
+<span class="sd">        If True, return a polars LazyFrame instead of DataFrame.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pl.DataFrame or pl.LazyFrame</span>
+<span class="sd">        Monthly factor data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">he_kelly_manela</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;factors_monthly&quot;</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span>
+        <span class="n">pull_if_not_found</span><span class="o">=</span><span class="n">pull_if_not_found</span><span class="p">,</span>
+        <span class="n">accept_license</span><span class="o">=</span><span class="n">accept_license</span><span class="p">,</span>
+        <span class="n">lazy</span><span class="o">=</span><span class="n">lazy</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="load_he_kelly_manela_factors_daily">
+<a class="viewcode-back" href="../../apidocs/finm/finm.data.html#finm.data.load_he_kelly_manela_factors_daily">[docs]</a>
+<span class="k">def</span> <span class="nf">load_he_kelly_manela_factors_daily</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="n">FormatType</span> <span class="o">=</span> <span class="s2">&quot;wide&quot;</span><span class="p">,</span>
+    <span class="n">pull_if_not_found</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">accept_license</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">lazy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pl</span><span class="o">.</span><span class="n">LazyFrame</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load He-Kelly-Manela daily factors.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path or str</span>
+<span class="sd">        Directory containing the data.</span>
+<span class="sd">    format : {&quot;wide&quot;, &quot;long&quot;}, default &quot;wide&quot;</span>
+<span class="sd">        Output format.</span>
+<span class="sd">    pull_if_not_found : bool, default False</span>
+<span class="sd">        If True and data doesn&#39;t exist locally, pull from source.</span>
+<span class="sd">    accept_license : bool, default False</span>
+<span class="sd">        Must be True when pull_if_not_found=True.</span>
+<span class="sd">    lazy : bool, default False</span>
+<span class="sd">        If True, return a polars LazyFrame instead of DataFrame.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pl.DataFrame or pl.LazyFrame</span>
+<span class="sd">        Daily factor data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">he_kelly_manela</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;factors_daily&quot;</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span>
+        <span class="n">pull_if_not_found</span><span class="o">=</span><span class="n">pull_if_not_found</span><span class="p">,</span>
+        <span class="n">accept_license</span><span class="o">=</span><span class="n">accept_license</span><span class="p">,</span>
+        <span class="n">lazy</span><span class="o">=</span><span class="n">lazy</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="load_he_kelly_manela_all">
+<a class="viewcode-back" href="../../apidocs/finm/finm.data.html#finm.data.load_he_kelly_manela_all">[docs]</a>
+<span class="k">def</span> <span class="nf">load_he_kelly_manela_all</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="n">FormatType</span> <span class="o">=</span> <span class="s2">&quot;wide&quot;</span><span class="p">,</span>
+    <span class="n">pull_if_not_found</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">accept_license</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">lazy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pl</span><span class="o">.</span><span class="n">LazyFrame</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load He-Kelly-Manela factors and test assets.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path or str</span>
+<span class="sd">        Directory containing the data.</span>
+<span class="sd">    format : {&quot;wide&quot;, &quot;long&quot;}, default &quot;wide&quot;</span>
+<span class="sd">        Output format.</span>
+<span class="sd">    pull_if_not_found : bool, default False</span>
+<span class="sd">        If True and data doesn&#39;t exist locally, pull from source.</span>
+<span class="sd">    accept_license : bool, default False</span>
+<span class="sd">        Must be True when pull_if_not_found=True.</span>
+<span class="sd">    lazy : bool, default False</span>
+<span class="sd">        If True, return a polars LazyFrame instead of DataFrame.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pl.DataFrame or pl.LazyFrame</span>
+<span class="sd">        Factors and test assets data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">he_kelly_manela</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span>
+        <span class="n">pull_if_not_found</span><span class="o">=</span><span class="n">pull_if_not_found</span><span class="p">,</span>
+        <span class="n">accept_license</span><span class="o">=</span><span class="n">accept_license</span><span class="p">,</span>
+        <span class="n">lazy</span><span class="o">=</span><span class="n">lazy</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="c1"># ==============================================================================</span>
+<span class="c1"># Open Source Bond - Descriptive wrapper functions</span>
+<span class="c1"># ==============================================================================</span>
+
+
+<div class="viewcode-block" id="pull_open_source_bond">
+<a class="viewcode-back" href="../../apidocs/finm/finm.data.html#finm.data.pull_open_source_bond">[docs]</a>
+<span class="k">def</span> <span class="nf">pull_open_source_bond</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">variant</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span>
+        <span class="s2">&quot;treasury&quot;</span><span class="p">,</span> <span class="s2">&quot;corporate_daily&quot;</span><span class="p">,</span> <span class="s2">&quot;corporate_monthly&quot;</span><span class="p">,</span> <span class="s2">&quot;corporate_all&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span><span class="p">,</span>
+    <span class="n">accept_license</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Download Open Source Bond data.</span>
+
+<span class="sd">    Website: https://openbondassetpricing.com/</span>
+<span class="sd">    License: MIT License (citation required)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path or str</span>
+<span class="sd">        Directory to save downloaded data.</span>
+<span class="sd">    variant : str, default &quot;all&quot;</span>
+<span class="sd">        Which dataset(s) to download:</span>
+<span class="sd">        - &quot;treasury&quot;: Treasury bond returns</span>
+<span class="sd">        - &quot;corporate_daily&quot;: Daily corporate bond PRICES</span>
+<span class="sd">        - &quot;corporate_monthly&quot;: Monthly corporate bond RETURNS with factor signals</span>
+<span class="sd">        - &quot;corporate_all&quot;: Both corporate datasets</span>
+<span class="sd">        - &quot;all&quot;: All datasets</span>
+<span class="sd">    accept_license : bool, default False</span>
+<span class="sd">        Must be True to acknowledge the data provider&#39;s license terms.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">open_source_bond</span><span class="o">.</span><span class="n">pull</span><span class="p">(</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">variant</span><span class="o">=</span><span class="n">variant</span><span class="p">,</span> <span class="n">accept_license</span><span class="o">=</span><span class="n">accept_license</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="load_treasury_returns">
+<a class="viewcode-back" href="../../apidocs/finm/finm.data.html#finm.data.load_treasury_returns">[docs]</a>
+<span class="k">def</span> <span class="nf">load_treasury_returns</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="n">FormatType</span> <span class="o">=</span> <span class="s2">&quot;wide&quot;</span><span class="p">,</span>
+    <span class="n">pull_if_not_found</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">accept_license</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">lazy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pl</span><span class="o">.</span><span class="n">LazyFrame</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load treasury bond returns.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path or str</span>
+<span class="sd">        Directory containing the data.</span>
+<span class="sd">    format : {&quot;wide&quot;, &quot;long&quot;}, default &quot;wide&quot;</span>
+<span class="sd">        Output format.</span>
+<span class="sd">    pull_if_not_found : bool, default False</span>
+<span class="sd">        If True and data doesn&#39;t exist locally, pull from source.</span>
+<span class="sd">    accept_license : bool, default False</span>
+<span class="sd">        Must be True when pull_if_not_found=True.</span>
+<span class="sd">    lazy : bool, default False</span>
+<span class="sd">        If True, return a polars LazyFrame instead of DataFrame.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pl.DataFrame or pl.LazyFrame</span>
+<span class="sd">        Treasury bond returns.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">open_source_bond</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;treasury&quot;</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span>
+        <span class="n">pull_if_not_found</span><span class="o">=</span><span class="n">pull_if_not_found</span><span class="p">,</span>
+        <span class="n">accept_license</span><span class="o">=</span><span class="n">accept_license</span><span class="p">,</span>
+        <span class="n">lazy</span><span class="o">=</span><span class="n">lazy</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="load_corporate_bond_returns">
+<a class="viewcode-back" href="../../apidocs/finm/finm.data.html#finm.data.load_corporate_bond_returns">[docs]</a>
+<span class="k">def</span> <span class="nf">load_corporate_bond_returns</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="n">FormatType</span> <span class="o">=</span> <span class="s2">&quot;wide&quot;</span><span class="p">,</span>
+    <span class="n">pull_if_not_found</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">accept_license</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">lazy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pl</span><span class="o">.</span><span class="n">LazyFrame</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load corporate bond returns (monthly).</span>
+
+<span class="sd">    This loads the monthly corporate bond returns with 108 factor signals.</span>
+<span class="sd">    For daily prices, use load_corporate_bond_prices_daily().</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path or str</span>
+<span class="sd">        Directory containing the data.</span>
+<span class="sd">    format : {&quot;wide&quot;, &quot;long&quot;}, default &quot;wide&quot;</span>
+<span class="sd">        Output format.</span>
+<span class="sd">    pull_if_not_found : bool, default False</span>
+<span class="sd">        If True and data doesn&#39;t exist locally, pull from source.</span>
+<span class="sd">    accept_license : bool, default False</span>
+<span class="sd">        Must be True when pull_if_not_found=True.</span>
+<span class="sd">    lazy : bool, default False</span>
+<span class="sd">        If True, return a polars LazyFrame instead of DataFrame.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pl.DataFrame or pl.LazyFrame</span>
+<span class="sd">        Corporate bond returns (monthly). Key columns:</span>
+<span class="sd">        - cusip: Bond identifier</span>
+<span class="sd">        - date: Month-end date</span>
+<span class="sd">        - ret_vw: Volume-weighted total return</span>
+<span class="sd">        - rfret: Risk-free rate</span>
+<span class="sd">        - tret: Duration-matched Treasury return</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">open_source_bond</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;corporate_monthly&quot;</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span>
+        <span class="n">pull_if_not_found</span><span class="o">=</span><span class="n">pull_if_not_found</span><span class="p">,</span>
+        <span class="n">accept_license</span><span class="o">=</span><span class="n">accept_license</span><span class="p">,</span>
+        <span class="n">lazy</span><span class="o">=</span><span class="n">lazy</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="load_corporate_bond_prices_daily">
+<a class="viewcode-back" href="../../apidocs/finm/finm.data.html#finm.data.load_corporate_bond_prices_daily">[docs]</a>
+<span class="k">def</span> <span class="nf">load_corporate_bond_prices_daily</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="n">FormatType</span> <span class="o">=</span> <span class="s2">&quot;wide&quot;</span><span class="p">,</span>
+    <span class="n">pull_if_not_found</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">accept_license</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">lazy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pl</span><span class="o">.</span><span class="n">LazyFrame</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load daily corporate bond prices (TRACE Stage 1).</span>
+
+<span class="sd">    This is PRICE data, not returns. For returns, use load_corporate_bond_returns().</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path or str</span>
+<span class="sd">        Directory containing the data.</span>
+<span class="sd">    format : {&quot;wide&quot;, &quot;long&quot;}, default &quot;wide&quot;</span>
+<span class="sd">        Output format.</span>
+<span class="sd">    pull_if_not_found : bool, default False</span>
+<span class="sd">        If True and data doesn&#39;t exist locally, pull from source.</span>
+<span class="sd">    accept_license : bool, default False</span>
+<span class="sd">        Must be True when pull_if_not_found=True.</span>
+<span class="sd">    lazy : bool, default False</span>
+<span class="sd">        If True, return a polars LazyFrame instead of DataFrame.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pl.DataFrame or pl.LazyFrame</span>
+<span class="sd">        Daily corporate bond prices. Key columns:</span>
+<span class="sd">        - cusip_id: Bond identifier</span>
+<span class="sd">        - trd_exctn_dt: Trade execution date</span>
+<span class="sd">        - pr: Price</span>
+<span class="sd">        - mod_dur: Modified duration</span>
+<span class="sd">        - ytm: Yield to maturity</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">open_source_bond</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;corporate_daily&quot;</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span>
+        <span class="n">pull_if_not_found</span><span class="o">=</span><span class="n">pull_if_not_found</span><span class="p">,</span>
+        <span class="n">accept_license</span><span class="o">=</span><span class="n">accept_license</span><span class="p">,</span>
+        <span class="n">lazy</span><span class="o">=</span><span class="n">lazy</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="load_corporate_bond_returns_monthly">
+<a class="viewcode-back" href="../../apidocs/finm/finm.data.html#finm.data.load_corporate_bond_returns_monthly">[docs]</a>
+<span class="k">def</span> <span class="nf">load_corporate_bond_returns_monthly</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="n">FormatType</span> <span class="o">=</span> <span class="s2">&quot;wide&quot;</span><span class="p">,</span>
+    <span class="n">pull_if_not_found</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">accept_license</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">lazy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pl</span><span class="o">.</span><span class="n">LazyFrame</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load monthly corporate bond returns with factor signals.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path or str</span>
+<span class="sd">        Directory containing the data.</span>
+<span class="sd">    format : {&quot;wide&quot;, &quot;long&quot;}, default &quot;wide&quot;</span>
+<span class="sd">        Output format.</span>
+<span class="sd">    pull_if_not_found : bool, default False</span>
+<span class="sd">        If True and data doesn&#39;t exist locally, pull from source.</span>
+<span class="sd">    accept_license : bool, default False</span>
+<span class="sd">        Must be True when pull_if_not_found=True.</span>
+<span class="sd">    lazy : bool, default False</span>
+<span class="sd">        If True, return a polars LazyFrame instead of DataFrame.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pl.DataFrame or pl.LazyFrame</span>
+<span class="sd">        Corporate bond returns (monthly) with 108 factor signals.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">open_source_bond</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;corporate_monthly&quot;</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span>
+        <span class="n">pull_if_not_found</span><span class="o">=</span><span class="n">pull_if_not_found</span><span class="p">,</span>
+        <span class="n">accept_license</span><span class="o">=</span><span class="n">accept_license</span><span class="p">,</span>
+        <span class="n">lazy</span><span class="o">=</span><span class="n">lazy</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="c1"># ==============================================================================</span>
+<span class="c1"># WRDS - Descriptive wrapper functions</span>
+<span class="c1"># ==============================================================================</span>
+
+
+<div class="viewcode-block" id="pull_wrds_treasury">
+<a class="viewcode-back" href="../../apidocs/finm/finm.data.html#finm.data.pull_wrds_treasury">[docs]</a>
+<span class="k">def</span> <span class="nf">pull_wrds_treasury</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">wrds_username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">start_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">end_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">variant</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;daily&quot;</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="s2">&quot;consolidated&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;consolidated&quot;</span><span class="p">,</span>
+    <span class="n">with_runness</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Pull CRSP Treasury data from WRDS.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path or str</span>
+<span class="sd">        Directory to save the data.</span>
+<span class="sd">    wrds_username : str</span>
+<span class="sd">        WRDS username.</span>
+<span class="sd">    start_date : str</span>
+<span class="sd">        Start date in &#39;YYYY-MM-DD&#39; format.</span>
+<span class="sd">    end_date : str</span>
+<span class="sd">        End date in &#39;YYYY-MM-DD&#39; format.</span>
+<span class="sd">    variant : {&quot;daily&quot;, &quot;info&quot;, &quot;consolidated&quot;}, default &quot;consolidated&quot;</span>
+<span class="sd">        Which data variant to pull.</span>
+<span class="sd">    with_runness : bool, default True</span>
+<span class="sd">        Whether to calculate runness for consolidated data.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pd.DataFrame</span>
+<span class="sd">        Treasury data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">wrds</span><span class="o">.</span><span class="n">pull</span><span class="p">(</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;treasury&quot;</span><span class="p">,</span>
+        <span class="n">wrds_username</span><span class="o">=</span><span class="n">wrds_username</span><span class="p">,</span>
+        <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span>
+        <span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span>
+        <span class="n">treasury_variant</span><span class="o">=</span><span class="n">variant</span><span class="p">,</span>
+        <span class="n">with_runness</span><span class="o">=</span><span class="n">with_runness</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="load_wrds_treasury">
+<a class="viewcode-back" href="../../apidocs/finm/finm.data.html#finm.data.load_wrds_treasury">[docs]</a>
+<span class="k">def</span> <span class="nf">load_wrds_treasury</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">variant</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;daily&quot;</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="s2">&quot;consolidated&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;consolidated&quot;</span><span class="p">,</span>
+    <span class="n">with_runness</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="n">FormatType</span> <span class="o">=</span> <span class="s2">&quot;wide&quot;</span><span class="p">,</span>
+    <span class="n">pull_if_not_found</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">wrds_username</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">start_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">end_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">lazy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pl</span><span class="o">.</span><span class="n">LazyFrame</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load CRSP Treasury data from local cache.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path or str</span>
+<span class="sd">        Directory containing the parquet files.</span>
+<span class="sd">    variant : {&quot;daily&quot;, &quot;info&quot;, &quot;consolidated&quot;}, default &quot;consolidated&quot;</span>
+<span class="sd">        Which data variant to load.</span>
+<span class="sd">    with_runness : bool, default True</span>
+<span class="sd">        For consolidated variant, whether to load version with runness.</span>
+<span class="sd">    format : {&quot;wide&quot;, &quot;long&quot;}, default &quot;wide&quot;</span>
+<span class="sd">        Output format.</span>
+<span class="sd">    pull_if_not_found : bool, default False</span>
+<span class="sd">        If True and data doesn&#39;t exist locally, pull from WRDS.</span>
+<span class="sd">    wrds_username : str, optional</span>
+<span class="sd">        WRDS username. Required when pull_if_not_found=True.</span>
+<span class="sd">    start_date : str, optional</span>
+<span class="sd">        Start date (&#39;YYYY-MM-DD&#39;). Required when pull_if_not_found=True.</span>
+<span class="sd">    end_date : str, optional</span>
+<span class="sd">        End date (&#39;YYYY-MM-DD&#39;). Required when pull_if_not_found=True.</span>
+<span class="sd">    lazy : bool, default False</span>
+<span class="sd">        If True, return a polars LazyFrame instead of DataFrame.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pl.DataFrame or pl.LazyFrame</span>
+<span class="sd">        Treasury data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">wrds</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;treasury&quot;</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span>
+        <span class="n">treasury_variant</span><span class="o">=</span><span class="n">variant</span><span class="p">,</span>
+        <span class="n">with_runness</span><span class="o">=</span><span class="n">with_runness</span><span class="p">,</span>
+        <span class="n">pull_if_not_found</span><span class="o">=</span><span class="n">pull_if_not_found</span><span class="p">,</span>
+        <span class="n">wrds_username</span><span class="o">=</span><span class="n">wrds_username</span><span class="p">,</span>
+        <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span>
+        <span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span>
+        <span class="n">lazy</span><span class="o">=</span><span class="n">lazy</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="pull_wrds_corp_bond">
+<a class="viewcode-back" href="../../apidocs/finm/finm.data.html#finm.data.pull_wrds_corp_bond">[docs]</a>
+<span class="k">def</span> <span class="nf">pull_wrds_corp_bond</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">wrds_username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">start_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">end_date</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Pull corporate bond data from WRDS.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path or str</span>
+<span class="sd">        Directory to save the data.</span>
+<span class="sd">    wrds_username : str</span>
+<span class="sd">        WRDS username.</span>
+<span class="sd">    start_date : str</span>
+<span class="sd">        Start date in &#39;YYYY-MM-DD&#39; format.</span>
+<span class="sd">    end_date : str</span>
+<span class="sd">        End date in &#39;YYYY-MM-DD&#39; format.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pd.DataFrame</span>
+<span class="sd">        Corporate bond data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">wrds</span><span class="o">.</span><span class="n">pull</span><span class="p">(</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;corp_bond&quot;</span><span class="p">,</span>
+        <span class="n">wrds_username</span><span class="o">=</span><span class="n">wrds_username</span><span class="p">,</span>
+        <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span>
+        <span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="load_wrds_corp_bond">
+<a class="viewcode-back" href="../../apidocs/finm/finm.data.html#finm.data.load_wrds_corp_bond">[docs]</a>
+<span class="k">def</span> <span class="nf">load_wrds_corp_bond</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="n">FormatType</span> <span class="o">=</span> <span class="s2">&quot;wide&quot;</span><span class="p">,</span>
+    <span class="n">pull_if_not_found</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">wrds_username</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">start_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">end_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">lazy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pl</span><span class="o">.</span><span class="n">LazyFrame</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load corporate bond data from local cache.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir : Path or str</span>
+<span class="sd">        Directory containing the parquet file.</span>
+<span class="sd">    format : {&quot;wide&quot;, &quot;long&quot;}, default &quot;wide&quot;</span>
+<span class="sd">        Output format.</span>
+<span class="sd">    pull_if_not_found : bool, default False</span>
+<span class="sd">        If True and data doesn&#39;t exist locally, pull from WRDS.</span>
+<span class="sd">    wrds_username : str, optional</span>
+<span class="sd">        WRDS username. Required when pull_if_not_found=True.</span>
+<span class="sd">    start_date : str, optional</span>
+<span class="sd">        Start date (&#39;YYYY-MM-DD&#39;). Required when pull_if_not_found=True.</span>
+<span class="sd">    end_date : str, optional</span>
+<span class="sd">        End date (&#39;YYYY-MM-DD&#39;). Required when pull_if_not_found=True.</span>
+<span class="sd">    lazy : bool, default False</span>
+<span class="sd">        If True, return a polars LazyFrame instead of DataFrame.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pl.DataFrame or pl.LazyFrame</span>
+<span class="sd">        Corporate bond data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">wrds</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;corp_bond&quot;</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span>
+        <span class="n">pull_if_not_found</span><span class="o">=</span><span class="n">pull_if_not_found</span><span class="p">,</span>
+        <span class="n">wrds_username</span><span class="o">=</span><span class="n">wrds_username</span><span class="p">,</span>
+        <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span>
+        <span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span>
+        <span class="n">lazy</span><span class="o">=</span><span class="n">lazy</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="calc_treasury_runness">
+<a class="viewcode-back" href="../../apidocs/finm/finm.data.html#finm.data.calc_treasury_runness">[docs]</a>
+<span class="k">def</span> <span class="nf">calc_treasury_runness</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate on-the-run/off-the-run status for Treasury securities.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : pd.DataFrame</span>
+<span class="sd">        DataFrame with Treasury data.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pd.DataFrame</span>
+<span class="sd">        Data with &#39;run&#39; column added.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">wrds</span><span class="o">.</span><span class="n">calc_runness</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># Submodules</span>
+    <span class="s2">&quot;federal_reserve&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;fama_french&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;he_kelly_manela&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;open_source_bond&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;wrds&quot;</span><span class="p">,</span>
+    <span class="c1"># Federal Reserve</span>
+    <span class="s2">&quot;pull_fed_yield_curve&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;load_fed_yield_curve&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;load_fed_yield_curve_all&quot;</span><span class="p">,</span>
+    <span class="c1"># Fama-French</span>
+    <span class="s2">&quot;pull_fama_french_factors&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;load_fama_french_factors&quot;</span><span class="p">,</span>
+    <span class="c1"># He-Kelly-Manela</span>
+    <span class="s2">&quot;pull_he_kelly_manela&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;load_he_kelly_manela_factors_monthly&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;load_he_kelly_manela_factors_daily&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;load_he_kelly_manela_all&quot;</span><span class="p">,</span>
+    <span class="c1"># Open Source Bond</span>
+    <span class="s2">&quot;pull_open_source_bond&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;load_treasury_returns&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;load_corporate_bond_returns&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;load_corporate_bond_prices_daily&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;load_corporate_bond_returns_monthly&quot;</span><span class="p">,</span>
+    <span class="c1"># WRDS</span>
+    <span class="s2">&quot;pull_wrds_treasury&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;load_wrds_treasury&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pull_wrds_corp_bond&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;load_wrds_corp_bond&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;calc_treasury_runness&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

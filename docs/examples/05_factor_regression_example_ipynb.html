@@ -1,0 +1,1053 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Factor Regression Analysis with finm &#8212; finm Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=55cd40c9" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=61571c06"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/05_factor_regression_example_ipynb';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Adding New Data Sources" href="../adding_data_sources.html" />
+    <link rel="prev" title="Data Module Integration Tests" href="04_data_integration_tests_ipynb.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search documentation..."
+         aria-label="Search documentation..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="finm Documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="finm Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    finm - Financial Mathematics Python Package
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data_module.html">Data Module Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_replicate_GSW_yield_curve_ipynb.html">Replicating the Gurkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_corp_bond_returns_ipynb.html">Example - Analyzing Corporate Bond Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_corp_bond_returns_ftsfr_HKM_ipynb.html">Cleaning Summary: Corporate Bond Returns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_data_integration_tests_ipynb.html">Data Module Integration Tests</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Factor Regression Analysis with finm</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../adding_data_sources.html">Adding New Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../apidocs/index.html">API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../apidocs/finm/finm.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../apidocs/finm/finm.analytics.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.analytics.factor_analysis.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics.factor_analysis</span></code></a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../apidocs/finm/finm.data.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.data.fama_french.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.fama_french</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.data.federal_reserve.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.federal_reserve</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.data.he_kelly_manela.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.he_kelly_manela</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.data.open_source_bond.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.open_source_bond</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.data.wrds.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.wrds</span></code></a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../apidocs/finm/finm.fixedincome.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.fixedincome.bonds.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.bonds</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.fixedincome.calc_corp_bond_returns.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.calc_corp_bond_returns</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.fixedincome.gsw2006_yield_curve.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.gsw2006_yield_curve</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.fixedincome.pricing.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.pricing</span></code></a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/finm" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/finm/issues/new?title=Issue%20on%20page%20%2Fexamples/05_factor_regression_example_ipynb.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/examples/05_factor_regression_example_ipynb.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Factor Regression Analysis with finm</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-functions">Key Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-fama-french-factors">1. Load Fama-French Factors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-synthetic-portfolio-returns">2. Create Synthetic Portfolio Returns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capm-regression">3. CAPM Regression</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-capm-results">Interpretation of CAPM Results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fama-french-3-factor-regression">4. Fama-French 3-Factor Regression</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-capm-and-ff3-results">Comparing CAPM and FF3 Results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-generic-run-factor-regression">5. Using the Generic run_factor_regression()</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-the-regressionresult-dataclass">6. Accessing the RegressionResult Dataclass</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="factor-regression-analysis-with-finm">
+<h1>Factor Regression Analysis with finm<a class="headerlink" href="#factor-regression-analysis-with-finm" title="Link to this heading">#</a></h1>
+<p>This notebook demonstrates how to use the <code class="docutils literal notranslate"><span class="pre">finm</span></code> package to perform
+factor regression analysis, including CAPM and Fama-French 3-factor models.</p>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Understand Jensen’s alpha and factor betas</p></li>
+<li><p>Run CAPM regression and interpret results</p></li>
+<li><p>Run Fama-French 3-factor regression</p></li>
+<li><p>Interpret statistical significance of alpha and betas</p></li>
+</ol>
+</section>
+<section id="key-functions">
+<h2>Key Functions<a class="headerlink" href="#key-functions" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">finm.run_factor_regression()</span></code> - Core OLS regression with full statistics</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">finm.run_capm_regression()</span></code> - Convenience wrapper for CAPM</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">finm.run_fama_french_regression()</span></code> - Convenience wrapper for FF3</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+
+<span class="kn">import</span> <span class="nn">finm</span>
+<span class="kn">from</span> <span class="nn">finm.data</span> <span class="kn">import</span> <span class="n">fama_french</span>
+
+<span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;DATA_DIR&quot;</span><span class="p">,</span> <span class="s2">&quot;./_data&quot;</span><span class="p">))</span>
+<span class="n">DATA_DIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data directory: </span><span class="si">{</span><span class="n">DATA_DIR</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data directory: /Users/jbejarano/GitRepositories/finm/_data
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-fama-french-factors">
+<h2>1. Load Fama-French Factors<a class="headerlink" href="#load-fama-french-factors" title="Link to this heading">#</a></h2>
+<p>The Fama-French 3-factor model includes:</p>
+<ul class="simple">
+<li><p><strong>Mkt-RF</strong>: Market excess return (market return minus risk-free rate)</p></li>
+<li><p><strong>SMB</strong>: Small Minus Big (size factor)</p></li>
+<li><p><strong>HML</strong>: High Minus Low (value factor)</p></li>
+<li><p><strong>RF</strong>: Risk-free rate</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load Fama-French data from bundled data</span>
+<span class="n">ff_factors</span> <span class="o">=</span> <span class="n">fama_french</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+<span class="n">ff_factors</span> <span class="o">=</span> <span class="n">ff_factors</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fama-French factors shape: </span><span class="si">{</span><span class="n">ff_factors</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Date range: </span><span class="si">{</span><span class="n">ff_factors</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">ff_factors</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ff_factors</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fama-French factors shape: (1227, 4)
+Date range: 2021-01-12 00:00:00 to 2025-11-28 00:00:00
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Mkt-RF</th>
+      <th>SMB</th>
+      <th>HML</th>
+      <th>RF</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-01-12</th>
+      <td>0.0037</td>
+      <td>0.0128</td>
+      <td>0.0124</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2021-01-13</th>
+      <td>0.0006</td>
+      <td>-0.0094</td>
+      <td>-0.0045</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2021-01-14</th>
+      <td>-0.0012</td>
+      <td>0.0202</td>
+      <td>0.0113</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2021-01-15</th>
+      <td>-0.0086</td>
+      <td>-0.0050</td>
+      <td>-0.0074</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2021-01-19</th>
+      <td>0.0092</td>
+      <td>0.0088</td>
+      <td>-0.0079</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="create-synthetic-portfolio-returns">
+<h2>2. Create Synthetic Portfolio Returns<a class="headerlink" href="#create-synthetic-portfolio-returns" title="Link to this heading">#</a></h2>
+<p>For demonstration, we’ll create synthetic portfolio returns with known
+characteristics. In practice, you would use actual portfolio or asset returns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create synthetic portfolio returns with known factor exposures</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Use a subset of dates</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">ff_factors</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">120</span><span class="p">:]</span>  <span class="c1"># Last 10 years of monthly data</span>
+<span class="n">factors</span> <span class="o">=</span> <span class="n">ff_factors</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dates</span><span class="p">]</span>
+
+<span class="c1"># Simulate a portfolio with:</span>
+<span class="c1"># - Market beta = 1.2</span>
+<span class="c1"># - SMB beta = 0.5 (tilted toward small caps)</span>
+<span class="c1"># - HML beta = 0.3 (tilted toward value)</span>
+<span class="c1"># - Alpha = 0.002 per month (about 2.4% annually)</span>
+
+<span class="n">market_beta</span> <span class="o">=</span> <span class="mf">1.2</span>
+<span class="n">smb_beta</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">hml_beta</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">monthly_alpha</span> <span class="o">=</span> <span class="mf">0.002</span>
+
+<span class="c1"># Generate portfolio excess returns</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dates</span><span class="p">))</span> <span class="o">*</span> <span class="mf">0.01</span>
+<span class="n">portfolio_excess</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">monthly_alpha</span>
+    <span class="o">+</span> <span class="n">market_beta</span> <span class="o">*</span> <span class="n">factors</span><span class="p">[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">]</span>
+    <span class="o">+</span> <span class="n">smb_beta</span> <span class="o">*</span> <span class="n">factors</span><span class="p">[</span><span class="s2">&quot;SMB&quot;</span><span class="p">]</span>
+    <span class="o">+</span> <span class="n">hml_beta</span> <span class="o">*</span> <span class="n">factors</span><span class="p">[</span><span class="s2">&quot;HML&quot;</span><span class="p">]</span>
+    <span class="o">+</span> <span class="n">noise</span>
+<span class="p">)</span>
+
+<span class="c1"># Raw returns = excess returns + risk-free rate</span>
+<span class="n">portfolio_returns</span> <span class="o">=</span> <span class="n">portfolio_excess</span> <span class="o">+</span> <span class="n">factors</span><span class="p">[</span><span class="s2">&quot;RF&quot;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Synthetic portfolio created with known exposures:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Target Market Beta: </span><span class="si">{</span><span class="n">market_beta</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Target SMB Beta: </span><span class="si">{</span><span class="n">smb_beta</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Target HML Beta: </span><span class="si">{</span><span class="n">hml_beta</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Target Monthly Alpha: </span><span class="si">{</span><span class="n">monthly_alpha</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Synthetic portfolio created with known exposures:
+  Target Market Beta: 1.2
+  Target SMB Beta: 0.5
+  Target HML Beta: 0.3
+  Target Monthly Alpha: 0.002
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="capm-regression">
+<h2>3. CAPM Regression<a class="headerlink" href="#capm-regression" title="Link to this heading">#</a></h2>
+<p>The Capital Asset Pricing Model (CAPM) regresses portfolio excess returns
+on market excess returns:</p>
+<div class="math notranslate nohighlight">
+\[R_p - R_f = \alpha + \beta (R_m - R_f) + \epsilon\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(R_p\)</span> is portfolio return</p></li>
+<li><p><span class="math notranslate nohighlight">\(R_f\)</span> is risk-free rate</p></li>
+<li><p><span class="math notranslate nohighlight">\(R_m\)</span> is market return</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span> is Jensen’s alpha (abnormal return)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta\)</span> is market beta (systematic risk)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run CAPM regression</span>
+<span class="n">capm_result</span> <span class="o">=</span> <span class="n">finm</span><span class="o">.</span><span class="n">run_capm_regression</span><span class="p">(</span>
+    <span class="n">excess_returns</span><span class="o">=</span><span class="n">portfolio_excess</span><span class="p">,</span>
+    <span class="n">market_excess_returns</span><span class="o">=</span><span class="n">factors</span><span class="p">[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">],</span>
+    <span class="n">annualization_factor</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>  <span class="c1"># Monthly data, annualize alpha</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CAPM Regression Results&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Alpha (monthly):     </span><span class="si">{</span><span class="n">capm_result</span><span class="o">.</span><span class="n">alpha</span><span class="si">:</span><span class="s2">&gt;10.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Alpha (annualized):  </span><span class="si">{</span><span class="n">capm_result</span><span class="o">.</span><span class="n">alpha_annualized</span><span class="si">:</span><span class="s2">&gt;10.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Alpha t-stat:        </span><span class="si">{</span><span class="n">capm_result</span><span class="o">.</span><span class="n">alpha_tstat</span><span class="si">:</span><span class="s2">&gt;10.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Alpha p-value:       </span><span class="si">{</span><span class="n">capm_result</span><span class="o">.</span><span class="n">alpha_pvalue</span><span class="si">:</span><span class="s2">&gt;10.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Market Beta:         </span><span class="si">{</span><span class="n">capm_result</span><span class="o">.</span><span class="n">betas</span><span class="p">[</span><span class="s1">&#39;Mkt-RF&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Beta t-stat:         </span><span class="si">{</span><span class="n">capm_result</span><span class="o">.</span><span class="n">beta_tstats</span><span class="p">[</span><span class="s1">&#39;Mkt-RF&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Beta p-value:        </span><span class="si">{</span><span class="n">capm_result</span><span class="o">.</span><span class="n">beta_pvalues</span><span class="p">[</span><span class="s1">&#39;Mkt-RF&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R-squared:           </span><span class="si">{</span><span class="n">capm_result</span><span class="o">.</span><span class="n">r_squared</span><span class="si">:</span><span class="s2">&gt;10.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Observations:        </span><span class="si">{</span><span class="n">capm_result</span><span class="o">.</span><span class="n">n_observations</span><span class="si">:</span><span class="s2">&gt;10d</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CAPM Regression Results
+==================================================
+Alpha (monthly):         0.0010
+Alpha (annualized):       1.25%
+Alpha t-stat:              1.19
+Alpha p-value:           0.2376
+
+Market Beta:               1.47
+Beta t-stat:              12.32
+Beta p-value:            0.0000
+
+R-squared:               56.25%
+Observations:               120
+</pre></div>
+</div>
+</div>
+</div>
+<section id="interpretation-of-capm-results">
+<h3>Interpretation of CAPM Results<a class="headerlink" href="#interpretation-of-capm-results" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Alpha</strong>: The intercept represents Jensen’s alpha - the average return
+not explained by market exposure. A positive alpha suggests outperformance.</p></li>
+<li><p><strong>Beta</strong>: Measures sensitivity to market movements. Beta &gt; 1 means the
+portfolio is more volatile than the market.</p></li>
+<li><p><strong>t-statistic</strong>: Tests if the coefficient is significantly different from
+zero. Generally, |t| &gt; 2 is considered statistically significant.</p></li>
+<li><p><strong>p-value</strong>: Probability of observing this result if the true coefficient
+is zero. p &lt; 0.05 is often used as a significance threshold.</p></li>
+<li><p><strong>R-squared</strong>: Proportion of variance explained by the model.</p></li>
+</ul>
+</section>
+</section>
+<section id="fama-french-3-factor-regression">
+<h2>4. Fama-French 3-Factor Regression<a class="headerlink" href="#fama-french-3-factor-regression" title="Link to this heading">#</a></h2>
+<p>The Fama-French 3-factor model extends CAPM by adding size and value factors:</p>
+<div class="math notranslate nohighlight">
+\[R_p - R_f = \alpha + \beta_{MKT}(R_m - R_f) + \beta_{SMB} \cdot SMB + \beta_{HML} \cdot HML + \epsilon\]</div>
+<p>This model captures additional sources of systematic risk:</p>
+<ul class="simple">
+<li><p><strong>SMB (Small Minus Big)</strong>: Return of small-cap stocks minus large-cap stocks</p></li>
+<li><p><strong>HML (High Minus Low)</strong>: Return of value stocks minus growth stocks</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run Fama-French 3-factor regression</span>
+<span class="n">ff_result</span> <span class="o">=</span> <span class="n">finm</span><span class="o">.</span><span class="n">run_fama_french_regression</span><span class="p">(</span>
+    <span class="n">returns</span><span class="o">=</span><span class="n">portfolio_returns</span><span class="p">,</span>
+    <span class="n">factors</span><span class="o">=</span><span class="n">factors</span><span class="p">,</span>
+    <span class="n">annualization_factor</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fama-French 3-Factor Regression Results&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Alpha (monthly):     </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">alpha</span><span class="si">:</span><span class="s2">&gt;10.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Alpha (annualized):  </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">alpha_annualized</span><span class="si">:</span><span class="s2">&gt;10.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Alpha t-stat:        </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">alpha_tstat</span><span class="si">:</span><span class="s2">&gt;10.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Alpha p-value:       </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">alpha_pvalue</span><span class="si">:</span><span class="s2">&gt;10.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Factor Betas:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">factor</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">,</span> <span class="s2">&quot;SMB&quot;</span><span class="p">,</span> <span class="s2">&quot;HML&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">factor</span><span class="si">:</span><span class="s2">8s</span><span class="si">}</span><span class="s2">:        </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">betas</span><span class="p">[</span><span class="n">factor</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10.2f</span><span class="si">}</span><span class="s2">  &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;(t=</span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">beta_tstats</span><span class="p">[</span><span class="n">factor</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;6.2f</span><span class="si">}</span><span class="s2">, p=</span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">beta_pvalues</span><span class="p">[</span><span class="n">factor</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)&quot;</span>
+    <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R-squared:           </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">r_squared</span><span class="si">:</span><span class="s2">&gt;10.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Adj R-squared:       </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">adj_r_squared</span><span class="si">:</span><span class="s2">&gt;10.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Observations:        </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">n_observations</span><span class="si">:</span><span class="s2">&gt;10d</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fama-French 3-Factor Regression Results
+==================================================
+Alpha (monthly):         0.0009
+Alpha (annualized):       1.13%
+Alpha t-stat:              1.11
+Alpha p-value:           0.2689
+
+Factor Betas:
+  Mkt-RF  :              1.45  (t= 10.32, p=0.0000)
+  SMB     :              0.19  (t=  1.29, p=0.1985)
+  HML     :              0.38  (t=  2.76, p=0.0067)
+
+R-squared:               60.44%
+Adj R-squared:           59.42%
+Observations:               120
+</pre></div>
+</div>
+</div>
+</div>
+<section id="comparing-capm-and-ff3-results">
+<h3>Comparing CAPM and FF3 Results<a class="headerlink" href="#comparing-capm-and-ff3-results" title="Link to this heading">#</a></h3>
+<p>Notice how the results change when we account for size and value exposures:</p>
+<ul class="simple">
+<li><p>The market beta changes when we control for other factors</p></li>
+<li><p>The R-squared increases (more variance explained)</p></li>
+<li><p>Alpha may change as the model explains more of the returns</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create comparison table</span>
+<span class="n">comparison_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Statistic&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Alpha (monthly)&quot;</span><span class="p">,</span> <span class="s2">&quot;Alpha (annual)&quot;</span><span class="p">,</span> <span class="s2">&quot;Alpha t-stat&quot;</span><span class="p">,</span> <span class="s2">&quot;Market Beta&quot;</span><span class="p">,</span> <span class="s2">&quot;R-squared&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;CAPM&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">capm_result</span><span class="o">.</span><span class="n">alpha</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">capm_result</span><span class="o">.</span><span class="n">alpha_annualized</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">capm_result</span><span class="o">.</span><span class="n">alpha_tstat</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">capm_result</span><span class="o">.</span><span class="n">betas</span><span class="p">[</span><span class="s1">&#39;Mkt-RF&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">capm_result</span><span class="o">.</span><span class="n">r_squared</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;FF3&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">alpha</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">alpha_annualized</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">alpha_tstat</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">betas</span><span class="p">[</span><span class="s1">&#39;Mkt-RF&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">r_squared</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">}</span>
+<span class="n">comparison_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">comparison_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model Comparison&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">comparison_df</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model Comparison
+==================================================
+      Statistic   CAPM    FF3
+Alpha (monthly) 0.0010 0.0009
+ Alpha (annual)  1.25%  1.13%
+   Alpha t-stat   1.19   1.11
+    Market Beta   1.47   1.45
+      R-squared 56.25% 60.44%
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="using-the-generic-run-factor-regression">
+<h2>5. Using the Generic run_factor_regression()<a class="headerlink" href="#using-the-generic-run-factor-regression" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">run_factor_regression()</span></code> function is the core function that handles
+both single-factor and multi-factor regressions. It provides full flexibility
+for custom factor models.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Run a custom 2-factor model (Market + SMB only)</span>
+<span class="n">custom_factors</span> <span class="o">=</span> <span class="n">factors</span><span class="p">[[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">,</span> <span class="s2">&quot;SMB&quot;</span><span class="p">]]</span>
+
+<span class="n">custom_result</span> <span class="o">=</span> <span class="n">finm</span><span class="o">.</span><span class="n">run_factor_regression</span><span class="p">(</span>
+    <span class="n">returns</span><span class="o">=</span><span class="n">portfolio_excess</span><span class="p">,</span>
+    <span class="n">factors</span><span class="o">=</span><span class="n">custom_factors</span><span class="p">,</span>
+    <span class="n">annualization_factor</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Custom 2-Factor Model (Market + SMB)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Alpha (annualized):  </span><span class="si">{</span><span class="n">custom_result</span><span class="o">.</span><span class="n">alpha_annualized</span><span class="si">:</span><span class="s2">&gt;10.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">factor_name</span><span class="p">,</span> <span class="n">beta</span> <span class="ow">in</span> <span class="n">custom_result</span><span class="o">.</span><span class="n">betas</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">factor_name</span><span class="si">}</span><span class="s2"> Beta:         </span><span class="si">{</span><span class="n">beta</span><span class="si">:</span><span class="s2">&gt;10.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R-squared:           </span><span class="si">{</span><span class="n">custom_result</span><span class="o">.</span><span class="n">r_squared</span><span class="si">:</span><span class="s2">&gt;10.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Custom 2-Factor Model (Market + SMB)
+==================================================
+Alpha (annualized):       1.41%
+Mkt-RF Beta:               1.32
+SMB Beta:               0.30
+R-squared:               57.85%
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="accessing-the-regressionresult-dataclass">
+<h2>6. Accessing the RegressionResult Dataclass<a class="headerlink" href="#accessing-the-regressionresult-dataclass" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">RegressionResult</span></code> dataclass provides a structured way to access
+all regression statistics. Here’s a complete view of available attributes:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Display all available attributes</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RegressionResult Attributes&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;alpha:             </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">alpha</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;alpha_tstat:       </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">alpha_tstat</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;alpha_pvalue:      </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">alpha_pvalue</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;alpha_se:          </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">alpha_se</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;betas:             </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">betas</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;beta_tstats:       </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">beta_tstats</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;beta_pvalues:      </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">beta_pvalues</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;beta_ses:          </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">beta_ses</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;r_squared:         </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">r_squared</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;adj_r_squared:     </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">adj_r_squared</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;n_observations:    </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">n_observations</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;residual_std:      </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">residual_std</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;alpha_annualized:  </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">alpha_annualized</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;annualization_factor: </span><span class="si">{</span><span class="n">ff_result</span><span class="o">.</span><span class="n">annualization_factor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RegressionResult Attributes
+==================================================
+alpha:             0.0009454922708299472
+alpha_tstat:       1.1110360410517994
+alpha_pvalue:      0.2688504206104958
+alpha_se:          0.0008510005399418594
+betas:             {&#39;Mkt-RF&#39;: np.float64(1.4549760801019018), &#39;SMB&#39;: np.float64(0.18634381266329703), &#39;HML&#39;: np.float64(0.3836527439059588)}
+beta_tstats:       {&#39;Mkt-RF&#39;: np.float64(10.323167198177247), &#39;SMB&#39;: np.float64(1.2933658504647636), &#39;HML&#39;: np.float64(2.759068027904079)}
+beta_pvalues:      {&#39;Mkt-RF&#39;: np.float64(0.0), &#39;SMB&#39;: np.float64(0.1984542228344075), &#39;HML&#39;: np.float64(0.006737881235053367)}
+beta_ses:          {&#39;Mkt-RF&#39;: np.float64(0.14094279906255958), &#39;SMB&#39;: np.float64(0.1440766451320293), &#39;HML&#39;: np.float64(0.13905157104712634)}
+r_squared:         0.6044139450741914
+adj_r_squared:     0.5941832712399033
+n_observations:    120
+residual_std:      0.009164980521723246
+alpha_annualized:  0.011345907249959366
+annualization_factor: 12
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>This notebook demonstrated:</p>
+<ol class="arabic simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">run_capm_regression()</span></code></strong>: Single-factor model for market beta and alpha</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">run_fama_french_regression()</span></code></strong>: Three-factor model with size and value</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">run_factor_regression()</span></code></strong>: Generic function for custom factor models</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">RegressionResult</span></code></strong>: Dataclass containing all regression statistics</p></li>
+</ol>
+<section id="key-takeaways">
+<h3>Key Takeaways<a class="headerlink" href="#key-takeaways" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Alpha represents the abnormal return not explained by factor exposures</p></li>
+<li><p>Betas measure sensitivity to each factor</p></li>
+<li><p>T-statistics and p-values indicate statistical significance</p></li>
+<li><p>R-squared shows how much variance is explained by the model</p></li>
+<li><p>Adding more factors typically increases R-squared but may reduce alpha</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="04_data_integration_tests_ipynb.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Data Module Integration Tests</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../adding_data_sources.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Adding New Data Sources</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-functions">Key Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-fama-french-factors">1. Load Fama-French Factors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-synthetic-portfolio-returns">2. Create Synthetic Portfolio Returns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capm-regression">3. CAPM Regression</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-capm-results">Interpretation of CAPM Results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fama-french-3-factor-regression">4. Fama-French 3-Factor Regression</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-capm-and-ff3-results">Comparing CAPM and FF3 Results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-generic-run-factor-regression">5. Using the Generic run_factor_regression()</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-the-regressionresult-dataclass">6. Accessing the RegressionResult Dataclass</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

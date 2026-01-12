@@ -1,0 +1,675 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>finm.fixedincome.pricing &#8212; finm Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=55cd40c9" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=61571c06"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/finm/fixedincome/pricing';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search documentation..."
+         aria-label="Search documentation..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="finm Documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="finm Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../index.html">
+                    finm - Financial Mathematics Python Package
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../data_module.html">Data Module Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cli.html">CLI Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../examples/index.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/01_replicate_GSW_yield_curve_ipynb.html">Replicating the Gurkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/02_corp_bond_returns_ipynb.html">Example - Analyzing Corporate Bond Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/03_corp_bond_returns_ftsfr_HKM_ipynb.html">Cleaning Summary: Corporate Bond Returns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/04_data_integration_tests_ipynb.html">Data Module Integration Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/05_factor_regression_example_ipynb.html">Factor Regression Analysis with finm</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../adding_data_sources.html">Adding New Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../development.html">Development Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../apidocs/index.html">API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../apidocs/finm/finm.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../apidocs/finm/finm.analytics.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../apidocs/finm/finm.analytics.factor_analysis.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics.factor_analysis</span></code></a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../apidocs/finm/finm.data.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../apidocs/finm/finm.data.fama_french.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.fama_french</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../apidocs/finm/finm.data.federal_reserve.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.federal_reserve</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../apidocs/finm/finm.data.he_kelly_manela.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.he_kelly_manela</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../apidocs/finm/finm.data.open_source_bond.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.open_source_bond</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../apidocs/finm/finm.data.wrds.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.wrds</span></code></a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../apidocs/finm/finm.fixedincome.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../apidocs/finm/finm.fixedincome.bonds.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.bonds</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../apidocs/finm/finm.fixedincome.calc_corp_bond_returns.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.calc_corp_bond_returns</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../apidocs/finm/finm.fixedincome.gsw2006_yield_curve.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.gsw2006_yield_curve</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../apidocs/finm/finm.fixedincome.pricing.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.pricing</span></code></a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/finm" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/finm/issues/new?title=Issue%20on%20page%20%2F_modules/finm/fixedincome/pricing.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for finm.fixedincome.pricing</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Various functions related to bonds, including pricing, etc.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">QuantLib</span> <span class="k">as</span> <span class="nn">ql</span>
+
+
+<div class="viewcode-block" id="get_coupon_dates">
+<a class="viewcode-back" href="../../../apidocs/finm/finm.fixedincome.pricing.html#finm.fixedincome.pricing.get_coupon_dates">[docs]</a>
+<span class="k">def</span> <span class="nf">get_coupon_dates</span><span class="p">(</span><span class="n">quote_date</span><span class="p">,</span> <span class="n">maturity_date</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate semiannual coupon payment dates between settlement and maturity.&quot;&quot;&quot;</span>
+    <span class="n">quote_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">quote_date</span><span class="p">)</span>
+    <span class="n">maturity_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">maturity_date</span><span class="p">)</span>
+
+    <span class="c1"># divide by 180 just to be safe</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span>
+        <span class="n">end</span><span class="o">=</span><span class="n">maturity_date</span><span class="p">,</span>
+        <span class="n">periods</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">((</span><span class="n">maturity_date</span> <span class="o">-</span> <span class="n">quote_date</span><span class="p">)</span><span class="o">.</span><span class="n">days</span> <span class="o">/</span> <span class="mi">180</span><span class="p">)),</span>
+        <span class="n">freq</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="mi">6</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="c1"># filter out if one date too many</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">temp</span><span class="p">[</span><span class="n">temp</span> <span class="o">&gt;</span> <span class="n">quote_date</span><span class="p">])</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">out</span></div>
+
+
+
+<div class="viewcode-block" id="get_coupon_dates_ql">
+<a class="viewcode-back" href="../../../apidocs/finm/finm.fixedincome.pricing.html#finm.fixedincome.pricing.get_coupon_dates_ql">[docs]</a>
+<span class="k">def</span> <span class="nf">get_coupon_dates_ql</span><span class="p">(</span>
+    <span class="n">quote_date</span><span class="p">,</span>
+    <span class="n">maturity_date</span><span class="p">,</span>
+    <span class="n">calendar</span><span class="o">=</span><span class="n">ql</span><span class="o">.</span><span class="n">UnitedStates</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="n">ql</span><span class="o">.</span><span class="n">UnitedStates</span><span class="o">.</span><span class="n">GovernmentBond</span><span class="p">),</span>
+    <span class="n">business_convention</span><span class="o">=</span><span class="n">ql</span><span class="o">.</span><span class="n">Following</span><span class="p">,</span>
+    <span class="n">end_of_month</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate semiannual coupon payment dates using QuantLib.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    quote_date : str or datetime</span>
+<span class="sd">        Valuation / settlement date</span>
+<span class="sd">    maturity_date : str or datetime</span>
+<span class="sd">        Bond maturity date</span>
+<span class="sd">    calendar : ql.Calendar</span>
+<span class="sd">        Business calendar</span>
+<span class="sd">    business_convention : ql.BusinessDayConvention</span>
+<span class="sd">        Date adjustment rule</span>
+<span class="sd">    end_of_month : bool</span>
+<span class="sd">        Apply end-of-month rule</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pd.Series</span>
+<span class="sd">        Coupon dates strictly after quote_date</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Convert to QuantLib Dates</span>
+    <span class="n">ql_quote</span> <span class="o">=</span> <span class="n">ql</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">quote_date</span><span class="p">)</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">quote_date</span><span class="p">)</span><span class="o">.</span><span class="n">month</span><span class="p">,</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">quote_date</span><span class="p">)</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">ql_maturity</span> <span class="o">=</span> <span class="n">ql</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">maturity_date</span><span class="p">)</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">maturity_date</span><span class="p">)</span><span class="o">.</span><span class="n">month</span><span class="p">,</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">maturity_date</span><span class="p">)</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">schedule</span> <span class="o">=</span> <span class="n">ql</span><span class="o">.</span><span class="n">Schedule</span><span class="p">(</span>
+        <span class="n">ql_quote</span><span class="p">,</span>
+        <span class="n">ql_maturity</span><span class="p">,</span>
+        <span class="n">ql</span><span class="o">.</span><span class="n">Period</span><span class="p">(</span><span class="n">ql</span><span class="o">.</span><span class="n">Semiannual</span><span class="p">),</span>
+        <span class="n">calendar</span><span class="p">,</span>
+        <span class="n">business_convention</span><span class="p">,</span>
+        <span class="n">business_convention</span><span class="p">,</span>
+        <span class="n">ql</span><span class="o">.</span><span class="n">DateGeneration</span><span class="o">.</span><span class="n">Backward</span><span class="p">,</span>
+        <span class="n">end_of_month</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Convert back to pandas and filter</span>
+    <span class="n">dates</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">year</span><span class="p">(),</span> <span class="n">d</span><span class="o">.</span><span class="n">month</span><span class="p">(),</span> <span class="n">d</span><span class="o">.</span><span class="n">dayOfMonth</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">schedule</span>
+        <span class="k">if</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="n">ql_quote</span>
+    <span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="bond_price">
+<a class="viewcode-back" href="../../../apidocs/finm/finm.fixedincome.pricing.html#finm.fixedincome.pricing.bond_price">[docs]</a>
+<span class="k">def</span> <span class="nf">bond_price</span><span class="p">(</span>
+    <span class="n">face_value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">coupon_rate</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">ytm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">periods</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">frequency</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the price of a bond.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    face_value : float</span>
+<span class="sd">        The face (par) value of the bond.</span>
+<span class="sd">    coupon_rate : float</span>
+<span class="sd">        The annual coupon rate (as a decimal, e.g., 0.05 for 5%).</span>
+<span class="sd">    ytm : float</span>
+<span class="sd">        The yield to maturity (as a decimal, e.g., 0.05 for 5%).</span>
+<span class="sd">    periods : int</span>
+<span class="sd">        The number of coupon periods remaining until maturity.</span>
+<span class="sd">    frequency : int, optional</span>
+<span class="sd">        The number of coupon payments per year (default: 2 for semi-annual).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        The price of the bond.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; bond_price(1000, 0.06, 0.05, 10, frequency=2)</span>
+<span class="sd">    1038.8972918207702</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">coupon_payment</span> <span class="o">=</span> <span class="n">face_value</span> <span class="o">*</span> <span class="n">coupon_rate</span> <span class="o">/</span> <span class="n">frequency</span>
+    <span class="n">periodic_ytm</span> <span class="o">=</span> <span class="n">ytm</span> <span class="o">/</span> <span class="n">frequency</span>
+
+    <span class="c1"># Present value of coupon payments (annuity)</span>
+    <span class="k">if</span> <span class="n">periodic_ytm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">pv_coupons</span> <span class="o">=</span> <span class="n">coupon_payment</span> <span class="o">*</span> <span class="n">periods</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pv_coupons</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">coupon_payment</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">periodic_ytm</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">periods</span><span class="p">))</span> <span class="o">/</span> <span class="n">periodic_ytm</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Present value of face value</span>
+    <span class="n">pv_face</span> <span class="o">=</span> <span class="n">face_value</span> <span class="o">/</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">periodic_ytm</span><span class="p">)</span> <span class="o">**</span> <span class="n">periods</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">pv_coupons</span> <span class="o">+</span> <span class="n">pv_face</span></div>
+
+
+
+<div class="viewcode-block" id="bond_price_ql">
+<a class="viewcode-back" href="../../../apidocs/finm/finm.fixedincome.pricing.html#finm.fixedincome.pricing.bond_price_ql">[docs]</a>
+<span class="k">def</span> <span class="nf">bond_price_ql</span><span class="p">(</span>
+    <span class="n">face_value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">coupon_rate</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">ytm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">periods</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">frequency</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    QuantLib equivalent of simple bond pricing formula.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Evaluation date (arbitrary, since we&#39;re matching formula math)</span>
+    <span class="n">today</span> <span class="o">=</span> <span class="n">ql</span><span class="o">.</span><span class="n">Date</span><span class="o">.</span><span class="n">todaysDate</span><span class="p">()</span>
+    <span class="n">ql</span><span class="o">.</span><span class="n">Settings</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">evaluationDate</span> <span class="o">=</span> <span class="n">today</span>
+
+    <span class="c1"># Map frequency</span>
+    <span class="n">freq_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="mi">1</span><span class="p">:</span> <span class="n">ql</span><span class="o">.</span><span class="n">Annual</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">:</span> <span class="n">ql</span><span class="o">.</span><span class="n">Semiannual</span><span class="p">,</span>
+        <span class="mi">4</span><span class="p">:</span> <span class="n">ql</span><span class="o">.</span><span class="n">Quarterly</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="n">schedule</span> <span class="o">=</span> <span class="n">ql</span><span class="o">.</span><span class="n">Schedule</span><span class="p">(</span>
+        <span class="n">today</span><span class="p">,</span>
+        <span class="n">today</span> <span class="o">+</span> <span class="n">ql</span><span class="o">.</span><span class="n">Period</span><span class="p">(</span><span class="n">periods</span> <span class="o">*</span> <span class="p">(</span><span class="mi">12</span> <span class="o">//</span> <span class="n">frequency</span><span class="p">),</span> <span class="n">ql</span><span class="o">.</span><span class="n">Months</span><span class="p">),</span>
+        <span class="n">ql</span><span class="o">.</span><span class="n">Period</span><span class="p">(</span><span class="n">freq_map</span><span class="p">[</span><span class="n">frequency</span><span class="p">]),</span>
+        <span class="n">ql</span><span class="o">.</span><span class="n">NullCalendar</span><span class="p">(),</span>
+        <span class="n">ql</span><span class="o">.</span><span class="n">Unadjusted</span><span class="p">,</span>
+        <span class="n">ql</span><span class="o">.</span><span class="n">Unadjusted</span><span class="p">,</span>
+        <span class="n">ql</span><span class="o">.</span><span class="n">DateGeneration</span><span class="o">.</span><span class="n">Forward</span><span class="p">,</span>
+        <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">bond</span> <span class="o">=</span> <span class="n">ql</span><span class="o">.</span><span class="n">FixedRateBond</span><span class="p">(</span>
+        <span class="n">settlementDays</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">faceAmount</span><span class="o">=</span><span class="n">face_value</span><span class="p">,</span>
+        <span class="n">schedule</span><span class="o">=</span><span class="n">schedule</span><span class="p">,</span>
+        <span class="n">coupons</span><span class="o">=</span><span class="p">[</span><span class="n">coupon_rate</span><span class="p">],</span>
+        <span class="n">paymentDayCounter</span><span class="o">=</span><span class="n">ql</span><span class="o">.</span><span class="n">Actual365Fixed</span><span class="p">(),</span>
+    <span class="p">)</span>
+
+    <span class="n">price</span> <span class="o">=</span> <span class="n">bond</span><span class="o">.</span><span class="n">cleanPrice</span><span class="p">(</span>
+        <span class="n">ytm</span><span class="p">,</span>
+        <span class="n">ql</span><span class="o">.</span><span class="n">Actual365Fixed</span><span class="p">(),</span>
+        <span class="n">ql</span><span class="o">.</span><span class="n">Compounded</span><span class="p">,</span>
+        <span class="n">freq_map</span><span class="p">[</span><span class="n">frequency</span><span class="p">],</span>
+    <span class="p">)</span>
+
+    <span class="c1"># QuantLib prices are quoted per 100 face</span>
+    <span class="k">return</span> <span class="n">price</span> <span class="o">*</span> <span class="p">(</span><span class="n">face_value</span> <span class="o">/</span> <span class="mf">100.0</span><span class="p">)</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">quote_date</span> <span class="o">=</span> <span class="s2">&quot;2020-01-02&quot;</span>
+    <span class="n">maturity_date</span> <span class="o">=</span> <span class="s2">&quot;2025-01-01&quot;</span>
+
+    <span class="n">coupon_dates</span> <span class="o">=</span> <span class="n">get_coupon_dates</span><span class="p">(</span>
+        <span class="n">quote_date</span><span class="o">=</span><span class="n">quote_date</span><span class="p">,</span>
+        <span class="n">maturity_date</span><span class="o">=</span><span class="n">maturity_date</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">coupon_dates</span><span class="p">)</span>
+
+    <span class="n">coupon_dates_ql</span> <span class="o">=</span> <span class="n">get_coupon_dates_ql</span><span class="p">(</span>
+        <span class="n">quote_date</span><span class="o">=</span><span class="n">quote_date</span><span class="p">,</span>
+        <span class="n">maturity_date</span><span class="o">=</span><span class="n">maturity_date</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">coupon_dates_ql</span><span class="p">)</span>
+
+    <span class="n">price</span> <span class="o">=</span> <span class="n">bond_price</span><span class="p">(</span>
+        <span class="n">face_value</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+        <span class="n">coupon_rate</span><span class="o">=</span><span class="mf">0.06</span><span class="p">,</span>
+        <span class="n">ytm</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+        <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">frequency</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">price</span><span class="p">)</span>
+
+    <span class="n">price_ql</span> <span class="o">=</span> <span class="n">bond_price_ql</span><span class="p">(</span>
+        <span class="n">face_value</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+        <span class="n">coupon_rate</span><span class="o">=</span><span class="mf">0.06</span><span class="p">,</span>
+        <span class="n">ytm</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+        <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">frequency</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">price_ql</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">price</span> <span class="o">/</span> <span class="n">price_ql</span> <span class="o">+</span> <span class="mf">1e-3</span><span class="p">)</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

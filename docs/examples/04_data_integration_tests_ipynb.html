@@ -1,0 +1,1592 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Data Module Integration Tests &#8212; finm Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=55cd40c9" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=61571c06"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/04_data_integration_tests_ipynb';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Factor Regression Analysis with finm" href="05_factor_regression_example_ipynb.html" />
+    <link rel="prev" title="Cleaning Summary: Corporate Bond Returns" href="03_corp_bond_returns_ftsfr_HKM_ipynb.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search documentation..."
+         aria-label="Search documentation..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="finm Documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="finm Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    finm - Financial Mathematics Python Package
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data_module.html">Data Module Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_replicate_GSW_yield_curve_ipynb.html">Replicating the Gurkaynak, Sack, and Wright (2006) Treasury Yield Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_corp_bond_returns_ipynb.html">Example - Analyzing Corporate Bond Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_corp_bond_returns_ftsfr_HKM_ipynb.html">Cleaning Summary: Corporate Bond Returns</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Data Module Integration Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_factor_regression_example_ipynb.html">Factor Regression Analysis with finm</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../adding_data_sources.html">Adding New Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../apidocs/index.html">API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../apidocs/finm/finm.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../apidocs/finm/finm.analytics.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.analytics.factor_analysis.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.analytics.factor_analysis</span></code></a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../apidocs/finm/finm.data.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.data.fama_french.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.fama_french</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.data.federal_reserve.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.federal_reserve</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.data.he_kelly_manela.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.he_kelly_manela</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.data.open_source_bond.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.open_source_bond</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.data.wrds.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.data.wrds</span></code></a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../apidocs/finm/finm.fixedincome.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.fixedincome.bonds.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.bonds</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.fixedincome.calc_corp_bond_returns.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.calc_corp_bond_returns</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.fixedincome.gsw2006_yield_curve.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.gsw2006_yield_curve</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../apidocs/finm/finm.fixedincome.pricing.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">finm.fixedincome.pricing</span></code></a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/finm" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jmbejara/finm/issues/new?title=Issue%20on%20page%20%2Fexamples/04_data_integration_tests_ipynb.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/examples/04_data_integration_tests_ipynb.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Data Module Integration Tests</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fama-french-factors">1. Fama-French Factors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#federal-reserve-yield-curve">2. Federal Reserve Yield Curve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#he-kelly-manela-intermediary-factors">3. He-Kelly-Manela Intermediary Factors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-source-bond-returns">4. Open Source Bond Returns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factor-analysis-asset-returns-only">5. Factor Analysis (Asset Returns Only)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrds-data-optional">6. WRDS Data (Optional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="data-module-integration-tests">
+<h1>Data Module Integration Tests<a class="headerlink" href="#data-module-integration-tests" title="Link to this heading">#</a></h1>
+<p>This notebook provides integration tests for the <code class="docutils literal notranslate"><span class="pre">finm.data</span></code> module by:</p>
+<ol class="arabic simple">
+<li><p>Pulling each data source</p></li>
+<li><p>Creating simple visualizations</p></li>
+<li><p>Calculating factor exposures for asset return data</p></li>
+</ol>
+<p><strong>Data Sources:</strong></p>
+<ul class="simple">
+<li><p><strong>Factor Data:</strong> Fama-French 3 factors, Federal Reserve yield curve, He-Kelly-Manela factors</p></li>
+<li><p><strong>Asset Returns:</strong> Open Source Bond (treasury and corporate returns)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+
+<span class="kn">import</span> <span class="nn">finm</span>
+<span class="kn">from</span> <span class="nn">finm.data</span> <span class="kn">import</span> <span class="n">fama_french</span><span class="p">,</span> <span class="n">federal_reserve</span><span class="p">,</span> <span class="n">he_kelly_manela</span><span class="p">,</span> <span class="n">open_source_bond</span>
+
+<span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;DATA_DIR&quot;</span><span class="p">,</span> <span class="s2">&quot;./_data&quot;</span><span class="p">))</span>
+<span class="n">DATA_DIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data directory: </span><span class="si">{</span><span class="n">DATA_DIR</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data directory: /Users/jbejarano/GitRepositories/finm/_data
+</pre></div>
+</div>
+</div>
+</div>
+<section id="fama-french-factors">
+<h2>1. Fama-French Factors<a class="headerlink" href="#fama-french-factors" title="Link to this heading">#</a></h2>
+<p>The Fama-French 3-factor model provides:</p>
+<ul class="simple">
+<li><p><strong>Mkt-RF</strong>: Market excess return</p></li>
+<li><p><strong>SMB</strong>: Small Minus Big (size factor)</p></li>
+<li><p><strong>HML</strong>: High Minus Low (value factor)</p></li>
+<li><p><strong>RF</strong>: Risk-free rate</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load Fama-French data from bundled data (data_dir=None)</span>
+<span class="n">ff_factors</span> <span class="o">=</span> <span class="n">fama_french</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+<span class="n">ff_factors</span> <span class="o">=</span> <span class="n">ff_factors</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded Fama-French factors (converted to pandas DataFrame)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Fama-French factors shape: </span><span class="si">{</span><span class="n">ff_factors</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Columns: </span><span class="si">{</span><span class="n">ff_factors</span><span class="o">.</span><span class="n">columns</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ff_factors</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loaded Fama-French factors (converted to pandas DataFrame)
+
+Fama-French factors shape: (1227, 4)
+Columns: Index([&#39;Mkt-RF&#39;, &#39;SMB&#39;, &#39;HML&#39;, &#39;RF&#39;], dtype=&#39;object&#39;)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Mkt-RF</th>
+      <th>SMB</th>
+      <th>HML</th>
+      <th>RF</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-01-12</th>
+      <td>0.0037</td>
+      <td>0.0128</td>
+      <td>0.0124</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2021-01-13</th>
+      <td>0.0006</td>
+      <td>-0.0094</td>
+      <td>-0.0045</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2021-01-14</th>
+      <td>-0.0012</td>
+      <td>0.0202</td>
+      <td>0.0113</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2021-01-15</th>
+      <td>-0.0086</td>
+      <td>-0.0050</td>
+      <td>-0.0074</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2021-01-19</th>
+      <td>0.0092</td>
+      <td>0.0088</td>
+      <td>-0.0079</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot Fama-French factors</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Cumulative returns for each factor</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">factor</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">,</span> <span class="s2">&quot;SMB&quot;</span><span class="p">,</span> <span class="s2">&quot;HML&quot;</span><span class="p">]):</span>
+    <span class="n">cumulative</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">ff_factors</span><span class="p">[</span><span class="n">factor</span><span class="p">])</span><span class="o">.</span><span class="n">cumprod</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cumulative</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">cumulative</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">factor</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">factor</span><span class="si">}</span><span class="s2"> Cumulative Return&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/295513a0cce04d30d37d8f0b50c3058cca3ed3a48623febf5cae6ee6435ddc48.png" src="../_images/295513a0cce04d30d37d8f0b50c3058cca3ed3a48623febf5cae6ee6435ddc48.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Summary statistics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Fama-French Factor Statistics (Daily):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ff_factors</span><span class="p">[[</span><span class="s2">&quot;Mkt-RF&quot;</span><span class="p">,</span> <span class="s2">&quot;SMB&quot;</span><span class="p">,</span> <span class="s2">&quot;HML&quot;</span><span class="p">,</span> <span class="s2">&quot;RF&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fama-French Factor Statistics (Daily):
+            Mkt-RF          SMB          HML           RF
+count  1227.000000  1227.000000  1227.000000  1227.000000
+mean      0.000424    -0.000233     0.000245     0.000129
+std       0.011242     0.007336     0.009452     0.000092
+min      -0.059200    -0.027000    -0.038900     0.000000
+25%      -0.005150    -0.005200    -0.005500     0.000000
+50%       0.000500    -0.000500    -0.000100     0.000200
+75%       0.006600     0.004200     0.005800     0.000200
+max       0.096500     0.036100     0.037100     0.000200
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="federal-reserve-yield-curve">
+<h2>2. Federal Reserve Yield Curve<a class="headerlink" href="#federal-reserve-yield-curve" title="Link to this heading">#</a></h2>
+<p>The GSW (Gurkaynak, Sack, Wright) yield curve provides:</p>
+<ul class="simple">
+<li><p>Zero-coupon yields for maturities 1-30 years</p></li>
+<li><p>Nelson-Siegel-Svensson model parameters</p></li>
+</ul>
+<p><strong>Note:</strong> These are yields, not returns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load Federal Reserve yield curve data with auto-pull</span>
+<span class="n">yields</span> <span class="o">=</span> <span class="n">federal_reserve</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="n">DATA_DIR</span><span class="p">,</span>
+    <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;standard&quot;</span><span class="p">,</span>
+    <span class="n">pull_if_not_found</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">accept_license</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+<span class="n">yields</span> <span class="o">=</span> <span class="n">yields</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Yield curve shape: </span><span class="si">{</span><span class="n">yields</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Columns: </span><span class="si">{</span><span class="n">yields</span><span class="o">.</span><span class="n">columns</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">yields</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Yield curve shape: (16843, 30)
+Columns: Index([&#39;SVENY01&#39;, &#39;SVENY02&#39;, &#39;SVENY03&#39;, &#39;SVENY04&#39;, &#39;SVENY05&#39;, &#39;SVENY06&#39;,
+       &#39;SVENY07&#39;, &#39;SVENY08&#39;, &#39;SVENY09&#39;, &#39;SVENY10&#39;, &#39;SVENY11&#39;, &#39;SVENY12&#39;,
+       &#39;SVENY13&#39;, &#39;SVENY14&#39;, &#39;SVENY15&#39;, &#39;SVENY16&#39;, &#39;SVENY17&#39;, &#39;SVENY18&#39;,
+       &#39;SVENY19&#39;, &#39;SVENY20&#39;, &#39;SVENY21&#39;, &#39;SVENY22&#39;, &#39;SVENY23&#39;, &#39;SVENY24&#39;,
+       &#39;SVENY25&#39;, &#39;SVENY26&#39;, &#39;SVENY27&#39;, &#39;SVENY28&#39;, &#39;SVENY29&#39;, &#39;SVENY30&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SVENY01</th>
+      <th>SVENY02</th>
+      <th>SVENY03</th>
+      <th>SVENY04</th>
+      <th>SVENY05</th>
+      <th>SVENY06</th>
+      <th>SVENY07</th>
+      <th>SVENY08</th>
+      <th>SVENY09</th>
+      <th>SVENY10</th>
+      <th>...</th>
+      <th>SVENY21</th>
+      <th>SVENY22</th>
+      <th>SVENY23</th>
+      <th>SVENY24</th>
+      <th>SVENY25</th>
+      <th>SVENY26</th>
+      <th>SVENY27</th>
+      <th>SVENY28</th>
+      <th>SVENY29</th>
+      <th>SVENY30</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1961-06-14</th>
+      <td>2.9825</td>
+      <td>3.3771</td>
+      <td>3.5530</td>
+      <td>3.6439</td>
+      <td>3.6987</td>
+      <td>3.7351</td>
+      <td>3.7612</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1961-06-15</th>
+      <td>2.9941</td>
+      <td>3.4137</td>
+      <td>3.5981</td>
+      <td>3.6930</td>
+      <td>3.7501</td>
+      <td>3.7882</td>
+      <td>3.8154</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1961-06-16</th>
+      <td>3.0012</td>
+      <td>3.4142</td>
+      <td>3.5994</td>
+      <td>3.6953</td>
+      <td>3.7531</td>
+      <td>3.7917</td>
+      <td>3.8192</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1961-06-19</th>
+      <td>2.9949</td>
+      <td>3.4386</td>
+      <td>3.6252</td>
+      <td>3.7199</td>
+      <td>3.7768</td>
+      <td>3.8147</td>
+      <td>3.8418</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1961-06-20</th>
+      <td>2.9833</td>
+      <td>3.4101</td>
+      <td>3.5986</td>
+      <td>3.6952</td>
+      <td>3.7533</td>
+      <td>3.7921</td>
+      <td>3.8198</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 30 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot yield curve snapshot for the most recent date</span>
+<span class="n">latest_date</span> <span class="o">=</span> <span class="n">yields</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">latest_yields</span> <span class="o">=</span> <span class="n">yields</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">latest_date</span><span class="p">]</span>
+
+<span class="n">maturities</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">col</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;SVENY&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">latest_yields</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">maturities</span><span class="p">,</span> <span class="n">latest_yields</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;o-&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Maturity (Years)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Yield (%)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;U.S. Treasury Yield Curve (</span><span class="si">{</span><span class="n">latest_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/bd84b434c5eb72fa84fce5f69c10058fd4bd3ade52aa22f1d2b3995ad199ca72.png" src="../_images/bd84b434c5eb72fa84fce5f69c10058fd4bd3ade52aa22f1d2b3995ad199ca72.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot time series of key maturities</span>
+<span class="n">key_maturities</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SVENY02&quot;</span><span class="p">,</span> <span class="s2">&quot;SVENY05&quot;</span><span class="p">,</span> <span class="s2">&quot;SVENY10&quot;</span><span class="p">,</span> <span class="s2">&quot;SVENY30&quot;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;2-Year&quot;</span><span class="p">,</span> <span class="s2">&quot;5-Year&quot;</span><span class="p">,</span> <span class="s2">&quot;10-Year&quot;</span><span class="p">,</span> <span class="s2">&quot;30-Year&quot;</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">key_maturities</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">yields</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">yields</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">yields</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Yield (%)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;U.S. Treasury Yields Over Time&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/86b1da44f52255681007f9a8bc784299830b6b7afc1fa9aaf76512042f0e6cc2.png" src="../_images/86b1da44f52255681007f9a8bc784299830b6b7afc1fa9aaf76512042f0e6cc2.png" />
+</div>
+</div>
+</section>
+<section id="he-kelly-manela-intermediary-factors">
+<h2>3. He-Kelly-Manela Intermediary Factors<a class="headerlink" href="#he-kelly-manela-intermediary-factors" title="Link to this heading">#</a></h2>
+<p>The HKM factors capture:</p>
+<ul class="simple">
+<li><p><strong>Intermediary capital ratio</strong>: Capital of financial intermediaries</p></li>
+<li><p><strong>Intermediary capital risk factor</strong>: Innovation in capital ratio</p></li>
+</ul>
+<p><strong>Note:</strong> These are factors, not asset returns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load He-Kelly-Manela data with auto-pull</span>
+<span class="n">hkm_monthly</span> <span class="o">=</span> <span class="n">he_kelly_manela</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="n">DATA_DIR</span><span class="p">,</span>
+    <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;factors_monthly&quot;</span><span class="p">,</span>
+    <span class="n">pull_if_not_found</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">accept_license</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+<span class="n">hkm_monthly</span> <span class="o">=</span> <span class="n">hkm_monthly</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;yyyymm&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;HKM monthly factors shape: </span><span class="si">{</span><span class="n">hkm_monthly</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Columns: </span><span class="si">{</span><span class="n">hkm_monthly</span><span class="o">.</span><span class="n">columns</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">hkm_monthly</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HKM monthly factors shape: (587, 5)
+Columns: Index([&#39;intermediary_capital_ratio&#39;, &#39;intermediary_capital_risk_factor&#39;,
+       &#39;intermediary_value_weighted_investment_return&#39;,
+       &#39;intermediary_leverage_ratio_squared&#39;, &#39;date&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>intermediary_capital_ratio</th>
+      <th>intermediary_capital_risk_factor</th>
+      <th>intermediary_value_weighted_investment_return</th>
+      <th>intermediary_leverage_ratio_squared</th>
+      <th>date</th>
+    </tr>
+    <tr>
+      <th>yyyymm</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>197001</th>
+      <td>0.0691</td>
+      <td>-0.0727</td>
+      <td>-0.0960</td>
+      <td>209.1790</td>
+      <td>1970-01-01</td>
+    </tr>
+    <tr>
+      <th>197002</th>
+      <td>0.0788</td>
+      <td>0.1416</td>
+      <td>0.1486</td>
+      <td>161.1352</td>
+      <td>1970-02-01</td>
+    </tr>
+    <tr>
+      <th>197003</th>
+      <td>0.0756</td>
+      <td>-0.0360</td>
+      <td>-0.0088</td>
+      <td>174.8429</td>
+      <td>1970-03-01</td>
+    </tr>
+    <tr>
+      <th>197004</th>
+      <td>0.0688</td>
+      <td>-0.0870</td>
+      <td>-0.1050</td>
+      <td>211.3283</td>
+      <td>1970-04-01</td>
+    </tr>
+    <tr>
+      <th>197005</th>
+      <td>0.0656</td>
+      <td>-0.0440</td>
+      <td>-0.0469</td>
+      <td>232.2706</td>
+      <td>1970-05-01</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot intermediary capital ratio</span>
+<span class="k">if</span> <span class="s2">&quot;intermediary_capital_ratio&quot;</span> <span class="ow">in</span> <span class="n">hkm_monthly</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hkm_monthly</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">hkm_monthly</span><span class="p">[</span><span class="s2">&quot;intermediary_capital_ratio&quot;</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Capital Ratio&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Intermediary Capital Ratio Over Time&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="k">elif</span> <span class="s2">&quot;capital_ratio&quot;</span> <span class="ow">in</span> <span class="n">hkm_monthly</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hkm_monthly</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">hkm_monthly</span><span class="p">[</span><span class="s2">&quot;capital_ratio&quot;</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Capital Ratio&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Intermediary Capital Ratio Over Time&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Available columns:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">hkm_monthly</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/56fbe5dc39b29ced378a082be77806146425fc9aefe7f032c3cf7a090a81e3bb.png" src="../_images/56fbe5dc39b29ced378a082be77806146425fc9aefe7f032c3cf7a090a81e3bb.png" />
+</div>
+</div>
+</section>
+<section id="open-source-bond-returns">
+<h2>4. Open Source Bond Returns<a class="headerlink" href="#open-source-bond-returns" title="Link to this heading">#</a></h2>
+<p>The Open Bond Asset Pricing project provides:</p>
+<ul class="simple">
+<li><p><strong>Treasury bond returns</strong>: Government bond returns</p></li>
+<li><p><strong>Corporate bond monthly returns</strong>: Monthly returns with 108 factor signals</p></li>
+<li><p><strong>Corporate bond daily prices</strong>: Daily prices from TRACE Stage 1</p></li>
+</ul>
+<p>These are <strong>asset returns</strong> that can be used for factor analysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load treasury returns with auto-pull if not found locally</span>
+<span class="n">treasury</span> <span class="o">=</span> <span class="n">open_source_bond</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="n">DATA_DIR</span><span class="p">,</span>
+    <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;treasury&quot;</span><span class="p">,</span>
+    <span class="n">pull_if_not_found</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">accept_license</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Treasury returns shape: </span><span class="si">{</span><span class="n">treasury</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Treasury columns: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">treasury</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Treasury returns shape: (2381340, 5)
+Treasury columns: [&#39;DATE&#39;, &#39;CUSIP&#39;, &#39;tr_return&#39;, &#39;tr_ytm_match&#39;, &#39;tau&#39;]...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load corporate bond returns (monthly with factor signals) with auto-pull</span>
+<span class="n">corporate</span> <span class="o">=</span> <span class="n">open_source_bond</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="n">DATA_DIR</span><span class="p">,</span>
+    <span class="n">variant</span><span class="o">=</span><span class="s2">&quot;corporate_monthly&quot;</span><span class="p">,</span>
+    <span class="n">pull_if_not_found</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">accept_license</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Corporate returns shape: </span><span class="si">{</span><span class="n">corporate</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Corporate columns: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">corporate</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+<span class="n">corporate</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Corporate returns shape: (1859546, 140)
+Corporate columns: [&#39;cusip&#39;, &#39;date&#39;, &#39;issuer_cusip&#39;, &#39;permno&#39;, &#39;permco&#39;, &#39;gvkey&#39;, &#39;144a&#39;, &#39;country&#39;, &#39;call&#39;, &#39;ret_vw&#39;]...
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cusip</th>
+      <th>date</th>
+      <th>issuer_cusip</th>
+      <th>permno</th>
+      <th>permco</th>
+      <th>gvkey</th>
+      <th>144a</th>
+      <th>country</th>
+      <th>call</th>
+      <th>ret_vw</th>
+      <th>...</th>
+      <th>imom1</th>
+      <th>imom3_1</th>
+      <th>imom12_1</th>
+      <th>iltr48_12</th>
+      <th>iltr30_6</th>
+      <th>iltr24_3</th>
+      <th>var_90</th>
+      <th>es_90</th>
+      <th>var_95</th>
+      <th>str</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>000336AE7</td>
+      <td>2002-08-31</td>
+      <td>000336</td>
+      <td>75188.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>USA</td>
+      <td>1</td>
+      <td>0.007252</td>
+      <td>...</td>
+      <td>0.009089</td>
+      <td>0.016714</td>
+      <td>0.070078</td>
+      <td>0.259947</td>
+      <td>0.250910</td>
+      <td>0.202824</td>
+      <td>0.032174</td>
+      <td>0.035203</td>
+      <td>0.038233</td>
+      <td>0.051041</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>000336AE7</td>
+      <td>2002-09-30</td>
+      <td>000336</td>
+      <td>75188.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>USA</td>
+      <td>1</td>
+      <td>-0.054660</td>
+      <td>...</td>
+      <td>0.015736</td>
+      <td>0.024968</td>
+      <td>0.075254</td>
+      <td>0.263304</td>
+      <td>0.213676</td>
+      <td>0.196803</td>
+      <td>0.038233</td>
+      <td>0.046446</td>
+      <td>0.054660</td>
+      <td>-0.002936</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>000336AE7</td>
+      <td>2002-10-31</td>
+      <td>000336</td>
+      <td>75188.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>USA</td>
+      <td>1</td>
+      <td>0.051999</td>
+      <td>...</td>
+      <td>0.014274</td>
+      <td>0.030234</td>
+      <td>0.067641</td>
+      <td>0.295979</td>
+      <td>0.237394</td>
+      <td>0.206790</td>
+      <td>0.038233</td>
+      <td>0.046446</td>
+      <td>0.054660</td>
+      <td>0.066941</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>000336AE7</td>
+      <td>2002-11-30</td>
+      <td>000336</td>
+      <td>75188.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>USA</td>
+      <td>1</td>
+      <td>0.080557</td>
+      <td>...</td>
+      <td>0.001263</td>
+      <td>0.015555</td>
+      <td>0.075689</td>
+      <td>0.260612</td>
+      <td>0.262213</td>
+      <td>0.207362</td>
+      <td>0.038233</td>
+      <td>0.046446</td>
+      <td>0.054660</td>
+      <td>0.045280</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>000336AE7</td>
+      <td>2003-04-30</td>
+      <td>000336</td>
+      <td>75188.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>USA</td>
+      <td>1</td>
+      <td>0.067899</td>
+      <td>...</td>
+      <td>0.005471</td>
+      <td>0.018439</td>
+      <td>0.120662</td>
+      <td>0.257004</td>
+      <td>0.244847</td>
+      <td>0.196972</td>
+      <td>0.038233</td>
+      <td>0.046446</td>
+      <td>0.054660</td>
+      <td>0.053730</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 140 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot treasury returns if available</span>
+<span class="k">if</span> <span class="s2">&quot;bond_ret&quot;</span> <span class="ow">in</span> <span class="n">treasury</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="c1"># Aggregate treasury returns</span>
+    <span class="n">treasury_agg</span> <span class="o">=</span> <span class="n">treasury</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">)[</span><span class="s2">&quot;bond_ret&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">cumulative</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">treasury_agg</span><span class="p">)</span><span class="o">.</span><span class="n">cumprod</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cumulative</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">cumulative</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cumulative Return&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Average Treasury Bond Cumulative Returns&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="k">elif</span> <span class="s2">&quot;ret&quot;</span> <span class="ow">in</span> <span class="n">treasury</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">treasury_agg</span> <span class="o">=</span> <span class="n">treasury</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">)[</span><span class="s2">&quot;ret&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">cumulative</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">treasury_agg</span><span class="p">)</span><span class="o">.</span><span class="n">cumprod</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cumulative</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">cumulative</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cumulative Return&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Average Treasury Bond Cumulative Returns&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Treasury columns:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">treasury</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Treasury columns: [&#39;DATE&#39;, &#39;CUSIP&#39;, &#39;tr_return&#39;, &#39;tr_ytm_match&#39;, &#39;tau&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot corporate bond returns</span>
+<span class="c1"># Note: Monthly corporate data uses ret_vw (volume-weighted total return)</span>
+<span class="n">ret_col</span> <span class="o">=</span> <span class="s2">&quot;ret_vw&quot;</span> <span class="k">if</span> <span class="s2">&quot;ret_vw&quot;</span> <span class="ow">in</span> <span class="n">corporate</span><span class="o">.</span><span class="n">columns</span> <span class="k">else</span> <span class="s2">&quot;bond_ret&quot;</span>
+<span class="k">if</span> <span class="n">ret_col</span> <span class="ow">in</span> <span class="n">corporate</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="c1"># Aggregate corporate returns by date (equal-weighted across bonds)</span>
+    <span class="n">corp_agg</span> <span class="o">=</span> <span class="n">corporate</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">)[</span><span class="n">ret_col</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">cumulative</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">corp_agg</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span><span class="o">.</span><span class="n">cumprod</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cumulative</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">cumulative</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cumulative Return&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Average Corporate Bond Cumulative Returns (Volume-Weighted)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Corporate columns:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">corporate</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/916b8157f9a7e1984650402206bf700af5accf05e8a5332686eccf583ed7c1c3.png" src="../_images/916b8157f9a7e1984650402206bf700af5accf05e8a5332686eccf583ed7c1c3.png" />
+</div>
+</div>
+</section>
+<section id="factor-analysis-asset-returns-only">
+<h2>5. Factor Analysis (Asset Returns Only)<a class="headerlink" href="#factor-analysis-asset-returns-only" title="Link to this heading">#</a></h2>
+<p>We calculate factor exposures for bond returns against the Fama-French factors.
+This analysis only applies to asset return data (Open Source Bond), not to
+yields (Federal Reserve) or factor data (HKM).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prepare Fama-French factors for merging</span>
+<span class="c1"># Resample to monthly if needed for bond data</span>
+<span class="n">ff_monthly</span> <span class="o">=</span> <span class="n">ff_factors</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;ME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Monthly FF factors shape: </span><span class="si">{</span><span class="n">ff_monthly</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Monthly FF factors shape: (59, 4)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate factor exposures for corporate bonds</span>
+<span class="c1"># Note: Monthly corporate data uses ret_vw (volume-weighted total return)</span>
+<span class="n">corp_ret_col</span> <span class="o">=</span> <span class="s2">&quot;ret_vw&quot;</span> <span class="k">if</span> <span class="s2">&quot;ret_vw&quot;</span> <span class="ow">in</span> <span class="n">corporate</span><span class="o">.</span><span class="n">columns</span> <span class="k">else</span> <span class="s2">&quot;bond_ret&quot;</span>
+<span class="k">if</span> <span class="n">corp_ret_col</span> <span class="ow">in</span> <span class="n">corporate</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="s2">&quot;date&quot;</span> <span class="ow">in</span> <span class="n">corporate</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="c1"># Aggregate corporate returns by date (equal-weighted portfolio)</span>
+    <span class="n">corp_monthly</span> <span class="o">=</span> <span class="n">corporate</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">)[</span><span class="n">corp_ret_col</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">corp_monthly</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">corp_monthly</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+    <span class="c1"># Resample to month-end to align with FF factors</span>
+    <span class="n">corp_monthly</span> <span class="o">=</span> <span class="n">corp_monthly</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;ME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+    <span class="c1"># Calculate factor exposures</span>
+    <span class="n">exposures_corp</span> <span class="o">=</span> <span class="n">finm</span><span class="o">.</span><span class="n">calculate_factor_exposures</span><span class="p">(</span>
+        <span class="n">corp_monthly</span><span class="p">,</span>
+        <span class="n">ff_monthly</span><span class="p">,</span>
+        <span class="n">annualization_factor</span><span class="o">=</span><span class="mf">12.0</span><span class="p">,</span>  <span class="c1"># Monthly data</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Corporate Bond Factor Exposures:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">exposures_corp</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Corporate Bond Factor Exposures:
+----------------------------------------
+  average_return: 0.0052
+  volatility: 0.0755
+  sharpe_ratio: 0.0511
+  market_beta: 1.0169
+  smb_beta: -1.3948
+  hml_beta: 0.0425
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate factor exposures for treasury bonds</span>
+<span class="k">if</span> <span class="s2">&quot;bond_ret&quot;</span> <span class="ow">in</span> <span class="n">treasury</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="c1"># Aggregate treasury returns by date</span>
+    <span class="n">treas_monthly</span> <span class="o">=</span> <span class="n">treasury</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">)[</span><span class="s2">&quot;bond_ret&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">treas_monthly</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">treas_monthly</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">treas_monthly</span> <span class="o">=</span> <span class="n">treas_monthly</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;ME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+    <span class="n">exposures_treas</span> <span class="o">=</span> <span class="n">finm</span><span class="o">.</span><span class="n">calculate_factor_exposures</span><span class="p">(</span>
+        <span class="n">treas_monthly</span><span class="p">,</span> <span class="n">ff_monthly</span><span class="p">,</span> <span class="n">annualization_factor</span><span class="o">=</span><span class="mf">12.0</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Treasury Bond Factor Exposures:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">exposures_treas</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="s2">&quot;ret&quot;</span> <span class="ow">in</span> <span class="n">treasury</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">treas_monthly</span> <span class="o">=</span> <span class="n">treasury</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">)[</span><span class="s2">&quot;ret&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">treas_monthly</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">treas_monthly</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">treas_monthly</span> <span class="o">=</span> <span class="n">treas_monthly</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;ME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+    <span class="n">exposures_treas</span> <span class="o">=</span> <span class="n">finm</span><span class="o">.</span><span class="n">calculate_factor_exposures</span><span class="p">(</span>
+        <span class="n">treas_monthly</span><span class="p">,</span> <span class="n">ff_monthly</span><span class="p">,</span> <span class="n">annualization_factor</span><span class="o">=</span><span class="mf">12.0</span>
+    <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Treasury Bond Factor Exposures:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">exposures_treas</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Summary comparison table</span>
+<span class="k">if</span> <span class="s2">&quot;exposures_corp&quot;</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">()</span> <span class="ow">and</span> <span class="s2">&quot;exposures_treas&quot;</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">():</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Corporate Bonds&quot;</span><span class="p">:</span> <span class="n">exposures_corp</span><span class="p">,</span>
+            <span class="s2">&quot;Treasury Bonds&quot;</span><span class="p">:</span> <span class="n">exposures_treas</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Factor Exposure Comparison:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">summary</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="wrds-data-optional">
+<h2>6. WRDS Data (Optional)<a class="headerlink" href="#wrds-data-optional" title="Link to this heading">#</a></h2>
+<p>WRDS data requires authentication. This section is skipped if credentials
+are not available.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check for WRDS credentials</span>
+<span class="n">WRDS_USERNAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;WRDS_USERNAME&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">WRDS_USERNAME</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WRDS username found: </span><span class="si">{</span><span class="n">WRDS_USERNAME</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WRDS data pull is available but skipped in this notebook.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;To pull WRDS data, use:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  from finm.data import wrds&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;  wrds.pull(data_dir=DATA_DIR, variant=&#39;treasury&#39;, wrds_username=WRDS_USERNAME)&quot;</span>
+    <span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WRDS credentials not found.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;To use WRDS data, set the WRDS_USERNAME environment variable:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  export WRDS_USERNAME=your_username&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Or add to your .env file:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  WRDS_USERNAME=your_username&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WRDS username found: jmbejara
+WRDS data pull is available but skipped in this notebook.
+To pull WRDS data, use:
+  from finm.data import wrds
+  wrds.pull(data_dir=DATA_DIR, variant=&#39;treasury&#39;, wrds_username=WRDS_USERNAME)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>This notebook demonstrated:</p>
+<ol class="arabic simple">
+<li><p><strong>Fama-French Factors</strong>: Loaded and visualized the 3-factor model data</p></li>
+<li><p><strong>Federal Reserve Yield Curve</strong>: Downloaded GSW yields and plotted the term structure</p></li>
+<li><p><strong>He-Kelly-Manela Factors</strong>: Pulled intermediary capital factor data</p></li>
+<li><p><strong>Open Source Bond Returns</strong>: Downloaded treasury and corporate bond returns</p></li>
+<li><p><strong>Factor Analysis</strong>: Calculated factor exposures for bond returns</p></li>
+</ol>
+<p>All data sources follow the standardized interface:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pull(data_dir,</span> <span class="pre">accept_license=True)</span></code>: Download data from source</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">load(data_dir,</span> <span class="pre">variant,</span> <span class="pre">pull_if_not_found,</span> <span class="pre">accept_license)</span></code>: Load cached data (returns polars DataFrame)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">to_long_format(df)</span></code>: Convert to long format</p></li>
+</ul>
+<p><strong>Note:</strong> When using <code class="docutils literal notranslate"><span class="pre">pull_if_not_found=True</span></code>, you must also set <code class="docutils literal notranslate"><span class="pre">accept_license=True</span></code>
+to acknowledge the data provider’s licensing terms. See each module’s <code class="docutils literal notranslate"><span class="pre">LICENSE_INFO</span></code> for details.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03_corp_bond_returns_ftsfr_HKM_ipynb.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Cleaning Summary: Corporate Bond Returns</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="05_factor_regression_example_ipynb.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Factor Regression Analysis with finm</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fama-french-factors">1. Fama-French Factors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#federal-reserve-yield-curve">2. Federal Reserve Yield Curve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#he-kelly-manela-intermediary-factors">3. He-Kelly-Manela Intermediary Factors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-source-bond-returns">4. Open Source Bond Returns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factor-analysis-asset-returns-only">5. Factor Analysis (Asset Returns Only)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrds-data-optional">6. WRDS Data (Optional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeremiah Bejarano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Jeremiah Bejarano.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
