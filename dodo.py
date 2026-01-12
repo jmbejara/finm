@@ -118,6 +118,7 @@ notebook_tasks = {
 def task_run_notebooks():
     """Preps the notebooks for presentation format.
     Execute notebooks if the script version of it has been changed.
+    Also copies notebooks to docs_src/examples/ for Sphinx documentation.
     """
     for notebook in notebook_tasks.keys():
         pyfile_path = Path(notebook_tasks[notebook]["path"])
@@ -130,6 +131,11 @@ def task_run_notebooks():
                 jupyter_execute_notebook(notebook_path),
                 jupyter_to_html(notebook_path),
                 mv(notebook_path, OUTPUT_DIR / "_notebook_build"),
+                # Copy executed notebook to docs_src/examples/ for Sphinx
+                copy_file(
+                    OUTPUT_DIR / "_notebook_build" / f"{notebook}.ipynb",
+                    BASE_DIR / "docs_src" / "examples" / f"{notebook}.ipynb",
+                ),
                 """python -c "import sys; from datetime import datetime; print(f'End """ + notebook + """: {datetime.now()}', file=sys.stderr)" """,
             ],
             "file_dep": [
@@ -139,6 +145,7 @@ def task_run_notebooks():
             "targets": [
                 OUTPUT_DIR / f"{notebook}.html",
                 OUTPUT_DIR / "_notebook_build" / f"{notebook}.ipynb",
+                BASE_DIR / "docs_src" / "examples" / f"{notebook}.ipynb",
                 *notebook_tasks[notebook]["targets"],
             ],
             "clean": True,
@@ -149,6 +156,13 @@ def task_run_notebooks():
 sphinx_targets = [
     "./docs/index.html",
 ]
+
+
+def clean_jupyter_execute():
+    """Remove the jupyter_execute directory created by myst-nb."""
+    jupyter_execute_dir = BASE_DIR / "jupyter_execute"
+    if jupyter_execute_dir.exists():
+        shutil.rmtree(jupyter_execute_dir)
 
 
 def task_compile_sphinx_docs():
@@ -165,6 +179,7 @@ def task_compile_sphinx_docs():
     return {
         "actions": [
             "sphinx-build -b html docs_src docs",
+            clean_jupyter_execute,  # Clean up myst-nb temp directory
         ],
         "targets": sphinx_targets,
         "file_dep": file_dep,

@@ -78,7 +78,7 @@ pip install finm[all]
 ## Table of Contents
 
 ```{toctree}
-:maxdepth: 2
+:maxdepth: 1
 :caption: User Guide
 
 data_module
@@ -86,7 +86,14 @@ cli
 ```
 
 ```{toctree}
-:maxdepth: 2
+:maxdepth: 1
+:caption: Examples
+
+examples/index
+```
+
+```{toctree}
+:maxdepth: 1
 :caption: Developer Guide
 
 adding_data_sources

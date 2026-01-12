@@ -154,6 +154,7 @@ _data/
 # Build outputs
 _output/
 docs/
+jupyter_execute/
 
 # PyDoit
 .doit-db.sqlite
