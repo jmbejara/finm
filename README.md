@@ -185,7 +185,7 @@ For commercial use, please consult the original data provider's licensing terms.
 
 ## License
 
-MIT License. See [LICENSE](LICENSE) for details.
+Modified BSD License. See [LICENSE](LICENSE) for details.
 
 ## Acknowledgments
 

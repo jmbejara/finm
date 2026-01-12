@@ -7,7 +7,7 @@ name = "finm"
 version = "0.1.2"
 description = "A student-led Python package for financial mathematics and quantitative finance education"
 readme = "README.md"
-license = "MIT"
+license = "BSD-3-Clause"
 requires-python = ">=3.9"
 authors = [
     { name = "Jeremiah Bejarano" },
@@ -23,7 +23,7 @@ classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Education",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
+    "License :: OSI Approved :: BSD License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",

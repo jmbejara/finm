@@ -8,7 +8,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 # -- Project information -----------------------------------------------------
 project = "finm"
-copyright = "2024, Jeremiah Bejarano"
+copyright = "2026, Jeremiah Bejarano"
 author = "Jeremiah Bejarano"
 release = "0.1.2"
 
