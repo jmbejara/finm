@@ -165,6 +165,11 @@ def clean_jupyter_execute():
         shutil.rmtree(jupyter_execute_dir)
 
 
+def create_nojekyll():
+    """Create .nojekyll file for GitHub Pages."""
+    (BASE_DIR / "docs" / ".nojekyll").touch()
+
+
 def task_compile_sphinx_docs():
     """Compile Sphinx Docs"""
     notebook_scripts = [
@@ -180,6 +185,7 @@ def task_compile_sphinx_docs():
         "actions": [
             "sphinx-build -b html docs_src docs",
             clean_jupyter_execute,  # Clean up myst-nb temp directory
+            create_nojekyll,  # Create .nojekyll for GitHub Pages
         ],
         "targets": sphinx_targets,
         "file_dep": file_dep,
