@@ -8,8 +8,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 # -- Project information -----------------------------------------------------
 project = "finm"
-copyright = "2024, University of Chicago Financial Mathematics Program"
-author = "University of Chicago Financial Mathematics Program"
+copyright = "2024, Jeremiah Bejarano"
+author = "Jeremiah Bejarano"
 release = "0.1.1"
 
 # -- General configuration ---------------------------------------------------
@@ -71,7 +71,7 @@ html_theme = "sphinx_book_theme"
 html_theme_options = {
     "navigation_with_keys": True,
     "search_bar_text": "Search documentation...",
-    "repository_url": "https://github.com/uchicago-finmath/finm",
+    "repository_url": "https://github.com/jmbejara/finm",
     "repository_branch": "main",
     "path_to_docs": "docs_src",
     "use_repository_button": True,

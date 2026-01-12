@@ -10,7 +10,7 @@ readme = "README.md"
 license = "MIT"
 requires-python = ">=3.9"
 authors = [
-    { name = "University of Chicago Financial Mathematics Program" },
+    { name = "Jeremiah Bejarano" },
 ]
 keywords = [
     "finance",
@@ -83,9 +83,9 @@ all = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/uchicago-finmath/finm"
-Documentation = "https://github.com/uchicago-finmath/finm#readme"
-Repository = "https://github.com/uchicago-finmath/finm"
+Homepage = "https://github.com/jmbejara/finm"
+Documentation = "https://jeremybejarano.com/finm/"
+Repository = "https://github.com/jmbejara/finm"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/finm"]
