@@ -158,6 +158,8 @@ pythonpath = ["src"]
 filterwarnings = [
     # Ignore QuantLib SWIG deprecation warnings (external library)
     "ignore:builtin type Swig.*:DeprecationWarning",
+    # Ignore pandas_datareader distutils deprecation warnings (external library)
+    "ignore:distutils Version classes are deprecated:DeprecationWarning",
 ]
 
 [tool.hatch.envs.docs]

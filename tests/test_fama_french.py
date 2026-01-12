@@ -116,35 +116,3 @@ class TestLongFormat:
         assert len(df_long) <= n_factors * n_dates
 
 
-class TestPullFamaFrenchFactors:
-    """Tests for fama_french.pull() function (requires network)."""
-
-    @pytest.mark.skip(reason="Requires network access and pandas_datareader")
-    def test_pull_daily_factors(self):
-        """Should download daily factors."""
-        import tempfile
-
-        with tempfile.TemporaryDirectory() as tmpdir:
-            df = fama_french.pull(
-                data_dir=tmpdir,
-                start="2023-01-01",
-                end="2023-01-31",
-                frequency="daily",
-            )
-            assert isinstance(df, pd.DataFrame)
-            assert len(df) > 0
-
-    @pytest.mark.skip(reason="Requires network access and pandas_datareader")
-    def test_pull_monthly_factors(self):
-        """Should download monthly factors."""
-        import tempfile
-
-        with tempfile.TemporaryDirectory() as tmpdir:
-            df = fama_french.pull(
-                data_dir=tmpdir,
-                start="2023-01-01",
-                end="2023-12-31",
-                frequency="monthly",
-            )
-            assert isinstance(df, pd.DataFrame)
-            assert len(df) > 0

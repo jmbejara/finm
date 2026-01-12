@@ -110,7 +110,8 @@ def _ols_regression(
     se = np.sqrt(np.diag(XtX_inv) * residual_var)
 
     # t-statistics and p-values (two-sided)
-    t_stats = coefficients / se
+    with np.errstate(divide='ignore', invalid='ignore'):
+        t_stats = coefficients / se
     p_values = 2 * (1 - stats.t.cdf(np.abs(t_stats), dof))
 
     # R-squared
