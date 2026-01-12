@@ -80,7 +80,7 @@ from finm.fixedincome.pricing import (
     get_coupon_dates_ql,
 )
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 __author__ = "University of Chicago Financial Mathematics Program"
 
 __all__ = [
