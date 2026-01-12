@@ -10,7 +10,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 project = "finm"
 copyright = "2026, Jeremiah Bejarano"
 author = "Jeremiah Bejarano"
-release = "0.1.2"
+release = "0.1.3"
 
 # -- General configuration ---------------------------------------------------
 extensions = [
