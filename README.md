@@ -1,7 +1,11 @@
-[![PyPI - Version](https://img.shields.io/badge/PyPI-v0.1.0-blue?logo=pypi)](https://pypi.org/project/finm)
+[![PyPI - Version](https://img.shields.io/pypi/v/finm?logo=pypi)](https://pypi.org/project/finm)
 [![PyPI - Python Version](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue?logo=python)](https://pypi.org/project/finm)
 [![GitHub Stars](https://img.shields.io/github/stars/jmbejara/finm?style=flat&logo=github)](https://github.com/jmbejara/finm)
 [![Documentation](https://img.shields.io/badge/docs-jeremybejarano.com%2Ffinm-blue)](https://jeremybejarano.com/finm/)
+
+<p align="center">
+  <img src="docs_src/_static/logo.png" alt="finm logo" width="200">
+</p>
 
 # finm
 
