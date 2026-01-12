@@ -10,7 +10,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 project = "finm"
 copyright = "2024, University of Chicago Financial Mathematics Program"
 author = "University of Chicago Financial Mathematics Program"
-release = "0.1.0"
+release = "0.1.1"
 
 # -- General configuration ---------------------------------------------------
 extensions = [
