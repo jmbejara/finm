@@ -4,7 +4,7 @@
 [![Documentation](https://img.shields.io/badge/docs-jeremybejarano.com%2Ffinm-blue)](https://jeremybejarano.com/finm/)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/jmbejara/finm/main/docs_src/_static/logo.png" alt="finm logo" width="400">
+  <img src="https://raw.githubusercontent.com/jmbejara/finm/main/docs_src/_static/logo.png" alt="finm logo" width="600">
 </p>
 
 # finm
