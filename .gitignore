@@ -148,7 +148,6 @@ Thumbs.db
 *.parquet
 *.csv
 *.zip
-data_cache/
 _data/
 
 # Build outputs
