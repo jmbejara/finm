@@ -41,12 +41,12 @@ def jupyter_execute_notebook(notebook_path):
 def jupyter_to_html(notebook_path, output_dir=OUTPUT_DIR):
     return (
         f"jupyter nbconvert --to html --log-level=ERROR "
-        f"--output-dir={output_dir} {notebook_path}"
+        f"--output-dir='{output_dir}' {notebook_path}"
     )
 
 def jupyter_to_md(notebook_path, output_dir=OUTPUT_DIR):
     """Requires jupytext"""
-    return f"jupytext --to markdown --output-dir={output_dir} {notebook_path}"
+    return f"jupytext --to markdown --output-dir='{output_dir}' {notebook_path}"
 
 def jupyter_clear_output(notebook_path):
     """Clear the output of a notebook"""
@@ -60,9 +60,9 @@ def mv(from_path, to_path):
     to_path = Path(to_path)
     to_path.mkdir(parents=True, exist_ok=True)
     if OS_TYPE == "nix":
-        command = f"mv {from_path} {to_path}"
+        command = f"mv '{from_path}' '{to_path}'"
     else:
-        command = f"move {from_path} {to_path}"
+        command = f"move '{from_path}' '{to_path}'"
     return command
 
 
