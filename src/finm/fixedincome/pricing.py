@@ -25,7 +25,7 @@ def get_coupon_dates(quote_date, maturity_date):
     return out
 
 
-def get_coupon_dates_ql(
+def ql_get_coupon_dates(
     quote_date,
     maturity_date,
     calendar=ql.UnitedStates(m=ql.UnitedStates.GovernmentBond),
@@ -133,7 +133,7 @@ def bond_price(
     return pv_coupons + pv_face
 
 
-def bond_price_ql(
+def ql_bond_price(
     face_value: float,
     coupon_rate: float,
     ytm: float,
@@ -185,6 +185,167 @@ def bond_price_ql(
     return price * (face_value / 100.0)
 
 
+def ql_create_bond(
+    issue_date: ql.Date,
+    maturity_date: ql.Date,
+    face_value: float,
+    coupon_rate: float,
+    frequency: int = 2,
+) -> ql.FixedRateBond:
+    """
+    Create a QuantLib FixedRateBond object.
+    
+    Parameters
+    ----------
+    issue_date : ql.Date
+        The issue date of the bond.
+    maturity_date : ql.Date
+        The maturity date of the bond.
+    face_value : float
+        The face (par) value of the bond.
+    coupon_rate : float
+        The annual coupon rate (as a decimal, e.g., 0.05 for 5%).
+    frequency : int, optional
+        The number of coupon payments per year (default: 2 for semi-annual).
+    
+    Returns
+    -------
+    ql.FixedRateBond
+        The QuantLib FixedRateBond object.
+    """
+    
+    # -----------------------------
+    # Global evaluation date
+    # -----------------------------
+    valuation_date = ql.Date(15, 1, 2025)
+    ql.Settings.instance().evaluationDate = valuation_date
+
+    # -----------------------------
+    # Bond specification
+    # -----------------------------
+    issue_date = issue_date
+    maturity_date = maturity_date
+    face_value = face_value
+    coupon_rate = coupon_rate
+
+    if frequency == 2:
+        frequency = ql.Semiannual
+    else:
+        raise ValueError("Only semiannual frequency supported in this example.")
+
+    calendar = ql.UnitedStates(ql.UnitedStates.GovernmentBond)
+    day_count = ql.ActualActual(ql.ActualActual.ISDA)
+
+    # -----------------------------
+    # Coupon schedule
+    # -----------------------------
+    schedule = ql.Schedule(
+        issue_date,
+        maturity_date,
+        ql.Period(frequency),
+        calendar,
+        ql.Following,
+        ql.Following,
+        ql.DateGeneration.Backward,
+        False,
+    )
+
+    # -----------------------------
+    # Fixed-rate bond
+    # -----------------------------
+    bond = ql.FixedRateBond(
+        settlementDays=1,
+        faceAmount=face_value,
+        schedule=schedule,
+        coupons=[coupon_rate],
+        paymentDayCounter=day_count,
+    )
+
+    return bond
+
+
+def ql_bond_dates_cashflows(
+    bond: ql.FixedRateBond,
+) -> pd.DataFrame:
+    """
+    Extract bond cashflow dates and amounts and return a DataFrame.
+    """
+
+    cashflows = bond.cashflows()
+    data = {
+        "date": [cf.date() for cf in cashflows],
+        "amount": [cf.amount() for cf in cashflows],
+    }
+
+    df = pd.DataFrame(data).set_index("date")
+    return df
+
+
+def ql_clean_price(
+    bond: ql.FixedRateBond,
+    ytm: float,
+    frequency: int = 2,
+) -> float:
+    """
+    Calculate the clean price of a QuantLib FixedRateBond given a YTM.
+    """
+
+    if frequency == 2:
+        frequency = ql.Semiannual
+    else:
+        raise ValueError("Only semiannual frequency supported in this example.")
+
+    # Need to extact the day_count
+    day_count = ql.ActualActual(ql.ActualActual.ISDA)
+
+    clean_price = bond.cleanPrice(
+        ytm,
+        day_count,
+        ql.Compounded,
+        frequency,
+    )
+
+    return clean_price
+
+
+def ql_dirty_price(
+    bond: ql.FixedRateBond,
+    ytm: float,
+    frequency: int = 2,
+) -> float:
+    """
+    Calculate the dirty price of a QuantLib FixedRateBond given a YTM.
+    """
+
+    if frequency == 2:
+        frequency = ql.Semiannual
+    else:
+        raise ValueError("Only semiannual frequency supported in this example.")
+
+    # Need to extact the day_count
+    day_count = ql.ActualActual(ql.ActualActual.ISDA)
+
+    dirty_price = bond.dirtyPrice(
+        ytm,
+        day_count,
+        ql.Compounded,
+        frequency,
+    )
+
+    return dirty_price
+
+def ql_accrued_interest(
+    bond: ql.FixedRateBond,
+) -> float:
+    """
+    Calculate the accrued interest of a QuantLib FixedRateBond.
+    """
+
+    accrued_interest = bond.accruedAmount()
+    return accrued_interest
+
+
+
 if __name__ == "__main__":
     quote_date = "2020-01-02"
     maturity_date = "2025-01-01"
@@ -196,7 +357,7 @@ if __name__ == "__main__":
 
     print(coupon_dates)
 
-    coupon_dates_ql = get_coupon_dates_ql(
+    coupon_dates_ql = ql_get_coupon_dates(
         quote_date=quote_date,
         maturity_date=maturity_date,
     )
@@ -213,7 +374,7 @@ if __name__ == "__main__":
 
     print(price)
 
-    price_ql = bond_price_ql(
+    price_ql = ql_bond_price(
         face_value=1000,
         coupon_rate=0.06,
         ytm=0.05,
@@ -224,3 +385,75 @@ if __name__ == "__main__":
     print(price_ql)
 
     print(price / price_ql + 1e-3)
+
+    day_count = ql.ActualActual(ql.ActualActual.ISDA)
+    frequency = ql.Semiannual
+    ytm = 0.05
+
+    bond = ql_create_bond(
+        issue_date=ql.Date(15, 1, 2025),
+        maturity_date=ql.Date(15, 1, 2055),
+        face_value=1000.0,
+        coupon_rate=0.04,
+        frequency=2,
+    )
+
+    df = ql_bond_dates_cashflows(bond)
+    print(df)
+
+    clean_price = ql_clean_price(
+        bond=bond,
+        ytm=ytm,
+        frequency=2,
+    )
+
+    print(clean_price)
+
+    dirty_price = ql_dirty_price(
+        bond=bond,
+        ytm=0.05,
+        frequency=2,
+    )
+
+    print(dirty_price)
+
+    accrued_interest = ql_accrued_interest(bond)
+    print(accrued_interest)
+
+    
+
+    mod_duration = ql.BondFunctions.duration(
+        bond,
+        ytm,
+        day_count,
+        ql.Compounded,
+        frequency,
+        ql.Duration.Modified,
+    )
+
+    print(mod_duration)
+
+    mac_duration = ql.BondFunctions.duration(
+        bond,
+        ytm,
+        day_count,
+        ql.Compounded,
+        frequency,
+        ql.Duration.Macaulay,
+    )
+
+    convexity = ql.BondFunctions.convexity(
+        bond,
+        ytm,
+        day_count,
+        ql.Compounded,
+        frequency,
+    )
+
+ 
+
+
+
+
+
+

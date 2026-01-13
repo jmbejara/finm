@@ -75,9 +75,9 @@ from finm.fixedincome.gsw2006_yield_curve import (
 )
 from finm.fixedincome.pricing import (
     bond_price,
-    bond_price_ql,
+    ql_bond_price,
     get_coupon_dates,
-    get_coupon_dates_ql,
+    ql_get_coupon_dates,
 )
 
 __version__ = "0.1.3"
@@ -143,7 +143,7 @@ __all__ = [
     "gurkaynak_sack_wright_filters",
     "compare_fit",
     # Fixed income - pricing
-    "get_coupon_dates_ql",
+    "ql_get_coupon_dates",
     "bond_price",
-    "bond_price_ql",
+    "ql_bond_price",
 ]
