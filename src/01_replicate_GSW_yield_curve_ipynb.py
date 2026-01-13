@@ -50,15 +50,16 @@
 # This equation shows the zero-coupon yield $y(t)$ for maturity $t$.
 
 # %%
+import numpy as np
 import os
+import pandas as pd
+
 from datetime import datetime
+from dotenv import load_dotenv
 from pathlib import Path
 
-import numpy as np
-import pandas as pd
-from dotenv import load_dotenv
-
-import finm
+from finm import data
+from finm.fixedincome import gsw2006_yield_curve
 
 load_dotenv()
 
@@ -71,14 +72,14 @@ WRDS_USERNAME = os.environ.get("WRDS_USERNAME", "")
 # "tau1", "tau2", "beta1", "beta2", "beta3", "beta4"
 params = np.array([1.0, 10.0, 3.0, 3.0, 3.0, 3.0])
 
-finm.plot_spot_curve(params)
+gsw2006_yield_curve.plot_spot_curve(params)
 
 # %%
 # Nelson-Siegel-Svensson parameters
 # "tau1", "tau2", "beta1", "beta2", "beta3", "beta4"
 params = np.array([1.0, 10.0, 3.0, 3.0, 3.0, 30.0])
 
-finm.plot_spot_curve(params)
+gsw2006_yield_curve.plot_spot_curve(params)
 
 # %% [markdown]
 # ## Theoretical Foundations
@@ -191,7 +192,7 @@ finm.plot_spot_curve(params)
 # and here: https://www.federalreserve.gov/data/yield-curve-tables/feds200628_1.html
 # Auto-pulls data if not found locally
 
-actual_all = finm.load_fed_yield_curve_all(
+actual_all = data.load_fed_yield_curve_all(
     data_dir=DATA_DIR,
     pull_if_not_found=True,
     accept_license=True,
@@ -212,7 +213,7 @@ actual_params_all[beta_columns] = actual_params_all[beta_columns] / 100
 # We will fit a Nelson-Siegel-Svensson model to this data to see
 # if we can replicate the Gurkaynak Sack Wright results above.
 # Auto-pulls from WRDS if not found locally (requires WRDS credentials).
-df_all = finm.load_wrds_treasury(
+df_all = data.load_wrds_treasury(
     data_dir=DATA_DIR,
     variant="consolidated",
     with_runness=True,
@@ -229,7 +230,7 @@ df_all.tail()
 df_all.describe()
 
 # %%
-df_all = finm.gurkaynak_sack_wright_filters(df_all)
+df_all = gsw2006_yield_curve.gurkaynak_sack_wright_filters(df_all)
 df_all.describe()
 
 # %% [markdown]
@@ -241,7 +242,7 @@ df_all.describe()
 # %%
 # Data was already loaded above with pull_if_not_found=True
 # Just reload with filters if needed
-df_all = finm.load_wrds_treasury(
+df_all = data.load_wrds_treasury(
     data_dir=DATA_DIR,
     variant="consolidated",
     with_runness=True,
@@ -265,7 +266,7 @@ sample_data = pd.DataFrame(
     }
 )
 
-cashflow = finm.calc_cashflows(sample_data)
+cashflow = gsw2006_yield_curve.calc_cashflows(sample_data)
 
 # Treasury securities have 2 coupon payments per year
 # and pay their final coupon and principal on the maturity date
@@ -335,7 +336,7 @@ cashflow
 
 # %%
 # Load Gurkaynak Sack Wright data from Federal Reserve's website (already cached)
-actual_all = finm.load_fed_yield_curve_all(data_dir=DATA_DIR).to_pandas()
+actual_all = data.load_fed_yield_curve_all(data_dir=DATA_DIR).to_pandas()
 actual_all = actual_all.set_index("Date")
 # Create copy of parameter DataFrame to avoid view vs copy issues
 actual_params_all = actual_all.loc[
@@ -347,12 +348,12 @@ actual_params_all[beta_columns] = actual_params_all[beta_columns] / 100
 
 
 # Load CRSP Treasury data from local cache (already pulled above)
-df_all = finm.load_wrds_treasury(
+df_all = data.load_wrds_treasury(
     data_dir=DATA_DIR,
     variant="consolidated",
     with_runness=True,
 ).to_pandas()
-df_all = finm.gurkaynak_sack_wright_filters(df_all)
+df_all = gsw2006_yield_curve.gurkaynak_sack_wright_filters(df_all)
 
 quote_dates = pd.date_range("2000-01-02", "2024-06-30", freq="BMS")
 
@@ -369,17 +370,17 @@ actual_params = actual_params_all[actual_params_all.index == quote_date].values[
 # "tau1", "tau2", "beta1", "beta2", "beta3", "beta4"
 params0 = np.array([0.989721, 9.955324, 3.685087, 1.579927, 3.637107, 9.814584])
 
-params_star, error = finm.fit(quote_date, df_all, params0)
+params_star, error = gsw2006_yield_curve.fit(quote_date, df_all, params0)
 
 # %%
 # Visualize the fit
-finm.plot_spot_curve(params_star)
+gsw2006_yield_curve.plot_spot_curve(params_star)
 
 # %%
-finm.plot_spot_curve(actual_params)
+gsw2006_yield_curve.plot_spot_curve(actual_params)
 
 # %%
-price_comparison = finm.compare_fit(quote_date, df_all, params_star, actual_params, df)
+price_comparison = gsw2006_yield_curve.compare_fit(quote_date, df_all, params_star, actual_params, df)
 price_comparison
 
 # %%
@@ -399,9 +400,9 @@ actual_params = actual_params_all[actual_params_all.index == quote_date].values[
 
 params0 = np.array([0.989721, 9.955324, 3.685087, 1.579927, 3.637107, 9.814584])
 
-params_star, error = finm.fit(quote_date, df_all, params0)
+params_star, error = gsw2006_yield_curve.fit(quote_date, df_all, params0)
 
-price_comparison = finm.compare_fit(quote_date, df_all, params_star, actual_params, df)
+price_comparison = gsw2006_yield_curve.compare_fit(quote_date, df_all, params_star, actual_params, df)
 
 # Assert that column is close to 0 for all CUSIPs
 assert (price_comparison["Predicted - Actual %"].abs() < 0.05).all()
@@ -419,9 +420,9 @@ actual_params = actual_params_all[actual_params_all.index == quote_date].values[
 
 params0 = np.array([0.989721, 9.955324, 3.685087, 1.579927, 3.637107, 9.814584])
 
-params_star, error = finm.fit(quote_date, df_all, params0)
+params_star, error = gsw2006_yield_curve.fit(quote_date, df_all, params0)
 
-price_comparison = finm.compare_fit(quote_date, df_all, params_star, actual_params, df)
+price_comparison = gsw2006_yield_curve.compare_fit(quote_date, df_all, params_star, actual_params, df)
 
 # Assert that column is close to 0 for all CUSIPs
 assert (price_comparison["Predicted - Actual %"].abs() < 0.05).all()
