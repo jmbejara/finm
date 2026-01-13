@@ -181,6 +181,8 @@ def _pull_corp_bond(
             CUSIP,
             COMPANY_SYMBOL,
             BOND_TYPE,
+            coupon,
+            amount_outstanding,
             price_eom,
             price_ldm,
             price_l5m,
