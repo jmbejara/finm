@@ -185,7 +185,7 @@ def ql_bond_price(
     return price * (face_value / 100.0)
 
 
-def ql_create_bond(
+def ql_create_fixed_rate_bond(
     issue_date: ql.Date,
     maturity_date: ql.Date,
     face_value: float,
@@ -390,9 +390,9 @@ if __name__ == "__main__":
     frequency = ql.Semiannual
     ytm = 0.05
 
-    bond = ql_create_bond(
-        issue_date=ql.Date(15, 1, 2025),
-        maturity_date=ql.Date(15, 1, 2055),
+    bond = ql_create_fixed_rate_bond(
+        issue_date=ql.Date(1, 1, 2025),
+        maturity_date=ql.Date(1, 1, 2055),
         face_value=1000.0,
         coupon_rate=0.04,
         frequency=2,
@@ -442,6 +442,8 @@ if __name__ == "__main__":
         ql.Duration.Macaulay,
     )
 
+    print(mac_duration)
+
     convexity = ql.BondFunctions.convexity(
         bond,
         ytm,
@@ -449,6 +451,170 @@ if __name__ == "__main__":
         ql.Compounded,
         frequency,
     )
+
+    print(convexity)
+
+    valuation_date = ql.Date(15, 1, 2025)
+
+    curve = ql.FlatForward(
+        valuation_date,
+        ql.QuoteHandle(ql.SimpleQuote(0.045)),
+        day_count,
+        ql.Compounded,
+        ql.Semiannual,
+    )
+
+    curve_handle = ql.YieldTermStructureHandle(curve)
+
+    engine = ql.DiscountingBondEngine(curve_handle)
+
+    bond.setPricingEngine(engine)
+
+    pv = bond.NPV()
+    print(pv)
+
+    clean_price = pv - bond.accruedAmount()
+    print(clean_price)
+
+    # Create complete yield curve
+    treasury_data = [
+        # maturity (years), coupon, clean price
+        (2,  0.030,  99.50),
+        (5,  0.035, 100.20),
+        (10, 0.040, 101.80),
+        (30, 0.045, 103.10),
+    ]
+
+
+    valuation_date = ql.Date(15, 1, 2025)
+    ql.Settings.instance().evaluationDate = valuation_date
+
+    calendar = ql.UnitedStates(ql.UnitedStates.GovernmentBond)
+    day_count = ql.ActualActual(ql.ActualActual.ISDA)
+    frequency = ql.Semiannual
+    settlement_days = 1
+
+    helpers = []
+
+    for maturity_years, coupon, clean_price in treasury_data:
+        maturity_date = valuation_date + ql.Period(maturity_years, ql.Years)
+
+        schedule = ql.Schedule(
+            valuation_date,
+            maturity_date,
+            ql.Period(frequency),
+            calendar,
+            ql.Following,
+            ql.Following,
+            ql.DateGeneration.Backward,
+            False,
+        )
+
+        bond_helper = ql.FixedRateBondHelper(
+            ql.QuoteHandle(ql.SimpleQuote(clean_price)),
+            settlement_days,
+            100.0,                 # par = 100 for curve building
+            schedule,
+            [coupon],
+            day_count,
+        )
+
+        helpers.append(bond_helper)
+
+    curve = ql.PiecewiseLogLinearDiscount(
+        valuation_date,
+        helpers,
+        day_count,
+    )
+
+    curve_handle = ql.YieldTermStructureHandle(curve)
+
+    for y in [1, 2, 5, 10, 30]:
+        date = valuation_date + ql.Period(y, ql.Years)
+        print(y, curve.discount(date))
+
+    for y in [1, 2, 5, 10, 30]:
+        date = valuation_date + ql.Period(y, ql.Years)
+        zero = curve.zeroRate(
+            date,
+            day_count,
+            ql.Compounded,
+            frequency,
+        ).rate()
+        print(y, zero)
+
+    engine = ql.DiscountingBondEngine(curve_handle)
+
+    test_bond = ql.FixedRateBond(
+        settlement_days,
+        100.0,
+        schedule,
+        [coupon],
+        day_count,
+    )
+
+    test_bond.setPricingEngine(engine)
+
+    model_price = test_bond.cleanPrice()
+
+    # Create zero coupon bond
+    import QuantLib as ql
+
+    valuation_date = ql.Date(15, 1, 2025)
+    ql.Settings.instance().evaluationDate = valuation_date
+
+    calendar = ql.UnitedStates(ql.UnitedStates.GovernmentBond)
+    day_count = ql.ActualActual(ql.ActualActual.ISDA)
+
+    settlement_days = 1
+    face_value = 100.0
+
+    issue_date = valuation_date
+    maturity_date = valuation_date + ql.Period(10, ql.Years)
+
+    # ZeroCouponBond(
+    #     settlementDays,   # T+ settlement
+    #     calendar,         # business-day calendar
+    #     faceAmount,       # notional
+    #     maturityDate,     # when principal is paid
+    #     paymentConvention,# adjust maturity date
+    #     redemption,       # usually = faceAmount
+    #     issueDate,        # optional, but good practice
+    # )
+
+    zero_bond = ql.ZeroCouponBond(
+        settlement_days,
+        calendar,
+        face_value,
+        maturity_date,
+        ql.Following,
+        face_value,   # redemption
+        issue_date,
+    )
+
+    for cf in zero_bond.cashflows():
+        print(cf.date(), cf.amount())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  
 
