@@ -6,15 +6,18 @@ import numpy as np
 
 from finm.fixedincome import (
     bond_price,
-    ql_bond_price,
     convexity,
     duration,
     future_value,
     get_coupon_dates,
-    ql_get_coupon_dates,
     modified_duration,
     present_value,
     yield_to_maturity,
+)
+
+from tests import (
+    ql_create_schedule,
+    ql_extract_coupon_dates,
 )
 
 
