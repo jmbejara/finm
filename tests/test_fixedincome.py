@@ -195,6 +195,3 @@ class TestCouponDates:
         for i in range(1, len(coupon_dates)):
             delta = (coupon_dates[i] - coupon_dates_ql[i]).days
             assert delta <= 3  # Allow some leeway for month length variations
-
-
-class TestBond

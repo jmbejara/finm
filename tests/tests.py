@@ -131,6 +131,54 @@ def ql_create_fixed_rate_bond(
     return bond
 
 
+def ql_create_zero_coupon_bond(
+    issue_date: str,
+    maturity_date: str,
+    face_value: float,
+    calendar: ql.Calendar = ql.UnitedStates(ql.UnitedStates.GovernmentBond),
+) -> ql.ZeroCouponBond:
+    """
+    Create a QuantLib ZeroCouponBond object.
+
+    Parameters
+    ----------
+    issue_date : str
+        The issue date of the bond.
+    maturity_date : str
+        The maturity date of the bond.
+    face_value : float
+        The face (par) value of the bond.
+    calendar : ql.Calendar, optional
+        The business day calendar to use (default: US Government Bond calendar).
+
+    Returns
+    -------
+    ql.ZeroCouponBond
+        The QuantLib ZeroCouponBond object.
+    """
+
+    # Convert to QuantLib dates from strings
+    if isinstance(issue_date, str):
+        dt = datetime.strptime(issue_date, "%Y-%m-%d")
+        issue_date = ql.Date(dt.day, dt.month, dt.year)
+    if isinstance(maturity_date, str):
+        dt = datetime.strptime(maturity_date, "%Y-%m-%d")
+        maturity_date = ql.Date(dt.day, dt.month, dt.year)
+
+    # Create QuantLib zero coupon bond
+    bond = ql.ZeroCouponBond(
+        settlementDays=1,  # T+1 settlement
+        calendar=calendar,
+        faceAmount=face_value,
+        maturityDate=maturity_date,
+        paymentConvention=ql.Following,
+        redemption=100.0, # Redemption value at maturity (usually 100% of face)
+        issueDate=issue_date,
+    )
+
+    return bond
+
+
 def ql_extract_cashflows(
     bond: ql.FixedRateBond,
 ) -> pd.Series:
@@ -161,7 +209,7 @@ def ql_extract_cashflows(
 
 
 def ql_extract_coupon_dates_cashflows(
-    bond: ql.FixedRateBond,
+    bond: ql.FixedRateBond | ql.ZeroCouponBond,
 ) -> pd.DataFrame:
     """
     Extract coupon dates and bond cashflow amounts from a QuantLib bond
@@ -420,6 +468,99 @@ def ql_calc_macaulay_duration(
     return mac_duration
 
 
+def ql_calc_convexity(
+    valuation_date: str,
+    ytm: float,
+    bond: ql.FixedRateBond,
+) -> float:
+    """
+    Calculate the convexity of a QuantLib FixedRateBond.
+
+    Parameters
+    ----------
+    valuation_date : str
+        The valuation date as a string "YYYY-MM-DD".
+    ytm : float
+        The yield to maturity (as a decimal, e.g., 0.05 for 5%).
+    bond : ql.FixedRateBond
+        The QuantLib FixedRateBond object.
+
+    Returns
+    -------
+    float
+        The convexity of the bond.
+    """
+
+    # Convert to QuantLib dates from strings
+    if isinstance(valuation_date, str):
+        dt = datetime.strptime(valuation_date, "%Y-%m-%d")
+        valuation_date = ql.Date(dt.day, dt.month, dt.year)
+
+    # Evaluation date
+    ql.Settings.instance().evaluationDate = valuation_date
+
+    # Calculate convexity for bond
+    convexity = ql.BondFunctions.convexity(
+        bond,
+        ytm,
+        bond.dayCounter(),  # Use bond's day counter
+        ql.Compounded,  # Use standard compounding
+        bond.frequency(),  # Use bond's coupon frequency
+    )
+
+    return convexity
+
+
+def ql_calc_zero_coupon_bond_price(
+    valuation_date: str,
+    ytm: float,
+    bond: ql.ZeroCouponBond,
+    day_counter: ql.DayCounter = ql.ActualActual(ql.ActualActual.ISDA),
+) -> float:
+    """
+    Calculate the price of a QuantLib ZeroCouponBond.
+
+    Parameters
+    ----------
+    valuation_date : str
+        The valuation date as a string "YYYY-MM-DD".
+    ytm : float
+        The yield to maturity (as a decimal, e.g., 0.05 for 5%).
+    zero_bond : ql.ZeroCouponBond
+        The QuantLib ZeroCouponBond object.
+
+    Returns
+    -------
+    float
+        The price of the zero-coupon bond.
+    """
+
+    # Convert to QuantLib dates from strings
+    if isinstance(valuation_date, str):
+        dt = datetime.strptime(valuation_date, "%Y-%m-%d")
+        valuation_date = ql.Date(dt.day, dt.month, dt.year)
+
+    # Evaluation date
+    ql.Settings.instance().evaluationDate = valuation_date
+
+    # Calculate price for zero coupon bond
+    price = bond.cleanPrice(
+        ytm,
+        day_counter,
+        ql.Compounded,  # Use standard compounding
+        ql.Annual,  # Zero coupon bonds pay annually (at maturity)
+    )
+
+    # Check if the face value is different from 100
+    face_value = bond.notional()
+
+    if face_value == 100.0:
+        return price
+    else:
+        # QuantLib prices are quoted per 100 face
+        return price * (face_value / 100.0)
+
+
 if __name__ == "__main__":
     quote_date = "2020-01-01"
     maturity_date = "2025-12-24"
@@ -479,26 +620,38 @@ if __name__ == "__main__":
 
     print(modified_duration)
 
-    # mac_duration = ql.BondFunctions.duration(
-    #     bond,
-    #     ytm,
-    #     day_count,
-    #     ql.Compounded,
-    #     frequency,
-    #     ql.Duration.Macaulay,
-    # )
+    macaulay_duration = ql_calc_macaulay_duration(
+        valuation_date=valuation_date,
+        ytm=0.06,
+        bond=bond,
+    )
 
-    # print(mac_duration)
+    print(macaulay_duration)
 
-    # convexity = ql.BondFunctions.convexity(
-    #     bond,
-    #     ytm,
-    #     day_count,
-    #     ql.Compounded,
-    #     frequency,
-    # )
+    convexity = ql_calc_convexity(
+        valuation_date=valuation_date,
+        ytm=0.06,
+        bond=bond,
+    )
 
-    # print(convexity)
+    print(convexity)
+
+    zero_coupon_bond = ql_create_zero_coupon_bond(
+        issue_date=quote_date,
+        maturity_date=maturity_date,
+        face_value=1000,
+    )
+
+    dates_cashflows = ql_extract_coupon_dates_cashflows(zero_coupon_bond)
+    print(dates_cashflows)
+
+    current_price = ql_calc_zero_coupon_bond_price(
+        valuation_date=valuation_date,
+        ytm=0.06,
+        bond=zero_coupon_bond,
+    )
+
+    print(current_price)
 
     # valuation_date = ql.Date(15, 1, 2025)
 
@@ -602,40 +755,4 @@ if __name__ == "__main__":
 
     # model_price = test_bond.cleanPrice()
 
-    # # Create zero coupon bond
-    # import QuantLib as ql
-
-    # valuation_date = ql.Date(15, 1, 2025)
-    # ql.Settings.instance().evaluationDate = valuation_date
-
-    # calendar = ql.UnitedStates(ql.UnitedStates.GovernmentBond)
-    # day_count = ql.ActualActual(ql.ActualActual.ISDA)
-
-    # settlement_days = 1
-    # face_value = 100.0
-
-    # issue_date = valuation_date
-    # maturity_date = valuation_date + ql.Period(10, ql.Years)
-
-    # # ZeroCouponBond(
-    # #     settlementDays,   # T+ settlement
-    # #     calendar,         # business-day calendar
-    # #     faceAmount,       # notional
-    # #     maturityDate,     # when principal is paid
-    # #     paymentConvention,# adjust maturity date
-    # #     redemption,       # usually = faceAmount
-    # #     issueDate,        # optional, but good practice
-    # # )
-
-    # zero_bond = ql.ZeroCouponBond(
-    #     settlement_days,
-    #     calendar,
-    #     face_value,
-    #     maturity_date,
-    #     ql.Following,
-    #     face_value,  # redemption
-    #     issue_date,
-    # )
-
-    # for cf in zero_bond.cashflows():
-    #     print(cf.date(), cf.amount())
+    
