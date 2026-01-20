@@ -32,9 +32,7 @@ from finm.fixedincome.gsw2006_yield_curve import (
 )
 from finm.fixedincome.pricing import (
     bond_price,
-    ql_bond_price,
     get_coupon_dates,
-    ql_get_coupon_dates,
 )
 
 __all__ = [
@@ -62,7 +60,5 @@ __all__ = [
     "compare_fit",
     # from finm.fixedincome.pricing import
     "get_coupon_dates",
-    "ql_get_coupon_dates",
     "bond_price",
-    "ql_bond_price",
 ]
