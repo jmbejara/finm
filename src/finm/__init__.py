@@ -48,13 +48,20 @@ from finm.data import (
     pull_wrds_treasury,
     wrds,
 )
-from finm.fixedincome.bonds import (
-    convexity,
-    duration,
-    future_value,
-    modified_duration,
+from finm.fixedincome.pricing import (
     present_value,
-    yield_to_maturity,
+    future_value,
+    get_coupon_dates,
+    calc_bond_cashflows,
+    calc_clean_bond_price,
+    calc_dirty_bond_price,
+    calc_accrued_interest,
+    calc_yield_to_maturity,
+    calc_macaulay_duration,
+    calc_modified_duration,
+    calc_convexity,
+    calc_zero_bond_price,
+    calc_dollar_duration,
 )
 from finm.fixedincome.calc_corp_bond_returns import (
     assign_cs_deciles,
@@ -73,11 +80,16 @@ from finm.fixedincome.gsw2006_yield_curve import (
     predict_prices,
     spot,
 )
-from finm.fixedincome.pricing import (
-    bond_price,
-    ql_bond_price,
-    get_coupon_dates,
-    ql_get_coupon_dates,
+from finm.options import (
+    calc_option_price,
+    calc_option_payoff,
+    calc_option_delta,
+    calc_option_gamma,
+    calc_option_vega,
+    calc_option_theta,
+    calc_option_rho,
+    calc_implied_volatility,
+    calc_binomial_option_price,
 )
 
 __version__ = "0.1.3"
@@ -120,13 +132,20 @@ __all__ = [
     "pull_wrds_corp_bond",
     "load_wrds_corp_bond",
     "calc_treasury_runness",
-    # Fixed income - bonds
+    # Fixed income - pricing
     "present_value",
     "future_value",
-    "yield_to_maturity",
-    "duration",
-    "modified_duration",
-    "convexity",
+    "get_coupon_dates",
+    "calc_bond_cashflows",
+    "calc_clean_bond_price",
+    "calc_dirty_bond_price",
+    "calc_accrued_interest",
+    "calc_yield_to_maturity",
+    "calc_macaulay_duration",
+    "calc_modified_duration",
+    "calc_convexity",
+    "calc_zero_bond_price",
+    "calc_dollar_duration",
     # Fixed income - corporate bond returns
     "assign_cs_deciles",
     "calc_value_weighted_decile_returns",
@@ -142,8 +161,14 @@ __all__ = [
     "fit",
     "gurkaynak_sack_wright_filters",
     "compare_fit",
-    # Fixed income - pricing
-    "ql_get_coupon_dates",
-    "bond_price",
-    "ql_bond_price",
+    # Options
+    "calc_option_price",
+    "calc_option_payoff",
+    "calc_option_delta",
+    "calc_option_gamma",
+    "calc_option_vega",
+    "calc_option_theta",
+    "calc_option_rho",
+    "calc_implied_volatility",
+    "calc_binomial_option_price",
 ]
