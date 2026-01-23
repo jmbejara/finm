@@ -158,6 +158,7 @@ jupyter_execute/
 # PyDoit
 .doit-db.sqlite
 .doit.db.db
+.doit.db
 
 # Credentials
 .pgpass
