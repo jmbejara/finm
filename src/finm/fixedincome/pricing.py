@@ -13,9 +13,14 @@ This module provides basic functions for:
 - Yield to maturity
 - Macaulay duration
 - Modified duration
+- Dollar duration
 - Convexity
 - Zero coupon bond price
-- Dollar duration
+- Zero coupon bond yield
+- Zero coupon bond duration
+- Zero coupon bond convexity
+- Zero coupon bond discount factor
+- Current yield
 """
 
 import numpy as np
@@ -439,7 +444,11 @@ def calc_yield_to_maturity(
 
 
 def calc_macaulay_duration(
-    face_value: float, coupon_rate: float, ytm: float, periods: int, frequency: int = 2
+    face_value: float, 
+    coupon_rate: float, 
+    ytm: float, 
+    periods: int, 
+    frequency: int = 2,
 ) -> float:
     """
     Calculate the Macaulay duration of a bond.
@@ -504,7 +513,11 @@ def calc_macaulay_duration(
 
 
 def calc_modified_duration(
-    face_value: float, coupon_rate: float, ytm: float, periods: int, frequency: int = 2
+    face_value: float, 
+    coupon_rate: float, 
+    ytm: float, 
+    periods: int, 
+    frequency: int = 2,
 ) -> float:
     """
     Calculate the modified duration of a bond.
@@ -547,9 +560,66 @@ def calc_modified_duration(
 
     return modified_duration
 
+def calc_dollar_duration(
+    face_value: float, coupon_rate: float, ytm: float, periods: int, frequency: int = 2
+) -> float:
+    """
+    Calculate the dollar duration (DV01) of a bond.
+
+    Dollar duration measures the change in bond price (in dollars) for a
+    1 basis point (0.01%) change in yield. It's also known as DV01
+    (dollar value of a 01, i.e., one basis point).
+
+    Parameters
+    ----------
+    face_value : float
+        The face (par) value of the bond.
+    coupon_rate : float
+        The annual coupon rate (as a decimal, e.g., 0.05 for 5%).
+    ytm : float
+        The yield to maturity (as a decimal, e.g., 0.05 for 5%).
+    periods : int
+        The number of coupon periods remaining until maturity.
+    frequency : int, optional
+        The number of coupon payments per year (default: 2 for semi-annual).
+
+    Returns
+    -------
+    float
+        The dollar duration (change in dollar value for 1bp yield change).
+    """
+
+    # Calculate modified duration
+    modified_duration = calc_modified_duration(
+        face_value=face_value,
+        coupon_rate=coupon_rate,
+        ytm=ytm,
+        periods=periods,
+        frequency=frequency,
+    )
+
+    # Calculate current clean price
+    clean_price = calc_clean_bond_price(
+        face_value=face_value,
+        coupon_rate=coupon_rate,
+        ytm=ytm,
+        periods=periods,
+        frequency=frequency,
+    )
+
+    # Dollar duration = Modified Duration × Price × 0.0001 (for 1bp)
+    # 0.0001 = 1 basis point as a decimal (0.01% = 0.0001)
+    dollar_duration = modified_duration * clean_price * 0.0001
+
+    return dollar_duration
+
 
 def calc_convexity(
-    face_value: float, coupon_rate: float, ytm: float, periods: int, frequency: int = 2
+    face_value: float, 
+    coupon_rate: float, 
+    ytm: float, 
+    periods: int, 
+    frequency: int = 2,
 ) -> float:
     """
     Calculate the convexity of a bond.
@@ -615,7 +685,10 @@ def calc_convexity(
 
 
 def calc_zero_bond_price(
-    face_value: float, ytm: float, years_to_maturity: float, frequency: int = 2
+    face_value: float, 
+    ytm: float, 
+    years_to_maturity: float, 
+    frequency: int = 2,
 ) -> float:
     """
     Calculate the price of a zero coupon bond.
@@ -652,56 +725,185 @@ def calc_zero_bond_price(
 
     return price
 
-
-def calc_dollar_duration(
-    face_value: float, coupon_rate: float, ytm: float, periods: int, frequency: int = 2
+def calc_zero_bond_yield(
+    face_value: float,
+    price: float,
+    years_to_maturity: float,
+    frequency: int = 2,
 ) -> float:
     """
-    Calculate the dollar duration (DV01) of a bond.
-
-    Dollar duration measures the change in bond price (in dollars) for a
-    1 basis point (0.01%) change in yield. It's also known as DV01
-    (dollar value of a 01, i.e., one basis point).
+    Calculate the yield (discount rate) of a zero coupon bond given its price.
 
     Parameters
     ----------
     face_value : float
         The face (par) value of the bond.
-    coupon_rate : float
-        The annual coupon rate (as a decimal, e.g., 0.05 for 5%).
-    ytm : float
-        The yield to maturity (as a decimal, e.g., 0.05 for 5%).
-    periods : int
-        The number of coupon periods remaining until maturity.
+    price : float
+        The current price of the bond.
+    years_to_maturity : float
+        The number of years until maturity.
     frequency : int, optional
-        The number of coupon payments per year (default: 2 for semi-annual).
+        The compounding frequency per year (default: 2 for semi-annual).
 
     Returns
     -------
     float
-        The dollar duration (change in dollar value for 1bp yield change).
+        The yield as a decimal (e.g., 0.05 for 5%).
+    """
+    
+    # Calculate total number of compounding periods
+    total_periods = years_to_maturity * frequency
+    
+    # Solve for periodic rate from: Price = Face_Value / (1 + r)^n
+    # (1 + r)^n = Face_Value / Price
+    # r = (Face_Value / Price)^(1/n) - 1
+    periodic_rate = (face_value / price) ** (1 / total_periods) - 1
+    
+    # Convert to annual rate
+    annual_yield = periodic_rate * frequency
+    
+    return annual_yield
+
+
+
+def calc_zero_bond_duration(
+    issue_date: str,
+    maturity_date: str,
+) -> float:
+    """
+    Calculate the Macaulay duration of a zero coupon bond.
+    
+    For zero coupon bonds, the Macaulay duration equals the time to maturity
+    because there is only one cash flow (at maturity).
+
+    Parameters
+    ----------
+    issue_date : str
+        The issue date of the bond.
+    maturity_date : str
+        The maturity date of the bond.
+
+    Returns
+    -------
+    float
+        The Macaulay duration in years.
+    """
+    
+    # Convert to datetime if needed
+    if isinstance(issue_date, str):
+        issue_date = datetime.strptime(issue_date, "%Y-%m-%d")
+    if isinstance(maturity_date, str):
+        maturity_date = datetime.strptime(maturity_date, "%Y-%m-%d")
+
+    # Ensure dates are valid
+    if issue_date >= maturity_date:
+        raise ValueError("Issue date must be earlier than maturity date.")
+
+    # For zero coupon bonds: Duration = Time to Maturity
+    duration = maturity_date - issue_date
+    
+    return duration.days / 365
+
+def calc_zero_bond_convexity(
+    years_to_maturity: float,
+    ytm: float,
+    frequency: int = 2,
+) -> float:
+    """
+    Calculate the convexity of a zero coupon bond.
+    
+    For zero coupon bonds, convexity has a simpler formula than for coupon bonds
+    because there is only one cash flow (at maturity).
+
+    Parameters
+    ----------
+    years_to_maturity : float
+        The number of years until maturity.
+    ytm : float
+        The yield to maturity (as a decimal, e.g., 0.05 for 5%).
+    frequency : int, optional
+        The compounding frequency per year (default: 2 for semi-annual).
+
+    Returns
+    -------
+    float
+        The convexity of the zero coupon bond.
+    """
+    
+    # Calculate periodic yield
+    periodic_yield = ytm / frequency
+    
+    # Calculate total number of periods
+    total_periods = years_to_maturity * frequency
+    
+    # For zero coupon bonds:
+    # Convexity = [n × (n + 1)] / [(1 + y)² × m²]
+    # where n = total periods, y = periodic yield, m = frequency
+    
+    convexity = (total_periods * (total_periods + 1)) / \
+                ((1 + periodic_yield) ** 2 * frequency ** 2)
+    
+    return convexity
+
+def calc_zero_bond_discount_factor(
+    zero_price: float,
+    face_value: float,
+) -> float:
+    """
+    Calculate the discount factor from a zero coupon bond price.
+    
+    The discount factor is the present value of $1 received at maturity.
+    For a zero coupon bond, it's simply the price divided by face value.
+
+    Parameters
+    ----------
+    zero_price : float
+        The current price of the zero coupon bond.
+    face_value : float
+        The face (par) value of the bond.
+
+    Returns
+    -------
+    float
+        The discount factor (between 0 and 1).
+    """
+    
+    # Discount factor = Price / Face Value
+    discount_factor = zero_price / face_value
+    
+    return discount_factor
+
+def calc_current_yield(
+    face_value: float,
+    coupon_rate: float,
+    current_price: float,
+) -> float:
+    """
+    Calculate the current yield of a bond.
+    
+    Current yield is a simple measure of return that only considers
+    the annual coupon income relative to the current price. It does NOT
+    account for capital gains/losses or time to maturity.
+
+    Parameters
+    ----------
+    face_value : float
+        The face value of the bond.
+    coupon_rate : float
+        The coupon rate of the bond.
+    current_price : float
+        The current market price of the bond.
+
+    Returns
+    -------
+    float
+        The current yield as a decimal (e.g., 0.0526 for 5.26%).
     """
 
-    # Calculate modified duration
-    modified_duration = calc_modified_duration(
-        face_value=face_value,
-        coupon_rate=coupon_rate,
-        ytm=ytm,
-        periods=periods,
-        frequency=frequency,
-    )
-
-    # Calculate current clean price
-    clean_price = calc_clean_bond_price(
-        face_value=face_value,
-        coupon_rate=coupon_rate,
-        ytm=ytm,
-        periods=periods,
-        frequency=frequency,
-    )
-
-    # Dollar duration = Modified Duration × Price × 0.0001 (for 1bp)
-    # 0.0001 = 1 basis point as a decimal (0.01% = 0.0001)
-    dollar_duration = modified_duration * clean_price * 0.0001
-
-    return dollar_duration
+    # Calculate the annual coupon payment
+    annual_coupon = face_value * coupon_rate
+    
+    # Current Yield = Annual Coupon / Current Price
+    current_yield = annual_coupon / current_price
+    
+    return current_yield

@@ -16,13 +16,17 @@ from finm.fixedincome import (
     calc_yield_to_maturity,
     calc_macaulay_duration,
     calc_modified_duration,
+    calc_dollar_duration,
     calc_convexity,
     calc_zero_bond_price,
-    calc_dollar_duration,
+    calc_zero_bond_yield,
+    calc_zero_bond_duration,
+    calc_zero_bond_convexity,
+    calc_zero_bond_discount_factor,
+    calc_current_yield,
 )
 
 from tests.test_ql_fixedincome_functions import (
-    ql_calc_accrued_interest,
     ql_calc_present_value,
     ql_calc_future_value,
     ql_create_schedule,
@@ -37,9 +41,14 @@ from tests.test_ql_fixedincome_functions import (
     ql_calc_yield_to_maturity,
     ql_calc_modified_duration,
     ql_calc_macaulay_duration,
+    ql_calc_dollar_duration,
     ql_calc_convexity,
     ql_calc_zero_coupon_bond_price,
-    ql_calc_dollar_duration,
+    ql_calc_zero_bond_yield,
+    ql_calc_zero_bond_duration,
+    ql_calc_zero_bond_convexity,
+    ql_calc_zero_bond_discount_factor,
+    ql_calc_current_yield,
 )
 
 
@@ -465,6 +474,40 @@ class TestBondFunctions:
         # Additional sanity checks
         assert student_duration > 0, "Modified duration should be positive"
 
+
+    def test_calc_dollar_duration(self):
+        """Test that dollar duration (DV01) is calculated correctly."""
+
+        periods = 10
+
+        # Calculate dollar duration using student function
+        student_dv01 = calc_dollar_duration(
+            face_value=self.face_value,
+            coupon_rate=self.coupon_rate,
+            ytm=self.ytm,
+            periods=periods,
+            frequency=self.frequency,
+        )
+
+        # Calculate dollar duration using QuantLib function
+        ql_dv01 = ql_calc_dollar_duration(
+            valuation_date=self.valuation_date,
+            ytm=self.ytm,
+            bond=self.fixed_bond,
+            face_value=self.face_value,
+        )
+
+        # Test: Check that dollar durations match within tolerance
+        tolerance = 0.01  # 1 cent tolerance
+        diff = abs(student_dv01 - ql_dv01)
+
+        assert (
+            diff < tolerance
+        ), f"Dollar duration mismatch: student={student_dv01:.4f}, ql={ql_dv01:.4f}, diff={diff:.4f}"
+
+        # Additional sanity checks
+        assert student_dv01 > 0, "Dollar duration should be positive"
+    
     def test_calc_convexity(self):
         """Test that convexity is calculated correctly."""
 
@@ -481,7 +524,9 @@ class TestBondFunctions:
 
         # Calculate convexity using QuantLib function
         ql_convexity = ql_calc_convexity(
-            valuation_date=self.valuation_date, ytm=self.ytm, bond=self.fixed_bond
+            valuation_date=self.valuation_date, 
+            ytm=self.ytm, 
+            bond=self.fixed_bond,
         )
 
         # Test: Check that convexities match within tolerance
@@ -527,35 +572,226 @@ class TestBondFunctions:
             student_price < self.face_value
         ), f"Zero bond should trade at discount: price={student_price:.2f}, face={self.face_value:.2f}"
 
-    def test_calc_dollar_duration(self):
-        """Test that dollar duration (DV01) is calculated correctly."""
-
-        periods = 10
-
-        # Calculate dollar duration using student function
-        student_dv01 = calc_dollar_duration(
-            face_value=self.face_value,
-            coupon_rate=self.coupon_rate,
-            ytm=self.ytm,
-            periods=periods,
-            frequency=self.frequency,
+    def test_calc_zero_bond_yield(self):
+        """Test that zero coupon bond yield is calculated correctly."""
+        
+        # First, calculate a price at a known yield
+        known_yield = self.ytm  # 0.045
+        
+        # Get price from QuantLib
+        ql_price = ql_calc_zero_coupon_bond_price(
+            valuation_date=self.valuation_date,
+            ytm=known_yield,
+            bond=self.zero_bond
         )
+        
+        # Now calculate yield from that price using QuantLib function
+        ql_yield = ql_calc_zero_bond_yield(
+            valuation_date=self.valuation_date,
+            price=ql_price,
+            bond=self.zero_bond,
+            frequency=self.frequency
+        )
+        
+        # Calculate yield using student function
+        student_yield = calc_zero_bond_yield(
+            face_value=self.face_value,
+            price=ql_price,
+            years_to_maturity=5,  # 2025 - 2020
+            frequency=self.frequency
+        )
+        
+        # Test: Check that yields match within tolerance
+        tolerance = 0.001  # 10 basis points tolerance
+        diff = abs(student_yield - ql_yield)
+        
+        assert diff < tolerance, \
+            f"Yield mismatch: student={student_yield:.4f}, ql={ql_yield:.4f}, diff={diff:.4f}"
+        
+        # Should recover the original known yield
+        assert abs(student_yield - known_yield) < tolerance, \
+            f"Should recover original yield: student={student_yield:.4f}, original={known_yield:.4f}"
+        
+        # Additional sanity checks
+        assert student_yield > 0, "Yield should be positive"
+        assert student_yield < 1, "Yield should be less than 100%"
+        
+        # Test round-trip: price -> yield -> price
+        recovered_price = calc_zero_bond_price(
+            face_value=self.face_value,
+            ytm=student_yield,
+            years_to_maturity=5,
+            frequency=self.frequency
+        )
+        assert abs(recovered_price - ql_price) < 0.01, \
+            "Round-trip conversion should recover original price"
 
-        # Calculate dollar duration using QuantLib function
-        ql_dv01 = ql_calc_dollar_duration(
+    def test_calc_zero_bond_duration(self):
+        """Test that zero coupon bond duration is calculated correctly."""
+        
+        # Calculate duration using QuantLib function
+        ql_duration = ql_calc_zero_bond_duration(
+            valuation_date=self.issue_date,
+            bond=self.zero_bond
+        )
+        
+        # Calculate duration using student function
+        student_duration = calc_zero_bond_duration(
+            issue_date=self.issue_date,
+            maturity_date=self.maturity_date
+        )
+        
+        # Test: Check that durations match
+        tolerance = 0.1  # 10 cents tolerance
+        diff = abs(student_duration - ql_duration)
+        
+        assert diff < tolerance, \
+            f"Duration mismatch: student={student_duration:.4f}, ql={ql_duration:.4f}, diff={diff:.4f}"
+        
+        # Sanity checks
+        assert student_duration > 0, "Duration should be positive"
+        
+        # For zero coupon bonds, duration should approximately equal time to maturity
+        assert abs(student_duration - 5.0) < 0.1, \
+            f"Zero bond duration should be close to 5 years, got {student_duration:.2f}"
+        
+        # Zero bond duration should be greater than coupon bond duration
+        coupon_bond_duration = ql_calc_macaulay_duration(
+            valuation_date=self.valuation_date,
+            ytm=self.ytm,
+            bond=self.fixed_bond  # Regular coupon bond from setup
+        )
+        
+        assert student_duration > coupon_bond_duration, \
+            f"Zero bond duration ({student_duration:.2f}) should be greater than " \
+            f"coupon bond duration ({coupon_bond_duration:.2f})"
+        
+        # Test that duration equals time to maturity (key property of zero bonds)
+        expected_duration = 5.0
+        assert abs(student_duration - expected_duration) < tolerance, \
+            "For zero coupon bonds, duration should equal time to maturity"
+
+    def test_calc_zero_bond_convexity(self):
+        """Test that zero coupon bond convexity is calculated correctly."""
+        
+        # Calculate convexity using QuantLib function
+        ql_convexity = ql_calc_zero_bond_convexity(
+            valuation_date=self.valuation_date,
+            ytm=self.ytm,
+            bond=self.zero_bond,
+        )
+        
+        # Calculate convexity using student function
+        student_convexity = calc_zero_bond_convexity(
+            years_to_maturity=5.0,  # 2025 - 2020
+            ytm=self.ytm,
+            frequency=self.frequency
+        )
+        
+        # Test: Check that convexities match
+        tolerance = 0.5
+        diff = abs(student_convexity - ql_convexity)
+        
+        assert diff < tolerance, \
+            f"Convexity mismatch: student={student_convexity:.4f}, ql={ql_convexity:.4f}, diff={diff:.4f}"
+        
+        # Sanity checks
+        assert student_convexity > 0, "Convexity should be positive"
+        
+        # Zero bond convexity should be greater than coupon bond convexity
+        coupon_bond_convexity = ql_calc_convexity(
+            valuation_date=self.valuation_date,
+            ytm=self.ytm,
+            bond=self.fixed_bond  # Regular coupon bond from setup
+        )
+        
+        assert student_convexity > coupon_bond_convexity, \
+            f"Zero bond convexity ({student_convexity:.2f}) should be greater than " \
+            f"coupon bond convexity ({coupon_bond_convexity:.2f})"
+        
+        # Longer maturity should mean higher convexity
+        longer_convexity = calc_zero_bond_convexity(
+            years_to_maturity=10.0,
+            ytm=self.ytm,
+            frequency=self.frequency
+        )
+        
+        assert longer_convexity > student_convexity, \
+            "Longer maturity zero should have higher convexity"
+        
+        # For zeros, convexity ≈ duration² / (1+y)²
+        # Rough approximation check
+        duration = 5.0  # years to maturity
+        approx_convexity = (duration ** 2) / ((1 + self.ytm / self.frequency) ** 2)
+        
+        # Should be in the same ballpark (within 50%)
+        assert abs(student_convexity - approx_convexity) / approx_convexity < 0.5, \
+            f"Convexity should be approximately duration² / (1+y)²"
+
+    def test_calc_discount_factor(self):
+        """Test that discount factor from zero bond price is calculated correctly."""
+        
+        # Calculate discount factor using QuantLib function
+        ql_df = ql_calc_zero_bond_discount_factor(
+            valuation_date=self.valuation_date,
+            ytm=self.ytm,
+            bond=self.zero_bond
+        )
+        
+        # Calculate the zero bond price for student function
+        zero_price = ql_calc_zero_coupon_bond_price(
+            valuation_date=self.valuation_date,
+            ytm=self.ytm,
+            bond=self.zero_bond
+        )
+        
+        # Calculate discount factor using student function
+        student_df = calc_zero_bond_discount_factor(
+            zero_price=zero_price,
+            face_value=self.face_value
+        )
+        
+        # Test: Check that discount factors match
+        tolerance = 0.01
+        diff = abs(student_df - ql_df)
+        
+        assert diff < tolerance, \
+            f"Discount factor mismatch: student={student_df:.6f}, ql={ql_df:.6f}, diff={diff:.6f}"
+        
+        # Sanity checks
+        assert 0 < student_df < 1, \
+            f"Discount factor should be between 0 and 1, got {student_df:.4f}"
+
+    def test_calc_current_yield(self):
+        """Test that current yield is calculated correctly."""
+        
+        # Calc current price from QuantLib function
+        ql_current_price = ql_calc_clean_bond_price(
             valuation_date=self.valuation_date,
             ytm=self.ytm,
             bond=self.fixed_bond,
-            face_value=self.face_value,
         )
+        
+        # Calculate current yield using student function
+        student_cy = calc_current_yield(
+            face_value=self.face_value,
+            coupon_rate=self.coupon_rate,
+            current_price=ql_current_price
+        )
+        
+        # Calculate current yield using QuantLib function
+        ql_cy = ql_calc_current_yield(
+            valuation_date=self.valuation_date,
+            ytm=self.ytm,
+            coupon_rate=self.coupon_rate,
+            bond=self.fixed_bond,
+        )
+        
+        # Test: Check that current yields match
+        tolerance = 0.0001
+        diff = abs(student_cy - ql_cy)
+        
+        assert diff < tolerance, \
+            f"Current yield mismatch: student={student_cy:.4f}, ql={ql_cy:.4f}, diff={diff:.4f}"
 
-        # Test: Check that dollar durations match within tolerance
-        tolerance = 0.01  # 1 cent tolerance
-        diff = abs(student_dv01 - ql_dv01)
 
-        assert (
-            diff < tolerance
-        ), f"Dollar duration mismatch: student={student_dv01:.4f}, ql={ql_dv01:.4f}, diff={diff:.4f}"
-
-        # Additional sanity checks
-        assert student_dv01 > 0, "Dollar duration should be positive"

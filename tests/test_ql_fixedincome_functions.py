@@ -647,6 +647,63 @@ def ql_calc_macaulay_duration(
 
     return mac_duration
 
+def ql_calc_dollar_duration(
+    valuation_date: str,
+    ytm: float,
+    bond: ql.FixedRateBond,
+    face_value: float = 100.0,
+) -> float:
+    """
+    Calculate the dollar duration (DV01) of a QuantLib FixedRateBond.
+
+    Dollar duration measures the change in bond price for a 1 basis point (0.01%)
+    change in yield. It's also known as DV01 (dollar value of a basis point).
+
+    Parameters
+    ----------
+    valuation_date : str
+        The valuation date as a string "YYYY-MM-DD".
+    ytm : float
+        The yield to maturity (as a decimal, e.g., 0.05 for 5%).
+    bond : ql.FixedRateBond
+        The QuantLib FixedRateBond object.
+    face_value : float, optional
+        The face value of the bond position (default: 100.0).
+
+    Returns
+    -------
+    float
+        The dollar duration (change in dollar value for 1bp yield change).
+    """
+
+    # Convert to QuantLib dates from strings
+    if isinstance(valuation_date, str):
+        dt = datetime.strptime(valuation_date, "%Y-%m-%d")
+        valuation_date = ql.Date(dt.day, dt.month, dt.year)
+
+    # Set evaluation date
+    ql.Settings.instance().evaluationDate = valuation_date
+
+    # Calculate modified duration
+    mod_duration = ql_calc_modified_duration(
+        valuation_date=valuation_date,
+        ytm=ytm,
+        bond=bond,
+    )
+
+    # Calculate current clean price
+    clean_price = ql_calc_clean_bond_price(
+        valuation_date=valuation_date,
+        ytm=ytm,
+        bond=bond,
+    )
+
+    # Dollar duration = Modified Duration × Price × 0.0001 (for 1bp)
+    # Price is expressed per 100 face value, so scale by (face_value / 100)
+    dollar_duration = mod_duration * clean_price * 0.0001 * (face_value / 100.0)
+
+    return dollar_duration
+
 
 def ql_calc_convexity(
     valuation_date: str,
@@ -741,17 +798,100 @@ def ql_calc_zero_coupon_bond_price(
         return price * (face_value / 100.0)
 
 
-def ql_calc_dollar_duration(
+def ql_calc_zero_bond_yield(
     valuation_date: str,
-    ytm: float,
-    bond: ql.FixedRateBond,
-    face_value: float = 100.0,
+    price: float,
+    bond: ql.ZeroCouponBond,
+    frequency: int = 2,
 ) -> float:
     """
-    Calculate the dollar duration (DV01) of a QuantLib FixedRateBond.
+    Calculate the yield of a zero coupon bond given its price using QuantLib.
 
-    Dollar duration measures the change in bond price for a 1 basis point (0.01%)
-    change in yield. It's also known as DV01 (dollar value of a basis point).
+    Parameters
+    ----------
+    valuation_date : str
+        The valuation date as a string "YYYY-MM-DD".
+    price : float
+        The current price of the bond.
+    bond : ql.ZeroCouponBond
+        The QuantLib ZeroCouponBond object.
+    frequency : int, optional
+        The compounding frequency per year (default: 2 for semi-annual).
+
+    Returns
+    -------
+    float
+        The yield as a decimal (e.g., 0.05 for 5%).
+    """
+    
+    # Convert to QuantLib date
+    if isinstance(valuation_date, str):
+        dt = datetime.strptime(valuation_date, "%Y-%m-%d")
+        valuation_date = ql.Date(dt.day, dt.month, dt.year)
+    
+    # Extract information from bond object
+    face_value = bond.notional()
+    maturity_date = bond.maturityDate()
+    
+    # Calculate years to maturity
+    day_count = ql.Actual365Fixed()
+    years_to_maturity = day_count.yearFraction(valuation_date, maturity_date)
+    
+    # Calculate total number of compounding periods
+    total_periods = years_to_maturity * frequency
+    
+    # Solve for periodic rate
+    periodic_rate = (face_value / price) ** (1 / total_periods) - 1
+    
+    # Convert to annual rate
+    annual_yield = periodic_rate * frequency
+    
+    return annual_yield
+
+def ql_calc_zero_bond_duration(
+    valuation_date: str,
+    bond: ql.ZeroCouponBond
+) -> float:
+    """
+    Calculate the Macaulay duration of a zero coupon bond using QuantLib.
+    
+    For zero coupon bonds, duration equals time to maturity.
+
+    Parameters
+    ----------
+    valuation_date : str
+        The valuation date as a string "YYYY-MM-DD".
+    bond : ql.ZeroCouponBond
+        The QuantLib ZeroCouponBond object.
+
+    Returns
+    -------
+    float
+        The Macaulay duration in years.
+    """
+    
+    # Convert to QuantLib date
+    if isinstance(valuation_date, str):
+        dt = datetime.strptime(valuation_date, "%Y-%m-%d")
+        valuation_date = ql.Date(dt.day, dt.month, dt.year)
+    
+    # Extract maturity date from bond
+    maturity_date = bond.maturityDate()
+    
+    # Calculate years to maturity (this is the duration)
+    day_count = ql.Actual365Fixed()
+    duration = day_count.yearFraction(valuation_date, maturity_date)
+    
+    return duration
+
+def ql_calc_zero_bond_convexity(
+    valuation_date: str,
+    ytm: float,
+    bond: ql.ZeroCouponBond,
+    frequency: int = 2,
+) -> float:
+    """
+    Calculate the convexity of a QuantLib ZeroCouponBond.
 
     Parameters
     ----------
@@ -759,15 +899,113 @@ def ql_calc_dollar_duration(
         The valuation date as a string "YYYY-MM-DD".
     ytm : float
         The yield to maturity (as a decimal, e.g., 0.05 for 5%).
-    bond : ql.FixedRateBond
-        The QuantLib FixedRateBond object.
-    face_value : float, optional
-        The face value of the bond position (default: 100.0).
+    bond : ql.ZeroCouponBond
+        The QuantLib ZeroCouponBond object.
+    frequency : int, optional
+        The compounding frequency per year (default: 2 for semi-annual).
 
     Returns
     -------
     float
-        The dollar duration (change in dollar value for 1bp yield change).
+        The convexity of the bond.
+    """
+
+    # Convert to QuantLib dates from strings
+    if isinstance(valuation_date, str):
+        dt = datetime.strptime(valuation_date, "%Y-%m-%d")
+        valuation_date = ql.Date(dt.day, dt.month, dt.year)
+
+    # Evaluation date
+    ql.Settings.instance().evaluationDate = valuation_date
+
+    # Set frequency
+    frequency_map = {
+        1: ql.Annual,
+        2: ql.Semiannual,
+        4: ql.Quarterly,
+        12: ql.Monthly,
+    }
+    frequency = frequency_map[frequency]
+
+    # Calculate convexity for bond
+    convexity = ql.BondFunctions.convexity(
+        bond,
+        ytm,
+        ql.Actual365Fixed(),
+        ql.Compounded,
+        frequency,
+    )
+
+    return convexity
+
+def ql_calc_zero_bond_discount_factor(
+    valuation_date: str,
+    ytm: float,
+    bond: ql.ZeroCouponBond,
+) -> float:
+    """
+    Calculate discount factor from a zero coupon bond using QuantLib yield curve.
+
+    Parameters
+    ----------
+    valuation_date : str
+        The valuation date as a string "YYYY-MM-DD".
+    ytm : float
+        The yield to maturity (as a decimal, e.g., 0.05 for 5%).
+    bond : ql.ZeroCouponBond
+        The QuantLib ZeroCouponBond object.
+
+    Returns
+    -------
+    float
+        The discount factor.
+    """
+    
+    # Convert to QuantLib date
+    if isinstance(valuation_date, str):
+        dt = datetime.strptime(valuation_date, "%Y-%m-%d")
+        valuation_date = ql.Date(dt.day, dt.month, dt.year)
+    
+    # Set evaluation date
+    ql.Settings.instance().evaluationDate = valuation_date
+    
+    # Extract maturity date from bond
+    maturity_date = bond.maturityDate()
+    
+    # Create a flat yield curve at the given ytm
+    day_count = ql.Actual365Fixed()
+    yield_curve = ql.FlatForward(valuation_date, ytm, day_count)
+    yield_curve_handle = ql.YieldTermStructureHandle(yield_curve)
+    
+    # Get discount factor from the curve
+    discount_factor = yield_curve_handle.discount(maturity_date)
+    
+    return discount_factor
+
+def ql_calc_current_yield(
+    valuation_date: str,
+    ytm: float,
+    coupon_rate: float,
+    bond: ql.FixedRateBond,
+) -> float:
+    """
+    Calculate the current yield of a QuantLib FixedRateBond.
+
+    Parameters
+    ----------
+    valuation_date : str
+        The valuation date as a string "YYYY-MM-DD".
+    ytm : float
+        The yield to maturity (as a decimal, e.g., 0.05 for 5%).
+    coupon_rate : float
+        The coupon rate of the bond.
+    bond : ql.FixedRateBond
+        The QuantLib FixedRateBond object.
+
+    Returns
+    -------
+    float
+        The current yield of the bond.
     """
 
     # Convert to QuantLib dates from strings
@@ -778,22 +1016,22 @@ def ql_calc_dollar_duration(
     # Set evaluation date
     ql.Settings.instance().evaluationDate = valuation_date
 
-    # Calculate modified duration
-    mod_duration = ql_calc_modified_duration(
-        valuation_date=valuation_date,
-        ytm=ytm,
-        bond=bond,
+    # Calc clean price for bond from YTM
+    clean_price = bond.cleanPrice(
+        ytm,
+        bond.dayCounter(),  # Use bond's day counter
+        ql.Compounded,  # Use standard compounding
+        bond.frequency(),  # Use bond's coupon frequency
     )
 
-    # Calculate current clean price
-    clean_price = ql_calc_clean_bond_price(
-        valuation_date=valuation_date,
-        ytm=ytm,
-        bond=bond,
-    )
+    # Calc annual coupon
+    face_value = bond.notional()
+    annual_coupon = face_value * coupon_rate
 
-    # Dollar duration = Modified Duration × Price × 0.0001 (for 1bp)
-    # Price is expressed per 100 face value, so scale by (face_value / 100)
-    dollar_duration = mod_duration * clean_price * 0.0001 * (face_value / 100.0)
+    # Calc current yield
+    current_yield = annual_coupon / clean_price
 
-    return dollar_duration
+    return current_yield
+
+
+    
