@@ -1,5 +1,5 @@
 """
-Tests for the fixedincome module.
+Tests for the options module.
 """
 
 import numpy as np
@@ -17,6 +17,7 @@ from finm.options import (
     calc_option_rho,
     calc_implied_volatility,
     calc_binomial_option_price,
+    calc_breakeven_price,
 )
 
 from tests.test_ql_options_functions import (
@@ -30,6 +31,7 @@ from tests.test_ql_options_functions import (
     ql_calc_implied_volatility,
     ql_create_american_option,
     ql_calc_binomial_option_price,
+    ql_calc_breakeven_price,
 )
 
 class TestOptionFunctions:
@@ -45,20 +47,23 @@ class TestOptionFunctions:
         self.risk_free_rate = 0.05  # 5%
         self.dividend_yield = 0.02  # 2%
         self.volatility = 0.25  # 25%
+        self.premium = 1.0  # 1% premium
         
         # Create European options
         self.call_option = ql_create_european_option(
             option_type="call",
             strike=self.strike,
             expiration_date=self.expiration_date,
-            spot_price=self.spot_price
+            spot_price=self.spot_price,
+            premium=self.premium,
         )
         
         self.put_option = ql_create_european_option(
             option_type="put",
             strike=self.strike,
             expiration_date=self.expiration_date,
-            spot_price=self.spot_price
+            spot_price=self.spot_price,
+            premium=self.premium,
         )
         
         # Price the European options
@@ -642,3 +647,43 @@ class TestOptionFunctions:
         
         assert student_put_price >= european_put - 0.01, \
             f"American put ({student_put_price:.4f}) should be >= European put ({european_put:.4f})"
+
+    def test_calc_breakeven_price(self):
+        """Test that option breakeven price is calculated correctly."""
+        
+        # Calculate breakeven for call option using student function
+        student_call_breakeven = calc_breakeven_price(
+            option_type="call",
+            strike=self.strike,
+            premium=self.premium,
+        )
+        
+        # Calculate breakeven using QuantLib function
+        ql_call_breakeven = ql_calc_breakeven_price(    
+            option=self.call_option,
+            premium=self.premium,
+        )
+        
+        # Test: Check that breakevens match
+        tolerance = 0.01
+        diff = abs(student_call_breakeven - ql_call_breakeven)
+        
+        assert diff < tolerance, \
+            f"Call breakeven mismatch: student={student_call_breakeven:.2f}, ql={ql_call_breakeven:.2f}, diff={diff:.2f}"
+        
+        # Test put option
+        student_put_breakeven = calc_breakeven_price(
+            option_type="put",
+            strike=self.strike,
+            premium=self.premium,
+        )
+        
+        ql_put_breakeven = ql_calc_breakeven_price(
+            option=self.put_option,
+            premium=self.premium,
+        )
+        
+        diff_put = abs(student_put_breakeven - ql_put_breakeven)
+        
+        assert diff_put < tolerance, \
+            f"Put breakeven mismatch: student={student_put_breakeven:.2f}, ql={ql_put_breakeven:.2f}, diff={diff_put:.2f}"

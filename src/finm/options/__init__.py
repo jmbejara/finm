@@ -15,6 +15,7 @@ from finm.options.pricing import (
     calc_option_rho,
     calc_implied_volatility,
     calc_binomial_option_price,
+    calc_breakeven_price,
 )
 
 __all__ = [
@@ -28,4 +29,5 @@ __all__ = [
     "calc_option_rho",
     "calc_implied_volatility",
     "calc_binomial_option_price",
+    "calc_breakeven_price",
 ]

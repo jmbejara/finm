@@ -14,6 +14,7 @@ def ql_create_european_option(
     strike: float,
     expiration_date: str,
     spot_price: float,
+    premium: float,
 ) -> ql.VanillaOption:
     """
     Create a QuantLib European option (call or put).
@@ -31,6 +32,8 @@ def ql_create_european_option(
         The option maturity/expiration date as a string "YYYY-MM-DD".
     spot_price : float
         The current price of the underlying asset.
+    premium : float
+        The premium paid for the option.
 
     Returns
     -------
@@ -503,3 +506,43 @@ def ql_calc_binomial_option_price(
     price = option.NPV()
 
     return price
+
+def ql_calc_breakeven_price(
+    option: ql.VanillaOption,
+    premium: float
+) -> float:
+    """
+    Calculate the breakeven stock price for a long option position.
+    
+    The breakeven is the stock price at expiration where the profit/loss
+    equals zero (after accounting for the premium paid).
+
+    Parameters
+    ----------
+    option : ql.VanillaOption
+        The QuantLib VanillaOption object.
+    premium : float
+        The premium paid for the option.
+
+    Returns
+    -------
+    float
+        The breakeven stock price at expiration.
+    """
+    
+    # Extract payoff and cast to PlainVanillaPayoff
+    payoff = option.payoff()
+    
+    # Cast to PlainVanillaPayoff to access strike and optionType
+    vanilla_payoff = ql.as_plain_vanilla_payoff(payoff)
+    
+    strike = vanilla_payoff.strike()
+    option_type = vanilla_payoff.optionType()
+    
+    # Calculate breakeven based on option type
+    if option_type == ql.Option.Call:
+        breakeven = strike + premium
+    else:  # Put
+        breakeven = strike - premium
+    
+    return breakeven

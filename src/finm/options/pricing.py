@@ -12,6 +12,7 @@ This module provides basic functions for:
 - Option rho
 - Implied volatility
 - Binomial option price
+- Breakeven price
 """
 
 import math
@@ -596,3 +597,43 @@ def calc_binomial_option_price(
             option_values[i] = max(intrinsic_value, continuation_value)
     
     return option_values[0]
+
+def calc_breakeven_price(
+    option_type: str,
+    strike: float,
+    premium: float,
+) -> float:
+    """
+    Calculate the breakeven stock price for a long option position.
+    
+    The breakeven is the stock price at expiration where the profit/loss
+    equals zero (after accounting for the premium paid).
+
+    Parameters
+    ----------
+    option_type : str
+        Either "call" or "put".
+    strike : float
+        The strike price of the option.
+    premium : float
+        The premium paid for the option.
+
+    Returns
+    -------
+    float
+        The breakeven stock price at expiration.
+    """
+    
+    if option_type == "call":
+        # For a call: need stock to rise above strike by the premium amount
+        # Breakeven = Strike + Premium
+        breakeven = strike + premium
+    elif option_type == "put":
+        # For a put: need stock to fall below strike by the premium amount
+        # Breakeven = Strike - Premium
+        breakeven = strike - premium
+    else:
+        raise ValueError("option_type must be either 'call' or 'put'")
+    
+    return breakeven
+
