@@ -59,9 +59,14 @@ from finm.fixedincome.pricing import (
     calc_yield_to_maturity,
     calc_macaulay_duration,
     calc_modified_duration,
+    calc_dollar_duration,
     calc_convexity,
     calc_zero_bond_price,
-    calc_dollar_duration,
+    calc_zero_bond_yield,
+    calc_zero_bond_duration,
+    calc_zero_bond_convexity,
+    calc_zero_bond_discount_factor,
+    calc_current_yield,
 )
 from finm.fixedincome.calc_corp_bond_returns import (
     assign_cs_deciles,
@@ -90,8 +95,16 @@ from finm.options import (
     calc_option_rho,
     calc_implied_volatility,
     calc_binomial_option_price,
+    calc_breakeven_price,
 )
-
+from finm.forwards import (
+    calc_fra_settlement,
+)
+from finm.futures import (
+    calc_futures_implied_rate,
+    calc_futures_price_from_rate,
+    calc_futures_pnl,
+)
 __version__ = "0.1.3"
 __author__ = "University of Chicago Financial Mathematics Program"
 
@@ -143,9 +156,14 @@ __all__ = [
     "calc_yield_to_maturity",
     "calc_macaulay_duration",
     "calc_modified_duration",
+    "calc_dollar_duration",
     "calc_convexity",
     "calc_zero_bond_price",
-    "calc_dollar_duration",
+    "calc_zero_bond_yield",
+    "calc_zero_bond_duration",
+    "calc_zero_bond_convexity",
+    "calc_zero_bond_discount_factor",
+    "calc_current_yield",
     # Fixed income - corporate bond returns
     "assign_cs_deciles",
     "calc_value_weighted_decile_returns",
@@ -171,4 +189,11 @@ __all__ = [
     "calc_option_rho",
     "calc_implied_volatility",
     "calc_binomial_option_price",
+    "calc_breakeven_price",
+    # Forwards
+    "calc_fra_settlement",
+    # Futures
+    "calc_futures_implied_rate",
+    "calc_futures_price_from_rate",
+    "calc_futures_pnl",
 ]
